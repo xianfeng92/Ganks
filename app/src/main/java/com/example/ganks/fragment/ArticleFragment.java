@@ -94,20 +94,11 @@ public class ArticleFragment extends Fragment implements SwipeRefreshLayout.OnRe
             fManager = getFragmentManager();
         }
         GankEntity.ResultsBean bean = (GankEntity.ResultsBean) datas.get(postion);
-        if (intentArticle == null)
-            intentArticle = new GankEntity.ResultsBean();
-        intentArticle._id = bean._id;
-        intentArticle.createdAt = bean.createdAt;
-        intentArticle.desc = bean.desc;
-        intentArticle.images = bean.images;
-        intentArticle.publishedAt = bean.publishedAt;
-        intentArticle.source = bean.source;
-        intentArticle.type = bean.type;
-        intentArticle.url = bean.url;
-        intentArticle.used = bean.used;
-        intentArticle.who = bean.who;
+        Bundle bundle = new Bundle();
+        bundle.putString("URL",bean.url);
         FragmentTransaction tx = fManager.beginTransaction();
         ArticleContentFragment articleContentFragment = ArticleContentFragment.newInstance();
+        articleContentFragment.setArguments(bundle);
         //加上Fragment替换动画
         tx.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_left_exit);
         tx.replace(R.id.ly_content, articleContentFragment);

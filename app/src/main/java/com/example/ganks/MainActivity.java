@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.ganks.fragment.ArticleFragment;
 import com.example.ganks.fragment.MeiziFragment;
-import com.example.ganks.fragment.MyFragment;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FrameLayout ly_content;
 
     //Fragment Object
-    private MyFragment fg3,fg4;
+//    private MyFragment fg3,fg4;
     private ArticleFragment articleFragment;
     private MeiziFragment meiziFragment;
     private FragmentManager fManager;
@@ -67,8 +66,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void hideAllFragment(FragmentTransaction fragmentTransaction){
         if(articleFragment != null)fragmentTransaction.hide(articleFragment);
         if(meiziFragment != null)fragmentTransaction.hide(meiziFragment);
-        if(fg3 != null)fragmentTransaction.hide(fg3);
-        if(fg4 != null)fragmentTransaction.hide(fg4);
+//        if(fg3 != null)fragmentTransaction.hide(fg3);
+//        if(fg4 != null)fragmentTransaction.hide(fg4);
     }
 
 
@@ -100,22 +99,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.txt_better:
                 setSelected();
                 txt_better.setSelected(true);
-                if(fg3 == null){
-                    fg3 = MyFragment.newInstance("第三个Fragment");
-                    fTransaction.add(R.id.ly_content,fg3);
-                }else{
-                    fTransaction.show(fg3);
-                }
+//                if(fg3 == null){
+//                    fg3 = MyFragment.newInstance("第三个Fragment");
+//                    fTransaction.add(R.id.ly_content,fg3);
+//                }else{
+//                    fTransaction.show(fg3);
+//                }
                 break;
             case R.id.txt_setting:
                 setSelected();
                 txt_setting.setSelected(true);
-                if(fg4 == null){
-                    fg4 = MyFragment.newInstance("第四个Fragment");
-                    fTransaction.add(R.id.ly_content,fg4);
-                }else{
-                    fTransaction.show(fg4);
-                }
+//                if(fg4 == null){
+//                    fg4 = MyFragment.newInstance("第四个Fragment");
+//                    fTransaction.add(R.id.ly_content,fg4);
+//                }else{
+//                    fTransaction.show(fg4);
+//                }
                 break;
         }
         fTransaction.commit();
