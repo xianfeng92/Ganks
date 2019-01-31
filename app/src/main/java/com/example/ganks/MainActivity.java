@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FrameLayout ly_content;
 
     //Fragment Object
-//    private MyFragment fg3,fg4;
+   // private MyFragment fg3,fg4;
     private ArticleFragment articleFragment;
     private MeiziFragment meiziFragment;
     private FragmentManager fManager;

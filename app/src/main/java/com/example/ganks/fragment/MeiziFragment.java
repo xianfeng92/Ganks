@@ -12,11 +12,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.blankj.utilcode.util.ScreenUtils;
 import com.example.ganks.R;
 import com.example.ganks.adapter.StaggerAdapter;
@@ -34,7 +37,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MeiziFragment extends Fragment {
+public class MeiziFragment extends Fragment implements StaggerAdapter.onItemClickListener {
 
     private static final String TAG = "MeiziFragment";
 
@@ -177,6 +180,7 @@ public class MeiziFragment extends Fragment {
             public void onNext(Meizi meizis) {
                 for (Meizi.ResultsBean resultsBean:meizis.results){
                     Log.d(TAG, "onNext: "+resultsBean.url);
+                    if (!TextUtils.isEmpty(resultsBean.url))
                     urls.add(resultsBean.url);
                 }
                 updateAdapter(urls);
@@ -198,11 +202,18 @@ public class MeiziFragment extends Fragment {
         Log.d(TAG, "updateAdapter: ");
         if (mAdapter == null){
             mAdapter = new StaggerAdapter(getActivity(),urls);
+            mAdapter.setOnItemClickListener(this);
             recyclerView.setAdapter(mAdapter);
             itemTouchHelper.attachToRecyclerView(recyclerView);
         }else {
             mAdapter.notifyDataSetChanged();
         }
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onItemClick(View view, int postion) {
+        Toast.makeText(getContext(),"OnItemClick"+postion+" "+"url is "+urls.get(postion),Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onItemClick: "+urls.get(postion));
     }
 }
