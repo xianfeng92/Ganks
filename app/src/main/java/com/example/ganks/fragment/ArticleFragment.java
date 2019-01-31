@@ -35,7 +35,7 @@ public class ArticleFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     private static FragmentManager fManager;
     private ArticleAdapter mAdapter;
-    private List<GankEntity.ResultsBean> datas;
+    private List<GankEntity.ResultsBean> datas = new ArrayList<>();
     private GankEntity.ResultsBean intentArticle;
     private Retrofit retrofit;
     private CommonService articleService;
@@ -71,6 +71,7 @@ public class ArticleFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private void init(){
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setHasFixedSize(true);
         mAdapter = new ArticleAdapter(getContext(),datas);
         mAdapter.setItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
@@ -117,9 +118,6 @@ public class ArticleFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
             @Override
             public void onNext(GankEntity gankEntity) {
-                if (datas == null){
-                    datas = new ArrayList<>();
-                }
                 for (GankEntity.ResultsBean bean:gankEntity.results){
                     Log.d(TAG, "onNext: "+bean.createdAt);
                     datas.add(bean);
