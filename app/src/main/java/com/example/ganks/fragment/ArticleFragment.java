@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import com.example.ganks.R;
 import com.example.ganks.adapter.ArticleAdapter;
 import com.example.ganks.api.Api;
@@ -35,12 +36,13 @@ public class ArticleFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     private static FragmentManager fManager;
     private ArticleAdapter mAdapter;
+    private LinearLayoutManager layoutManager;
     private List<GankEntity.ResultsBean> datas = new ArrayList<>();
-    private GankEntity.ResultsBean intentArticle;
     private Retrofit retrofit;
     private CommonService articleService;
     private int page = 1;
     private int pageSize = 10;
+    private int lastVisibleItem;
 
     RecyclerView mRecyclerView;
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -70,11 +72,34 @@ public class ArticleFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     private void init(){
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        layoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
         mAdapter = new ArticleAdapter(getContext(),datas);
         mAdapter.setItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener(){
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                //获取加载的最后一个可见视图在适配器的位置。
+                lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+            }
+
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                // 0：当前屏幕停止滚动；
+                // 1：屏幕在滚动且用户仍在触碰或手指还在屏幕上
+                // 2：随用户的操作，屏幕上产生的惯性滑动；
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
+                        && lastVisibleItem +1 >= layoutManager.getItemCount()) {
+                    page++;
+                  getArticle();
+                }
+            }
+        });
         getArticle();
     }
 
@@ -137,5 +162,4 @@ public class ArticleFragment extends Fragment implements SwipeRefreshLayout.OnRe
             }
         });
     }
-
 }

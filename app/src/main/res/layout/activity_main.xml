@@ -8,7 +8,7 @@
         android:id="@+id/ly_top_bar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/bg_topbar">
+        android:background="@color/cardview_dark_background">
 
         <TextView
             android:id="@+id/txt_topbar"
@@ -17,12 +17,12 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:textSize="18sp"
-            android:textColor="@color/text_topbar"
-            android:text="信息"/>
+            android:textColor="@color/C9"
+            android:text="Ganks"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:background="@color/div_white"
+            android:background="@color/C10"
             android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
