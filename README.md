@@ -19,6 +19,8 @@ Just for fun，Let's coding
 
 [关于getChildFragmentManager()、 getFragmentManager()、getSupportFragmentManager()的使用](https://blog.csdn.net/u013531824/article/details/49333343)
 
+[ViewPager 全面剖析及使用详解](https://www.jianshu.com/p/e5abbda4a71c)
+
 # Thanks
 
 [干货集中营](https://gank.io/api)
