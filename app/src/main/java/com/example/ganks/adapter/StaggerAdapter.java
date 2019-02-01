@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.example.ganks.R;
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 public class StaggerAdapter extends RecyclerView.Adapter {

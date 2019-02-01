@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
 import com.example.ganks.fragment.ArticleFragment;
 import com.example.ganks.fragment.MeiziFragment;
 
