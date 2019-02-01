@@ -1,6 +1,5 @@
 # Ganks
-Just for Fun
-
+Just for fun，Let's coding
 
 # Libraries
 
@@ -17,3 +16,9 @@ Just for Fun
 [图片加载框架－Picasso最详细的使用指南](https://www.jianshu.com/p/c68a3b9ca07a)
 
 [Android WebView基本使用](https://blog.csdn.net/lowprofile_coding/article/details/77928614)
+
+[关于getChildFragmentManager()、 getFragmentManager()、getSupportFragmentManager()的使用](https://blog.csdn.net/u013531824/article/details/49333343)
+
+# Thanks
+
+[干货集中营](https://gank.io/api)
