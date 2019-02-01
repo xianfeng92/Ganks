@@ -77,6 +77,7 @@ public class CategoryArticleFragment extends Fragment implements SwipeRefreshLay
         init();
         mAdapter.setItemClickListener(this);
         type = getArguments().getString("type");
+        getDatas();
         return view;
     }
 
