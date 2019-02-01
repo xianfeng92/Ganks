@@ -8,4 +8,4 @@
     android:scaleType="centerCrop"
     android:background="#ffffff"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:targetApi="lollipop" />
+    tools:targetApi="lollipop"/>

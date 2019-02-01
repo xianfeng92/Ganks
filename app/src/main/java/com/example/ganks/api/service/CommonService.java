@@ -10,8 +10,8 @@ import retrofit2.http.Path;
 
 public interface CommonService {
 
-    @GET("api/data/Android/{pageSize}/{page}")
-    Observable<GankEntity> gank(@Path("pageSize") int pageSize, @Path("page") int page);
+    @GET("api/data/{type}/{pageSize}/{page}")
+    Observable<GankEntity> gank(@Path("type") String type, @Path("pageSize") int pageSize, @Path("page") int page);
 
     @GET("api/data/福利/10/{page}")
     Observable<Meizi> getMeizi(@Path("page") int page);

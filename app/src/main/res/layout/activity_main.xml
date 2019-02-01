@@ -1,42 +1,25 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/ly_top_bar"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/cardview_dark_background">
-
-        <TextView
-            android:id="@+id/txt_topbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="@color/C9"
-            android:text="Ganks"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:background="@color/C10"
-            android:layout_alignParentBottom="true"/>
-
-    </RelativeLayout>
+        android:layout_height="600dp"
+        android:id="@+id/ly_content">
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/ly_tab_bar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
         android:background="@color/bg_white"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/txt_channel"
+            android:id="@+id/txt_home"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -45,12 +28,12 @@
             android:drawableTop="@drawable/tab_menu_channel"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/tab_menu_alert"
+            android:text="@string/tab_menu_home"
             android:textColor="@drawable/tab_menu_text"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/txt_message"
+            android:id="@+id/txt_meizi"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -59,12 +42,12 @@
             android:drawableTop="@drawable/tab_menu_message"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/tab_menu_profile"
+            android:text="@string/tab_menu_meizi"
             android:textColor="@drawable/tab_menu_text"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/txt_better"
+            android:id="@+id/txt_video"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -73,7 +56,7 @@
             android:drawableTop="@drawable/tab_menu_better"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/tab_menu_pay"
+            android:text="@string/tab_menu_video"
             android:textColor="@drawable/tab_menu_text"
             android:textSize="16sp" />
 
@@ -93,19 +76,4 @@
 
     </LinearLayout>
 
-    <View
-        android:id="@+id/div_tab_bar"
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/div_white"
-        android:layout_above="@id/ly_tab_bar"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/ly_top_bar"
-        android:layout_above="@id/div_tab_bar"
-        android:id="@+id/ly_content">
-    </FrameLayout>
-
-</RelativeLayout>
+</LinearLayout>

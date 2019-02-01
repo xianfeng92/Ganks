@@ -30,9 +30,13 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ArticleFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, ArticleAdapter.ItemClickListener {
+/**
+ * Created By zhongxianfeng on 19-2-1
+ * github: https://github.com/xianfeng92
+ */
+public class CategoryArticleFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, ArticleAdapter.ItemClickListener {
 
-    private static final String TAG = "ArticleFragment";
+    private static final String TAG = "CategoryArticleFragment";
 
     private static FragmentManager fManager;
     private ArticleAdapter mAdapter;
@@ -46,6 +50,16 @@ public class ArticleFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     RecyclerView mRecyclerView;
     SwipeRefreshLayout mSwipeRefreshLayout;
+    public String type;
+
+    public static CategoryArticleFragment newInstance(String type){
+        CategoryArticleFragment categoryArticleFragment = new CategoryArticleFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("type",type);
+        categoryArticleFragment.setArguments(bundle);
+        return categoryArticleFragment;
+    }
+
 
     @Nullable
     @Override
@@ -61,13 +75,33 @@ public class ArticleFragment extends Fragment implements SwipeRefreshLayout.OnRe
         mSwipeRefreshLayout = view.findViewById(R.id.refreshLayout);
         init();
         mAdapter.setItemClickListener(this);
+        type = getArguments().getString("type");
         return view;
     }
 
-    public static ArticleFragment newInstance(FragmentManager fragmentManager){
-        fManager = fragmentManager;
-        ArticleFragment articleFragment = new ArticleFragment();
-        return articleFragment;
+    @Override
+    public void onRefresh() {
+        page++;
+        getDatas();
+    }
+
+    @Override
+    public void onItemClick(View view, int postion) {
+        Toast.makeText(getContext(),"OnItemClick"+postion,Toast.LENGTH_SHORT).show();
+        if (fManager == null){
+            fManager = getFragmentManager();
+        }
+        GankEntity.ResultsBean bean = (GankEntity.ResultsBean) datas.get(postion);
+        Bundle bundle = new Bundle();
+        bundle.putString("URL",bean.url);
+        FragmentTransaction tx = fManager.beginTransaction();
+        ArticleContentFragment articleContentFragment = ArticleContentFragment.newInstance();
+        articleContentFragment.setArguments(bundle);
+        //加上Fragment替换动画
+        tx.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_left_exit);
+        tx.replace(R.id.ly_content, articleContentFragment);
+        tx.addToBackStack(null);
+        tx.commit();
     }
 
     private void init(){
@@ -96,70 +130,41 @@ public class ArticleFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && lastVisibleItem +1 >= layoutManager.getItemCount()) {
                     page++;
-                  getArticle();
+                    getDatas();
                 }
             }
         });
-        getArticle();
+        getDatas();
     }
 
-    private void setListener(){
+    private void getDatas(){
+        articleService.gank(type,pageSize,page)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<GankEntity>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
-    }
+            }
 
-    @Override
-    public void onRefresh() {
-        page++;
-        getArticle();
-    }
+            @Override
+            public void onNext(GankEntity gankEntity) {
+                for (GankEntity.ResultsBean bean:gankEntity.results){
+                    Log.d(TAG, "onNext: "+bean.url);
+                    datas.add(bean);
+                }
+                mAdapter.notifyDataSetChanged();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
 
-    @Override
-    public void onItemClick(View view, int postion) {
-        Toast.makeText(getContext(),"OnItemClick"+postion,Toast.LENGTH_SHORT).show();
-        if (fManager == null){
-            fManager = getFragmentManager();
-        }
-        GankEntity.ResultsBean bean = (GankEntity.ResultsBean) datas.get(postion);
-        Bundle bundle = new Bundle();
-        bundle.putString("URL",bean.url);
-        FragmentTransaction tx = fManager.beginTransaction();
-        ArticleContentFragment articleContentFragment = ArticleContentFragment.newInstance();
-        articleContentFragment.setArguments(bundle);
-        //加上Fragment替换动画
-        tx.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_left_exit);
-        tx.replace(R.id.ly_content, articleContentFragment);
-        tx.addToBackStack(null);
-        tx.commit();
-    }
+            @Override
+            public void onError(Throwable e) {
 
-    private void getArticle(){
-//        articleService.gank(pageSize,page)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<GankEntity>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//
-//            }
-//
-//            @Override
-//            public void onNext(GankEntity gankEntity) {
-//                for (GankEntity.ResultsBean bean:gankEntity.results){
-//                    Log.d(TAG, "onNext: "+bean.createdAt);
-//                    datas.add(bean);
-//                }
-//                mAdapter.notifyDataSetChanged();
-//                mSwipeRefreshLayout.setRefreshing(false);
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//
-//            }
-//        });
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 }

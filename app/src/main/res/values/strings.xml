@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">Ganks</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="tab_menu_alert">首页</string>
-    <string name="tab_menu_profile">福利</string>
-    <string name="tab_menu_pay">视频</string>
+    <string name="tab_menu_home">首页</string>
+    <string name="tab_menu_meizi">福利</string>
+    <string name="tab_menu_video">视频</string>
     <string name="tab_menu_setting">设置</string>
 </resources>
