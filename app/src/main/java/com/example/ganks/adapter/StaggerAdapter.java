@@ -79,7 +79,6 @@ public class StaggerAdapter extends RecyclerView.Adapter {
         picasso.setIndicatorsEnabled(true);
         picasso.setLoggingEnabled(true);
         picasso.load(urls.get(i)).placeholder(R.mipmap.default_bg).error(R.mipmap.fail_load).into(((MyViewHolder)viewHolder).imageView);
-
     }
 
     @Override
