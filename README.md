@@ -10,6 +10,8 @@ Just for Fun
 
 [rxjava](https://github.com/ReactiveX/RxJava)
 
+[circleprogress](https://github.com/lzyzsd/CircleProgress)
+
 # Reference resources
 
 [图片加载框架－Picasso最详细的使用指南](https://www.jianshu.com/p/c68a3b9ca07a)
