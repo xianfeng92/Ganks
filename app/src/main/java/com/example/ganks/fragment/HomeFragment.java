@@ -42,14 +42,12 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-
-
     private void initData(){
         if (mFragments == null){
             mFragments = new ArrayList<>();
-            mFragments.add(CategoryArticleFragment.newInstance(CategoryType.ANDROID_STR));
-            mFragments.add(CategoryArticleFragment.newInstance(CategoryType.IOS_STR));
-            mFragments.add(CategoryArticleFragment.newInstance(CategoryType.FRONT_STR));
+            mFragments.add(CategoryArticleFragment.newInstance(CategoryType.ANDROID_STR,getActivity().getSupportFragmentManager()));
+            mFragments.add(CategoryArticleFragment.newInstance(CategoryType.IOS_STR,getActivity().getSupportFragmentManager()));
+            mFragments.add(CategoryArticleFragment.newInstance(CategoryType.FRONT_STR,getActivity().getSupportFragmentManager()));
         }
         mainPager.setOffscreenPageLimit(mFragments.size());
         mainPager.setAdapter(new MianViewPagerAdapter(getChildFragmentManager(),mFragments));

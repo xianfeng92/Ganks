@@ -52,7 +52,8 @@ public class CategoryArticleFragment extends Fragment implements SwipeRefreshLay
     SwipeRefreshLayout mSwipeRefreshLayout;
     public String type;
 
-    public static CategoryArticleFragment newInstance(String type){
+    public static CategoryArticleFragment newInstance(String type, FragmentManager fragmentManager){
+        fManager = fragmentManager;
         CategoryArticleFragment categoryArticleFragment = new CategoryArticleFragment();
         Bundle bundle = new Bundle();
         bundle.putString("type",type);
@@ -88,9 +89,6 @@ public class CategoryArticleFragment extends Fragment implements SwipeRefreshLay
     @Override
     public void onItemClick(View view, int postion) {
         Toast.makeText(getContext(),"OnItemClick"+postion,Toast.LENGTH_SHORT).show();
-        if (fManager == null){
-            fManager = getFragmentManager();
-        }
         GankEntity.ResultsBean bean = (GankEntity.ResultsBean) datas.get(postion);
         Bundle bundle = new Bundle();
         bundle.putString("URL",bean.url);
