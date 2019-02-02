@@ -1,4 +1,4 @@
-package com.example.ganks;
+package com.example.tantancardswipe;
 
 /**
  * Created By zhongxianfeng on 19-2-2

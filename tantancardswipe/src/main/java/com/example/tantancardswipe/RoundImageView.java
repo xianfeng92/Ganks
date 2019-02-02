@@ -1,4 +1,4 @@
-package com.example.ganks;
+package com.example.tantancardswipe;
 
 import android.content.Context;
 import android.content.res.TypedArray;

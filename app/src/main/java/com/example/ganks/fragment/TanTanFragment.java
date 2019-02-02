@@ -13,12 +13,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.ganks.R;
 import com.example.ganks.adapter.TanTanAdapter;
 import com.example.ganks.api.Api;
 import com.example.ganks.api.service.CommonService;
 import com.example.ganks.bean.Meizi;
+import com.example.tantancardswipe.OnSwipeListener;
+import com.example.tantancardswipe.CardItemTouchHelperCallback;
+import com.example.tantancardswipe.CardLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +29,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import me.yuqirong.cardswipelayout.CardItemTouchHelperCallback;
-import me.yuqirong.cardswipelayout.CardLayoutManager;
-import me.yuqirong.cardswipelayout.OnSwipeListener;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -91,7 +90,7 @@ public class TanTanFragment extends Fragment {
     }
 
     private void setListener(){
-        cardItemTouchHelperCallback.setOnSwipedListener(new OnSwipeListener() {
+        cardItemTouchHelperCallback.setOnSwipeListener(new OnSwipeListener() {
             @Override
             public void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
 

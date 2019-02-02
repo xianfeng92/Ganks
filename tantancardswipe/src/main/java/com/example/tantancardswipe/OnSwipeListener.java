@@ -1,4 +1,4 @@
-package com.example.ganks.listener;
+package com.example.tantancardswipe;
 
 import android.support.v7.widget.RecyclerView;
 
