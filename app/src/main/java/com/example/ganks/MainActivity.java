@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import com.example.ganks.fragment.HomeFragment;
 import com.example.ganks.fragment.MeiziFragment;
+import com.example.ganks.fragment.TanTanFragment;
 
 import java.util.List;
 
@@ -26,9 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private List<Integer> mTitles;
 
     // Fragment Object
-   // private MyFragment fg3,fg4;
     private HomeFragment homeFragment;
     private MeiziFragment meiziFragment;
+    private TanTanFragment tanTanFragment;
     private FragmentManager fManager;
 
     @Override
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //UI组件初始化与事件绑定
     private void bindViews() {
-//        txt_topbar = (TextView) findViewById(R.id.txt_topbar);
+        //txt_topbar = (TextView) findViewById(R.id.txt_topbar);
         txt_home = (TextView) findViewById(R.id.txt_home);
         txt_meizi = (TextView) findViewById(R.id.txt_meizi);
         txt_video = (TextView) findViewById(R.id.txt_video);
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void hideAllFragment(FragmentTransaction fragmentTransaction){
         if(homeFragment != null)fragmentTransaction.hide(homeFragment);
         if(meiziFragment != null)fragmentTransaction.hide(meiziFragment);
-//        if(fg3 != null)fragmentTransaction.hide(fg3);
+        if(tanTanFragment != null)fragmentTransaction.hide(tanTanFragment);
 //        if(fg4 != null)fragmentTransaction.hide(fg4);
     }
 
@@ -101,12 +102,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.txt_video:
                 setSelected();
                 txt_video.setSelected(true);
-//                if(fg3 == null){
-//                    fg3 = MyFragment.newInstance("第三个Fragment");
-//                    fTransaction.add(R.id.ly_content,fg3);
-//                }else{
-//                    fTransaction.show(fg3);
-//                }
+                if(tanTanFragment == null){
+                    tanTanFragment = TanTanFragment.newInstance();
+                    fTransaction.add(R.id.ly_content,tanTanFragment);
+                }else{
+                    fTransaction.show(tanTanFragment);
+                }
                 break;
             case R.id.txt_setting:
                 setSelected();
