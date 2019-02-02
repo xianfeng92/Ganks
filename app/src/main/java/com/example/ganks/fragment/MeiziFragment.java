@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.example.ganks.R;
 import com.example.ganks.adapter.StaggerAdapter;
-import com.example.ganks.api.Api;
+import com.example.ganks.api.GankApi;
 import com.example.ganks.api.service.CommonService;
 import com.example.ganks.bean.Meizi;
 import java.util.ArrayList;
@@ -32,9 +32,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MeiziFragment extends Fragment implements StaggerAdapter.onItemClickListener {
 
@@ -49,7 +46,6 @@ public class MeiziFragment extends Fragment implements StaggerAdapter.onItemClic
     public StaggeredGridLayoutManager staggeredGridLayoutManager;
     private int lastVisibleItem;
     private ItemTouchHelper itemTouchHelper;
-    private Retrofit retrofit;
     private CommonService meiziService;
     private int page = 1;
     private int screenwidth;
@@ -63,12 +59,7 @@ public class MeiziFragment extends Fragment implements StaggerAdapter.onItemClic
         swipeRefreshLayout = view.findViewById(R.id.stagger_swipe_refresh);
         init();
         setListener();
-        retrofit = new Retrofit.Builder()
-                .baseUrl(Api.APP_DOMAIN)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-        meiziService = retrofit.create(CommonService.class);
+        meiziService = GankApi.buildServiceForGank();
         screenwidth = ScreenUtils.getScreenWidth();
         getMeizi();
         return view;

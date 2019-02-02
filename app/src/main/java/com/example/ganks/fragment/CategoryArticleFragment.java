@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.ganks.R;
 import com.example.ganks.adapter.ArticleAdapter;
-import com.example.ganks.api.Api;
+import com.example.ganks.api.GankApi;
 import com.example.ganks.api.service.CommonService;
 import com.example.ganks.bean.GankEntity;
 import java.util.ArrayList;
@@ -27,8 +27,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created By zhongxianfeng on 19-2-1
@@ -66,12 +64,7 @@ public class CategoryArticleFragment extends Fragment implements SwipeRefreshLay
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_refresh_list,container,false);
-        retrofit = new Retrofit.Builder()
-                .baseUrl(Api.APP_DOMAIN)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-        articleService = retrofit.create(CommonService.class);
+        articleService = GankApi.buildServiceForGank();
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mSwipeRefreshLayout = view.findViewById(R.id.refreshLayout);
         init();

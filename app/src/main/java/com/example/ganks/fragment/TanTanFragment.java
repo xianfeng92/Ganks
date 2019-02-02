@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.ganks.R;
 import com.example.ganks.adapter.TanTanAdapter;
-import com.example.ganks.api.Api;
+import com.example.ganks.api.GankApi;
 import com.example.ganks.api.service.CommonService;
 import com.example.ganks.bean.Meizi;
 import com.example.tantancardswipe.CardConfig;
@@ -32,9 +32,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created By zhongxianfeng on 19-2-2
@@ -44,7 +41,6 @@ public class TanTanFragment extends Fragment {
 
     private static final String TAG = "TanTanFragment";
 
-    private Retrofit retrofit;
     private CommonService meiziService;
     private TanTanAdapter tanTanAdapter;
     private CardItemTouchHelperCallback cardItemTouchHelperCallback;
@@ -75,12 +71,7 @@ public class TanTanFragment extends Fragment {
     }
 
     private void init(){
-        retrofit = new Retrofit.Builder()
-                .baseUrl(Api.APP_DOMAIN)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-        meiziService = retrofit.create(CommonService.class);
+        meiziService = GankApi.buildServiceForGank();
         tanTanAdapter = new TanTanAdapter(getContext(),urls);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(tanTanAdapter);
