@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.example.ganks.R;
 import com.example.ganks.adapter.TanTanAdapter;
 import com.example.ganks.api.GankApi;
@@ -49,8 +48,6 @@ public class TanTanFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private List<String> urls = new ArrayList<>();
     private int page = 1;
-    private int pageSize = 1;
-
 
 
     public static TanTanFragment newInstance(){
