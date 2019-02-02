@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +20,7 @@ import java.util.List;
  * Created By zhongxianfeng on 19-2-1
  * github: https://github.com/xianfeng92
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
 
     private static final String TAG = "HomeFragment";
     TabLayout tabs;
@@ -35,14 +35,16 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: ");
         View view = inflater.inflate(R.layout.fragment_home,container,false);
         tabs = view.findViewById(R.id.tabs);
         mainPager = view.findViewById(R.id.mainPager);
-        initData();
         return view;
     }
 
-    private void initData(){
+    @Override
+    public void initData(Bundle savedInstanceState) {
+        Log.d(TAG, "initData: ");
         if (mFragments == null){
             mFragments = new ArrayList<>();
             mFragments.add(CategoryArticleFragment.newInstance(CategoryType.ANDROID_STR,getActivity().getSupportFragmentManager()));
@@ -54,4 +56,8 @@ public class HomeFragment extends Fragment {
         tabs.setupWithViewPager(mainPager);
     }
 
+    @Override
+    public void setData(Object data) {
+
+    }
 }

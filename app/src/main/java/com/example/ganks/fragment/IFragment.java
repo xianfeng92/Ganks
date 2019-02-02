@@ -1,17 +1,12 @@
 package com.example.ganks.fragment;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 /**
  * Created By zhongxianfeng on 19-2-2
  * github: https://github.com/xianfeng92
  */
 public interface IFragment {
-
-    View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     void initData(Bundle savedInstanceState);
 

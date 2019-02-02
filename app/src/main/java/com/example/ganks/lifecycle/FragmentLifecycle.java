@@ -1,4 +1,4 @@
-package com.example.ganks.fragment;
+package com.example.ganks.lifecycle;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
+
+import com.example.ganks.fragment.FragmentDelegate;
+import com.example.ganks.fragment.FragmentDelegateImpl;
+import com.example.ganks.fragment.IFragment;
 
 /**
  * Created By zhongxianfeng on 19-2-2
@@ -33,6 +37,7 @@ public class FragmentLifecycle extends FragmentManager.FragmentLifecycleCallback
 
     @Override
     public void onFragmentCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onFragmentCreated: ");
         super.onFragmentCreated(fm, f, savedInstanceState);
         FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
         if (fragmentDelegate != null) {

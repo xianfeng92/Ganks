@@ -2,26 +2,43 @@ package com.example.ganks;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
+import android.util.Log;
 
-import com.example.ganks.fragment.FragmentLifecycle;
+import com.example.ganks.lifecycle.ActivityLifecycle;
+import com.example.ganks.lifecycle.AppLifecycles;
+import com.example.ganks.lifecycle.FragmentLifecycle;
 
 /**
  * Created By zhongxianfeng on 19-2-2
  * github: https://github.com/xianfeng92
  */
-public class BaseApplication extends Application {
+public class BaseApplication extends Application implements AppLifecycles {
+    private Application mApplication;
+    private static final String TAG = "BaseApplication";
 
-    private FragmentManager.FragmentLifecycleCallbacks mFragmentLifecycle;
+    private ActivityLifecycle activityLifecycle;
+
 
     @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
+    public void attachBaseContext(Context base) {
+
+    }
+
+    @Override
+    public void onCreate(Application application) {
+        this.mApplication = application;
+    }
+
+    @Override
+    public void onTerminate(Application application) {
+
     }
 
     @Override
     public void onCreate() {
+        Log.d(TAG, "onCreate: ");
         super.onCreate();
-        mFragmentLifecycle = new FragmentLifecycle();
+        activityLifecycle = new ActivityLifecycle();
+        mApplication.registerActivityLifecycleCallbacks(activityLifecycle);
     }
 }
