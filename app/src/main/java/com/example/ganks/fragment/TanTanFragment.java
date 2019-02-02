@@ -10,14 +10,21 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import com.example.ganks.R;
 import com.example.ganks.adapter.TanTanAdapter;
 import com.example.ganks.api.Api;
 import com.example.ganks.api.service.CommonService;
 import com.example.ganks.bean.Meizi;
+import com.example.tantancardswipe.CardConfig;
 import com.example.tantancardswipe.OnSwipeListener;
 import com.example.tantancardswipe.CardItemTouchHelperCallback;
 import com.example.tantancardswipe.CardLayoutManager;
@@ -98,7 +105,16 @@ public class TanTanFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, Object o, int direction) {
-
+                View toastView = getLayoutInflater().inflate(R.layout.mytoast, null);
+                Toast toast = new Toast(getContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                if (direction == CardConfig.SWIPED_LEFT){
+                    toastView.setBackgroundResource(R.mipmap.img_dislike);
+                }else {
+                    toastView.setBackgroundResource(R.mipmap.img_like);
+                }
+                toast.setView(toastView);
+                toast.show();
             }
 
             @Override
