@@ -17,6 +17,11 @@ public abstract class BaseFragment extends Fragment implements IFragment {
     private static final String TAG = "BaseFragment";
 
 
+    public BaseFragment() {
+        //必须确保在Fragment实例化时setArguments()
+        setArguments(new Bundle());
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

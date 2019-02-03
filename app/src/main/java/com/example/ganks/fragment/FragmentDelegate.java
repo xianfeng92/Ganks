@@ -10,6 +10,7 @@ import android.view.View;
  * github: https://github.com/xianfeng92
  */
 public interface FragmentDelegate extends Parcelable {
+
     String FRAGMENT_DELEGATE = "fragment_delegate";
 
     void onAttach(Context context);

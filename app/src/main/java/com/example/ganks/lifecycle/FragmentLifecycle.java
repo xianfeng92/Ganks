@@ -40,7 +40,11 @@ public class FragmentLifecycle extends FragmentManager.FragmentLifecycleCallback
         Log.d(TAG, "onFragmentCreated: ");
         super.onFragmentCreated(fm, f, savedInstanceState);
         FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
+        if (fragmentDelegate == null){
+            Log.d(TAG, "fragmentDelegate is null ");
+        }
         if (fragmentDelegate != null) {
+            Log.d(TAG, "onFragmentCreated: "+"for test");
             fragmentDelegate.onCreate(savedInstanceState);
         }
     }
@@ -56,6 +60,7 @@ public class FragmentLifecycle extends FragmentManager.FragmentLifecycleCallback
 
     @Override
     public void onFragmentActivityCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onFragmentActivityCreated: ");
         super.onFragmentActivityCreated(fm, f, savedInstanceState);
         FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
         if (fragmentDelegate != null){
@@ -130,7 +135,8 @@ public class FragmentLifecycle extends FragmentManager.FragmentLifecycleCallback
 
     private FragmentDelegate fetchFragmentDelegate(Fragment fragment) {
         if (fragment instanceof IFragment) {
-            return fragment.getArguments() == null ? null : (FragmentDelegate) fragment.getArguments().getParcelable(FragmentDelegate.FRAGMENT_DELEGATE);
+            Log.d(TAG, "fetchFragmentDelegate: ");
+            return fragment.getArguments() == null ? null :(FragmentDelegate) fragment.getArguments().getParcelable("fragment_delegate");
         }
         return null;
     }
