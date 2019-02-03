@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,7 +32,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class MeiziFragment extends Fragment implements StaggerAdapter.onItemClickListener {
+public class MeiziFragment extends BaseFragment implements StaggerAdapter.onItemClickListener {
 
     private static final String TAG = "MeiziFragment";
 
@@ -57,8 +56,6 @@ public class MeiziFragment extends Fragment implements StaggerAdapter.onItemClic
         recyclerView = view.findViewById(R.id.stagger_recycleView);
         coordinatorLayout = view.findViewById(R.id.stagger_coordinatorLayout);
         swipeRefreshLayout = view.findViewById(R.id.stagger_swipe_refresh);
-        init();
-        setListener();
         meiziService = GankApi.buildServiceForGank();
         screenwidth = ScreenUtils.getScreenWidth();
         getMeizi();
@@ -70,14 +67,61 @@ public class MeiziFragment extends Fragment implements StaggerAdapter.onItemClic
         return meiziFragment;
     }
 
+    private void getMeizi(){
+        meiziService.getMeizi(page)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Meizi>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
-    private void init(){
+            }
+
+            @Override
+            public void onNext(Meizi meizis) {
+                for (Meizi.ResultsBean resultsBean:meizis.results){
+                    Log.d(TAG, "onNext: "+resultsBean.url);
+                    if (!TextUtils.isEmpty(resultsBean.url))
+                    urls.add(resultsBean.url);
+                }
+                updateAdapter(urls);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "onError: "+e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "onComplete: ");
+            }
+        });
+    }
+
+    private void updateAdapter(List<String> urls){
+        Log.d(TAG, "updateAdapter: ");
+        if (mAdapter == null){
+            mAdapter = new StaggerAdapter(getActivity(),urls);
+            mAdapter.setOnItemClickListener(this);
+            recyclerView.setAdapter(mAdapter);
+            itemTouchHelper.attachToRecyclerView(recyclerView);
+        }else {
+            mAdapter.notifyDataSetChanged();
+        }
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onItemClick(View view, int postion) {
+        Toast.makeText(getContext(),"OnItemClick"+postion+" "+"url is "+urls.get(postion),Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onItemClick: "+urls.get(postion));
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         swipeRefreshLayout.setProgressViewOffset(false,0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
-    }
-
-    private void setListener(){
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -156,54 +200,8 @@ public class MeiziFragment extends Fragment implements StaggerAdapter.onItemClic
         });
     }
 
-
-    private void getMeizi(){
-        meiziService.getMeizi(page)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Meizi>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(Meizi meizis) {
-                for (Meizi.ResultsBean resultsBean:meizis.results){
-                    Log.d(TAG, "onNext: "+resultsBean.url);
-                    if (!TextUtils.isEmpty(resultsBean.url))
-                    urls.add(resultsBean.url);
-                }
-                updateAdapter(urls);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.d(TAG, "onError: "+e.getMessage());
-            }
-
-            @Override
-            public void onComplete() {
-                Log.d(TAG, "onComplete: ");
-            }
-        });
-    }
-
-    private void updateAdapter(List<String> urls){
-        Log.d(TAG, "updateAdapter: ");
-        if (mAdapter == null){
-            mAdapter = new StaggerAdapter(getActivity(),urls);
-            mAdapter.setOnItemClickListener(this);
-            recyclerView.setAdapter(mAdapter);
-            itemTouchHelper.attachToRecyclerView(recyclerView);
-        }else {
-            mAdapter.notifyDataSetChanged();
-        }
-        swipeRefreshLayout.setRefreshing(false);
-    }
-
     @Override
-    public void onItemClick(View view, int postion) {
-        Toast.makeText(getContext(),"OnItemClick"+postion+" "+"url is "+urls.get(postion),Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "onItemClick: "+urls.get(postion));
+    public void setData(Object data) {
+
     }
 }
