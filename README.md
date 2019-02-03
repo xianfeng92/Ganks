@@ -25,6 +25,10 @@ Just for fun，Let's coding
 
 [RecyclerView实现拖拽排序和侧滑删除](https://yuqirong.me/2017/02/03/RecyclerView%E5%AE%9E%E7%8E%B0%E6%8B%96%E6%8B%BD%E6%8E%92%E5%BA%8F%E5%92%8C%E4%BE%A7%E6%BB%91%E5%88%A0%E9%99%A4/)
 
+[ActivityLifecycleCallbacks使用方法初探](https://blog.csdn.net/tongcpp/article/details/40344871)
+
+[ActivityLifecycleCallbacks](https://www.jianshu.com/p/75a5c24174b2)
+
 # Thanks
 
 [干货集中营](https://gank.io/api)
