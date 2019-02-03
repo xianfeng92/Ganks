@@ -3,7 +3,6 @@ package com.example.ganks.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -26,7 +25,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
 
 /**
  * Created By zhongxianfeng on 19-2-1
@@ -40,7 +38,6 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
     private ArticleAdapter mAdapter;
     private LinearLayoutManager layoutManager;
     private List<GankEntity.ResultsBean> datas = new ArrayList<>();
-    private Retrofit retrofit;
     private CommonService articleService;
     private int page = 1;
     private int pageSize = 10;
