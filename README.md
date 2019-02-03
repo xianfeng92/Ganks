@@ -29,6 +29,8 @@ Just for fun，Let's coding
 
 [ActivityLifecycleCallbacks](https://www.jianshu.com/p/75a5c24174b2)
 
+[Android应用开发性能优化完全分析](https://blog.csdn.net/yanbober/article/details/48394201)
+
 # Thanks
 
 [干货集中营](https://gank.io/api)
