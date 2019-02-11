@@ -11,6 +11,14 @@ Just for fun，Let's coding
 
 [circleprogress](https://github.com/lzyzsd/CircleProgress)
 
+# Display
+
+![](https://github.com/xianfeng92/Ganks/blob/master/app/src/main/res/images/Screenshot_1549876211.png)
+
+![](https://github.com/xianfeng92/Ganks/blob/master/app/src/main/res/images/Screenshot_1549876221.png)
+
+![](https://github.com/xianfeng92/Ganks/blob/master/app/src/main/res/images/Screenshot_1549876225.png)
+
 # Reference resources
 
 [图片加载框架－Picasso最详细的使用指南](https://www.jianshu.com/p/c68a3b9ca07a)
