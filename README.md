@@ -13,11 +13,11 @@ Just for fun，Let's coding
 
 # Display
 
-![](https://github.com/xianfeng92/Ganks/blob/master/app/src/main/res/images/Screenshot_1549876211.png)
+![](https://github.com/xianfeng92/Ganks/blob/master/app/src/main/res/images/Screenshot_1549876211.png = 200x300)
 
-![](https://github.com/xianfeng92/Ganks/blob/master/app/src/main/res/images/Screenshot_1549876221.png)
+![](https://github.com/xianfeng92/Ganks/blob/master/app/src/main/res/images/Screenshot_1549876221.png = 200x300)
 
-![](https://github.com/xianfeng92/Ganks/blob/master/app/src/main/res/images/Screenshot_1549876225.png)
+![](https://github.com/xianfeng92/Ganks/blob/master/app/src/main/res/images/Screenshot_1549876225.png = 200x300)
 
 # Reference resources
 
