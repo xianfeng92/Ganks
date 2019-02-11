@@ -3,7 +3,6 @@ package com.example.ganks.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -26,13 +25,12 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
 
 /**
  * Created By zhongxianfeng on 19-2-1
  * github: https://github.com/xianfeng92
  */
-public class CategoryArticleFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, ArticleAdapter.ItemClickListener {
+public class CategoryArticleFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, ArticleAdapter.ItemClickListener {
 
     private static final String TAG = "CategoryArticleFragment";
 
@@ -40,7 +38,6 @@ public class CategoryArticleFragment extends Fragment implements SwipeRefreshLay
     private ArticleAdapter mAdapter;
     private LinearLayoutManager layoutManager;
     private List<GankEntity.ResultsBean> datas = new ArrayList<>();
-    private Retrofit retrofit;
     private CommonService articleService;
     private int page = 1;
     private int pageSize = 10;
@@ -67,8 +64,6 @@ public class CategoryArticleFragment extends Fragment implements SwipeRefreshLay
         articleService = GankApi.buildServiceForGank();
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mSwipeRefreshLayout = view.findViewById(R.id.refreshLayout);
-        init();
-        mAdapter.setItemClickListener(this);
         type = getArguments().getString("type");
         getDatas();
         return view;
@@ -96,7 +91,39 @@ public class CategoryArticleFragment extends Fragment implements SwipeRefreshLay
         tx.commit();
     }
 
-    private void init(){
+    private void getDatas(){
+        articleService.gank(type,pageSize,page)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<GankEntity>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(GankEntity gankEntity) {
+                for (GankEntity.ResultsBean bean:gankEntity.results){
+                    Log.d(TAG, "onNext: "+bean.url);
+                    datas.add(bean);
+                }
+                mAdapter.notifyDataSetChanged();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
         mSwipeRefreshLayout.setOnRefreshListener(this);
         layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
@@ -129,34 +156,8 @@ public class CategoryArticleFragment extends Fragment implements SwipeRefreshLay
         getDatas();
     }
 
-    private void getDatas(){
-        articleService.gank(type,pageSize,page)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<GankEntity>() {
-            @Override
-            public void onSubscribe(Disposable d) {
+    @Override
+    public void setData(Object data) {
 
-            }
-
-            @Override
-            public void onNext(GankEntity gankEntity) {
-                for (GankEntity.ResultsBean bean:gankEntity.results){
-                    Log.d(TAG, "onNext: "+bean.url);
-                    datas.add(bean);
-                }
-                mAdapter.notifyDataSetChanged();
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
     }
 }
