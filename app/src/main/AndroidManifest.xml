@@ -26,6 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.example.ganks.GlobalConfiguration"
+            android:value="ConfigModule" />
     </application>
+
+
 
 </manifest>
