@@ -37,7 +37,7 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
     private List<GankEntity.ResultsBean> datas = new ArrayList<>();
     private CommonService articleService;
     private int page = 1;
-    private int pageSize = 10;
+    int pageSize = 10;
     private int lastVisibleItem;
 
     RecyclerView mRecyclerView;
@@ -62,8 +62,13 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mSwipeRefreshLayout = view.findViewById(R.id.refreshLayout);
         type = getArguments().getString("type");
-        getDatas();
         return view;
+    }
+
+    @Override
+    protected void onFragmentFirstVisible() {
+        super.onFragmentFirstVisible();
+        getDatas();
     }
 
     @Override

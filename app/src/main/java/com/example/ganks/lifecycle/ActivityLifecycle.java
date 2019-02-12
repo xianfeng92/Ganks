@@ -7,8 +7,8 @@ import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
-import com.example.ganks.ActivityDelegate;
-import com.example.ganks.ActivityDelegateImpl;
+import com.example.ganks.delegate.ActivityDelegate;
+import com.example.ganks.delegate.ActivityDelegateImpl;
 import com.example.ganks.callbacks.MyFragmentLifeCycleCallbacks;
 
 import java.util.ArrayList;

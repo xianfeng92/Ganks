@@ -3,6 +3,7 @@ package com.example.ganks;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.ganks.delegate.AppDelegate;
 import com.example.ganks.lifecycle.AppLifecycles;
 
 /**

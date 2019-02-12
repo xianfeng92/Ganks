@@ -1,4 +1,4 @@
-package com.example.ganks.fragment;
+package com.example.ganks.delegate;
 
 import android.content.Context;
 import android.os.Bundle;

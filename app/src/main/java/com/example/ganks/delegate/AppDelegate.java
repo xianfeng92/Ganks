@@ -1,9 +1,10 @@
-package com.example.ganks;
+package com.example.ganks.delegate;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
 
+import com.example.ganks.config.ConfigModule;
+import com.example.ganks.utils.ManifestParser;
 import com.example.ganks.lifecycle.ActivityLifecycle;
 import com.example.ganks.lifecycle.AppLifecycles;
 

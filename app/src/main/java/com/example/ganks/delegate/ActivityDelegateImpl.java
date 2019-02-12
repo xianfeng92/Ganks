@@ -1,4 +1,4 @@
-package com.example.ganks;
+package com.example.ganks.delegate;
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -8,8 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
-import com.example.ganks.fragment.FragmentDelegate;
-import com.example.ganks.fragment.FragmentDelegateImpl;
+import com.example.ganks.delegate.FragmentDelegate;
+import com.example.ganks.delegate.FragmentDelegateImpl;
 import com.example.ganks.fragment.IFragment;
 
 /**

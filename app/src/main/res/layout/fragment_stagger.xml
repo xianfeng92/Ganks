@@ -5,7 +5,6 @@
     android:id="@+id/stagger_coordinatorLayout"
     android:fitsSystemWindows="true"
     android:background="#ffffff">
-
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/stagger_swipe_refresh"
         android:layout_width="match_parent"

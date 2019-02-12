@@ -1,4 +1,4 @@
-package com.example.ganks;
+package com.example.ganks.config;
 
 import android.app.Application;
 import android.content.Context;

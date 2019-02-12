@@ -1,4 +1,4 @@
-package com.example.ganks;
+package com.example.ganks.delegate;
 
 import android.os.Bundle;
 import android.os.Parcelable;

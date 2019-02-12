@@ -33,6 +33,7 @@ public class ArticleContentFragment extends Fragment {
         return view;
     }
 
+
     public static ArticleContentFragment newInstance(){
         ArticleContentFragment articleContentFragment = new ArticleContentFragment();
         return articleContentFragment;

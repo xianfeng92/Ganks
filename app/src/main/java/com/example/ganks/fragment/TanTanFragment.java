@@ -58,8 +58,13 @@ public class TanTanFragment extends BaseFragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         swipeRefreshLayout = view.findViewById(R.id.refreshLayout);
         meiziService = GankApi.buildServiceForGank();
-        getMeizi();
         return view;
+    }
+
+    @Override
+    protected void onFragmentFirstVisible() {
+        super.onFragmentFirstVisible();
+        getMeizi();
     }
 
     private void getMeizi(){

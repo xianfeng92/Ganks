@@ -1,4 +1,4 @@
-package com.example.ganks.fragment;
+package com.example.ganks.delegate;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.os.Parcel;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+
+import com.example.ganks.fragment.IFragment;
 
 /**
  * Created By zhongxianfeng on 19-2-2

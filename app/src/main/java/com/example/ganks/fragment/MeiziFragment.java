@@ -55,13 +55,19 @@ public class MeiziFragment extends BaseFragment implements StaggerAdapter.onItem
         swipeRefreshLayout = view.findViewById(R.id.stagger_swipe_refresh);
         meiziService = GankApi.buildServiceForGank();
         screenwidth = ScreenUtils.getScreenWidth();
-        getMeizi();
         return view;
     }
 
     public static MeiziFragment newInstance(){
         MeiziFragment meiziFragment = new MeiziFragment();
         return meiziFragment;
+    }
+
+
+    @Override
+    protected void onFragmentFirstVisible() {
+        super.onFragmentFirstVisible();
+        getMeizi();
     }
 
     private void getMeizi(){
