@@ -13,11 +13,11 @@ Just for fun，Let's coding
 
 # Display
 
-<img src="https://github.com/xianfeng92/Ganks/blob/master/app/src/main/res/images/Screenshot_1549876211.png" width="300" hegiht="200" align=center />
+<img src="https://github.com/xianfeng92/Ganks/blob/master/images/Screenshot_1549876211.png" width="300" hegiht="200" align=center />
 
-<img src="https://github.com/xianfeng92/Ganks/blob/master/app/src/main/res/images/Screenshot_1549876221.png" width="300" hegiht="200" align=center />
+<img src="https://github.com/xianfeng92/Ganks/blob/master/images/Screenshot_1549876221.png" width="300" hegiht="200" align=center />
 
-<img src="https://github.com/xianfeng92/Ganks/blob/master/app/src/main/res/images/Screenshot_1549876225.png" width="300" hegiht="200" align=center />
+<img src="https://github.com/xianfeng92/Ganks/blob/master/images/Screenshot_1549876225.png" width="300" hegiht="200" align=center />
 
 # Reference resources
 
