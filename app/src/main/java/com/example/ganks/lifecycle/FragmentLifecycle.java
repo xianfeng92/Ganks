@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 
 import com.example.ganks.fragment.FragmentDelegate;
@@ -19,11 +18,9 @@ import com.example.ganks.fragment.IFragment;
  */
 public class FragmentLifecycle extends FragmentManager.FragmentLifecycleCallbacks {
 
-    private static final String TAG = "FragmentLifecycle";
 
     @Override
     public void onFragmentAttached(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull Context context) {
-        Log.d(TAG, "onFragmentAttached: ");
         super.onFragmentAttached(fm, f, context);
         if (f instanceof IFragment && f.getArguments() != null) {
             FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
@@ -37,14 +34,11 @@ public class FragmentLifecycle extends FragmentManager.FragmentLifecycleCallback
 
     @Override
     public void onFragmentCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onFragmentCreated: ");
         super.onFragmentCreated(fm, f, savedInstanceState);
         FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
         if (fragmentDelegate == null){
-            Log.d(TAG, "fragmentDelegate is null ");
         }
         if (fragmentDelegate != null) {
-            Log.d(TAG, "onFragmentCreated: "+"for test");
             fragmentDelegate.onCreate(savedInstanceState);
         }
     }
@@ -60,7 +54,6 @@ public class FragmentLifecycle extends FragmentManager.FragmentLifecycleCallback
 
     @Override
     public void onFragmentActivityCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onFragmentActivityCreated: ");
         super.onFragmentActivityCreated(fm, f, savedInstanceState);
         FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
         if (fragmentDelegate != null){
@@ -135,7 +128,6 @@ public class FragmentLifecycle extends FragmentManager.FragmentLifecycleCallback
 
     private FragmentDelegate fetchFragmentDelegate(Fragment fragment) {
         if (fragment instanceof IFragment) {
-            Log.d(TAG, "fetchFragmentDelegate: ");
             return fragment.getArguments() == null ? null :(FragmentDelegate) fragment.getArguments().getParcelable("fragment_delegate");
         }
         return null;

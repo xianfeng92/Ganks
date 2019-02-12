@@ -3,15 +3,12 @@ package com.example.ganks;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcel;
-import android.util.Log;
 
 /**
  * Created By apple on 2019/2/3
  * github: https://github.com/xianfeng92
  */
 public class ActivityDelegateImpl implements ActivityDelegate {
-
-    private static final String TAG = "ActivityDelegateImpl";
 
     private Activity mActivity;
 
@@ -31,7 +28,7 @@ public class ActivityDelegateImpl implements ActivityDelegate {
 
     @Override
     public void onCreate(Bundle var1) {
-        Log.d(TAG, "onCreate: ");
+
     }
 
     @Override

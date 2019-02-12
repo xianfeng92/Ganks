@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import com.example.ganks.R;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 
 public class ArticleContentFragment extends Fragment {
-    private static final String TAG = "ArticleContentFragment";
 
     private Bundle bundle;
     private WebView webview;
@@ -27,7 +25,6 @@ public class ArticleContentFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: ");
         View view = inflater.inflate(R.layout.fg_content,container,false);
         bundle = getArguments();
         webview = view.findViewById(R.id.webview);
@@ -65,7 +62,6 @@ public class ArticleContentFragment extends Fragment {
         webview.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                Log.d(TAG, "onProgressChanged: "+newProgress);
                 if (newProgress < 100){
                     String progress = newProgress + "%";
                     webview.setVisibility(View.INVISIBLE);

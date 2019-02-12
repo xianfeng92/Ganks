@@ -16,8 +16,6 @@ import java.util.List;
 
 public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener,View.OnLongClickListener{
 
-    private static final String TAG = "GridAdapter";
-
     private Context context;
     private List<String> urls;
 

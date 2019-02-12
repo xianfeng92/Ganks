@@ -1,8 +1,11 @@
 package com.example.ganks.callbacks;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+
+
 
 /**
  * Created By zhongxianfeng on 19-2-11
@@ -15,12 +18,31 @@ public class MyFragmentLifeCycleCallbacks extends FragmentManager.FragmentLifecy
         // 在配置变化的时候将这个 Fragment 保存下来,在 Activity 由于配置变化重建是重复利用已经创建的Fragment。
         // https://developer.android.com/reference/android/app/Fragment.html?hl=zh-cn#setRetainInstance(boolean)
         // 在 Activity 中绑定少量的 Fragment 建议这样做,如果需要绑定较多的 Fragment 不建议设置此参数,如 ViewPager 需要展示较多 Fragment
+    }
 
+    @Override
+    public void onFragmentStarted(@NonNull FragmentManager fm, @NonNull Fragment f) {
+        super.onFragmentStarted(fm, f);
+    }
+
+    @Override
+    public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+        super.onFragmentResumed(fm, f);
+    }
+
+    @Override
+    public void onFragmentStopped(@NonNull FragmentManager fm, @NonNull Fragment f) {
+        super.onFragmentStopped(fm, f);
     }
 
     @Override
     public void onFragmentDestroyed(FragmentManager fm, Fragment f) {
 
+    }
+
+    @Override
+    public void onFragmentDetached(@NonNull FragmentManager fm, @NonNull Fragment f) {
+        super.onFragmentDetached(fm, f);
     }
 
 }

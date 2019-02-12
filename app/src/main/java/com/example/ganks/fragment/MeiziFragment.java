@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,8 +32,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class MeiziFragment extends BaseFragment implements StaggerAdapter.onItemClickListener {
-
-    private static final String TAG = "MeiziFragment";
 
     public RecyclerView recyclerView;
     public CoordinatorLayout coordinatorLayout;
@@ -79,7 +76,6 @@ public class MeiziFragment extends BaseFragment implements StaggerAdapter.onItem
             @Override
             public void onNext(Meizi meizis) {
                 for (Meizi.ResultsBean resultsBean:meizis.results){
-                    Log.d(TAG, "onNext: "+resultsBean.url);
                     if (!TextUtils.isEmpty(resultsBean.url))
                     urls.add(resultsBean.url);
                 }
@@ -88,18 +84,15 @@ public class MeiziFragment extends BaseFragment implements StaggerAdapter.onItem
 
             @Override
             public void onError(Throwable e) {
-                Log.d(TAG, "onError: "+e.getMessage());
             }
 
             @Override
             public void onComplete() {
-                Log.d(TAG, "onComplete: ");
             }
         });
     }
 
     private void updateAdapter(List<String> urls){
-        Log.d(TAG, "updateAdapter: ");
         if (mAdapter == null){
             mAdapter = new StaggerAdapter(getActivity(),urls);
             mAdapter.setOnItemClickListener(this);
@@ -114,7 +107,6 @@ public class MeiziFragment extends BaseFragment implements StaggerAdapter.onItem
     @Override
     public void onItemClick(View view, int postion) {
         Toast.makeText(getContext(),"OnItemClick"+postion+" "+"url is "+urls.get(postion),Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "onItemClick: "+urls.get(postion));
     }
 
     @Override
@@ -132,7 +124,6 @@ public class MeiziFragment extends BaseFragment implements StaggerAdapter.onItem
         itemTouchHelper=new ItemTouchHelper(new ItemTouchHelper.Callback() {
             @Override
             public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                Log.d(TAG, "getMovementFlags: ");
                 int dragFlags=0,swipeFlags=0;
                 if(recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager){
                     dragFlags=ItemTouchHelper.UP|ItemTouchHelper.DOWN|ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT;
@@ -146,7 +137,6 @@ public class MeiziFragment extends BaseFragment implements StaggerAdapter.onItem
 
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                Log.d(TAG, "onMove: ");
                 int from=viewHolder.getAdapterPosition();
                 int to=target.getAdapterPosition();
                 Collections.swap(urls,from,to);
@@ -156,7 +146,6 @@ public class MeiziFragment extends BaseFragment implements StaggerAdapter.onItem
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                Log.d(TAG, "onSwiped: ");
             }
 
             @Override

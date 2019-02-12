@@ -8,7 +8,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +35,6 @@ import io.reactivex.schedulers.Schedulers;
  * github: https://github.com/xianfeng92
  */
 public class TanTanFragment extends BaseFragment {
-
-    private static final String TAG = "TanTanFragment";
 
     private CommonService meiziService;
     private TanTanAdapter tanTanAdapter;
@@ -77,7 +74,6 @@ public class TanTanFragment extends BaseFragment {
             @Override
             public void onNext(Meizi meizis) {
                 for (Meizi.ResultsBean resultsBean:meizis.results){
-                    Log.d(TAG, "onNext: "+resultsBean.url);
                     if (!TextUtils.isEmpty(resultsBean.url))
                         urls.add(resultsBean.url);
                 }
@@ -86,12 +82,12 @@ public class TanTanFragment extends BaseFragment {
 
             @Override
             public void onError(Throwable e) {
-                Log.d(TAG, "onError: "+e.getMessage());
+
             }
 
             @Override
             public void onComplete() {
-                Log.d(TAG, "onComplete: ");
+
             }
         });
     }

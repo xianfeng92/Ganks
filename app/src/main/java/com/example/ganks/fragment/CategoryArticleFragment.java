@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +30,6 @@ import io.reactivex.schedulers.Schedulers;
  * github: https://github.com/xianfeng92
  */
 public class CategoryArticleFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, ArticleAdapter.ItemClickListener {
-
-    private static final String TAG = "CategoryArticleFragment";
 
     private static FragmentManager fManager;
     private ArticleAdapter mAdapter;
@@ -103,7 +100,6 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
             @Override
             public void onNext(GankEntity gankEntity) {
                 for (GankEntity.ResultsBean bean:gankEntity.results){
-                    Log.d(TAG, "onNext: "+bean.url);
                     datas.add(bean);
                 }
                 mAdapter.notifyDataSetChanged();

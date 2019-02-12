@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -13,7 +12,6 @@ import android.view.View;
  * github: https://github.com/xianfeng92
  */
 public class FragmentDelegateImpl implements FragmentDelegate {
-    private static final String TAG = "FragmentDelegateImpl";
 
     private android.support.v4.app.FragmentManager mFragmentManager;
     private android.support.v4.app.Fragment mFragment;
@@ -27,7 +25,6 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
     @Override
     public void onAttach(Context context) {
-        Log.d(TAG, "onAttach: ");
 
     }
 

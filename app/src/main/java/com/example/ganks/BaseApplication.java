@@ -11,8 +11,6 @@ import com.example.ganks.lifecycle.AppLifecycles;
  */
 public class BaseApplication extends Application {
     private AppLifecycles mAppDelegate;
-    private static final String TAG = "BaseApplication";
-
 
     @Override
     protected void attachBaseContext(Context base) {

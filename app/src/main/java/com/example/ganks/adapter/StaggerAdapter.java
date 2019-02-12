@@ -3,7 +3,6 @@ package com.example.ganks.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class StaggerAdapter extends RecyclerView.Adapter {
-    private static final String TAG = "StaggerAdapter";
 
     private Context context;
     private List<String> urls;
@@ -83,7 +81,6 @@ public class StaggerAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount: "+urls.size());
         return urls.size();
     }
 

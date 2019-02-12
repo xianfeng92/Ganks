@@ -3,7 +3,6 @@ package com.example.ganks.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import java.util.List;
 
 public class LineAdapter extends RecyclerView.Adapter<LineAdapter.MyViewHolder> implements View.OnClickListener {
 
-    private static final String TAG = "LineAdapter";
 
     private Context context;
     private List<String> urls;
@@ -41,7 +39,6 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i) {
-        Log.d(TAG, "onBindViewHolder: ");
         viewHolder.textView.setText("picture"+i);
         Picasso.with(context).load(urls.get(i)).into(((MyViewHolder)viewHolder).imageView);
     }
@@ -85,7 +82,6 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.MyViewHolder> 
     }
 
     public void removeItem(final int position) {
-        Log.d(TAG, "removeItem: "+position);
         final String removed=urls.get(position);
         urls.remove(urls.get(position));
         notifyItemRemoved(position);

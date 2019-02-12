@@ -5,7 +5,6 @@ import android.app.Application;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 
 import com.example.ganks.ActivityDelegate;
 import com.example.ganks.ActivityDelegateImpl;
@@ -16,13 +15,10 @@ import com.example.ganks.ActivityDelegateImpl;
  */
 public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks {
 
-    private static final String TAG = "ActivityLifecycle";
-
     private FragmentLifecycle fragmentLifecycle;
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        Log.d(TAG, "onActivityCreated: ");
         if (activity.getIntent() != null) {
             ActivityDelegate activityDelegate = this.fetchActivityDelegate(activity);
             if (activityDelegate == null) {
