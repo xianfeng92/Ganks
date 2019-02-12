@@ -2,6 +2,7 @@ package com.example.ganks;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 
 import com.example.ganks.lifecycle.ActivityLifecycle;
 import com.example.ganks.lifecycle.AppLifecycles;
@@ -20,6 +21,7 @@ public class AppDelegate implements AppLifecycles {
     private List<ConfigModule> mModules;
     private List<AppLifecycles> mAppLifecycles = new ArrayList<>();
     private List<Application.ActivityLifecycleCallbacks> mActivityLifecycles = new ArrayList<>();
+
 
 
     public AppDelegate(Context context) {

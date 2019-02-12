@@ -40,8 +40,6 @@ public abstract class BaseFragment extends Fragment implements IFragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-
-
     @Override
     public void onStart() {
         super.onStart();

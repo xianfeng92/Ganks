@@ -2,8 +2,9 @@ package com.example.ganks.callbacks;
 
 import android.app.Application;
 import android.content.Context;
-
+import com.example.ganks.BuildConfig;
 import com.example.ganks.lifecycle.AppLifecycles;
+import timber.log.Timber;
 
 
 /**
@@ -18,10 +19,14 @@ public class MyAppLifecyclesCallbacks implements AppLifecycles {
 
     @Override
     public void onCreate(Application application) {
+        if (BuildConfig.DEBUG){
+            //开启Timber日志打印
+            Timber.plant(new Timber.DebugTree());
+        }
     }
 
     @Override
     public void onTerminate(Application application) {
-
+        Timber.d((application+"onTerminate"));
     }
 }
