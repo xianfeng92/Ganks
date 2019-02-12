@@ -39,6 +39,8 @@ Just for fun，Let's coding
 
 [leakcanary使用教程](https://www.liaohuqiu.net/cn/posts/leak-canary-read-me/)
 
+[LeakCanary: 让内存泄露无所遁形](https://www.liaohuqiu.net/cn/posts/leak-canary/)
+
 [Android应用开发性能优化完全分析](https://blog.csdn.net/yanbober/article/details/48394201)
 
 # Thanks
