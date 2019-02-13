@@ -41,6 +41,8 @@ Just for fun，Let's coding
 
 [LeakCanary: 让内存泄露无所遁形](https://www.liaohuqiu.net/cn/posts/leak-canary/)
 
+[Android 屏幕适配：最全面的解决方案](https://www.jianshu.com/p/ec5a1a30694b)
+
 [Android应用开发性能优化完全分析](https://blog.csdn.net/yanbober/article/details/48394201)
 
 # Thanks
