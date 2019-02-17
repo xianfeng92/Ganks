@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.example.ganks.R;
 import com.example.ganks.adapter.TanTanAdapter;
-import com.example.ganks.api.GankApi;
-import com.example.ganks.api.service.CommonService;
+import com.example.ganks.net.GankApi;
 import com.example.ganks.bean.Meizi;
+import com.example.ganks.net.RestService;
 import com.example.tantancardswipe.CardConfig;
 import com.example.tantancardswipe.OnSwipeListener;
 import com.example.tantancardswipe.CardItemTouchHelperCallback;
@@ -36,7 +36,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class TanTanFragment extends BaseFragment {
 
-    private CommonService meiziService;
+    private RestService meiziService;
     private TanTanAdapter tanTanAdapter;
     private CardItemTouchHelperCallback cardItemTouchHelperCallback;
     private CardLayoutManager cardLayoutManager;

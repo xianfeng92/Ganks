@@ -15,9 +15,10 @@ import android.widget.Toast;
 
 import com.example.ganks.R;
 import com.example.ganks.adapter.ArticleAdapter;
-import com.example.ganks.api.GankApi;
-import com.example.ganks.api.service.CommonService;
+import com.example.ganks.net.GankApi;
 import com.example.ganks.bean.GankEntity;
+import com.example.ganks.net.RestService;
+
 import java.util.ArrayList;
 import java.util.List;
 import io.reactivex.Observer;
@@ -35,7 +36,7 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
     private ArticleAdapter mAdapter;
     private LinearLayoutManager layoutManager;
     private List<GankEntity.ResultsBean> datas = new ArrayList<>();
-    private CommonService articleService;
+    private RestService articleService;
     private int page = 1;
     int pageSize = 10;
     private int lastVisibleItem;

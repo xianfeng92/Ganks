@@ -1,7 +1,11 @@
 package com.example.ganks.net;
 
+import com.example.ganks.bean.GankEntity;
+import com.example.ganks.bean.Meizi;
+
 import java.util.WeakHashMap;
 
+import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -15,6 +19,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
@@ -24,6 +29,12 @@ import retrofit2.http.Url;
  * github: https://github.com/xianfeng92
  */
 public interface RestService {
+
+    @GET("api/data/{type}/{pageSize}/{page}")
+    Observable<GankEntity> gank(@Path("type") String type, @Path("pageSize") int pageSize, @Path("page") int page);
+
+    @GET("api/data/福利/10/{page}")
+    Observable<Meizi> getMeizi(@Path("page") int page);
 
     @GET
     Call<String> get(@Url String url, @QueryMap WeakHashMap<String, Object> params);

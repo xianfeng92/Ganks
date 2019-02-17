@@ -20,9 +20,10 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.example.ganks.R;
 import com.example.ganks.adapter.StaggerAdapter;
-import com.example.ganks.api.GankApi;
-import com.example.ganks.api.service.CommonService;
+import com.example.ganks.net.GankApi;
 import com.example.ganks.bean.Meizi;
+import com.example.ganks.net.RestService;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -42,7 +43,7 @@ public class MeiziFragment extends BaseFragment implements StaggerAdapter.onItem
     public StaggeredGridLayoutManager staggeredGridLayoutManager;
     private int lastVisibleItem;
     private ItemTouchHelper itemTouchHelper;
-    private CommonService meiziService;
+    private RestService meiziService;
     private int page = 1;
     private int screenwidth;
 
