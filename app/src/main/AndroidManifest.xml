@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <meta-data
-            android:name="com.example.ganks.config.GlobalConfiguration"
+            android:name="com.example.ganks.global.GlobalConfiguration"
             android:value="ConfigModule" />
     </application>
 

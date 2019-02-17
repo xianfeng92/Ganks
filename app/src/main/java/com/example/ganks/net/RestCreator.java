@@ -10,8 +10,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-import static android.net.sip.SipErrorCode.TIME_OUT;
-
 /**
  * Created By apple on 2019/2/17
  * github: https://github.com/xianfeng92
@@ -22,7 +20,7 @@ public final class RestCreator {
      * 构建OkHttp
      */
     public static final class OkHttpHolder {
-        public static final int TIMEOUT = 60;
+        public static final int TIME_OUT = 60;
         public static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
         private static final OkHttpClient OK_HTTP_CLIENT = BUILDER
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
-import com.example.ganks.config.ConfigModule;
+import com.example.ganks.global.ConfigModule;
 
 import java.util.ArrayList;
 import java.util.List;

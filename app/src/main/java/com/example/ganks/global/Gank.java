@@ -10,7 +10,7 @@ import android.os.Handler;
  */
 public final class Gank {
 
-    public final Configurator init(Context context){
+    public static final Configurator init(Context context){
         Configurator.getInstance().getGankConfigs().
                 put(ConfigKeys.APPLICATION_CONTEXT.name(),context.getApplicationContext());
         return Configurator.getInstance();

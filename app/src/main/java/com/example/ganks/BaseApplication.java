@@ -3,7 +3,9 @@ package com.example.ganks;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.ganks.api.Api;
 import com.example.ganks.delegate.AppDelegate;
+import com.example.ganks.global.Gank;
 import com.example.ganks.lifecycle.AppLifecycles;
 
 /**
@@ -24,6 +26,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         this.mAppDelegate.onCreate(this);
+        Gank.init(this).withBaseUrl(Api.APP_DOMAIN).configure();
     }
 
     @Override

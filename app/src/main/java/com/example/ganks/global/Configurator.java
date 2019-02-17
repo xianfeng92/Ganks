@@ -1,5 +1,4 @@
 package com.example.ganks.global;
-
 import android.os.Handler;
 
 import java.util.HashMap;
@@ -41,6 +40,11 @@ public class Configurator {
                 .replace("https://", "");
         hostName = hostName.substring(0,hostName.lastIndexOf("/"));
         GANK_CONFIGS.put(ConfigKeys.WEB_API_HOST.name(),hostName);
+        return this;
+    }
+
+    public final Configurator withBaseUrl(String url){
+        GANK_CONFIGS.put(ConfigKeys.BASE_URL.name(),url);
         return this;
     }
 
