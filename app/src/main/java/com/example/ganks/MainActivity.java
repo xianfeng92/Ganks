@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import com.example.ganks.fragment.HomeFragment;
 import com.example.ganks.fragment.MeiziFragment;
 import com.example.ganks.fragment.TanTanFragment;
@@ -16,6 +17,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "MainActivity";
 
     // UI Object
     // private TextView txt_topbar;

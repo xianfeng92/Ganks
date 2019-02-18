@@ -8,14 +8,14 @@
     <FrameLayout
         android:id="@+id/ly_content"
         android:layout_width="match_parent"
-        android:layout_height="600dp">
+        android:layout_height="wrap_content">
     </FrameLayout>
 
     <LinearLayout
         android:id="@+id/ly_tab_bar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_marginTop="601dp"
+        android:layout_alignParentBottom="true"
         android:background="@color/bg_white"
         android:orientation="horizontal">
 

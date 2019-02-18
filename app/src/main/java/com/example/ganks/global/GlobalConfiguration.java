@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import com.example.ganks.callbacks.MyActivityLifecycleCallbacks;
 import com.example.ganks.callbacks.MyAppLifecyclesCallbacks;
 import com.example.ganks.callbacks.MyFragmentLifeCycleCallbacks;
-import com.example.ganks.global.ConfigModule;
 import com.example.ganks.lifecycle.AppLifecycles;
 
 import java.util.List;

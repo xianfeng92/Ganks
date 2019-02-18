@@ -15,8 +15,8 @@ import android.widget.Toast;
 
 import com.example.ganks.R;
 import com.example.ganks.adapter.ArticleAdapter;
-import com.example.ganks.net.GankApi;
 import com.example.ganks.bean.GankEntity;
+import com.example.ganks.net.RestCreator;
 import com.example.ganks.net.RestService;
 
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_refresh_list,container,false);
-        articleService = GankApi.buildServiceForGank();
+        articleService = RestCreator.getRestService();
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mSwipeRefreshLayout = view.findViewById(R.id.refreshLayout);
         type = getArguments().getString("type");

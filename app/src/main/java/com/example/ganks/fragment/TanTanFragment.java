@@ -14,8 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.example.ganks.R;
 import com.example.ganks.adapter.TanTanAdapter;
-import com.example.ganks.net.GankApi;
 import com.example.ganks.bean.Meizi;
+import com.example.ganks.net.RestCreator;
 import com.example.ganks.net.RestService;
 import com.example.tantancardswipe.CardConfig;
 import com.example.tantancardswipe.OnSwipeListener;
@@ -57,7 +57,7 @@ public class TanTanFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.layout_refresh_list,container,false);
         recyclerView = view.findViewById(R.id.recyclerView);
         swipeRefreshLayout = view.findViewById(R.id.refreshLayout);
-        meiziService = GankApi.buildServiceForGank();
+        meiziService = RestCreator.getRestService();
         return view;
     }
 

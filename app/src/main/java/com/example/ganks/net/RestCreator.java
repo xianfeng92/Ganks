@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created By apple on 2019/2/17
@@ -32,11 +32,11 @@ public final class RestCreator {
          * 构建全局Retrofit客户端
          */
         private static final class RetrofitHolder {
-            private static final String BASE_URL = Gank.getConfiguration(ConfigKeys.WEB_API_HOST.name());
+            private static final String BASE_URL = Gank.getConfiguration(ConfigKeys.BASE_URL.name());
             private static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(OkHttpHolder.OK_HTTP_CLIENT)
-                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
         }

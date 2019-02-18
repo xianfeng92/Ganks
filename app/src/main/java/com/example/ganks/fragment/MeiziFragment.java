@@ -20,8 +20,8 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.example.ganks.R;
 import com.example.ganks.adapter.StaggerAdapter;
-import com.example.ganks.net.GankApi;
 import com.example.ganks.bean.Meizi;
+import com.example.ganks.net.RestCreator;
 import com.example.ganks.net.RestService;
 
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class MeiziFragment extends BaseFragment implements StaggerAdapter.onItem
         recyclerView = view.findViewById(R.id.stagger_recycleView);
         coordinatorLayout = view.findViewById(R.id.stagger_coordinatorLayout);
         swipeRefreshLayout = view.findViewById(R.id.stagger_swipe_refresh);
-        meiziService = GankApi.buildServiceForGank();
+        meiziService = RestCreator.getRestService();
         screenwidth = ScreenUtils.getScreenWidth();
         return view;
     }
