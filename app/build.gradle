@@ -42,6 +42,17 @@ dependencies {
     implementation 'com.wang.avi:library:2.1.3'
     implementation 'com.squareup.okio:okio:1.14.1'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    //Json
+    implementation 'com.alibaba:fastjson:1.1.68.android'
+    //Fragment
+    implementation 'me.yokeyword:fragmentation:1.3.6'
+    implementation 'me.yokeyword:fragmentation-swipeback:1.3.6'
+    //ButterKnife依赖
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    //权限
+    implementation "org.permissionsdispatcher:permissionsdispatcher:4.3.0"
+    annotationProcessor "org.permissionsdispatcher:permissionsdispatcher-processor:4.3.0"
     implementation project(path: ':tantancardswipe')
     implementation project(':autosize')
 }
