@@ -48,11 +48,12 @@ dependencies {
     implementation 'me.yokeyword:fragmentation:1.3.6'
     implementation 'me.yokeyword:fragmentation-swipeback:1.3.6'
     //ButterKnife依赖
-    implementation 'com.jakewharton:butterknife:10.0.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    implementation 'com.jakewharton:butterknife:9.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'
     //权限
-    implementation "org.permissionsdispatcher:permissionsdispatcher:4.3.0"
-    annotationProcessor "org.permissionsdispatcher:permissionsdispatcher-processor:4.3.0"
+    implementation('com.github.hotchemi:permissionsdispatcher:3.2.0') {
+        exclude module: 'support-v13'
+    }
     implementation project(path: ':tantancardswipe')
     implementation project(':autosize')
 }
