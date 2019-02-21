@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView txt_setting;
     private FrameLayout ly_content;
     private List<Integer> mTitles;
+    private HomeFragment targetFragment;
 
     // Fragment Object
     private HomeFragment homeFragment;
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 txt_home.setSelected(true);
                 if(homeFragment == null){
                     homeFragment = HomeFragment.newInstance();
-                    fTransaction.add(R.id.ly_content,homeFragment);
+                    fTransaction.add(R.id.ly_content,homeFragment,"homeFragment");
                 }else{
                     fTransaction.show(homeFragment);
                 }
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 txt_meizi.setSelected(true);
                 if(meiziFragment == null){
                     meiziFragment = MeiziFragment.newInstance();
-                    fTransaction.add(R.id.ly_content,meiziFragment);
+                    fTransaction.add(R.id.ly_content,meiziFragment,"meiziFragment");
                 }else{
                     fTransaction.show(meiziFragment);
                 }
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 txt_video.setSelected(true);
                 if(tanTanFragment == null){
                     tanTanFragment = TanTanFragment.newInstance();
-                    fTransaction.add(R.id.ly_content,tanTanFragment);
+                    fTransaction.add(R.id.ly_content,tanTanFragment,"tanTanFragment");
                 }else{
                     fTransaction.show(tanTanFragment);
                 }
