@@ -19,7 +19,7 @@ public abstract class ProxyActivity extends AppCompatActivity implements ISuppor
     private final SupportActivityDelegate DELEGATE =
             new SupportActivityDelegate(this);
 
-    public abstract GankFragment setRootFragment();
+    public abstract LauncherDelegate setRootDelegate();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public abstract class ProxyActivity extends AppCompatActivity implements ISuppor
         container.setId(R.id.delegate_container);
         setContentView(container);
         if (savedInstanceState == null) {
-            DELEGATE.loadRootFragment(R.id.delegate_container, setRootFragment());
+            DELEGATE.loadRootFragment(R.id.delegate_container, setRootDelegate());
         }
     }
 

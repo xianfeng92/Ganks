@@ -7,6 +7,7 @@ import permissions.dispatcher.PermissionUtils;
  * github: https://github.com/xianfeng92
  */
 public class GankFragmentPermissionsDispatcher {
+
     private static final int REQUEST_REQUESTFILEPERMISSION = 0;
 
     private static final String[] PERMISSION_REQUESTFILEPERMISSION = new String[] {"android.permission.WRITE_EXTERNAL_STORAGE"};

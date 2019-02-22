@@ -2,6 +2,7 @@ package com.example.ganks.launcher;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
@@ -9,7 +10,7 @@ import com.example.ganks.R;
 import com.example.ganks.delegate.BaseDelegate;
 import com.example.ganks.timer.BaseTimerTask;
 import com.example.ganks.timer.ITimerListener;
-import com.example.ganks.utils.storage.GankPreference;
+import com.example.ganks.utils.GankPreference;
 import java.text.MessageFormat;
 import java.util.Timer;
 import butterknife.BindView;
@@ -58,7 +59,7 @@ public class LauncherDelegate extends BaseDelegate implements ITimerListener {
     }
 
     @Override
-    public void OnBindView(@Nullable Bundle savedInstanceState, View rootView) {
+    public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         initTimer();
         mTvTimer = rootView.findViewById(R.id.tv_launcher_timer);
         mTvTimer.setOnClickListener(new View.OnClickListener() {

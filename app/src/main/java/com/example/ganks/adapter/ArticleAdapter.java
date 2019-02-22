@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.ganks.R;
-import com.example.ganks.bean.GankEntity;
+import com.example.ganks.entity.GankEntity;
 import java.util.List;
 
 

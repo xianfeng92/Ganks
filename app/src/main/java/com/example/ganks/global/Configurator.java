@@ -1,4 +1,5 @@
 package com.example.ganks.global;
+import android.app.Activity;
 import android.os.Handler;
 
 import java.util.HashMap;
@@ -47,6 +48,10 @@ public class Configurator {
         GANK_CONFIGS.put(ConfigKeys.BASE_URL.name(),url);
         return this;
     }
+    public final Configurator withActivity(Activity activity) {
+        GANK_CONFIGS.put(ConfigKeys.ACTIVITY.name(), activity);
+        return this;
+    }
 
     public final Configurator withLoaderDelayed(int delay){
         GANK_CONFIGS.put(ConfigKeys.LOADER_DELAYED.name(),delay);
@@ -59,6 +64,7 @@ public class Configurator {
             throw new RuntimeException("Configuration is not ready,call configure");
         }
     }
+
 
     @SuppressWarnings("unchecked")
     final <T> T getConfiguration(String key) {

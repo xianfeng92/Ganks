@@ -1,127 +1,106 @@
 package com.example.ganks;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.support.v4.app.ActivityCompat;
 import android.view.Window;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
-import com.example.ganks.fragment.HomeFragment;
-import com.example.ganks.fragment.MeiziFragment;
-import com.example.ganks.fragment.TanTanFragment;
-import java.util.List;
+import com.example.ganks.ui.fragment.BaseMainFragment;
+import com.example.ganks.ui.widge.BottomBar;
+import com.example.ganks.ui.widge.BottomBarTab;
+import com.example.ganks.ui.fragment.HomeFragment;
+import com.example.ganks.ui.fragment.MeiziFragment;
+import com.example.ganks.ui.fragment.TanTanFragment;
+import com.example.ganks.global.EventBusActivityScope;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import me.yokeyword.fragmentation.SupportActivity;
+import me.yokeyword.fragmentation.SupportFragment;
+
+public class MainActivity extends SupportActivity implements BaseMainFragment.OnBackToFirstListener{
     private static final String TAG = "MainActivity";
 
-    // UI Object
-    // private TextView txt_topbar;
-    private TextView txt_home;
-    private TextView txt_meizi;
-    private TextView txt_video;
-    private TextView txt_setting;
-    private FrameLayout ly_content;
-    private List<Integer> mTitles;
-    private HomeFragment targetFragment;
+    public static final int FIRST = 0;
+    public static final int SECOND = 1;
+    public static final int THIRD = 2;
 
-    // Fragment Object
-    private HomeFragment homeFragment;
-    private MeiziFragment meiziFragment;
-    private TanTanFragment tanTanFragment;
-//    private LauncherDelegate launcherDelegate;
-    private FragmentManager fManager;
+    private SupportFragment[] mFragments = new SupportFragment[3];
+    private BottomBar mBottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        fManager = getSupportFragmentManager();
-        bindViews();
-        txt_home.performClick();//模拟一次点击，既进去后选择第一项
+        SupportFragment firstFragment = findFragment(HomeFragment.class);
+        if (firstFragment == null){
+            mFragments[0] = HomeFragment.newInstance();
+            mFragments[1] = MeiziFragment.newInstance();
+            mFragments[2] = TanTanFragment.newInstance();
+
+            loadMultipleRootFragment(R.id.fl_container, FIRST,
+                    mFragments[FIRST],
+                    mFragments[SECOND],
+                    mFragments[THIRD]);
+        }else {
+            // 这里我们需要拿到mFragments的引用
+            mFragments[FIRST] = firstFragment;
+            mFragments[SECOND] = findFragment(HomeFragment.class);
+            mFragments[THIRD] = findFragment(MeiziFragment.class);
+        }
+        initView();
     }
 
-    //UI组件初始化与事件绑定
-    private void bindViews() {
-        //txt_topbar = (TextView) findViewById(R.id.txt_topbar);
-        txt_home = (TextView) findViewById(R.id.txt_home);
-        txt_meizi = (TextView) findViewById(R.id.txt_meizi);
-        txt_video = (TextView) findViewById(R.id.txt_video);
-        txt_setting = (TextView) findViewById(R.id.txt_setting);
-        ly_content = (FrameLayout) findViewById(R.id.ly_content);
+    private void initView(){
+        mBottomBar = findViewById(R.id.bottomBar);
+        mBottomBar.addItem(new BottomBarTab(this,R.drawable.ic_home_white_24dp))
+                .addItem(new BottomBarTab(this,R.drawable.ic_discover_white_24dp))
+                .addItem(new BottomBarTab(this,R.drawable.ic_message_white_24dp));
+        mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int position, int prePosition) {
+                showHideFragment(mFragments[position], mFragments[prePosition]);
+            }
 
-        txt_home.setOnClickListener(this);
-        txt_meizi.setOnClickListener(this);
-        txt_video.setOnClickListener(this);
-        txt_setting.setOnClickListener(this);
+            @Override
+            public void onTabUnselected(int position) {
+
+            }
+
+            @Override
+            public void onTabReselected(int position) {
+                final SupportFragment currentFragment = mFragments[position];
+                int count = currentFragment.getChildFragmentManager().getBackStackEntryCount();
+                if (count > 1){
+                    if (currentFragment instanceof HomeFragment) {
+                        currentFragment.popToChild(HomeFragment.class, false);
+                    } else if (currentFragment instanceof MeiziFragment) {
+                        currentFragment.popToChild(MeiziFragment.class, false);
+                    } else if (currentFragment instanceof TanTanFragment) {
+                        currentFragment.popToChild(TanTanFragment.class, false);
+                    }
+                    return;
+                }
+                // 这里推荐使用EventBus来实现 -> 解耦
+                if (count == 1) {
+                    // 在FirstPagerFragment中接收, 因为是嵌套的孙子Fragment 所以用EventBus比较方便
+                    // 主要为了交互: 重选tab 如果列表不在顶部则移动到顶部,如果已经在顶部,则刷新
+                    EventBusActivityScope.getDefault(MainActivity.this).post(new TabSelectedEvent(position));
+                }
+            }
+        });
     }
-
-    //重置所有文本的选中状态
-    private void setSelected(){
-        txt_home.setSelected(false);
-        txt_meizi.setSelected(false);
-        txt_video.setSelected(false);
-        txt_setting.setSelected(false);
-    }
-
-    //隐藏所有Fragment
-    private void hideAllFragment(FragmentTransaction fragmentTransaction){
-        if(homeFragment != null)fragmentTransaction.hide(homeFragment);
-        if(meiziFragment != null)fragmentTransaction.hide(meiziFragment);
-        if(tanTanFragment != null)fragmentTransaction.hide(tanTanFragment);
-//        if(launcherDelegate != null)fragmentTransaction.hide(launcherDelegate);
-    }
-
 
     @Override
-    public void onClick(View v) {
-        FragmentTransaction fTransaction = fManager.beginTransaction();
-        hideAllFragment(fTransaction);
-        switch (v.getId()){
-            case R.id.txt_home:
-                setSelected();
-                txt_home.setSelected(true);
-                if(homeFragment == null){
-                    homeFragment = HomeFragment.newInstance();
-                    fTransaction.add(R.id.ly_content,homeFragment,"homeFragment");
-                }else{
-                    fTransaction.show(homeFragment);
-                }
-                break;
-            case R.id.txt_meizi:
-                setSelected();
-                txt_meizi.setSelected(true);
-                if(meiziFragment == null){
-                    meiziFragment = MeiziFragment.newInstance();
-                    fTransaction.add(R.id.ly_content,meiziFragment,"meiziFragment");
-                }else{
-                    fTransaction.show(meiziFragment);
-                }
-                break;
-            case R.id.txt_video:
-                setSelected();
-                txt_video.setSelected(true);
-                if(tanTanFragment == null){
-                    tanTanFragment = TanTanFragment.newInstance();
-                    fTransaction.add(R.id.ly_content,tanTanFragment,"tanTanFragment");
-                }else{
-                    fTransaction.show(tanTanFragment);
-                }
-                break;
-            case R.id.txt_setting:
-                setSelected();
-                txt_setting.setSelected(true);
-//                if(launcherDelegate == null){
-//                    launcherDelegate = new LauncherDelegate();
-//                    fTransaction.add(R.id.ly_content,launcherDelegate);
-//                }else{
-//                    fTransaction.show(launcherDelegate);
-//                }
-                break;
+    public void onBackPressedSupport() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            pop();
+        } else {
+            ActivityCompat.finishAfterTransition(this);
         }
-        fTransaction.commit();
     }
+
+    @Override
+    public void onBackToFirstFragment() {
+        mBottomBar.setCurrentItem(0);
+    }
+
 }

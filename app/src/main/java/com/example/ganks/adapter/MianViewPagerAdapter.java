@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.ganks.fragment.CategoryArticleFragment;
+import com.example.ganks.ui.fragment.CategoryArticleFragment;
 import com.example.ganks.utils.CategoryType;
 
 import java.util.List;

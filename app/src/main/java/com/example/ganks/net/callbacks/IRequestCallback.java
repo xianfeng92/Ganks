@@ -2,10 +2,7 @@ package com.example.ganks.net.callbacks;
 
 import android.os.Handler;
 
-import com.example.ganks.global.ConfigKeys;
 import com.example.ganks.global.Gank;
-import com.example.ganks.loader.GankLoader;
-import com.example.ganks.loader.LoadStyle;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,16 +19,14 @@ public final class IRequestCallback implements Callback<String> {
     private final IFailure IFAILURE;
     private final IError IERROR;
 
-    private final LoadStyle LOAD_STYLE;
     private static final Handler HANDLER = Gank.getHandler();
 
 
-    public IRequestCallback(IRequest irequest, ISuccess isecess, IFailure ifailure, IError ierror, LoadStyle load_style) {
+    public IRequestCallback(IRequest irequest, ISuccess isecess, IFailure ifailure, IError ierror) {
         IREQUEST = irequest;
         ISECESS = isecess;
         IFAILURE = ifailure;
         IERROR = ierror;
-        LOAD_STYLE = load_style;
     }
 
 
@@ -58,20 +53,6 @@ public final class IRequestCallback implements Callback<String> {
         }
         if (IREQUEST != null){
             IREQUEST.onRequestEnd();
-        }
-    }
-
-    private void onRequestFinish(){
-        final long delayed = Gank.getConfiguration(ConfigKeys.LOADER_DELAYED.name());
-        if (LOAD_STYLE != null){
-            if (HANDLER != null){
-                HANDLER.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        GankLoader.stopLoading();
-                    }
-                }, delayed);
-            }
         }
     }
 
