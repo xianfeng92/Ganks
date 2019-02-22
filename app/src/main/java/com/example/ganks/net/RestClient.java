@@ -1,10 +1,6 @@
 package com.example.ganks.net;
 
 import android.content.Context;
-
-import com.example.ganks.download.DownloadHandler;
-import com.example.ganks.loader.GankLoader;
-import com.example.ganks.loader.LoadStyle;
 import com.example.ganks.net.callbacks.HttpMethod;
 import com.example.ganks.net.callbacks.IError;
 import com.example.ganks.net.callbacks.IFailure;
@@ -37,7 +33,6 @@ public final class RestClient {
     private final IFailure FAILURE;
     private final IError ERROR;
     private final RequestBody BODY;
-    private final LoadStyle LOADER_STYLE;
     private final File FILE;
     private final Context CONTEXT;
 
@@ -52,8 +47,7 @@ public final class RestClient {
                IError error,
                RequestBody body,
                File file,
-               Context context,
-               LoadStyle loaderStyle) {
+               Context context) {
         this.URL = url;
         this.PARAMS = params;
         this.DOWNLOAD_DIR = downloadDir;
@@ -66,7 +60,6 @@ public final class RestClient {
         this.BODY = body;
         this.FILE = file;
         this.CONTEXT = context;
-        this.LOADER_STYLE = loaderStyle;
     }
 
     public static RestClientBuilder builder(){
@@ -79,10 +72,6 @@ public final class RestClient {
 
         if (REQUEST != null) {
             REQUEST.onRequestStart();
-        }
-
-        if (LOADER_STYLE != null) {
-            GankLoader.showLoading(CONTEXT, LOADER_STYLE);
         }
 
         switch (method) {
@@ -125,9 +114,7 @@ public final class RestClient {
                 REQUEST,
                 SUCCESS,
                 FAILURE,
-                ERROR,
-                LOADER_STYLE
-        );
+                ERROR);
     }
 
     public final void get() {
@@ -162,12 +149,6 @@ public final class RestClient {
 
     public final void upload() {
         request(HttpMethod.UPLOAD);
-    }
-
-    public final void download() {
-        new DownloadHandler(URL, PARAMS,REQUEST, DOWNLOAD_DIR, EXTENSION, NAME,
-                SUCCESS, FAILURE, ERROR)
-                .handleDownload();
     }
 
 }

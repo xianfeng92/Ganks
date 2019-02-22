@@ -10,5 +10,6 @@ public enum ConfigKeys {
     APPLICATION_CONTEXT,
     CONFIG_READY,
     LOADER_DELAYED,
-    HANDLER
+    HANDLER,
+    ACTIVITY
 }

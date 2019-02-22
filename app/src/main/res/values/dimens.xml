@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="bottombar_height">48dp</dimen>
     <!-- text size -->
     <dimen name="f0">10sp</dimen>
     <dimen name="f1">11sp</dimen>

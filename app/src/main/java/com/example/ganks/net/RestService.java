@@ -1,7 +1,7 @@
 package com.example.ganks.net;
 
-import com.example.ganks.bean.GankEntity;
-import com.example.ganks.bean.Meizi;
+import com.example.ganks.entity.GankEntity;
+import com.example.ganks.entity.Meizi;
 
 import java.util.WeakHashMap;
 

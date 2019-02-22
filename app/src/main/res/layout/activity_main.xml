@@ -1,79 +1,26 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
 
     <FrameLayout
-        android:id="@+id/ly_content"
+        android:id="@+id/fl_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </FrameLayout>
+        android:layout_marginBottom="@dimen/bottombar_height"
+        android:layout_height="match_parent"/>
 
-    <LinearLayout
-        android:id="@+id/ly_tab_bar"
+    <com.example.ganks.ui.widge.BottomBar
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/bg_white"
-        android:orientation="horizontal">
+        android:layout_height="@dimen/bottombar_height"
+        android:layout_gravity="bottom"/>
 
-        <TextView
-            android:id="@+id/txt_home"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/tab_menu_bg"
-            android:drawableTop="@drawable/tab_menu_channel"
-            android:drawablePadding="3dp"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="@string/tab_menu_home"
-            android:textColor="@drawable/tab_menu_text"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/txt_meizi"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/tab_menu_bg"
-            android:drawableTop="@drawable/tab_menu_message"
-            android:drawablePadding="3dp"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="@string/tab_menu_meizi"
-            android:textColor="@drawable/tab_menu_text"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/txt_video"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/tab_menu_bg"
-            android:drawableTop="@drawable/tab_menu_better"
-            android:drawablePadding="3dp"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="@string/tab_menu_video"
-            android:textColor="@drawable/tab_menu_text"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/txt_setting"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/tab_menu_bg"
-            android:drawableTop="@drawable/tab_menu_setting"
-            android:drawablePadding="3dp"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="@string/tab_menu_setting"
-            android:textColor="@drawable/tab_menu_text"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-</RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:background="@drawable/actionbar_shadow_up"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/bottombar_height"
+        android:layout_height="wrap_content"/>
+</FrameLayout>

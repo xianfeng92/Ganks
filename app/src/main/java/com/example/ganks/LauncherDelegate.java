@@ -2,17 +2,19 @@ package com.example.ganks;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
-import com.example.ganks.delegate.BaseDelegate;
+import com.example.ganks.delegate.GankDelegate;
 import com.example.ganks.launcher.ILauncherListener;
 import com.example.ganks.launcher.LauncherScrollDelegate;
+import com.example.ganks.launcher.OnLauncherFinishTag;
 import com.example.ganks.launcher.ScrollLauncherTag;
 import com.example.ganks.timer.BaseTimerTask;
 import com.example.ganks.timer.ITimerListener;
-import com.example.ganks.utils.storage.GankPreference;
+import com.example.ganks.utils.GankPreference;
 
 import java.text.MessageFormat;
 import java.util.Timer;
@@ -24,7 +26,7 @@ import butterknife.OnClick;
  * Created By apple on 2019/2/20
  * github: https://github.com/xianfeng92
  */
-public class LauncherDelegate extends BaseDelegate implements ITimerListener {
+public class LauncherDelegate extends GankDelegate implements ITimerListener {
 
     private Timer mTimer = null;
     private int mCount = 5;
@@ -58,12 +60,17 @@ public class LauncherDelegate extends BaseDelegate implements ITimerListener {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public Object setLayout() {
         return R.layout.delegate_launcher;
     }
 
     @Override
-    public void OnBindView(@Nullable Bundle savedInstanceState, View rootView) {
+    public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         initTimer();
         mTvTimer = rootView.findViewById(R.id.tv_launcher_timer);
         mTvTimer.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +87,9 @@ public class LauncherDelegate extends BaseDelegate implements ITimerListener {
             getSupportDelegate().start(new LauncherScrollDelegate(),SINGLETASK);
         }else{
             // do something else
+            if (mILauncherListener != null){
+                mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+            }
         }
     }
 
@@ -88,7 +98,7 @@ public class LauncherDelegate extends BaseDelegate implements ITimerListener {
         getProxyActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (textView != null){
+                if (mTvTimer != null){
                     mTvTimer.setText(MessageFormat.format("跳过\n{0}s", mCount));
                     mCount--;
                     if (mCount < 0){
@@ -102,5 +112,4 @@ public class LauncherDelegate extends BaseDelegate implements ITimerListener {
             }
         });
     }
-
 }

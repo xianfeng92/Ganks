@@ -2,7 +2,6 @@ package com.example.ganks.net;
 
 import android.content.Context;
 
-import com.example.ganks.loader.LoadStyle;
 import com.example.ganks.net.callbacks.IError;
 import com.example.ganks.net.callbacks.IFailure;
 import com.example.ganks.net.callbacks.IRequest;
@@ -27,7 +26,6 @@ public class RestClientBuilder {
     private IError mIError = null;
     private RequestBody mBody = null;
     private Context mContext = null;
-    private LoadStyle mLoaderStyle = null;
     private File mFile = null;
     private String mDownloadDir = null;
     private String mExtension = null;
@@ -93,15 +91,9 @@ public class RestClientBuilder {
         return this;
     }
 
-    public final RestClientBuilder loader(Context context, LoadStyle loadStyle){
-        this.mContext = context;
-        this.mLoaderStyle = loadStyle;
-        return this;
-    }
 
     public final RestClientBuilder loader(Context context){
         this.mContext = context;
-        this.mLoaderStyle = LoadStyle.BallSpinFadeLoaderIndicator;
         return this;
     }
 
@@ -109,8 +101,7 @@ public class RestClientBuilder {
         return new RestClient(mUrl, PARAMS,
                 mDownloadDir, mExtension, mName,
                 mIRequest, mISuccess, mIFailure,
-                mIError, mBody, mFile, mContext,
-                mLoaderStyle);
+                mIError, mBody, mFile, mContext);
     }
 
 }
