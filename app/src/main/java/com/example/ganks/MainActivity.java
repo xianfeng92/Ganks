@@ -12,9 +12,7 @@ import android.widget.TextView;
 import com.example.ganks.fragment.HomeFragment;
 import com.example.ganks.fragment.MeiziFragment;
 import com.example.ganks.fragment.TanTanFragment;
-
 import java.util.List;
-
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
@@ -33,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private HomeFragment homeFragment;
     private MeiziFragment meiziFragment;
     private TanTanFragment tanTanFragment;
+//    private LauncherDelegate launcherDelegate;
     private FragmentManager fManager;
 
     @Override
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(homeFragment != null)fragmentTransaction.hide(homeFragment);
         if(meiziFragment != null)fragmentTransaction.hide(meiziFragment);
         if(tanTanFragment != null)fragmentTransaction.hide(tanTanFragment);
-//        if(fg4 != null)fragmentTransaction.hide(fg4);
+//        if(launcherDelegate != null)fragmentTransaction.hide(launcherDelegate);
     }
 
 
@@ -115,11 +114,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.txt_setting:
                 setSelected();
                 txt_setting.setSelected(true);
-//                if(fg4 == null){
-//                    fg4 = MyFragment.newInstance("第四个Fragment");
-//                    fTransaction.add(R.id.ly_content,fg4);
+//                if(launcherDelegate == null){
+//                    launcherDelegate = new LauncherDelegate();
+//                    fTransaction.add(R.id.ly_content,launcherDelegate);
 //                }else{
-//                    fTransaction.show(fg4);
+//                    fTransaction.show(launcherDelegate);
 //                }
                 break;
         }

@@ -54,6 +54,8 @@ dependencies {
     implementation('com.github.hotchemi:permissionsdispatcher:3.2.0') {
         exclude module: 'support-v13'
     }
+    //Banner依赖
+    implementation 'com.bigkoo:convenientbanner:2.0.5'
     implementation project(path: ':tantancardswipe')
     implementation project(':autosize')
 }

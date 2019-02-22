@@ -1,17 +1,22 @@
-package com.example.ganks.launcher;
+package com.example.ganks;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
-import com.example.ganks.R;
+
 import com.example.ganks.delegate.BaseDelegate;
+import com.example.ganks.launcher.ILauncherListener;
+import com.example.ganks.launcher.LauncherScrollDelegate;
+import com.example.ganks.launcher.ScrollLauncherTag;
 import com.example.ganks.timer.BaseTimerTask;
 import com.example.ganks.timer.ITimerListener;
 import com.example.ganks.utils.storage.GankPreference;
+
 import java.text.MessageFormat;
 import java.util.Timer;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
