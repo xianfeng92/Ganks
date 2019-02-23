@@ -1,5 +1,6 @@
 package com.example.ganks.launcher;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,6 +38,14 @@ public class LauncherScrollDelegate extends BaseDelegate implements OnItemClickL
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof ILauncherListener){
+            mIlaunchListener = (ILauncherListener)context;
+        }
+    }
+
+    @Override
     public Object setLayout() {
         mConvinientBanner = new ConvenientBanner<>(getContext());
         return mConvinientBanner;
@@ -51,7 +60,9 @@ public class LauncherScrollDelegate extends BaseDelegate implements OnItemClickL
     public void onItemClick(int position) {
         if (position == INTEGERS.size()-1){
             GankPreference.setAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name(),true);
-            // do next thing, example check use account
+            if (mIlaunchListener != null){
+                mIlaunchListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+            }
         }
     }
 }

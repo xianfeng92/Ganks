@@ -1,12 +1,15 @@
 package com.example.ganks.launcher;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import com.example.ganks.R;
+import com.example.ganks.sign.AccountManager;
+import com.example.ganks.sign.IUserChecker;
+import com.example.ganks.sign.SignUpDelegate;
 import com.xforg.gank_core.delegates.GankDelegate;
 import com.xforg.gank_core.utils.timer.BaseTimerTask;
 import com.xforg.gank_core.utils.timer.ITimerListener;
@@ -25,6 +28,7 @@ public class LauncherDelegate extends GankDelegate implements ITimerListener {
     private Timer mTimer = null;
     private int mCount = 5;
     private ILauncherListener mILauncherListener = null;
+    private IUserChecker mIUserChecker = null;
     private AppCompatTextView mTvTimer = null;
 
     @BindView(R.id.tv_launcher_timer)
@@ -46,10 +50,13 @@ public class LauncherDelegate extends GankDelegate implements ITimerListener {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (activity instanceof ILauncherListener){
-            mILauncherListener = (ILauncherListener)activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof ILauncherListener){
+            mILauncherListener = (ILauncherListener)context;
+        }
+        if (context instanceof IUserChecker){
+            mIUserChecker = (IUserChecker)context;
         }
     }
 
@@ -75,10 +82,13 @@ public class LauncherDelegate extends GankDelegate implements ITimerListener {
         if (!GankPreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())){
             getSupportDelegate().start(new LauncherScrollDelegate(),SINGLETASK);
         }else{
-            // do something else
-            if (mILauncherListener != null){
-                mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
-            }
+          if (!AccountManager.isSignIn()){
+              getSupportDelegate().start(new SignUpDelegate());
+          }else {
+              if (mIUserChecker != null){
+                  mIUserChecker.onSignIn();
+              }
+          }
         }
     }
 
