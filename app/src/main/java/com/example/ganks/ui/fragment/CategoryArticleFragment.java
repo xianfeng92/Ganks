@@ -15,9 +15,9 @@ import android.widget.Toast;
 
 import com.example.ganks.R;
 import com.example.ganks.adapter.ArticleAdapter;
-import com.example.ganks.entity.GankEntity;
-import com.example.ganks.net.RestCreator;
-import com.example.ganks.net.RestService;
+import com.xforg.gank_core.entity.GankEntity;
+import com.xforg.gank_core.net.RestCreator;
+import com.xforg.gank_core.net.RestService;
 
 import java.util.ArrayList;
 import java.util.List;

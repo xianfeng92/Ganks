@@ -7,10 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import com.example.ganks.R;
-import com.example.ganks.delegate.BaseDelegate;
-import com.example.ganks.timer.BaseTimerTask;
-import com.example.ganks.timer.ITimerListener;
-import com.example.ganks.utils.GankPreference;
+import com.xforg.gank_core.delegates.GankDelegate;
+import com.xforg.gank_core.utils.timer.BaseTimerTask;
+import com.xforg.gank_core.utils.timer.ITimerListener;
+import com.xforg.gank_core.utils.storage.GankPreference;
 import java.text.MessageFormat;
 import java.util.Timer;
 import butterknife.BindView;
@@ -20,7 +20,7 @@ import butterknife.OnClick;
  * Created By apple on 2019/2/20
  * github: https://github.com/xianfeng92
  */
-public class LauncherDelegate extends BaseDelegate implements ITimerListener {
+public class LauncherDelegate extends GankDelegate implements ITimerListener {
 
     private Timer mTimer = null;
     private int mCount = 5;
@@ -76,6 +76,9 @@ public class LauncherDelegate extends BaseDelegate implements ITimerListener {
             getSupportDelegate().start(new LauncherScrollDelegate(),SINGLETASK);
         }else{
             // do something else
+            if (mILauncherListener != null){
+                mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+            }
         }
     }
 
@@ -84,7 +87,7 @@ public class LauncherDelegate extends BaseDelegate implements ITimerListener {
         getProxyActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (textView != null){
+                if (mTvTimer != null){
                     mTvTimer.setText(MessageFormat.format("跳过\n{0}s", mCount));
                     mCount--;
                     if (mCount < 0){

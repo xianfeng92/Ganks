@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.ganks.R;
 import com.example.ganks.adapter.MianViewPagerAdapter;
-import com.example.ganks.utils.CategoryType;
+import com.xforg.gank_core.app.CategoryType;
 import java.util.ArrayList;
 import java.util.List;
 

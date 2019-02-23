@@ -8,8 +8,8 @@ import android.view.View;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.ganks.R;
-import com.example.ganks.delegate.BaseDelegate;
-import com.example.ganks.utils.GankPreference;
+import com.xforg.gank_core.delegates.BaseDelegate;
+import com.xforg.gank_core.utils.storage.GankPreference;
 
 import java.util.ArrayList;
 import java.util.List;
