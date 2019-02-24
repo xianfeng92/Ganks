@@ -23,7 +23,6 @@ import com.example.ganks.ui.adapter.StaggerAdapter;
 import com.xforg.gank_core.entity.Meizi;
 import com.xforg.gank_core.net.RestCreator;
 import com.xforg.gank_core.net.RestService;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -80,7 +79,7 @@ public class MeiziFragment extends BaseMainFragment implements StaggerAdapter.on
 
     @Override
     public void onItemClick(View view, int postion) {
-        Toast.makeText(getContext(),"OnItemClick"+postion+" "+"url is "+urls.get(postion),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),"此处功能待开发，谢谢您的厚爱",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -168,7 +167,6 @@ public class MeiziFragment extends BaseMainFragment implements StaggerAdapter.on
             }
         });
     }
-
 
     private void getMeizi(){
         meiziService.getMeizi(page)

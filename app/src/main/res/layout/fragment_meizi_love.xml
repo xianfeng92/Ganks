@@ -4,15 +4,10 @@
     android:id="@+id/meizi_line_coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="5dp"
     android:background="#ffffff">
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/meizi_love_swipe_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/meizi_love_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
-
 </android.support.design.widget.CoordinatorLayout>

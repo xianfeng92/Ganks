@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="300dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="10dp"
+    app:contentPadding="3dp"
+    app:cardElevation="8dp">
 
     <ImageView
         android:id="@+id/line_item_iv"
@@ -11,5 +16,4 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"/>
-
-</LinearLayout>
+</android.support.design.card.MaterialCardView>

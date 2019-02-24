@@ -76,5 +76,4 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.MyViewHolder> 
         resultsBeanList.remove(removed);
         notifyItemRemoved(position);
     }
-
 }

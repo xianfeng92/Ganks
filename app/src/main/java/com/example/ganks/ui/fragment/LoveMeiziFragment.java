@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,7 +25,6 @@ public class LoveMeiziFragment extends BaseMainFragment implements LineAdapter.o
 
     public RecyclerView recyclerView;
     public CoordinatorLayout coordinatorLayout;
-    public SwipeRefreshLayout swipeRefreshLayout;
     public LineAdapter mAdapter;
     public LinearLayoutManager mlayoutManager;
     public List<DaoMeiziEntity> resultsBeanList = new ArrayList<>();
@@ -36,7 +34,6 @@ public class LoveMeiziFragment extends BaseMainFragment implements LineAdapter.o
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meizi_love,container,false);
         recyclerView = view.findViewById(R.id.meizi_love_recycler);
-        swipeRefreshLayout = view.findViewById(R.id.meizi_love_swipe_refresh);
         coordinatorLayout = view.findViewById(R.id.meizi_line_coordinatorLayout);
         init();
         loadDataByGreenDao();
@@ -84,12 +81,11 @@ public class LoveMeiziFragment extends BaseMainFragment implements LineAdapter.o
         }else {
             mAdapter.notifyDataSetChanged();
         }
-        swipeRefreshLayout.setRefreshing(false);
     }
 
 
     @Override
     public void onItemClick(View view) {
-        Toast.makeText(getContext(),"OnItemClick",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),"此处功能待开发，谢谢您的厚爱",Toast.LENGTH_SHORT).show();
     }
 }
