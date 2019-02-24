@@ -7,7 +7,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +22,7 @@ import java.util.List;
  * Created By apple on 2019/2/24
  * github: https://github.com/xianfeng92
  */
-public class LoveMeiziFragment extends BaseMainFragment implements LineAdapter.onItemClickListener {
-    private static final String TAG = "LoveMeiziFragment";
+public class LoveMeiziFragment extends BaseMainFragment implements LineAdapter.onRecycleViewItemClickListener {
 
     public RecyclerView recyclerView;
     public CoordinatorLayout coordinatorLayout;
@@ -46,18 +44,17 @@ public class LoveMeiziFragment extends BaseMainFragment implements LineAdapter.o
     }
 
     @Override
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        loadDataByGreenDao();
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (resultsBeanList.size() > 0){
             updateAdapter(resultsBeanList);
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        loadDataByGreenDao();
-        updateAdapter(resultsBeanList);
     }
 
     public static LoveMeiziFragment newInstance(){
@@ -73,14 +70,17 @@ public class LoveMeiziFragment extends BaseMainFragment implements LineAdapter.o
     }
 
     private void loadDataByGreenDao(){
-        resultsBeanList = GreenDaoHelper.getAllMeiziEntity();
+        resultsBeanList.clear();
+        List<DaoMeiziEntity> list = GreenDaoHelper.getAllMeiziEntity();
+        resultsBeanList.addAll(list);
+        updateAdapter(resultsBeanList);
     }
 
+
     private void updateAdapter(List<DaoMeiziEntity> resultsBeanList){
-        Log.d(TAG, "updateAdapter: "+resultsBeanList.size());
         if (mAdapter == null){
             mAdapter = new LineAdapter(getActivity(),resultsBeanList);
-            mAdapter.setOnItemClickListener(this);
+            mAdapter.setRecycleViewItemClickListener(this);
             recyclerView.setAdapter(mAdapter);
         }else {
             mAdapter.notifyDataSetChanged();
@@ -90,7 +90,7 @@ public class LoveMeiziFragment extends BaseMainFragment implements LineAdapter.o
 
 
     @Override
-    public void onItemClick(View view, int postion) {
-        Toast.makeText(getContext(),"OnItemClick"+postion,Toast.LENGTH_SHORT).show();
+    public void onItemClick(View view) {
+        Toast.makeText(getContext(),"OnItemClick",Toast.LENGTH_SHORT).show();
     }
 }

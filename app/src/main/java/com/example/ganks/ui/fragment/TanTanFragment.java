@@ -39,7 +39,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created By zhongxianfeng on 19-2-2
  * github: https://github.com/xianfeng92
  */
-public class TanTanFragment extends BaseMainFragment {
+public class TanTanFragment extends BaseMainFragment{
 
     private RestService meiziService;
     private TanTanAdapter tanTanAdapter;
@@ -172,4 +172,5 @@ public class TanTanFragment extends BaseMainFragment {
         daoGankEntity.addTime =str;
         return daoGankEntity;
     }
+
 }
