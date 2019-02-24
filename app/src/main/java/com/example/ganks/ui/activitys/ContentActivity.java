@@ -7,6 +7,7 @@ import android.view.Window;
 import com.example.ganks.R;
 import com.example.ganks.ui.TabSelectedEvent;
 import com.example.ganks.ui.fragment.BaseMainFragment;
+import com.example.ganks.ui.fragment.LoveMeiziFragment;
 import com.example.ganks.ui.widge.BottomBar;
 import com.example.ganks.ui.widge.BottomBarTab;
 import com.example.ganks.ui.fragment.HomeFragment;
@@ -17,13 +18,14 @@ import com.xforg.gank_core.app.EventBusActivityScope;
 import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 
-public class MainActivity extends SupportActivity implements BaseMainFragment.OnBackToFirstListener{
+public class ContentActivity extends SupportActivity implements BaseMainFragment.OnBackToFirstListener{
 
     public static final int FIRST = 0;
     public static final int SECOND = 1;
     public static final int THIRD = 2;
+    public static final int FOURTH = 3;
 
-    private SupportFragment[] mFragments = new SupportFragment[3];
+    private SupportFragment[] mFragments = new SupportFragment[4];
     private BottomBar mBottomBar;
 
     @Override
@@ -34,18 +36,21 @@ public class MainActivity extends SupportActivity implements BaseMainFragment.On
         SupportFragment firstFragment = findFragment(HomeFragment.class);
         if (firstFragment == null){
             mFragments[0] = HomeFragment.newInstance();
-            mFragments[1] = MeiziFragment.newInstance();
-            mFragments[2] = TanTanFragment.newInstance();
-
+            mFragments[1] = TanTanFragment.newInstance();
+            mFragments[2] = MeiziFragment.newInstance();
+            mFragments[3] = LoveMeiziFragment.newInstance();
+            //加载多个同级根Fragment
             loadMultipleRootFragment(R.id.fl_container, FIRST,
                     mFragments[FIRST],
                     mFragments[SECOND],
-                    mFragments[THIRD]);
+                    mFragments[THIRD],
+                    mFragments[FOURTH]);
         }else {
-            // 这里我们需要拿到mFragments的引用
+            // 这里需要拿到mFragments的引用
             mFragments[FIRST] = firstFragment;
-            mFragments[SECOND] = findFragment(HomeFragment.class);
+            mFragments[SECOND] = findFragment(TanTanFragment.class);
             mFragments[THIRD] = findFragment(MeiziFragment.class);
+            mFragments[FOURTH] = findFragment(LoveMeiziFragment.class);
         }
         initView();
     }
@@ -54,6 +59,7 @@ public class MainActivity extends SupportActivity implements BaseMainFragment.On
         mBottomBar = findViewById(R.id.bottomBar);
         mBottomBar.addItem(new BottomBarTab(this,R.drawable.ic_home_white_24dp))
                 .addItem(new BottomBarTab(this,R.drawable.ic_discover_white_24dp))
+                .addItem(new BottomBarTab(this,R.drawable.icon_apple))
                 .addItem(new BottomBarTab(this,R.drawable.ic_message_white_24dp));
         mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
             @Override
@@ -77,6 +83,8 @@ public class MainActivity extends SupportActivity implements BaseMainFragment.On
                         currentFragment.popToChild(MeiziFragment.class, false);
                     } else if (currentFragment instanceof TanTanFragment) {
                         currentFragment.popToChild(TanTanFragment.class, false);
+                    } else if(currentFragment instanceof LoveMeiziFragment){
+                        currentFragment.popToChild(LoveMeiziFragment.class,false);
                     }
                     return;
                 }
@@ -84,7 +92,7 @@ public class MainActivity extends SupportActivity implements BaseMainFragment.On
                 if (count == 1) {
                     // 在FirstPagerFragment中接收, 因为是嵌套的孙子Fragment 所以用EventBus比较方便
                     // 主要为了交互: 重选tab 如果列表不在顶部则移动到顶部,如果已经在顶部,则刷新
-                    EventBusActivityScope.getDefault(MainActivity.this).post(new TabSelectedEvent(position));
+                    EventBusActivityScope.getDefault(ContentActivity.this).post(new TabSelectedEvent(position));
                 }
             }
         });

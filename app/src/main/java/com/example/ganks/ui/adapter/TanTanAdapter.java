@@ -1,4 +1,4 @@
-package com.example.ganks.adapter;
+package com.example.ganks.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.example.ganks.R;
 import com.squareup.picasso.Picasso;
+import com.xforg.gank_core.entity.Meizi;
 
 import java.util.List;
 
@@ -20,10 +21,10 @@ import java.util.List;
 public class TanTanAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private List<String> datas;
+    private List<Meizi.ResultsBean> resultsBeanList;
 
-    public TanTanAdapter(Context context, List<String> datas){
-        this.datas = datas;
+    public TanTanAdapter(Context context, List<Meizi.ResultsBean> resultsBeanList){
+        this.resultsBeanList = resultsBeanList;
         this.context = context;
     }
 
@@ -37,12 +38,12 @@ public class TanTanAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        Picasso.with(context).load(datas.get(i)).error(R.mipmap.fail_load).into(((MyViewHolder)viewHolder).imageView);
+        Picasso.with(context).load(resultsBeanList.get(i).url).error(R.mipmap.fail_load).into(((MyViewHolder)viewHolder).imageView);
     }
 
     @Override
     public int getItemCount() {
-        return datas.size();
+        return resultsBeanList.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{

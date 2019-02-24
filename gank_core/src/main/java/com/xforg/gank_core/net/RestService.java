@@ -1,6 +1,5 @@
 package com.xforg.gank_core.net;
 
-import com.xforg.gank_core.entity.GankEntity;
 import com.xforg.gank_core.entity.Meizi;
 
 import java.util.WeakHashMap;
@@ -31,7 +30,7 @@ import retrofit2.http.Url;
 public interface RestService {
 
     @GET("api/data/{type}/{pageSize}/{page}")
-    Observable<GankEntity> gank(@Path("type") String type, @Path("pageSize") int pageSize, @Path("page") int page);
+    Observable<Meizi> gank(@Path("type") String type, @Path("pageSize") int pageSize, @Path("page") int page);
 
     @GET("api/data/福利/10/{page}")
     Observable<Meizi> getMeizi(@Path("page") int page);

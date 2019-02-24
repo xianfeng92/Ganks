@@ -1,4 +1,4 @@
-package com.example.ganks.ui.fragment;
+package com.example.ganks.ui.fragment.article;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,8 +14,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.ganks.R;
-import com.example.ganks.adapter.ArticleAdapter;
-import com.xforg.gank_core.entity.GankEntity;
+import com.example.ganks.ui.adapter.ArticleAdapter;
+import com.example.ganks.ui.fragment.BaseFragment;
+import com.xforg.gank_core.entity.Meizi;
 import com.xforg.gank_core.net.RestCreator;
 import com.xforg.gank_core.net.RestService;
 
@@ -35,7 +36,7 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
     private static FragmentManager fManager;
     private ArticleAdapter mAdapter;
     private LinearLayoutManager layoutManager;
-    private List<GankEntity.ResultsBean> datas = new ArrayList<>();
+    private List<Meizi.ResultsBean> datas = new ArrayList<>();
     private RestService articleService;
     private int page = 1;
     int pageSize = 10;
@@ -82,7 +83,7 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
     @Override
     public void onItemClick(View view, int postion) {
         Toast.makeText(getContext(),"OnItemClick"+postion,Toast.LENGTH_SHORT).show();
-        GankEntity.ResultsBean bean = (GankEntity.ResultsBean) datas.get(postion);
+        Meizi.ResultsBean bean = (Meizi.ResultsBean) datas.get(postion);
         Bundle bundle = new Bundle();
         bundle.putString("URL",bean.url);
         FragmentTransaction tx = fManager.beginTransaction();
@@ -98,15 +99,15 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
     private void getDatas(){
         articleService.gank(type,pageSize,page)
                 .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<GankEntity>() {
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Meizi>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(GankEntity gankEntity) {
-                for (GankEntity.ResultsBean bean:gankEntity.results){
+            public void onNext(Meizi gankEntity) {
+                for (Meizi.ResultsBean bean:gankEntity.results){
                     datas.add(bean);
                 }
                 mAdapter.notifyDataSetChanged();

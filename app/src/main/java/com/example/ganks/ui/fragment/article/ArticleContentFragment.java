@@ -1,4 +1,4 @@
-package com.example.ganks.ui.fragment;
+package com.example.ganks.ui.fragment.article;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

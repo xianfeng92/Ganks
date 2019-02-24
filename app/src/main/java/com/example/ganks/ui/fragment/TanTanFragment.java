@@ -14,7 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.ganks.R;
-import com.example.ganks.adapter.TanTanAdapter;
+import com.example.ganks.ui.adapter.TanTanAdapter;
+import com.xforg.gank_core.entity.DaoMeiziEntity;
 import com.xforg.gank_core.entity.Meizi;
 import com.xforg.gank_core.net.RestCreator;
 import com.xforg.gank_core.net.RestService;
@@ -22,8 +23,11 @@ import com.example.tantancardswipe.CardConfig;
 import com.example.tantancardswipe.OnSwipeListener;
 import com.example.tantancardswipe.CardItemTouchHelperCallback;
 import com.example.tantancardswipe.CardLayoutManager;
+import com.xforg.gank_core.utils.GreenDaoHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -42,8 +46,10 @@ public class TanTanFragment extends BaseMainFragment {
     private CardItemTouchHelperCallback cardItemTouchHelperCallback;
     private CardLayoutManager cardLayoutManager;
     private RecyclerView recyclerView;
+    private DaoMeiziEntity daoGankEntity;
     private SwipeRefreshLayout swipeRefreshLayout;
     private List<String> urls = new ArrayList<>();
+    private List<Meizi.ResultsBean> resultsBeanList = new ArrayList<>();
     private int page = 1;
 
 
@@ -82,7 +88,7 @@ public class TanTanFragment extends BaseMainFragment {
             public void onNext(Meizi meizis) {
                 for (Meizi.ResultsBean resultsBean:meizis.results){
                     if (!TextUtils.isEmpty(resultsBean.url))
-                        urls.add(resultsBean.url);
+                    resultsBeanList.add(resultsBean);
                 }
                 tanTanAdapter.notifyDataSetChanged();
             }
@@ -100,10 +106,10 @@ public class TanTanFragment extends BaseMainFragment {
     }
 
     private void initData(){
-        tanTanAdapter = new TanTanAdapter(getContext(),urls);
+        tanTanAdapter = new TanTanAdapter(getContext(),resultsBeanList);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(tanTanAdapter);
-        cardItemTouchHelperCallback = new CardItemTouchHelperCallback(tanTanAdapter,urls);
+        cardItemTouchHelperCallback = new CardItemTouchHelperCallback(tanTanAdapter,resultsBeanList);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(cardItemTouchHelperCallback);
         cardLayoutManager = new CardLayoutManager(recyclerView,itemTouchHelper);
         recyclerView.setLayoutManager(cardLayoutManager);
@@ -123,6 +129,7 @@ public class TanTanFragment extends BaseMainFragment {
                     toastView.setBackgroundResource(R.mipmap.img_dislike);
                 }else {
                     toastView.setBackgroundResource(R.mipmap.img_like);
+                    addToFavorites(o);
                 }
                 toast.setView(toastView);
                 toast.show();
@@ -133,5 +140,36 @@ public class TanTanFragment extends BaseMainFragment {
                 getMeizi();
             }
         });
+    }
+
+    public void addToFavorites(Object o){
+        Meizi.ResultsBean resultsBean = (Meizi.ResultsBean)o;
+        DaoMeiziEntity daoMeiziEntity = entityToDao(resultsBean);
+        GreenDaoHelper.insert(daoMeiziEntity);
+    }
+
+    public void removeByid(Meizi.ResultsBean entity) {
+        DaoMeiziEntity daoGankEntity = entityToDao(entity);
+        GreenDaoHelper.removeById(daoGankEntity._id);
+    }
+
+    private  DaoMeiziEntity entityToDao(Meizi.ResultsBean entity){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        String str = formatter.format(curDate);
+        if (daoGankEntity == null){
+            daoGankEntity = new DaoMeiziEntity();
+        }
+        daoGankEntity._id = entity._id;
+        daoGankEntity.createdAt = entity.createdAt;
+        daoGankEntity.desc = entity.desc;
+        daoGankEntity.publishedAt = entity.publishedAt;
+        daoGankEntity.source = entity.source;
+        daoGankEntity.type = entity.type;
+        daoGankEntity.url = entity.url;
+        daoGankEntity.used = entity.used;
+        daoGankEntity.who = entity.who;
+        daoGankEntity.addTime =str;
+        return daoGankEntity;
     }
 }

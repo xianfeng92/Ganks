@@ -6,14 +6,16 @@ import android.os.Bundle;
 import com.example.ganks.launcher.LauncherDelegate;
 import com.example.ganks.sign.ISignListener;
 import com.example.ganks.sign.IUserChecker;
-import com.example.ganks.ui.activitys.MainActivity;
+import com.example.ganks.ui.activitys.ContentActivity;
 import com.xforg.gank_core.app.Gank;
 import com.example.ganks.launcher.ILauncherListener;
 import com.example.ganks.launcher.OnLauncherFinishTag;
 import com.xforg.gank_core.activitys.ProxyActivity;
 import com.xforg.gank_core.delegates.GankDelegate;
 
+
 public class EnterActivity extends ProxyActivity implements ILauncherListener, ISignListener, IUserChecker {
+    private static final String TAG = "EnterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class EnterActivity extends ProxyActivity implements ILauncherListener, I
     public void onLauncherFinish(OnLauncherFinishTag tag) {
         switch (tag){
             case SIGNED:
+                startActivity(new Intent(EnterActivity.this, ContentActivity.class));
+                finish();
                 break;
             case NOT_SIGNED:
                 break;
@@ -40,7 +44,7 @@ public class EnterActivity extends ProxyActivity implements ILauncherListener, I
 
     @Override
     public void onSignIn() {
-        startActivity(new Intent(EnterActivity.this, MainActivity.class));
+        startActivity(new Intent(EnterActivity.this, ContentActivity.class));
         finish();
     }
 
@@ -51,7 +55,7 @@ public class EnterActivity extends ProxyActivity implements ILauncherListener, I
 
     @Override
     public void onSignInSuccess() {
-        startActivity(new Intent(EnterActivity.this, MainActivity.class));
+        startActivity(new Intent(EnterActivity.this, ContentActivity.class));
         finish();
     }
 

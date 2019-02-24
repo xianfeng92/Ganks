@@ -1,4 +1,4 @@
-package com.example.ganks.adapter;
+package com.example.ganks.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

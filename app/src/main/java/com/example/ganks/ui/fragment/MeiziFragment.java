@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.example.ganks.R;
-import com.example.ganks.adapter.StaggerAdapter;
+import com.example.ganks.ui.adapter.StaggerAdapter;
 import com.xforg.gank_core.entity.Meizi;
 import com.xforg.gank_core.net.RestCreator;
 import com.xforg.gank_core.net.RestService;

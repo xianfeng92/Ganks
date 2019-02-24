@@ -111,5 +111,4 @@ public class LauncherDelegate extends GankDelegate implements ITimerListener {
             }
         });
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.ganks.adapter;
+package com.example.ganks.ui.adapter;
 
 
 import android.content.Context;
@@ -10,18 +10,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.ganks.R;
-import com.xforg.gank_core.entity.GankEntity;
+import com.xforg.gank_core.entity.Meizi;
+
 import java.util.List;
 
 
 public class ArticleAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private List<GankEntity.ResultsBean> datas;
+    private List<Meizi.ResultsBean> datas;
     private ItemClickListener itemClickListener;
 
 
-    public ArticleAdapter(Context context, List<GankEntity.ResultsBean> datas){
+    public ArticleAdapter(Context context, List<Meizi.ResultsBean> datas){
         this.context = context;
         this.datas = datas;
     }
