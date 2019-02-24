@@ -76,7 +76,6 @@ public class LoveMeiziFragment extends BaseMainFragment implements LineAdapter.o
         updateAdapter(resultsBeanList);
     }
 
-
     private void updateAdapter(List<DaoMeiziEntity> resultsBeanList){
         if (mAdapter == null){
             mAdapter = new LineAdapter(getActivity(),resultsBeanList);

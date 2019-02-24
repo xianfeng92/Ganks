@@ -37,8 +37,8 @@ public class ContentActivity extends SupportActivity implements BaseMainFragment
         if (firstFragment == null){
             mFragments[0] = HomeFragment.newInstance();
             mFragments[1] = TanTanFragment.newInstance();
-            mFragments[2] = MeiziFragment.newInstance();
-            mFragments[3] = LoveMeiziFragment.newInstance();
+            mFragments[2] = LoveMeiziFragment.newInstance();
+            mFragments[3] = MeiziFragment.newInstance();
             //加载多个同级根Fragment
             loadMultipleRootFragment(R.id.fl_container, FIRST,
                     mFragments[FIRST],
@@ -49,8 +49,8 @@ public class ContentActivity extends SupportActivity implements BaseMainFragment
             // 这里需要拿到mFragments的引用
             mFragments[FIRST] = firstFragment;
             mFragments[SECOND] = findFragment(TanTanFragment.class);
-            mFragments[THIRD] = findFragment(MeiziFragment.class);
-            mFragments[FOURTH] = findFragment(LoveMeiziFragment.class);
+            mFragments[THIRD] = findFragment(LoveMeiziFragment.class);
+            mFragments[FOURTH] = findFragment(MeiziFragment.class);
         }
         initView();
     }
@@ -79,12 +79,12 @@ public class ContentActivity extends SupportActivity implements BaseMainFragment
                 if (count > 1){
                     if (currentFragment instanceof HomeFragment) {
                         currentFragment.popToChild(HomeFragment.class, false);
-                    } else if (currentFragment instanceof MeiziFragment) {
-                        currentFragment.popToChild(MeiziFragment.class, false);
                     } else if (currentFragment instanceof TanTanFragment) {
                         currentFragment.popToChild(TanTanFragment.class, false);
-                    } else if(currentFragment instanceof LoveMeiziFragment){
-                        currentFragment.popToChild(LoveMeiziFragment.class,false);
+                    } else if (currentFragment instanceof LoveMeiziFragment) {
+                        currentFragment.popToChild(LoveMeiziFragment.class, false);
+                    } else if(currentFragment instanceof MeiziFragment){
+                        currentFragment.popToChild(MeiziFragment.class,false);
                     }
                     return;
                 }

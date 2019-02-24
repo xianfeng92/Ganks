@@ -10,9 +10,7 @@ import android.widget.ImageView;
 import com.example.ganks.R;
 import com.squareup.picasso.Picasso;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
-
 import java.util.List;
-
 
 public class LineAdapter extends RecyclerView.Adapter<LineAdapter.MyViewHolder> implements View.OnClickListener {
 
@@ -68,16 +66,15 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.MyViewHolder> 
         this.listener = listener;
     }
 
+    public void addItem(DaoMeiziEntity resultsBean, int position) {
+        resultsBeanList.add(position, resultsBean);
+        notifyItemInserted(position);
+    }
 
-//    public void addItem(Meizi.ResultsBean resultsBean, int position) {
-//        resultsBeanList.add(position, resultsBean);
-//        notifyItemInserted(position);
-//    }
-
-//    public void removeItem(final int position) {
-//        final Meizi.ResultsBean removed=resultsBeanList.get(position);
-//        resultsBeanList.remove(removed);
-//        notifyItemRemoved(position);
-//    }
+    public void removeItem(final int position) {
+        final DaoMeiziEntity removed=resultsBeanList.get(position);
+        resultsBeanList.remove(removed);
+        notifyItemRemoved(position);
+    }
 
 }

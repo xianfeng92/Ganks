@@ -61,6 +61,15 @@ public class GreenDaoHelper {
         return daoMeiziEntityList;
     }
 
+    public static Boolean isDaoContainMeizi(String id){
+        List<DaoMeiziEntity> daoMeiziEntities = queryById(id);
+        if (daoMeiziEntities.size() == 0){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
     public static List<DaoMeiziEntity> getAllMeiziEntity(){
         return daoSession.getDaoMeiziEntityDao().queryBuilder().list();
     }

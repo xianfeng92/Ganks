@@ -8,11 +8,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.TanTanAdapter;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
@@ -24,12 +24,10 @@ import com.example.tantancardswipe.OnSwipeListener;
 import com.example.tantancardswipe.CardItemTouchHelperCallback;
 import com.example.tantancardswipe.CardLayoutManager;
 import com.xforg.gank_core.utils.GreenDaoHelper;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -40,6 +38,8 @@ import io.reactivex.schedulers.Schedulers;
  * github: https://github.com/xianfeng92
  */
 public class TanTanFragment extends BaseMainFragment{
+
+    private static final String TAG = "TanTanFragment";
 
     private RestService meiziService;
     private TanTanAdapter tanTanAdapter;
@@ -145,7 +145,11 @@ public class TanTanFragment extends BaseMainFragment{
     public void addToFavorites(Object o){
         Meizi.ResultsBean resultsBean = (Meizi.ResultsBean)o;
         DaoMeiziEntity daoMeiziEntity = entityToDao(resultsBean);
-        GreenDaoHelper.insert(daoMeiziEntity);
+        if (GreenDaoHelper.isDaoContainMeizi(daoMeiziEntity._id)){
+            GreenDaoHelper.insert(daoMeiziEntity);
+        }else {
+            Log.d(TAG, "you already love It!!");
+        }
     }
 
     public void removeByid(Meizi.ResultsBean entity) {
@@ -172,5 +176,4 @@ public class TanTanFragment extends BaseMainFragment{
         daoGankEntity.addTime =str;
         return daoGankEntity;
     }
-
 }
