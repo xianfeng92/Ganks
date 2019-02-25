@@ -1,7 +1,10 @@
 package com.example.ganks.ui.fragment;
 
 import android.content.Context;
+import android.util.Log;
 
+
+import com.example.ganks.ui.fragment.article.CategoryArticleFragment;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -11,8 +14,9 @@ import me.yokeyword.fragmentation.SupportFragment;
  * 懒加载
  */
 public abstract class BaseMainFragment extends SupportFragment {
+    private static final String TAG = "BaseMainFragment";
 
-    private OnBackToFirstListener _mBackToFirstListener;
+    public OnBackToFirstListener _mBackToFirstListener;
 
     @Override
     public void onAttach(Context context) {
@@ -42,7 +46,7 @@ public abstract class BaseMainFragment extends SupportFragment {
         if (getChildFragmentManager().getBackStackEntryCount() > 1){
             popChild();
         }else {
-            if (this instanceof HomeFragment){
+            if (this instanceof CategoryArticleFragment){
                 // 如果是 第一个Fragment 则退出app
                 _mActivity.finish();
             }else {
