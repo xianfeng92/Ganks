@@ -51,14 +51,6 @@ public class HomeFragment extends BaseMainFragment {
         initData();
     }
 
-    @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
-        if (findChildFragment(HomeFragment.class) == null) {
-            loadRootFragment(R.id.fragment_home, HomeFragment.newInstance());
-        }
-    }
-
     private void initData(){
         if (mFragments == null){
             mFragments = new ArrayList<>();
