@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.ganks.ui.fragment.article.CategoryArticleFragment;
+import com.example.ganks.ui.fragment.BaseMainFragment;
 import com.xforg.gank_core.app.CategoryType;
 
 import java.util.List;
@@ -16,9 +16,9 @@ import java.util.List;
  */
 public class MianViewPagerAdapter extends FragmentPagerAdapter {
 
-    private List<CategoryArticleFragment> mFragments;
+    private List<BaseMainFragment> mFragments;
 
-    public MianViewPagerAdapter(FragmentManager fm,List<CategoryArticleFragment> mFragments) {
+    public MianViewPagerAdapter(FragmentManager fm,List<BaseMainFragment> mFragments) {
         super(fm);
         this.mFragments = mFragments;
     }

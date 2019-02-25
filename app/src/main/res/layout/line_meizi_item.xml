@@ -2,10 +2,12 @@
 <android.support.design.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="250dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
     android:layout_marginTop="10dp"
+    android:layout_marginRight="50dp"
+    android:layout_marginLeft="50dp"
     app:cardCornerRadius="10dp"
     app:contentPadding="3dp"
     app:cardElevation="8dp">

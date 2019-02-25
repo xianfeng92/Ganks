@@ -2,6 +2,7 @@ package com.example.ganks.ui.activitys;
 
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.Window;
 
 import com.example.ganks.R;
@@ -19,6 +20,7 @@ import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 
 public class ContentActivity extends SupportActivity implements BaseMainFragment.OnBackToFirstListener{
+    private static final String TAG = "ContentActivity";
 
     public static final int FIRST = 0;
     public static final int SECOND = 1;
@@ -35,6 +37,7 @@ public class ContentActivity extends SupportActivity implements BaseMainFragment
         setContentView(R.layout.activity_main);
         SupportFragment firstFragment = findFragment(HomeFragment.class);
         if (firstFragment == null){
+            Log.d(TAG, "onCreate:firstFragment is null ");
             mFragments[0] = HomeFragment.newInstance();
             mFragments[1] = TanTanFragment.newInstance();
             mFragments[2] = LoveMeiziFragment.newInstance();

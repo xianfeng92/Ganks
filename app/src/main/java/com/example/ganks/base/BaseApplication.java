@@ -6,6 +6,7 @@ import android.content.Context;
 import com.xforg.gank_core.net.Api;
 import com.xforg.gank_core.app.Gank;
 import com.xforg.gank_core.utils.GreenDaoHelper;
+import com.xforg.gank_core.utils.Utils;
 
 /**
  * Created By zhongxianfeng on 19-2-2
@@ -24,6 +25,7 @@ public class BaseApplication extends Application {
         Gank.init(this).withBaseUrl(Api.APP_DOMAIN).configure();
         //初始化GreenDao
         GreenDaoHelper.initDataBase(this);
+        Utils.init(this);
     }
 
     @Override

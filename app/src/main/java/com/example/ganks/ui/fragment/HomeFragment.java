@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +22,11 @@ import java.util.List;
  * github: https://github.com/xianfeng92
  */
 public class HomeFragment extends BaseMainFragment {
+    private static final String TAG = "HomeFragment";
 
     TabLayout tabs;
     ViewPager mainPager;
-    private List<CategoryArticleFragment> mFragments;
+    private List<BaseMainFragment> mFragments;
 
     public static HomeFragment newInstance(){
         Bundle args = new Bundle();
@@ -36,6 +38,7 @@ public class HomeFragment extends BaseMainFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: ");
         View view = inflater.inflate(R.layout.fragment_home,container,false);
         tabs = view.findViewById(R.id.tabs);
         mainPager = view.findViewById(R.id.mainPager);

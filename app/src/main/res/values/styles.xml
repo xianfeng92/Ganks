@@ -48,4 +48,19 @@
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
 
+    <string name="empty_no_data">窈窕淑女，君子好逑</string>
+
+    <style name="bg">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/bg</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="empty_img">
+        <item name="android:layout_width">@dimen/def_height</item>
+        <item name="android:layout_height">@dimen/def_height</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
 </resources>

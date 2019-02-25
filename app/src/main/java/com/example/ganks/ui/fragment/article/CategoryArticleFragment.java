@@ -8,14 +8,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.ArticleAdapter;
-import com.example.ganks.ui.fragment.BaseFragment;
+import com.example.ganks.ui.fragment.BaseMainFragment;
 import com.xforg.gank_core.entity.Meizi;
 import com.xforg.gank_core.net.RestCreator;
 import com.xforg.gank_core.net.RestService;
@@ -31,7 +31,9 @@ import io.reactivex.schedulers.Schedulers;
  * Created By zhongxianfeng on 19-2-1
  * github: https://github.com/xianfeng92
  */
-public class CategoryArticleFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, ArticleAdapter.ItemClickListener {
+public class CategoryArticleFragment extends BaseMainFragment implements SwipeRefreshLayout.OnRefreshListener{
+
+    private static final String TAG = "CategoryArticleFragment";
 
     private static FragmentManager fManager;
     private ArticleAdapter mAdapter;
@@ -56,7 +58,6 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
     }
 
 
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_refresh_list,container,false);
@@ -64,14 +65,9 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mSwipeRefreshLayout = view.findViewById(R.id.refreshLayout);
         type = getArguments().getString("type");
+        initData();
         getDatas();
         return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initData();
     }
 
     @Override
@@ -80,29 +76,12 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
         getDatas();
     }
 
-    @Override
-    public void onItemClick(View view, int postion) {
-        Toast.makeText(getContext(),"OnItemClick"+postion,Toast.LENGTH_SHORT).show();
-        Meizi.ResultsBean bean = (Meizi.ResultsBean) datas.get(postion);
-        Bundle bundle = new Bundle();
-        bundle.putString("URL",bean.url);
-        FragmentTransaction tx = fManager.beginTransaction();
-        ArticleContentFragment articleContentFragment = ArticleContentFragment.newInstance();
-        articleContentFragment.setArguments(bundle);
-        //加上Fragment替换动画
-        tx.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_left_exit);
-        tx.replace(R.id.fl_container, articleContentFragment);
-        tx.addToBackStack(null);
-        tx.commit();
-    }
-
     private void getDatas(){
         articleService.gank(type,pageSize,page)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Meizi>() {
             @Override
             public void onSubscribe(Disposable d) {
-
             }
 
             @Override
@@ -110,6 +89,7 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
                 for (Meizi.ResultsBean bean:gankEntity.results){
                     datas.add(bean);
                 }
+                Log.d(TAG, "onNext: "+datas.size());
                 mAdapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
             }
@@ -124,6 +104,7 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
 
             }
         });
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     private void initData() {
@@ -131,8 +112,25 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
         layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new ArticleAdapter(getContext(),datas);
-        mAdapter.setItemClickListener(this);
+        mAdapter = new ArticleAdapter(R.layout.article_item,datas);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Meizi.ResultsBean bean = (Meizi.ResultsBean) datas.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("URL",bean.url);
+                FragmentTransaction tx = fManager.beginTransaction();
+                ArticleContentFragment articleContentFragment = ArticleContentFragment.newInstance();
+                articleContentFragment.setArguments(bundle);
+                //加上Fragment替换动画
+                tx.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_left_exit);
+                tx.replace(R.id.fl_container, articleContentFragment);
+                tx.addToBackStack(null);
+                tx.commit();
+            }
+        });
+        mAdapter.openLoadAnimation();
+        mAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener(){
 
@@ -156,6 +154,5 @@ public class CategoryArticleFragment extends BaseFragment implements SwipeRefres
                 }
             }
         });
-        getDatas();
     }
 }

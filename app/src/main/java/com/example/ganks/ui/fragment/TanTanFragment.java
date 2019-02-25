@@ -106,7 +106,7 @@ public class TanTanFragment extends BaseMainFragment{
     }
 
     private void initData(){
-        tanTanAdapter = new TanTanAdapter(getContext(),resultsBeanList);
+        tanTanAdapter = new TanTanAdapter(R.layout.tantan_item,resultsBeanList);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(tanTanAdapter);
         cardItemTouchHelperCallback = new CardItemTouchHelperCallback(tanTanAdapter,resultsBeanList);
@@ -145,7 +145,7 @@ public class TanTanFragment extends BaseMainFragment{
     public void addToFavorites(Object o){
         Meizi.ResultsBean resultsBean = (Meizi.ResultsBean)o;
         DaoMeiziEntity daoMeiziEntity = entityToDao(resultsBean);
-        if (GreenDaoHelper.isDaoContainMeizi(daoMeiziEntity._id)){
+        if (!GreenDaoHelper.isDaoContainMeizi(daoMeiziEntity._id)){
             GreenDaoHelper.insert(daoMeiziEntity);
         }else {
             Log.d(TAG, "you already love It!!");
