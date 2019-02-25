@@ -62,4 +62,5 @@ public class HomeFragment extends BaseMainFragment {
         mainPager.setAdapter(new MianViewPagerAdapter(getChildFragmentManager(),mFragments));
         tabs.setupWithViewPager(mainPager);
     }
+
 }

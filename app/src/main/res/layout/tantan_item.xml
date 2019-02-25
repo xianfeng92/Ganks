@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             app:radius="7.5dp"
-            android:src="@drawable/img_avatar_01" />
+            android:src="@mipmap/img_avatar_01" />
     </RelativeLayout>
 
     <RelativeLayout

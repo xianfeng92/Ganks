@@ -11,7 +11,7 @@
         android:layout_marginBottom="@dimen/bottombar_height"
         android:layout_height="match_parent"/>
 
-    <com.example.ganks.ui.widge.BottomBar
+    <com.xforg.gank_core.widge.BottomBar
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottombar_height"

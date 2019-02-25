@@ -1,4 +1,4 @@
-package com.example.ganks.ui.widge;
+package com.xforg.gank_core.widge;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,7 +11,8 @@ import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.example.ganks.R;
+import com.xforg.gank_core.R;
+
 
 /**
  * Created By zhongxianfeng on 19-2-22
@@ -49,7 +50,7 @@ public class BottomBarTab extends FrameLayout {
         params.gravity = Gravity.CENTER;
         mICon.setImageResource(icon);
         mICon.setLayoutParams(params);
-        mICon.setColorFilter(ContextCompat.getColor(context,R.color.tab_unselect));
+        mICon.setColorFilter(ContextCompat.getColor(context, R.color.tab_unselect));
         addView(mICon);
     }
 

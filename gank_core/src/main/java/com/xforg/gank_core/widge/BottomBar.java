@@ -1,4 +1,4 @@
-package com.example.ganks.ui.widge;
+package com.xforg.gank_core.widge;
 
 import android.content.Context;
 import android.graphics.Color;

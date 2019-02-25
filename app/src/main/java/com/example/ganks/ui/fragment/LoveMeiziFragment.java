@@ -87,8 +87,8 @@ public class LoveMeiziFragment extends BaseMainFragment {
         List<DaoMeiziEntity> list = GreenDaoHelper.getAllMeiziEntity();
         Log.d(TAG, "loadDataByGreenDao: "+list.size());
         resultsBeanList.addAll(list);
-        // for test
-        resultsBeanList.clear();
+        // for test empty view
+        // resultsBeanList.clear();
         updateAdapter(resultsBeanList);
     }
 
@@ -144,7 +144,8 @@ public class LoveMeiziFragment extends BaseMainFragment {
             @Override
             public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
                 Log.d(TAG, "View Swiped: " + pos);
-
+                GreenDaoHelper.removeById(resultsBeanList.get(pos)._id);
+                loadDataByGreenDao();
             }
 
             @Override
