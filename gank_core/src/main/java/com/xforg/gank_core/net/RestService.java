@@ -3,7 +3,6 @@ package com.xforg.gank_core.net;
 import com.xforg.gank_core.entity.Meizi;
 
 import java.util.WeakHashMap;
-
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -58,6 +57,10 @@ public interface RestService {
     @Streaming
     @GET
     Call<ResponseBody> download(@Url String url, @QueryMap WeakHashMap<String, Object> params);
+
+    @GET("{picture}")
+    @Streaming
+    Observable<ResponseBody> download(@Path("picture") String picture);
 
     @Multipart
     @POST

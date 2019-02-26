@@ -6,6 +6,7 @@ package com.xforg.gank_core.app;
  */
 public enum ConfigKeys {
     BASE_URL,
+    BASE_URL_PICTURE,
     WEB_API_HOST,
     APPLICATION_CONTEXT,
     CONFIG_READY,

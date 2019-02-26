@@ -2,9 +2,7 @@ package com.xforg.gank_core.net;
 
 import com.xforg.gank_core.app.ConfigKeys;
 import com.xforg.gank_core.app.Gank;
-
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

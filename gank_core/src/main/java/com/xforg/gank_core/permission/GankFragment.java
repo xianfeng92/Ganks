@@ -14,6 +14,7 @@ import permissions.dispatcher.RuntimePermissions;
  */
 @RuntimePermissions
 public abstract class GankFragment extends BaseDelegate {
+
     @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     void requestFilePermission() {
     }

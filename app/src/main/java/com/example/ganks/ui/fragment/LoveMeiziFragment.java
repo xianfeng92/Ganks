@@ -1,9 +1,12 @@
 package com.example.ganks.ui.fragment;
 
+import android.Manifest;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -22,11 +25,27 @@ import com.chad.library.adapter.base.listener.OnItemDragListener;
 import com.chad.library.adapter.base.listener.OnItemSwipeListener;
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.LineAdapter;
+import com.tbruyelle.rxpermissions.RxPermissions;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
+import com.xforg.gank_core.net.RestService;
+import com.xforg.gank_core.utils.File.FileUtil;
 import com.xforg.gank_core.utils.GreenDaoHelper;
 import com.xforg.gank_core.utils.ToastUtils;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.functions.Action1;
 
 /**
  * Created By apple on 2019/2/24
@@ -36,12 +55,15 @@ public class LoveMeiziFragment extends BaseMainFragment {
 
     public static final String TAG = "LoveMeiziFragment";
 
+    private Retrofit retrofit;
     private View notDataView;
     public RecyclerView recyclerView;
     public CoordinatorLayout coordinatorLayout;
     public LineAdapter mAdapter;
     public LinearLayoutManager mlayoutManager;
     public List<DaoMeiziEntity> resultsBeanList = new ArrayList<>();
+
+    private Set<String> downLoadUrls = new TreeSet<>();
 
     public static LoveMeiziFragment newInstance(){
         Bundle args = new Bundle();
@@ -67,6 +89,14 @@ public class LoveMeiziFragment extends BaseMainFragment {
         });
         initItemDargAndSwipe();
         loadDataByGreenDao();
+        RxPermissions.getInstance(getActivity()).request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Action1<Boolean>() {
+            @Override
+            public void call(Boolean aBoolean) {
+                if (aBoolean){
+                    ToastUtils.showShortToastSafe("WRITE STORAGE Permission 获取成功");
+                }
+            }
+        });
         return view;
     }
 
@@ -178,9 +208,66 @@ public class LoveMeiziFragment extends BaseMainFragment {
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ToastUtils.showShortToast("此处功能待开发，试试长押可以拖动哦！");
+//                ToastUtils.showShortToast("此处功能待开发，试试长押可以拖动哦！");
+                Log.d(TAG, "onItemClick: "+resultsBeanList.get(position).url);
+                String url = resultsBeanList.get(position).url;
+                downLoad(url);
             }
         });
         recyclerView.setAdapter(mAdapter);
+    }
+
+    public void downLoad(final String url){
+        Log.d(TAG, "downLoad: "+url);
+        if (downLoadUrls.contains(url)){
+            ToastUtils.showShortToastSafe("已保存！");
+            return;
+        }
+         retrofit = new Retrofit.Builder()
+                .baseUrl("https://ws1.sinaimg.cn/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+         retrofit.create(RestService.class).download(subString(url))
+                  //在新线程中实现该方法
+                 .subscribeOn(Schedulers.newThread()).subscribe(new Observer<ResponseBody>() {
+             @Override
+             public void onSubscribe(Disposable d) {
+
+             }
+
+             @Override
+             public void onNext(ResponseBody responseBody) {
+                 byte[] bys = new byte[0];
+                 try {
+                     // OkHttp请求回调中responseBody.bytes();只能有效调用一次.
+                     // 调用responseBody.bytes();的时候数据流已经关闭了，再次调用就会出现错误提示java.lang.IllegalStateException: closed
+                     bys = responseBody.bytes();
+                     File file = FileUtil.saveBitmap(BitmapFactory.decodeByteArray(bys,0,bys.length),
+                             Environment.getExternalStorageState()+"/image/",80);
+                     if (file != null){
+                         ToastUtils.showShortToastSafe("保存成功！");
+                         downLoadUrls.add(url);
+                     }
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
+             }
+
+             @Override
+             public void onError(Throwable e) {
+                 Log.d(TAG, "onError: "+e.toString());
+             }
+
+             @Override
+             public void onComplete() {
+
+             }
+         });
+    }
+
+    // 提取url中baseUrl之后的字符串
+    private String subString(String url){
+        return url.substring(23);
     }
 }
