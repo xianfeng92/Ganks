@@ -39,6 +39,20 @@ public final class RestCreator {
         }
 
     /**
+     * 构建一个用于下载的Service接口
+     */
+    public static RestService getRestServiceForDownLoad (){
+        final String BASE_URL = "https://ws1.sinaimg.cn/";
+
+        return new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(OkHttpHolder.OK_HTTP_CLIENT)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build().create(RestService.class);
+    }
+
+    /**
      * Service接口
      */
     private static final class RestServiceHolder {

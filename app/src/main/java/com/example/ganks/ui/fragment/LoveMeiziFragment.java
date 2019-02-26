@@ -28,6 +28,8 @@ import com.example.ganks.ui.adapter.LineAdapter;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
 import com.xforg.gank_core.net.RestService;
+import com.xforg.gank_core.net.callbacks.IRequest;
+import com.xforg.gank_core.net.download.DownloadHandler;
 import com.xforg.gank_core.utils.File.FileUtil;
 import com.xforg.gank_core.utils.GreenDaoHelper;
 import com.xforg.gank_core.utils.ToastUtils;
@@ -62,7 +64,6 @@ public class LoveMeiziFragment extends BaseMainFragment {
     public LineAdapter mAdapter;
     public LinearLayoutManager mlayoutManager;
     public List<DaoMeiziEntity> resultsBeanList = new ArrayList<>();
-
     private Set<String> downLoadUrls = new TreeSet<>();
 
     public static LoveMeiziFragment newInstance(){
@@ -211,12 +212,20 @@ public class LoveMeiziFragment extends BaseMainFragment {
 //                ToastUtils.showShortToast("此处功能待开发，试试长押可以拖动哦！");
                 Log.d(TAG, "onItemClick: "+resultsBeanList.get(position).url);
                 String url = resultsBeanList.get(position).url;
-                downLoad(url);
+                // 采用AsyncTask下载资源
+                // 需要指定url 、 request 以及 url
+                DownloadHandler.builder().url(subString(url))
+                        .dir(Environment.getExternalStorageState()+"/image/")
+                        .extension("png")
+                        .request(new MyRequest())
+                        .build().handleDownLoad();
+//                downLoad(url);
             }
         });
         recyclerView.setAdapter(mAdapter);
     }
 
+    // 保存指定url的图片
     public void downLoad(final String url){
         Log.d(TAG, "downLoad: "+url);
         if (downLoadUrls.contains(url)){
@@ -228,7 +237,7 @@ public class LoveMeiziFragment extends BaseMainFragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-         retrofit.create(RestService.class).download(subString(url))
+         retrofit.create(RestService.class).downloadWithRajava(subString(url))
                   //在新线程中实现该方法
                  .subscribeOn(Schedulers.newThread()).subscribe(new Observer<ResponseBody>() {
              @Override
@@ -269,5 +278,18 @@ public class LoveMeiziFragment extends BaseMainFragment {
     // 提取url中baseUrl之后的字符串
     private String subString(String url){
         return url.substring(23);
+    }
+
+    class MyRequest implements IRequest{
+
+        @Override
+        public void onRequestStart() {
+            Log.d(TAG, "onRequestStart: ");
+        }
+
+        @Override
+        public void onRequestEnd() {
+            Log.d(TAG, "onRequestEnd: ");
+        }
     }
 }

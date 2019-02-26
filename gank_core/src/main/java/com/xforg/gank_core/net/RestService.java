@@ -60,7 +60,11 @@ public interface RestService {
 
     @GET("{picture}")
     @Streaming
-    Observable<ResponseBody> download(@Path("picture") String picture);
+    Observable<ResponseBody> downloadWithRajava(@Path("picture") String picture);
+
+    @GET("{picture}")
+    @Streaming
+    Call<ResponseBody> downloadWithoutRajava(@Path("picture") String picture);
 
     @Multipart
     @POST
