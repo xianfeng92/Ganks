@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * github: https://github.com/xianfeng92
  */
 public abstract class BaseDelegate extends Fragment implements ISupportFragment {
+    private static final String TAG = "BaseDelegate";
 
     private final SupportFragmentDelegate DELEGATE = new SupportFragmentDelegate(this);
     private View mRootView = null;
@@ -43,6 +45,7 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: ");
         final View rootView;
         if (setLayout() instanceof Integer) {
             rootView = inflater.inflate((int) setLayout(), container, false);

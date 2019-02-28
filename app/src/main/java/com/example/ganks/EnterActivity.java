@@ -2,6 +2,7 @@ package com.example.ganks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.ganks.launcher.LauncherDelegate;
 import com.example.ganks.sign.ISignListener;
@@ -24,7 +25,14 @@ public class EnterActivity extends ProxyActivity implements ILauncherListener, I
     }
 
     @Override
+    protected void onStart() {
+        Log.d(TAG, "onStart: ");
+        super.onStart();
+    }
+
+    @Override
     public GankDelegate setRootDelegate() {
+        Log.d(TAG, "setRootDelegate: ");
         return new LauncherDelegate();
     }
 

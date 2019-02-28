@@ -6,6 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
     </style>
 
+    <style name="AppStartLoad" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@mipmap/launcher</item>
+    </style>
+
     <declare-styleable name="CircleProgress">
         <attr name="circle_progress" format="integer"/>
         <attr name="circle_max" format="integer"/>
