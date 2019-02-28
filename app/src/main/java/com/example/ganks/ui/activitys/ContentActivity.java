@@ -1,6 +1,7 @@
 package com.example.ganks.ui.activitys;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.Window;
@@ -15,7 +16,6 @@ import com.example.ganks.ui.fragment.HomeFragment;
 import com.example.ganks.ui.fragment.MeiziFragment;
 import com.example.ganks.ui.fragment.TanTanFragment;
 import com.xforg.gank_core.app.EventBusActivityScope;
-
 import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 

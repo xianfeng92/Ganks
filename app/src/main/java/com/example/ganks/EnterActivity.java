@@ -17,6 +17,7 @@ import com.xforg.gank_core.delegates.GankDelegate;
 import org.greenrobot.eventbus.EventBus;
 
 
+
 public class EnterActivity extends ProxyActivity implements ILauncherListener, ISignListener, IUserChecker {
     private static final String TAG = "EnterActivity";
 
