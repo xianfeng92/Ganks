@@ -7,8 +7,8 @@
     </style>
 
     <style name="AppStartLoad" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@mipmap/launcher</item>
     </style>
 
     <declare-styleable name="CircleProgress">

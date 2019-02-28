@@ -14,6 +14,8 @@ import com.example.ganks.launcher.OnLauncherFinishTag;
 import com.xforg.gank_core.activitys.ProxyActivity;
 import com.xforg.gank_core.delegates.GankDelegate;
 
+import org.greenrobot.eventbus.EventBus;
+
 
 public class EnterActivity extends ProxyActivity implements ILauncherListener, ISignListener, IUserChecker {
     private static final String TAG = "EnterActivity";
@@ -28,6 +30,9 @@ public class EnterActivity extends ProxyActivity implements ILauncherListener, I
     protected void onStart() {
         Log.d(TAG, "onStart: ");
         super.onStart();
+        MessageEvent<Integer> messageEvent = new MessageEvent<>();
+        messageEvent.setMessage(110);
+        EventBus.getDefault().post(messageEvent);
     }
 
     @Override
