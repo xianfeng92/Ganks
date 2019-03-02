@@ -13,20 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.ganks.DataConvert.HomeDataConvert;
 import com.example.ganks.R;
-import com.example.ganks.ui.adapter.ArticleAdapter;
+import com.example.ganks.ui.adapter.MultipleRecyclerAdapter;
 import com.example.ganks.ui.fragment.BaseMainFragment;
-import com.xforg.gank_core.entity.Meizi;
+import com.xforg.gank_core.net.RestClient;
 import com.xforg.gank_core.net.RestCreator;
 import com.xforg.gank_core.net.RestService;
-
+import com.xforg.gank_core.net.callbacks.IError;
+import com.xforg.gank_core.net.callbacks.ISuccess;
+import com.xforg.gank_core.recycler.MultipleFields;
+import com.xforg.gank_core.recycler.MultipleItemEntity;
 import java.util.ArrayList;
 import java.util.List;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-
 /**
  * Created By zhongxianfeng on 19-2-1
  * github: https://github.com/xianfeng92
@@ -36,9 +35,9 @@ public class CategoryArticleFragment extends BaseMainFragment implements SwipeRe
     private static final String TAG = "CategoryArticleFragment";
 
     private static FragmentManager fManager;
-    private ArticleAdapter mAdapter;
+    private MultipleRecyclerAdapter mAdapter;
     private LinearLayoutManager layoutManager;
-    private List<Meizi.ResultsBean> datas = new ArrayList<>();
+    private List<MultipleItemEntity> datas = new ArrayList<>();
     private RestService articleService;
     private int page = 1;
     int pageSize = 10;
@@ -72,38 +71,68 @@ public class CategoryArticleFragment extends BaseMainFragment implements SwipeRe
 
     @Override
     public void onRefresh() {
+        Log.d(TAG, "onRefresh: ");
         page++;
         getDatas();
     }
 
     private void getDatas(){
-        articleService.gank(type,pageSize,page)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Meizi>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-            }
+        RestClient.builder()
+                .url("https://gank.io/api/data")
+                .addParams(type)
+                .addParams(pageSize)
+                .addParams(page)
+                .error(new IError() {
+                    @Override
+                    public void onError(int code, String msg) {
+                        Log.d(TAG, "onError: "+msg);
+                    }
+                })
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        // 数据解析
+                        final HomeDataConvert homeDataConvert = new HomeDataConvert();
+                        homeDataConvert.serJsonData(response);
+                        final ArrayList<MultipleItemEntity> list = homeDataConvert.convert();
+                        if (list != null){
+                            datas.addAll(list);
+                            mAdapter.notifyDataSetChanged();
+                        }else{
+                            throw new RuntimeException("Can not get Data from Service");
+                        }
+                    }
+                })
+                .build()
+                .get();
 
-            @Override
-            public void onNext(Meizi gankEntity) {
-                for (Meizi.ResultsBean bean:gankEntity.results){
-                    datas.add(bean);
-                }
-                Log.d(TAG, "onNext: "+datas.size());
-                mAdapter.notifyDataSetChanged();
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
+//        articleService.gank(type,pageSize,page)
+//                .subscribeOn(Schedulers.newThread())
+//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Meizi>() {
+//            @Override
+//            public void onSubscribe(Disposable d) {
+//            }
+//
+//            @Override
+//            public void onNext(Meizi gankEntity) {
+//                for (Meizi.ResultsBean bean:gankEntity.results){
+//                    datas.add(bean);
+//                }
+//                Log.d(TAG, "onNext: "+datas.size());
+//                mAdapter.notifyDataSetChanged();
+//                mSwipeRefreshLayout.setRefreshing(false);
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//
+//            }
+//        });
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
@@ -112,13 +141,13 @@ public class CategoryArticleFragment extends BaseMainFragment implements SwipeRe
         layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new ArticleAdapter(R.layout.article_item,datas);
+        mAdapter = new MultipleRecyclerAdapter(datas);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Meizi.ResultsBean bean = (Meizi.ResultsBean) datas.get(position);
+                MultipleItemEntity bean = (MultipleItemEntity) datas.get(position);
                 Bundle bundle = new Bundle();
-                bundle.putString("URL",bean.url);
+                bundle.putString("URL", (String) bean.getField(MultipleFields.URL));
                 FragmentTransaction tx = fManager.beginTransaction();
                 ArticleContentFragment articleContentFragment = ArticleContentFragment.newInstance();
                 articleContentFragment.setArguments(bundle);

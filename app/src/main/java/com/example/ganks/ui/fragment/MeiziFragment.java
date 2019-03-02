@@ -23,6 +23,8 @@ import com.example.ganks.ui.adapter.StaggerAdapter;
 import com.xforg.gank_core.entity.Meizi;
 import com.xforg.gank_core.net.RestCreator;
 import com.xforg.gank_core.net.RestService;
+import com.xforg.gank_core.net.rx.RxRestService;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -42,7 +44,7 @@ public class MeiziFragment extends BaseMainFragment implements StaggerAdapter.on
     public StaggeredGridLayoutManager staggeredGridLayoutManager;
     private int lastVisibleItem;
     private ItemTouchHelper itemTouchHelper;
-    private RestService meiziService;
+    private RxRestService meiziService;
     private int page = 1;
     private int screenwidth;
 
@@ -53,7 +55,7 @@ public class MeiziFragment extends BaseMainFragment implements StaggerAdapter.on
         recyclerView = view.findViewById(R.id.stagger_recycleView);
         coordinatorLayout = view.findViewById(R.id.stagger_coordinatorLayout);
         swipeRefreshLayout = view.findViewById(R.id.stagger_swipe_refresh);
-        meiziService = RestCreator.getRestService();
+        meiziService = RestCreator.getRxRestService();
         screenwidth = ScreenUtils.getScreenWidth();
         return view;
     }

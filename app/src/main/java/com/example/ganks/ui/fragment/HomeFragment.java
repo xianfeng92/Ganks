@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.MianViewPagerAdapter;
 import com.example.ganks.ui.fragment.article.CategoryArticleFragment;

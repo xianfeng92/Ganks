@@ -1,9 +1,6 @@
 package com.xforg.gank_core.net;
 
-import com.xforg.gank_core.entity.Meizi;
-
 import java.util.WeakHashMap;
-import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -27,12 +24,6 @@ import retrofit2.http.Url;
  * github: https://github.com/xianfeng92
  */
 public interface RestService {
-
-    @GET("api/data/{type}/{pageSize}/{page}")
-    Observable<Meizi> gank(@Path("type") String type, @Path("pageSize") int pageSize, @Path("page") int page);
-
-    @GET("api/data/福利/10/{page}")
-    Observable<Meizi> getMeizi(@Path("page") int page);
 
     @GET
     Call<String> get(@Url String url, @QueryMap WeakHashMap<String, Object> params);
@@ -58,13 +49,10 @@ public interface RestService {
     @GET
     Call<ResponseBody> download(@Url String url, @QueryMap WeakHashMap<String, Object> params);
 
-    @GET("{picture}")
-    @Streaming
-    Observable<ResponseBody> downloadWithRajava(@Path("picture") String picture);
 
     @GET("{picture}")
     @Streaming
-    Call<ResponseBody> downloadWithoutRajava(@Path("picture") String picture);
+    Call<ResponseBody> downloadWithoutRxjava(@Path("picture") String picture);
 
     @Multipart
     @POST

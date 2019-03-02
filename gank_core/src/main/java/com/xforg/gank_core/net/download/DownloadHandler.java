@@ -62,7 +62,7 @@ public class DownloadHandler {
     public final void handleDownLoad(){
         if(REQUEST != null){
             RestCreator.getRestServiceForDownLoad()
-                    .downloadWithoutRajava(URL).enqueue(new Callback<ResponseBody>() {
+                    .downloadWithoutRxjava(URL).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if(response.isSuccessful()){

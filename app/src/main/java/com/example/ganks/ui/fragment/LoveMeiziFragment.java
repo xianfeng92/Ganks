@@ -30,6 +30,7 @@ import com.xforg.gank_core.entity.DaoMeiziEntity;
 import com.xforg.gank_core.net.RestService;
 import com.xforg.gank_core.net.callbacks.IRequest;
 import com.xforg.gank_core.net.download.DownloadHandler;
+import com.xforg.gank_core.net.rx.RxRestService;
 import com.xforg.gank_core.utils.File.FileUtil;
 import com.xforg.gank_core.utils.GreenDaoHelper;
 import com.xforg.gank_core.utils.ToastUtils;
@@ -237,7 +238,7 @@ public class LoveMeiziFragment extends BaseMainFragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-         retrofit.create(RestService.class).downloadWithRajava(subString(url))
+         retrofit.create(RxRestService.class).downloadWithRxjava(subString(url))
                   //在新线程中实现该方法
                  .subscribeOn(Schedulers.newThread()).subscribe(new Observer<ResponseBody>() {
              @Override

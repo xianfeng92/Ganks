@@ -23,6 +23,7 @@ import com.example.tantancardswipe.CardConfig;
 import com.example.tantancardswipe.OnSwipeListener;
 import com.example.tantancardswipe.CardItemTouchHelperCallback;
 import com.example.tantancardswipe.CardLayoutManager;
+import com.xforg.gank_core.net.rx.RxRestService;
 import com.xforg.gank_core.utils.GreenDaoHelper;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class TanTanFragment extends BaseMainFragment{
 
     private static final String TAG = "TanTanFragment";
 
-    private RestService meiziService;
+    private RxRestService meiziService;
     private TanTanAdapter tanTanAdapter;
     private CardItemTouchHelperCallback cardItemTouchHelperCallback;
     private CardLayoutManager cardLayoutManager;
@@ -64,7 +65,7 @@ public class TanTanFragment extends BaseMainFragment{
         View view = inflater.inflate(R.layout.layout_refresh_list,container,false);
         recyclerView = view.findViewById(R.id.recyclerView);
         swipeRefreshLayout = view.findViewById(R.id.refreshLayout);
-        meiziService = RestCreator.getRestService();
+        meiziService = RestCreator.getRxRestService();
         return view;
     }
 

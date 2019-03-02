@@ -44,6 +44,7 @@ dependencies {
     // retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
     //支持gson解析数据
     implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
 
@@ -56,12 +57,15 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.0.0'
 
     //Json
-    implementation 'com.alibaba:fastjson:1.1.68.android'
+    implementation 'com.alibaba:fastjson:1.1.70.android'
 
     //权限
     implementation('com.github.hotchemi:permissionsdispatcher:3.2.0') {
         exclude module: 'support-v13'
     }
+
+    //RecyclerView依赖
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
 
     implementation 'org.greenrobot:greendao:3.2.2' // greenDao
 }

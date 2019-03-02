@@ -6,10 +6,8 @@ import com.xforg.gank_core.net.callbacks.IError;
 import com.xforg.gank_core.net.callbacks.IFailure;
 import com.xforg.gank_core.net.callbacks.IRequest;
 import com.xforg.gank_core.net.callbacks.ISuccess;
-
 import java.io.File;
 import java.util.WeakHashMap;
-
 import okhttp3.RequestBody;
 
 /**
@@ -40,6 +38,16 @@ public class RestClientBuilder {
 
     public final RestClientBuilder params(WeakHashMap<String,Object> params){
         this.PARAMS = params;
+        return this;
+    }
+
+    public final RestClientBuilder addParams(String value){
+        this.mUrl = mUrl+"/"+value;
+        return this;
+    }
+
+    public final RestClientBuilder addParams(int value){
+        this.mUrl = mUrl+"/"+value;
         return this;
     }
 

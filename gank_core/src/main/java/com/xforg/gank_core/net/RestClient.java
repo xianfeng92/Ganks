@@ -1,16 +1,14 @@
 package com.xforg.gank_core.net;
-
 import android.content.Context;
+import android.util.Log;
 import com.xforg.gank_core.net.callbacks.HttpMethod;
 import com.xforg.gank_core.net.callbacks.IError;
 import com.xforg.gank_core.net.callbacks.IFailure;
 import com.xforg.gank_core.net.callbacks.IRequest;
 import com.xforg.gank_core.net.callbacks.ISuccess;
 import com.xforg.gank_core.net.callbacks.RequestCallbacks;
-
 import java.io.File;
 import java.util.WeakHashMap;
-
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -22,6 +20,7 @@ import retrofit2.Callback;
  * github: https://github.com/xianfeng92
  */
 public final class RestClient {
+    private static final String TAG = "RestClient";
 
     private final WeakHashMap<String, Object> PARAMS;
     private final String URL;
@@ -67,6 +66,7 @@ public final class RestClient {
     }
 
     private void request(HttpMethod method) {
+        Log.d(TAG, "request: "+method);
         final RestService service = RestCreator.getRestService();
         Call<String> call = null;
 
@@ -105,7 +105,8 @@ public final class RestClient {
         }
 
         if (call != null) {
-            call.enqueue(getRequestCallback());
+            Log.d(TAG, "request: call.enqueue");
+            call.enqueue(getRequestCallback());//getRequestCallback()
         }
     }
 

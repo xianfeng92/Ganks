@@ -57,11 +57,13 @@ dependencies {
     // EventBus
     implementation 'org.greenrobot:eventbus:3.0.0'
 
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
 
     implementation 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
 
     implementation 'io.reactivex:rxjava:1.1.9'
+
+    implementation 'com.alibaba:fastjson:1.1.70.android'
 
     implementation project(':autosize')
     implementation project(':gank_core')

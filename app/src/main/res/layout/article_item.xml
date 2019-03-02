@@ -30,6 +30,6 @@
             android:paddingRight="@dimen/m10"
             android:textColor="@color/C5"
             android:textSize="@dimen/f6"
-            tools:text="test androdi" />
+            tools:text="test android" />
     </LinearLayout>
 </android.support.v7.widget.CardView>
