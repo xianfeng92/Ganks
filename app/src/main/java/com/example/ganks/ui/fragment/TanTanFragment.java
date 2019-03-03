@@ -1,5 +1,6 @@
 package com.example.ganks.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -51,6 +52,7 @@ public class TanTanFragment extends GankDelegate {
     private List<Meizi.ResultsBean> resultsBeanList = new ArrayList<>();
     private int page = 1;
 
+    public OnBackToFirstListener _mBackToFirstListener;
 
     public static TanTanFragment newInstance(){
         TanTanFragment tanTanFragment = new TanTanFragment();
@@ -75,6 +77,17 @@ public class TanTanFragment extends GankDelegate {
         super.onStart();
         initData();
         getMeizi();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof OnBackToFirstListener){
+            _mBackToFirstListener = (OnBackToFirstListener)context;
+        }else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnBackToFirstListener");
+        }
     }
 
     private void getMeizi(){
@@ -177,5 +190,13 @@ public class TanTanFragment extends GankDelegate {
         daoGankEntity.who = entity.who;
         daoGankEntity.addTime =str;
         return daoGankEntity;
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        if (_mBackToFirstListener != null){
+            _mBackToFirstListener.onBackToFirstFragment();
+        }
+        return true;
     }
 }

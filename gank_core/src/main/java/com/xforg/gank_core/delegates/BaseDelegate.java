@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-
 import com.xforg.gank_core.activitys.ProxyActivity;
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -27,6 +26,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  */
 public abstract class BaseDelegate extends Fragment implements ISupportFragment {
     private static final String TAG = "BaseDelegate";
+
 
     private final SupportFragmentDelegate DELEGATE = new SupportFragmentDelegate(this);
     private View mRootView = null;
@@ -42,6 +42,7 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
         }
         throw new NullPointerException("rootView is null");
     }
+
 
     @Nullable
     @Override
@@ -59,6 +60,7 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
         onBindView(savedInstanceState, rootView);
         return rootView;
     }
+
 
     public final ProxyActivity getProxyActivity() {
         return (ProxyActivity) _mActivity;
@@ -194,7 +196,12 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
 
     @Override
     public boolean onBackPressedSupport() {
-        return DELEGATE.onBackPressedSupport();
+        if (getChildFragmentManager().getBackStackEntryCount() > 1){
+            popChild();
+        }else {
+            return false;
+        }
+        return true;
     }
 
 
@@ -292,5 +299,16 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
 
     public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable, int popAnim) {
         DELEGATE.popToChild(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable, popAnim);
+    }
+
+    /**
+     * Pop the child fragment.
+     */
+    public void popChild() {
+        DELEGATE.popChild();
+    }
+
+    public interface OnBackToFirstListener {
+        void onBackToFirstFragment();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.ganks.ui.fragment;
 
 import android.Manifest;
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -57,6 +58,8 @@ public class LoveMeiziFragment extends GankDelegate {
 
     public static final String TAG = "LoveMeiziFragment";
 
+    public OnBackToFirstListener _mBackToFirstListener;
+
     private Retrofit retrofit;
     private View notDataView;
     public RecyclerView recyclerView;
@@ -66,7 +69,7 @@ public class LoveMeiziFragment extends GankDelegate {
     public List<DaoMeiziEntity> resultsBeanList = new ArrayList<>();
     private Set<String> downLoadUrls = new TreeSet<>();
 
-    public static LoveMeiziFragment newInstance(){
+    public static LoveMeiziFragment newInstance() {
         Bundle args = new Bundle();
         LoveMeiziFragment loveMeiziFragment = new LoveMeiziFragment();
         loveMeiziFragment.setArguments(args);
@@ -96,11 +99,23 @@ public class LoveMeiziFragment extends GankDelegate {
         RxPermissions.getInstance(getActivity()).request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Action1<Boolean>() {
             @Override
             public void call(Boolean aBoolean) {
-                if (aBoolean){
+                if (aBoolean) {
                     ToastUtils.showShortToastSafe("WRITE STORAGE Permission 获取成功");
                 }
             }
         });
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof OnBackToFirstListener){
+            _mBackToFirstListener = (OnBackToFirstListener)context;
+        }else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnBackToFirstListener");
+        }
     }
 
     @Override
@@ -112,32 +127,32 @@ public class LoveMeiziFragment extends GankDelegate {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-            updateAdapter(resultsBeanList);
+        updateAdapter(resultsBeanList);
     }
 
-    private void loadDataByGreenDao(){
+    private void loadDataByGreenDao() {
         resultsBeanList.clear();
         List<DaoMeiziEntity> list = GreenDaoHelper.getAllMeiziEntity();
-        Log.d(TAG, "loadDataByGreenDao: "+list.size());
+        Log.d(TAG, "loadDataByGreenDao: " + list.size());
         resultsBeanList.addAll(list);
         // for test empty view
         // resultsBeanList.clear();
         updateAdapter(resultsBeanList);
     }
 
-    private void updateAdapter(List<DaoMeiziEntity> resultsBeanList){
-        if (resultsBeanList.size() == 0){
+    private void updateAdapter(List<DaoMeiziEntity> resultsBeanList) {
+        if (resultsBeanList.size() == 0) {
             mAdapter.setEmptyView(notDataView);
         }
-        if (mAdapter == null){
-            mAdapter = new LineAdapter(R.layout.line_meizi_item,resultsBeanList);
+        if (mAdapter == null) {
+            mAdapter = new LineAdapter(R.layout.line_meizi_item, resultsBeanList);
             recyclerView.setAdapter(mAdapter);
-        }else {
+        } else {
             mAdapter.setNewData(resultsBeanList);
         }
     }
 
-    private void initItemDargAndSwipe(){
+    private void initItemDargAndSwipe() {
         OnItemDragListener listener = new OnItemDragListener() {
             @Override
             public void onItemDragStart(RecyclerView.ViewHolder viewHolder, int pos) {
@@ -189,7 +204,7 @@ public class LoveMeiziFragment extends GankDelegate {
             }
         };
 
-        mAdapter = new LineAdapter(R.layout.line_meizi_item,resultsBeanList);
+        mAdapter = new LineAdapter(R.layout.line_meizi_item, resultsBeanList);
         ItemDragAndSwipeCallback mItemDragAndSwipeCallback = new ItemDragAndSwipeCallback(mAdapter);
         ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(mItemDragAndSwipeCallback);
         mItemTouchHelper.attachToRecyclerView(recyclerView);
@@ -212,12 +227,12 @@ public class LoveMeiziFragment extends GankDelegate {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                ToastUtils.showShortToast("此处功能待开发，试试长押可以拖动哦！");
-                Log.d(TAG, "onItemClick: "+resultsBeanList.get(position).url);
+                Log.d(TAG, "onItemClick: " + resultsBeanList.get(position).url);
                 String url = resultsBeanList.get(position).url;
                 // 采用AsyncTask下载资源
                 // 需要指定url 、 request 以及 url
                 DownloadHandler.builder().url(subString(url))
-                        .dir(Environment.getExternalStorageState()+"/image/")
+                        .dir(Environment.getExternalStorageState() + "/image/")
                         .extension("png")
                         .request(new MyRequest())
                         .build().handleDownLoad();
@@ -228,61 +243,61 @@ public class LoveMeiziFragment extends GankDelegate {
     }
 
     // 保存指定url的图片
-    public void downLoad(final String url){
-        Log.d(TAG, "downLoad: "+url);
-        if (downLoadUrls.contains(url)){
+    public void downLoad(final String url) {
+        Log.d(TAG, "downLoad: " + url);
+        if (downLoadUrls.contains(url)) {
             ToastUtils.showShortToastSafe("已保存！");
             return;
         }
-         retrofit = new Retrofit.Builder()
+        retrofit = new Retrofit.Builder()
                 .baseUrl("https://ws1.sinaimg.cn/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-         retrofit.create(RxRestService.class).downloadWithRxjava(subString(url))
-                  //在新线程中实现该方法
-                 .subscribeOn(Schedulers.newThread()).subscribe(new Observer<ResponseBody>() {
-             @Override
-             public void onSubscribe(Disposable d) {
+        retrofit.create(RxRestService.class).downloadWithRxjava(subString(url))
+                //在新线程中实现该方法
+                .subscribeOn(Schedulers.newThread()).subscribe(new Observer<ResponseBody>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
-             }
+            }
 
-             @Override
-             public void onNext(ResponseBody responseBody) {
-                 byte[] bys = new byte[0];
-                 try {
-                     // OkHttp请求回调中responseBody.bytes();只能有效调用一次.
-                     // 调用responseBody.bytes();的时候数据流已经关闭了，再次调用就会出现错误提示java.lang.IllegalStateException: closed
-                     bys = responseBody.bytes();
-                     File file = FileUtil.saveBitmap(BitmapFactory.decodeByteArray(bys,0,bys.length),
-                             Environment.getExternalStorageState()+"/image/",80);
-                     if (file != null){
-                         ToastUtils.showShortToastSafe("保存成功！");
-                         downLoadUrls.add(url);
-                     }
-                 } catch (IOException e) {
-                     e.printStackTrace();
-                 }
-             }
+            @Override
+            public void onNext(ResponseBody responseBody) {
+                byte[] bys = new byte[0];
+                try {
+                    // OkHttp请求回调中responseBody.bytes();只能有效调用一次.
+                    // 调用responseBody.bytes();的时候数据流已经关闭了，再次调用就会出现错误提示java.lang.IllegalStateException: closed
+                    bys = responseBody.bytes();
+                    File file = FileUtil.saveBitmap(BitmapFactory.decodeByteArray(bys, 0, bys.length),
+                            Environment.getExternalStorageState() + "/image/", 80);
+                    if (file != null) {
+                        ToastUtils.showShortToastSafe("保存成功！");
+                        downLoadUrls.add(url);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
-             @Override
-             public void onError(Throwable e) {
-                 Log.d(TAG, "onError: "+e.toString());
-             }
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "onError: " + e.toString());
+            }
 
-             @Override
-             public void onComplete() {
+            @Override
+            public void onComplete() {
 
-             }
-         });
+            }
+        });
     }
 
     // 提取url中baseUrl之后的字符串
-    private String subString(String url){
+    private String subString(String url) {
         return url.substring(23);
     }
 
-    class MyRequest implements IRequest{
+    class MyRequest implements IRequest {
 
         @Override
         public void onRequestStart() {
@@ -293,5 +308,13 @@ public class LoveMeiziFragment extends GankDelegate {
         public void onRequestEnd() {
             Log.d(TAG, "onRequestEnd: ");
         }
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        if (_mBackToFirstListener != null){
+            _mBackToFirstListener.onBackToFirstFragment();
+        }
+        return true;
     }
 }

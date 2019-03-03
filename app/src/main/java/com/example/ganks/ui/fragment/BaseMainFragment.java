@@ -10,6 +10,7 @@
 // * github: https://github.com/xianfeng92
 // */
 //public abstract class BaseMainFragment extends SupportFragment {
+//
 //    private static final String TAG = "BaseMainFragment";
 //    //
 //    private int flag = 0;

@@ -62,4 +62,8 @@ public class HomeFragment extends GankDelegate {
         tabs.setupWithViewPager(mainPager);
     }
 
+    @Override
+    public boolean onBackPressedSupport() {
+        return super.onBackPressedSupport();
+    }
 }

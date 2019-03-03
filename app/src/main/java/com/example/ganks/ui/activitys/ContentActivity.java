@@ -8,6 +8,7 @@ import com.example.ganks.ui.TabSelectedEvent;
 import com.example.ganks.ui.fragment.LoveMeiziFragment;
 import com.xforg.gank_core.activitys.ProxyActivity;
 import com.xforg.gank_core.delegates.GankDelegate;
+import com.xforg.gank_core.utils.ToastUtils;
 import com.xforg.gank_core.widge.BottomBar;
 import com.xforg.gank_core.widge.BottomBarTab;
 import com.example.ganks.ui.fragment.HomeFragment;
@@ -16,7 +17,7 @@ import com.example.ganks.ui.fragment.TanTanFragment;
 import com.xforg.gank_core.app.EventBusActivityScope;
 
 
-public class ContentActivity extends ProxyActivity {
+public class ContentActivity extends ProxyActivity implements GankDelegate.OnBackToFirstListener{
     private static final String TAG = "ContentActivity";
 
     public static final int FIRST = 0;
@@ -26,6 +27,11 @@ public class ContentActivity extends ProxyActivity {
 
     private GankDelegate[] mFragments = new GankDelegate[4];
     private BottomBar mBottomBar;
+
+    private int flag = 0;
+    // 再点一次退出程序时间设置
+    private static final long WAIT_TIME = 2000L;
+    private long TOUCH_TIME = 0;
 
 
     @Override
@@ -103,7 +109,22 @@ public class ContentActivity extends ProxyActivity {
         if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
             pop();
         } else {
-            ActivityCompat.finishAfterTransition(this);
-        }
+                flag = flag + 1;
+                if (flag == 1){
+                    TOUCH_TIME = System.currentTimeMillis();
+                    ToastUtils.showShortToast("再按一次退出");
+                }else if (flag == 2){
+                    if (System.currentTimeMillis() - TOUCH_TIME < WAIT_TIME){
+                        // 如果是 第一个Fragment 则退出app
+                        ActivityCompat.finishAfterTransition(this);
+                    }
+                    flag = 0;
+                }
+            }
+    }
+
+    @Override
+    public void onBackToFirstFragment() {
+        mBottomBar.setCurrentItem(0);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.ganks.ui.fragment;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -46,6 +47,8 @@ public class MeiziFragment extends GankDelegate implements StaggerAdapter.onItem
     private int page = 1;
     private int screenwidth;
 
+    public OnBackToFirstListener _mBackToFirstListener;
+
     @Override
     public Object setLayout() {
         return R.layout.fragment_stagger;
@@ -78,6 +81,17 @@ public class MeiziFragment extends GankDelegate implements StaggerAdapter.onItem
             mAdapter.notifyDataSetChanged();
         }
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof OnBackToFirstListener){
+            _mBackToFirstListener = (OnBackToFirstListener)context;
+        }else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnBackToFirstListener");
+        }
     }
 
     @Override
@@ -197,5 +211,13 @@ public class MeiziFragment extends GankDelegate implements StaggerAdapter.onItem
             public void onComplete() {
             }
         });
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        if (_mBackToFirstListener != null){
+            _mBackToFirstListener.onBackToFirstFragment();
+        }
+        return true;
     }
 }

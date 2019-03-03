@@ -12,10 +12,13 @@ import com.xforg.gank_core.app.Gank;
 import com.example.ganks.launcher.ILauncherListener;
 import com.example.ganks.launcher.OnLauncherFinishTag;
 import com.xforg.gank_core.activitys.ProxyActivity;
+import com.xforg.gank_core.delegates.GankDelegate;
+
 import org.greenrobot.eventbus.EventBus;
 
 
-public class EnterActivity extends ProxyActivity implements ILauncherListener, ISignListener, IUserChecker {
+public class EnterActivity extends ProxyActivity implements
+        ILauncherListener, ISignListener, IUserChecker, GankDelegate.OnBackToFirstListener {
     private static final String TAG = "EnterActivity";
 
     @Override
@@ -70,5 +73,10 @@ public class EnterActivity extends ProxyActivity implements ILauncherListener, I
     @Override
     public void onSignUpSuccess() {
 
+    }
+
+    @Override
+    public void onBackToFirstFragment() {
+        finish();
     }
 }
