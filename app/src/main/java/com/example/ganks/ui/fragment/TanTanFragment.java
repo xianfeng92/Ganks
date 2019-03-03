@@ -18,7 +18,6 @@ import com.example.ganks.ui.adapter.TanTanAdapter;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
 import com.xforg.gank_core.entity.Meizi;
 import com.xforg.gank_core.net.RestCreator;
-import com.xforg.gank_core.net.RestService;
 import com.example.tantancardswipe.CardConfig;
 import com.example.tantancardswipe.OnSwipeListener;
 import com.example.tantancardswipe.CardItemTouchHelperCallback;
@@ -38,7 +37,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created By zhongxianfeng on 19-2-2
  * github: https://github.com/xianfeng92
  */
-public class TanTanFragment extends BaseMainFragment{
+public class TanTanFragment extends BaseMainFragment {
 
     private static final String TAG = "TanTanFragment";
 
@@ -58,6 +57,7 @@ public class TanTanFragment extends BaseMainFragment{
         TanTanFragment tanTanFragment = new TanTanFragment();
         return tanTanFragment;
     }
+
 
     @Nullable
     @Override

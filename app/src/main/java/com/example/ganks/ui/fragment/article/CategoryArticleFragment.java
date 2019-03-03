@@ -24,6 +24,8 @@ import com.xforg.gank_core.net.callbacks.IError;
 import com.xforg.gank_core.net.callbacks.ISuccess;
 import com.xforg.gank_core.recycler.MultipleFields;
 import com.xforg.gank_core.recycler.MultipleItemEntity;
+import com.xforg.gank_core.web.WebDelegateImpl;
+
 import java.util.ArrayList;
 import java.util.List;
 /**
