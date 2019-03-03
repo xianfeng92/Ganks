@@ -79,6 +79,12 @@ public abstract class ProxyActivity extends AppCompatActivity implements ISuppor
         DELEGATE.onBackPressed();
     }
 
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        DELEGATE.onPostCreate(savedInstanceState);
+    }
+
     /**
      * 加载根Fragment, 即Activity内的第一个Fragment 或 Fragment内的第一个子Fragment
      *
@@ -223,4 +229,5 @@ public abstract class ProxyActivity extends AppCompatActivity implements ISuppor
     public <T extends ISupportFragment> T findFragment(Class<T> fragmentClass) {
         return SupportHelper.findFragment(getSupportFragmentManager(), fragmentClass);
     }
+
 }

@@ -311,4 +311,5 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
     public interface OnBackToFirstListener {
         void onBackToFirstFragment();
     }
+
 }

@@ -11,7 +11,6 @@ import com.xforg.gank_core.utils.Utils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
@@ -32,7 +31,6 @@ public class BaseApplication extends Application {
     public void onCreate() {
         Log.d(TAG, "onCreate: ");
         super.onCreate();
-        // 必须在欢迎界面出来前初始化，所以不能lazyInit
         Fragmentation.builder()
                 // 设置 栈视图 模式为 （默认）悬浮球模式   SHAKE: 摇一摇唤出  NONE：隐藏， 仅在Debug环境生效
                 .stackViewMode(Fragmentation.BUBBLE)
@@ -57,7 +55,6 @@ public class BaseApplication extends Application {
         super.onTerminate();
         EventBus.getDefault().unregister(this);
     }
-
 
     //当进入欢迎画面时，再去初期化第三方框架
     @Subscribe(threadMode = ThreadMode.MAIN)
