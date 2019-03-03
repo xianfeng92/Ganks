@@ -16,7 +16,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.ganks.DataConvert.HomeDataConvert;
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.MultipleRecyclerAdapter;
-import com.example.ganks.ui.fragment.BaseMainFragment;
+import com.xforg.gank_core.delegates.GankDelegate;
 import com.xforg.gank_core.net.RestClient;
 import com.xforg.gank_core.net.RestCreator;
 import com.xforg.gank_core.net.RestService;
@@ -24,7 +24,6 @@ import com.xforg.gank_core.net.callbacks.IError;
 import com.xforg.gank_core.net.callbacks.ISuccess;
 import com.xforg.gank_core.recycler.MultipleFields;
 import com.xforg.gank_core.recycler.MultipleItemEntity;
-import com.xforg.gank_core.web.WebDelegateImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ import java.util.List;
  * Created By zhongxianfeng on 19-2-1
  * github: https://github.com/xianfeng92
  */
-public class CategoryArticleFragment extends BaseMainFragment implements SwipeRefreshLayout.OnRefreshListener{
+public class CategoryArticleFragment extends GankDelegate implements SwipeRefreshLayout.OnRefreshListener{
 
     private static final String TAG = "CategoryArticleFragment";
 
@@ -60,15 +59,24 @@ public class CategoryArticleFragment extends BaseMainFragment implements SwipeRe
 
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_refresh_list,container,false);
+    public Object setLayout() {
+        return R.layout.layout_refresh_list;
+    }
+
+    @Override
+    public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         articleService = RestCreator.getRestService();
-        mRecyclerView = view.findViewById(R.id.recyclerView);
-        mSwipeRefreshLayout = view.findViewById(R.id.refreshLayout);
+        mRecyclerView = rootView.findViewById(R.id.recyclerView);
+        mSwipeRefreshLayout = rootView.findViewById(R.id.refreshLayout);
+        type = getArguments().getString("type");
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
         type = getArguments().getString("type");
         initData();
         getDatas();
-        return view;
     }
 
     @Override

@@ -18,6 +18,7 @@ import com.xforg.gank_core.activitys.ProxyActivity;
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragmentDelegate;
+import me.yokeyword.fragmentation.SupportHelper;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
@@ -225,5 +226,71 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
 
     public void start(final ISupportFragment toFragment, @LaunchMode int launchMode) {
         DELEGATE.start(toFragment, launchMode);
+    }
+
+    /**
+     * 得到位于栈顶Fragment
+     */
+    public ISupportFragment getTopFragment() {
+        return SupportHelper.getTopFragment(getChildFragmentManager());
+    }
+
+    /**
+     * 获取栈内的fragment对象
+     */
+    public <T extends ISupportFragment> T findFragment(Class<T> fragmentClass) {
+        return SupportHelper.findFragment(getChildFragmentManager(), fragmentClass);
+    }
+
+    /**
+     * 加载根Fragment, 即Activity内的第一个Fragment 或 Fragment内的第一个子Fragment
+     *
+     * @param containerId 容器id
+     * @param toFragment  目标Fragment
+     */
+    public void loadRootFragment(int containerId, @NonNull ISupportFragment toFragment) {
+        DELEGATE.loadRootFragment(containerId, toFragment);
+    }
+
+    public void loadRootFragment(int containerId, ISupportFragment toFragment, boolean addToBackStack, boolean allowAnimation) {
+        DELEGATE.loadRootFragment(containerId, toFragment, addToBackStack, allowAnimation);
+    }
+
+    /**
+     * 加载多个同级根Fragment,类似Wechat, QQ主页的场景
+     */
+    public void loadMultipleRootFragment(int containerId, int showPosition, ISupportFragment... toFragments) {
+        DELEGATE.loadMultipleRootFragment(containerId, showPosition, toFragments);
+    }
+
+    /**
+     * show一个Fragment,hide其他同栈所有Fragment
+     * 使用该方法时，要确保同级栈内无多余的Fragment,(只有通过loadMultipleRootFragment()载入的Fragment)
+     * <p>
+     * 建议使用更明确的{@link #showHideFragment(ISupportFragment, ISupportFragment)}
+     *
+     * @param showFragment 需要show的Fragment
+     */
+    public void showHideFragment(ISupportFragment showFragment) {
+        DELEGATE.showHideFragment(showFragment);
+    }
+
+    /**
+     * show一个Fragment,hide一个Fragment ; 主要用于类似微信主页那种 切换tab的情况
+     */
+    public void showHideFragment(ISupportFragment showFragment, ISupportFragment hideFragment) {
+        DELEGATE.showHideFragment(showFragment, hideFragment);
+    }
+
+    public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment) {
+        DELEGATE.popToChild(targetFragmentClass, includeTargetFragment);
+    }
+
+    public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable) {
+        DELEGATE.popToChild(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
+    }
+
+    public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable, int popAnim) {
+        DELEGATE.popToChild(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable, popAnim);
     }
 }

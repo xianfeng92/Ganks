@@ -12,10 +12,7 @@ import com.xforg.gank_core.app.Gank;
 import com.example.ganks.launcher.ILauncherListener;
 import com.example.ganks.launcher.OnLauncherFinishTag;
 import com.xforg.gank_core.activitys.ProxyActivity;
-import com.xforg.gank_core.delegates.GankDelegate;
-
 import org.greenrobot.eventbus.EventBus;
-
 
 
 public class EnterActivity extends ProxyActivity implements ILauncherListener, ISignListener, IUserChecker {
@@ -24,6 +21,7 @@ public class EnterActivity extends ProxyActivity implements ILauncherListener, I
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_enter);
         Gank.getConfigurator().withActivity(this);
     }
 
@@ -34,13 +32,9 @@ public class EnterActivity extends ProxyActivity implements ILauncherListener, I
         MessageEvent<Integer> messageEvent = new MessageEvent<>();
         messageEvent.setMessage(110);
         EventBus.getDefault().post(messageEvent);
+        loadRootFragment(R.id.enter,new LauncherDelegate());
     }
 
-    @Override
-    public GankDelegate setRootDelegate() {
-        Log.d(TAG, "setRootDelegate: ");
-        return new LauncherDelegate();
-    }
 
     @Override
     public void onLauncherFinish(OnLauncherFinishTag tag) {

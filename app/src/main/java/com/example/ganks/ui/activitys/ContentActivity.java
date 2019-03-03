@@ -1,25 +1,22 @@
 package com.example.ganks.ui.activitys;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
-import android.view.Window;
-
 import com.example.ganks.R;
 import com.example.ganks.ui.TabSelectedEvent;
-import com.example.ganks.ui.fragment.BaseMainFragment;
 import com.example.ganks.ui.fragment.LoveMeiziFragment;
+import com.xforg.gank_core.activitys.ProxyActivity;
+import com.xforg.gank_core.delegates.GankDelegate;
 import com.xforg.gank_core.widge.BottomBar;
 import com.xforg.gank_core.widge.BottomBarTab;
 import com.example.ganks.ui.fragment.HomeFragment;
 import com.example.ganks.ui.fragment.MeiziFragment;
 import com.example.ganks.ui.fragment.TanTanFragment;
 import com.xforg.gank_core.app.EventBusActivityScope;
-import me.yokeyword.fragmentation.SupportActivity;
-import me.yokeyword.fragmentation.SupportFragment;
 
-public class ContentActivity extends SupportActivity implements BaseMainFragment.OnBackToFirstListener {
+
+public class ContentActivity extends ProxyActivity {
     private static final String TAG = "ContentActivity";
 
     public static final int FIRST = 0;
@@ -27,15 +24,15 @@ public class ContentActivity extends SupportActivity implements BaseMainFragment
     public static final int THIRD = 2;
     public static final int FOURTH = 3;
 
-    private SupportFragment[] mFragments = new SupportFragment[4];
+    private GankDelegate[] mFragments = new GankDelegate[4];
     private BottomBar mBottomBar;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main);
-        SupportFragment firstFragment = findFragment(HomeFragment.class);
+        setContentView(R.layout.activity_content);
+        GankDelegate firstFragment = findFragment(HomeFragment.class);
         if (firstFragment == null){
             Log.d(TAG, "onCreate:firstFragment is null ");
             mFragments[0] = HomeFragment.newInstance();
@@ -77,7 +74,7 @@ public class ContentActivity extends SupportActivity implements BaseMainFragment
 
             @Override
             public void onTabReselected(int position) {
-                final SupportFragment currentFragment = mFragments[position];
+                final GankDelegate currentFragment = mFragments[position];
                 int count = currentFragment.getChildFragmentManager().getBackStackEntryCount();
                 if (count > 1){
                     if (currentFragment instanceof HomeFragment) {
@@ -108,10 +105,5 @@ public class ContentActivity extends SupportActivity implements BaseMainFragment
         } else {
             ActivityCompat.finishAfterTransition(this);
         }
-    }
-
-    @Override
-    public void onBackToFirstFragment() {
-        mBottomBar.setCurrentItem(0);
     }
 }

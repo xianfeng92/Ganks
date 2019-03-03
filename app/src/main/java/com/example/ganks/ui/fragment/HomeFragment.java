@@ -5,14 +5,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.MianViewPagerAdapter;
 import com.example.ganks.ui.fragment.article.CategoryArticleFragment;
 import com.xforg.gank_core.app.CategoryType;
+import com.xforg.gank_core.delegates.GankDelegate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +19,12 @@ import java.util.List;
  * Created By zhongxianfeng on 19-2-1
  * github: https://github.com/xianfeng92
  */
-public class HomeFragment extends BaseMainFragment {
+public class HomeFragment extends GankDelegate {
     private static final String TAG = "HomeFragment";
 
     TabLayout tabs;
     ViewPager mainPager;
-    private List<BaseMainFragment> mFragments;
+    private List<GankDelegate> mFragments;
 
     public static HomeFragment newInstance(){
         Bundle args = new Bundle();
@@ -34,14 +33,15 @@ public class HomeFragment extends BaseMainFragment {
         return homeFragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: ");
-        View view = inflater.inflate(R.layout.fragment_home,container,false);
-        tabs = view.findViewById(R.id.tabs);
-        mainPager = view.findViewById(R.id.mainPager);
-        return view;
+    public Object setLayout() {
+        return R.layout.fragment_home;
+    }
+
+    @Override
+    public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        tabs = rootView.findViewById(R.id.tabs);
+        mainPager = rootView.findViewById(R.id.mainPager);
     }
 
     @Override

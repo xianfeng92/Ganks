@@ -13,16 +13,14 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.StaggerAdapter;
+import com.xforg.gank_core.delegates.GankDelegate;
 import com.xforg.gank_core.entity.Meizi;
 import com.xforg.gank_core.net.RestCreator;
-import com.xforg.gank_core.net.RestService;
 import com.xforg.gank_core.net.rx.RxRestService;
 
 import java.util.ArrayList;
@@ -33,7 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class MeiziFragment extends BaseMainFragment implements StaggerAdapter.onItemClickListener {
+public class MeiziFragment extends GankDelegate implements StaggerAdapter.onItemClickListener {
 
     public RecyclerView recyclerView;
     public CoordinatorLayout coordinatorLayout;
@@ -48,17 +46,20 @@ public class MeiziFragment extends BaseMainFragment implements StaggerAdapter.on
     private int page = 1;
     private int screenwidth;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_stagger,container,false);
-        recyclerView = view.findViewById(R.id.stagger_recycleView);
-        coordinatorLayout = view.findViewById(R.id.stagger_coordinatorLayout);
-        swipeRefreshLayout = view.findViewById(R.id.stagger_swipe_refresh);
+    public Object setLayout() {
+        return R.layout.fragment_stagger;
+    }
+
+    @Override
+    public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        recyclerView = rootView.findViewById(R.id.stagger_recycleView);
+        coordinatorLayout = rootView.findViewById(R.id.stagger_coordinatorLayout);
+        swipeRefreshLayout = rootView.findViewById(R.id.stagger_swipe_refresh);
         meiziService = RestCreator.getRxRestService();
         screenwidth = ScreenUtils.getScreenWidth();
-        return view;
     }
+
 
     public static MeiziFragment newInstance(){
         Bundle args = new Bundle();

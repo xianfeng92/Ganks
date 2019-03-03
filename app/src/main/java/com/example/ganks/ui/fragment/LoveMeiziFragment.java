@@ -15,7 +15,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -26,8 +25,8 @@ import com.chad.library.adapter.base.listener.OnItemSwipeListener;
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.LineAdapter;
 import com.tbruyelle.rxpermissions.RxPermissions;
+import com.xforg.gank_core.delegates.GankDelegate;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
-import com.xforg.gank_core.net.RestService;
 import com.xforg.gank_core.net.callbacks.IRequest;
 import com.xforg.gank_core.net.download.DownloadHandler;
 import com.xforg.gank_core.net.rx.RxRestService;
@@ -54,7 +53,7 @@ import rx.functions.Action1;
  * Created By apple on 2019/2/24
  * github: https://github.com/xianfeng92
  */
-public class LoveMeiziFragment extends BaseMainFragment {
+public class LoveMeiziFragment extends GankDelegate {
 
     public static final String TAG = "LoveMeiziFragment";
 
@@ -74,12 +73,15 @@ public class LoveMeiziFragment extends BaseMainFragment {
         return loveMeiziFragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_meizi_love,container,false);
-        recyclerView = view.findViewById(R.id.meizi_love_recycler);
-        coordinatorLayout = view.findViewById(R.id.meizi_line_coordinatorLayout);
+    public Object setLayout() {
+        return R.layout.fragment_meizi_love;
+    }
+
+    @Override
+    public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        recyclerView = rootView.findViewById(R.id.meizi_love_recycler);
+        coordinatorLayout = rootView.findViewById(R.id.meizi_line_coordinatorLayout);
         mlayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mlayoutManager);
         notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) recyclerView.getParent(), false);
@@ -99,7 +101,6 @@ public class LoveMeiziFragment extends BaseMainFragment {
                 }
             }
         });
-        return view;
     }
 
     @Override

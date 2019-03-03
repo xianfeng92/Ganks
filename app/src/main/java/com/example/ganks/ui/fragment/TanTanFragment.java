@@ -9,12 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.TanTanAdapter;
+import com.xforg.gank_core.delegates.GankDelegate;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
 import com.xforg.gank_core.entity.Meizi;
 import com.xforg.gank_core.net.RestCreator;
@@ -37,7 +36,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created By zhongxianfeng on 19-2-2
  * github: https://github.com/xianfeng92
  */
-public class TanTanFragment extends BaseMainFragment {
+public class TanTanFragment extends GankDelegate {
 
     private static final String TAG = "TanTanFragment";
 
@@ -59,14 +58,16 @@ public class TanTanFragment extends BaseMainFragment {
     }
 
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_refresh_list,container,false);
-        recyclerView = view.findViewById(R.id.recyclerView);
-        swipeRefreshLayout = view.findViewById(R.id.refreshLayout);
+    public Object setLayout() {
+        return R.layout.layout_refresh_list;
+    }
+
+    @Override
+    public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        recyclerView = rootView.findViewById(R.id.recyclerView);
+        swipeRefreshLayout = rootView.findViewById(R.id.refreshLayout);
         meiziService = RestCreator.getRxRestService();
-        return view;
     }
 
     @Override
