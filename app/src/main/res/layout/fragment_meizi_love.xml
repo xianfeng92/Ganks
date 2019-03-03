@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/meizi_line_coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="5dp"
     android:background="#ffffff">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/meizi_love_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_index"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/app_main"
+            app:layout_behavior="com.example.ganks.ui.TranslucentBehavior">
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:text="Love Girls"
+                    android:orientation="horizontal">
+                </android.support.v7.widget.AppCompatTextView>
+        </android.support.v7.widget.Toolbar>
 </android.support.design.widget.CoordinatorLayout>
