@@ -9,9 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.ganks.DataConvert.HomeDataConvert;
 import com.example.ganks.R;
@@ -49,6 +47,7 @@ public class CategoryArticleFragment extends GankDelegate implements SwipeRefres
     public String type;
 
     public static CategoryArticleFragment newInstance(String type, FragmentManager fragmentManager){
+
         fManager = fragmentManager;
         CategoryArticleFragment categoryArticleFragment = new CategoryArticleFragment();
         Bundle bundle = new Bundle();
@@ -69,15 +68,17 @@ public class CategoryArticleFragment extends GankDelegate implements SwipeRefres
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         mSwipeRefreshLayout = rootView.findViewById(R.id.refreshLayout);
         type = getArguments().getString("type");
-    }
-
-    @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
-        type = getArguments().getString("type");
         initData();
         getDatas();
     }
+
+//    @Override
+//    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+//        super.onLazyInitView(savedInstanceState);
+//        type = getArguments().getString("type");
+//        initData();
+//        getDatas();
+//    }
 
     @Override
     public void onRefresh() {

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.MianViewPagerAdapter;
@@ -34,6 +35,12 @@ public class HomeFragment extends GankDelegate {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: ");
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public Object setLayout() {
         return R.layout.fragment_home;
     }
@@ -42,11 +49,6 @@ public class HomeFragment extends GankDelegate {
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         tabs = rootView.findViewById(R.id.tabs);
         mainPager = rootView.findViewById(R.id.mainPager);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         initData();
     }
 

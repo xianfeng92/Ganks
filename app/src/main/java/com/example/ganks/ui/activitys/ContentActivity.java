@@ -1,7 +1,6 @@
 package com.example.ganks.ui.activitys;
 
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import com.example.ganks.R;
 import com.example.ganks.ui.TabSelectedEvent;
@@ -115,8 +114,9 @@ public class ContentActivity extends ProxyActivity implements GankDelegate.OnBac
                     ToastUtils.showShortToast("再按一次退出");
                 }else if (flag == 2){
                     if (System.currentTimeMillis() - TOUCH_TIME < WAIT_TIME){
-                        // 如果是 第一个Fragment 则退出app
-                        ActivityCompat.finishAfterTransition(this);
+                        // 不再Finish到此Activity，仅仅是把它放到后台隐藏
+                        // 类似于用户主动触发系统Home键的效果
+                        moveTaskToBack(true);
                     }
                     flag = 0;
                 }
