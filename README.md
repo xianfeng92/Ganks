@@ -1,7 +1,7 @@
 # Ganks
 Just for fun，Let's coding
 
-# Libraries
+# Core
 
 [Fragmentation](https://github.com/YoKeyword/Fragmentation) ---Fragment
 
