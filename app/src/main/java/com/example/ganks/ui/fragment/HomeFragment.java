@@ -12,7 +12,6 @@ import com.example.ganks.ui.adapter.MianViewPagerAdapter;
 import com.example.ganks.ui.fragment.article.CategoryArticleFragment;
 import com.xforg.gank_core.app.CategoryType;
 import com.xforg.gank_core.delegates.GankDelegate;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,10 +48,10 @@ public class HomeFragment extends GankDelegate {
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         tabs = rootView.findViewById(R.id.tabs);
         mainPager = rootView.findViewById(R.id.mainPager);
-        initData();
     }
 
-    private void initData(){
+    @Override
+    public void initData(){
         if (mFragments == null){
             mFragments = new ArrayList<>();
             mFragments.add(CategoryArticleFragment.newInstance(CategoryType.ANDROID_STR,getActivity().getSupportFragmentManager()));

@@ -3,7 +3,6 @@ package com.example.ganks;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-
 import com.example.ganks.launcher.LauncherDelegate;
 import com.example.ganks.sign.ISignListener;
 import com.example.ganks.sign.IUserChecker;
@@ -13,7 +12,6 @@ import com.example.ganks.launcher.ILauncherListener;
 import com.example.ganks.launcher.OnLauncherFinishTag;
 import com.xforg.gank_core.activitys.ProxyActivity;
 import com.xforg.gank_core.delegates.GankDelegate;
-
 import org.greenrobot.eventbus.EventBus;
 
 

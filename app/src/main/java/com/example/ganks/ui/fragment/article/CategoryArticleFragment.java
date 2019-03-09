@@ -22,7 +22,6 @@ import com.xforg.gank_core.net.callbacks.IError;
 import com.xforg.gank_core.net.callbacks.ISuccess;
 import com.xforg.gank_core.recycler.MultipleFields;
 import com.xforg.gank_core.recycler.MultipleItemEntity;
-
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -147,7 +146,8 @@ public class CategoryArticleFragment extends GankDelegate implements SwipeRefres
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
-    private void initData() {
+    @Override
+    public void initData() {
         mSwipeRefreshLayout.setOnRefreshListener(this);
         layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);

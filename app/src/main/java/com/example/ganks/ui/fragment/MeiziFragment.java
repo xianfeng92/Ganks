@@ -99,14 +99,9 @@ public class MeiziFragment extends GankDelegate implements StaggerAdapter.onItem
         Toast.makeText(getContext(),"此处功能待开发，谢谢您的厚爱",Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        initData();
-        getMeizi();
-    }
 
-    private void initData(){
+    @Override
+    public void initData(){
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         swipeRefreshLayout.setProgressViewOffset(false,0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
@@ -183,6 +178,7 @@ public class MeiziFragment extends GankDelegate implements StaggerAdapter.onItem
                 lastVisibleItem =Math.max(positions[0],positions[1]);
             }
         });
+        getMeizi();
     }
 
     private void getMeizi(){

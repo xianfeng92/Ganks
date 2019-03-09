@@ -94,6 +94,10 @@ public class LoveMeiziFragment extends GankDelegate {
                 ToastUtils.showShortToast("你没有喜欢的妹子哟");
             }
         });
+    }
+
+    @Override
+    public void initData() {
         initItemDargAndSwipe();
         loadDataByGreenDao();
         RxPermissions.getInstance(getActivity()).request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Action1<Boolean>() {
@@ -287,7 +291,7 @@ public class LoveMeiziFragment extends GankDelegate {
 
             @Override
             public void onComplete() {
-
+                Log.d(TAG, "onComplete: ");
             }
         });
     }

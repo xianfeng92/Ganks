@@ -36,6 +36,11 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
     public abstract void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView);
 
 
+    public void initData(){
+
+    }
+
+
     public <T extends View> T $(@IdRes int viewId) {
         if (mRootView != null) {
             return mRootView.findViewById(viewId);
@@ -58,6 +63,7 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
         }
         mRootView = rootView;
         onBindView(savedInstanceState, rootView);
+        initData();
         return rootView;
     }
 

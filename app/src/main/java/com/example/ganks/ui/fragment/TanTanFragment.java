@@ -73,13 +73,6 @@ public class TanTanFragment extends GankDelegate {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        initData();
-        getMeizi();
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if(context instanceof OnBackToFirstListener){
@@ -120,7 +113,8 @@ public class TanTanFragment extends GankDelegate {
         });
     }
 
-    private void initData(){
+    @Override
+    public void initData(){
         tanTanAdapter = new TanTanAdapter(R.layout.tantan_item,resultsBeanList);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(tanTanAdapter);
@@ -155,6 +149,7 @@ public class TanTanFragment extends GankDelegate {
                 getMeizi();
             }
         });
+        getMeizi();
     }
 
     public void addToFavorites(Object o){

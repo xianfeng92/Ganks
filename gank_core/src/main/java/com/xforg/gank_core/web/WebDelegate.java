@@ -2,11 +2,10 @@ package com.xforg.gank_core.web;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.webkit.WebView;
-
 import com.xforg.gank_core.delegates.GankDelegate;
 import com.xforg.gank_core.web.route.RouteKeys;
-
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 
@@ -15,14 +14,13 @@ import java.lang.ref.WeakReference;
  * github: https://github.com/xianfeng92
  */
 public abstract class WebDelegate extends GankDelegate implements IWebViewInitializer {
+    private static final String TAG = "WebDelegate";
+    
     private WebView mWebView = null;
     private final ReferenceQueue<WebView> WEB_VIEW_QUEUE = new ReferenceQueue<>();
     private String mUrl = null;
     private boolean mIsWebViewAvaliable = false;
     private GankDelegate mTopDelegate = null;
-
-    public WebDelegate(){
-    }
 
 
     public abstract IWebViewInitializer setInitializer();
@@ -30,6 +28,7 @@ public abstract class WebDelegate extends GankDelegate implements IWebViewInitia
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
         final Bundle args = getArguments();
         mUrl = args.getString(RouteKeys.URL.name());
@@ -37,6 +36,7 @@ public abstract class WebDelegate extends GankDelegate implements IWebViewInitia
     }
 
     private void initWebView(){
+        Log.d(TAG, "initWebView: ");
         if (mWebView != null){
             mWebView.removeAllViews();
             mWebView.destroy();

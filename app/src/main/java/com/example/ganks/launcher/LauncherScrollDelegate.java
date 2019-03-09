@@ -56,6 +56,7 @@ public class LauncherScrollDelegate extends BaseDelegate implements OnItemClickL
         initBanner();
     }
 
+
     @Override
     public void onItemClick(int position) {
         if (position == INTEGERS.size()-1){
