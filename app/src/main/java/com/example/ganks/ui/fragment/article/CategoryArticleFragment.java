@@ -46,7 +46,6 @@ public class CategoryArticleFragment extends GankDelegate implements SwipeRefres
     public String type;
 
     public static CategoryArticleFragment newInstance(String type, FragmentManager fragmentManager){
-
         fManager = fragmentManager;
         CategoryArticleFragment categoryArticleFragment = new CategoryArticleFragment();
         Bundle bundle = new Bundle();
@@ -67,17 +66,7 @@ public class CategoryArticleFragment extends GankDelegate implements SwipeRefres
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         mSwipeRefreshLayout = rootView.findViewById(R.id.refreshLayout);
         type = getArguments().getString("type");
-        initData();
-        getDatas();
     }
-
-//    @Override
-//    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-//        super.onLazyInitView(savedInstanceState);
-//        type = getArguments().getString("type");
-//        initData();
-//        getDatas();
-//    }
 
     @Override
     public void onRefresh() {
@@ -162,11 +151,11 @@ public class CategoryArticleFragment extends GankDelegate implements SwipeRefres
                 FragmentTransaction tx = fManager.beginTransaction();
                 ArticleContentFragment articleContentFragment = ArticleContentFragment.newInstance();
                 articleContentFragment.setArguments(bundle);
-                //加上Fragment替换动画
-                tx.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_left_exit);
-                tx.replace(R.id.fl_container, articleContentFragment);
-                tx.addToBackStack(null);
-                tx.commit();
+//                //加上Fragment替换动画
+//                tx.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_left_exit);
+//                tx.replace(R.id.fl_container, articleContentFragment);
+//                tx.addToBackStack(null);
+//                tx.commit();
             }
         });
         mAdapter.openLoadAnimation();
@@ -194,5 +183,6 @@ public class CategoryArticleFragment extends GankDelegate implements SwipeRefres
                 }
             }
         });
+        getDatas();
     }
 }

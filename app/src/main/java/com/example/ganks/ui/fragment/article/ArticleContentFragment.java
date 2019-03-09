@@ -3,10 +3,7 @@ package com.example.ganks.ui.fragment.article;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -15,22 +12,25 @@ import android.webkit.WebViewClient;
 
 import com.example.ganks.R;
 import com.github.lzyzsd.circleprogress.CircleProgress;
+import com.xforg.gank_core.delegates.BaseDelegate;
 
-public class ArticleContentFragment extends Fragment {
+public class ArticleContentFragment extends BaseDelegate {
 
     private Bundle bundle;
     private WebView webview;
     private CircleProgress circleProgress;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fg_content,container,false);
+    public Object setLayout() {
+        return R.layout.fg_content;
+    }
+
+    @Override
+    public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        webview = rootView.findViewById(R.id.webview);
+        circleProgress = rootView.findViewById(R.id.circle_progress);
         bundle = getArguments();
-        webview = view.findViewById(R.id.webview);
-        circleProgress = view.findViewById(R.id.circle_progress);
         initWebView(bundle.getString("URL"));
-        return view;
     }
 
 
