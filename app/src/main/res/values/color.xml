@@ -13,6 +13,7 @@
     <color name="div_white">#E5E5E5</color>
     <color name="txt_color">#48495F</color>
     <color name="color_light_blue">#00DDB6</color>
+    <color name="colorLine">#dfdfdf</color>
     <color name="app_main">@android:color/holo_orange_dark</color>
 
     <color name="C1">#2dbc6d</color>

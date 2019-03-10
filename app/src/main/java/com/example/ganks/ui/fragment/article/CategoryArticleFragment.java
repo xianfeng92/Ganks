@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.ethanhua.skeleton.Skeleton;
+import com.ethanhua.skeleton.SkeletonScreen;
 import com.example.ganks.DataConvert.HomeDataConvert;
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.MultipleRecyclerAdapter;
@@ -128,6 +130,15 @@ public class CategoryArticleFragment extends GankDelegate implements SwipeRefres
 
     /***************************************************private Methods***********************************/
     private void getDatas() {
+        final SkeletonScreen skeletonScreen = Skeleton.bind(mRecyclerView)
+                .adapter(mAdapter)
+                .shimmer(true)
+                .angle(20)
+                .frozen(false)
+                .duration(120)
+                .count(10)
+                .load(R.layout.item_skeleton_news)
+                .show(); //default count is 10
         RestClient.builder()
                 .url("https://gank.io/api/data")
                 .addParams(type)
@@ -149,6 +160,7 @@ public class CategoryArticleFragment extends GankDelegate implements SwipeRefres
                         if (list != null) {
                             datas.addAll(list);
                             mAdapter.notifyDataSetChanged();
+                            skeletonScreen.hide();
                         } else {
                             throw new RuntimeException("Can not get Data from Service");
                         }

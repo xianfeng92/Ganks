@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.MianViewPagerAdapter;
 import com.example.ganks.ui.fragment.article.CategoryArticleFragment;
