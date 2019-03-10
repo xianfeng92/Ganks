@@ -2,10 +2,12 @@ package com.example.ganks.ui.fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -18,6 +20,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
@@ -133,6 +137,7 @@ public class LoveMeiziFragment extends GankDelegate {
         super.onViewCreated(view, savedInstanceState);
         updateAdapter(resultsBeanList);
     }
+
 
     private void loadDataByGreenDao() {
         resultsBeanList.clear();
@@ -311,6 +316,7 @@ public class LoveMeiziFragment extends GankDelegate {
         @Override
         public void onRequestEnd() {
             Log.d(TAG, "onRequestEnd: ");
+            ToastUtils.showShortToast("保存成功！");
         }
     }
 
