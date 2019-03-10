@@ -75,66 +75,6 @@ public class CategoryArticleFragment extends GankDelegate implements SwipeRefres
         getDatas();
     }
 
-    private void getDatas(){
-        RestClient.builder()
-                .url("https://gank.io/api/data")
-                .addParams(type)
-                .addParams(pageSize)
-                .addParams(page)
-                .error(new IError() {
-                    @Override
-                    public void onError(int code, String msg) {
-                        Log.d(TAG, "onError: "+msg);
-                    }
-                })
-                .success(new ISuccess() {
-                    @Override
-                    public void onSuccess(String response) {
-                        // 数据解析
-                        final HomeDataConvert homeDataConvert = new HomeDataConvert();
-                        homeDataConvert.serJsonData(response);
-                        final ArrayList<MultipleItemEntity> list = homeDataConvert.convert();
-                        if (list != null){
-                            datas.addAll(list);
-                            mAdapter.notifyDataSetChanged();
-                        }else{
-                            throw new RuntimeException("Can not get Data from Service");
-                        }
-                    }
-                })
-                .build()
-                .get();
-
-//        articleService.gank(type,pageSize,page)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Meizi>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//            }
-//
-//            @Override
-//            public void onNext(Meizi gankEntity) {
-//                for (Meizi.ResultsBean bean:gankEntity.results){
-//                    datas.add(bean);
-//                }
-//                Log.d(TAG, "onNext: "+datas.size());
-//                mAdapter.notifyDataSetChanged();
-//                mSwipeRefreshLayout.setRefreshing(false);
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//
-//            }
-//        });
-        mSwipeRefreshLayout.setRefreshing(false);
-    }
-
     @Override
     public void initData() {
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -151,11 +91,8 @@ public class CategoryArticleFragment extends GankDelegate implements SwipeRefres
                 FragmentTransaction tx = fManager.beginTransaction();
                 ArticleContentFragment articleContentFragment = ArticleContentFragment.newInstance();
                 articleContentFragment.setArguments(bundle);
-//                //加上Fragment替换动画
-//                tx.setCustomAnimations(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_left_exit);
-//                tx.replace(R.id.fl_container, articleContentFragment);
-//                tx.addToBackStack(null);
-//                tx.commit();
+                //  这里是父Fragment启动(HomeFragment),要注意 栈层级
+                getParentDelegate().start(articleContentFragment);
             }
         });
         mAdapter.openLoadAnimation();
@@ -185,4 +122,41 @@ public class CategoryArticleFragment extends GankDelegate implements SwipeRefres
         });
         getDatas();
     }
+
+
+
+
+    /***************************************************private Methods***********************************/
+    private void getDatas() {
+        RestClient.builder()
+                .url("https://gank.io/api/data")
+                .addParams(type)
+                .addParams(pageSize)
+                .addParams(page)
+                .error(new IError() {
+                    @Override
+                    public void onError(int code, String msg) {
+                        Log.d(TAG, "onError: " + msg);
+                    }
+                })
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        // 数据解析
+                        final HomeDataConvert homeDataConvert = new HomeDataConvert();
+                        homeDataConvert.serJsonData(response);
+                        final ArrayList<MultipleItemEntity> list = homeDataConvert.convert();
+                        if (list != null) {
+                            datas.addAll(list);
+                            mAdapter.notifyDataSetChanged();
+                        } else {
+                            throw new RuntimeException("Can not get Data from Service");
+                        }
+                    }
+                })
+                .build()
+                .get();
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
 }

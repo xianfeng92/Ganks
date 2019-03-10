@@ -3,17 +3,10 @@ package com.example.ganks.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import com.example.ganks.R;
-import com.example.ganks.ui.adapter.MianViewPagerAdapter;
-import com.example.ganks.ui.fragment.article.CategoryArticleFragment;
-import com.xforg.gank_core.app.CategoryType;
 import com.xforg.gank_core.delegates.GankDelegate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created By zhongxianfeng on 19-2-1
@@ -21,10 +14,6 @@ import java.util.List;
  */
 public class HomeFragment extends GankDelegate {
     private static final String TAG = "HomeFragment";
-
-    TabLayout tabs;
-    ViewPager mainPager;
-    private List<GankDelegate> mFragments;
 
     public static HomeFragment newInstance(){
         Bundle args = new Bundle();
@@ -46,22 +35,23 @@ public class HomeFragment extends GankDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        tabs = rootView.findViewById(R.id.tabs);
-        mainPager = rootView.findViewById(R.id.mainPager);
+
     }
 
     @Override
-    public void initData(){
-        if (mFragments == null){
-            mFragments = new ArrayList<>();
-            mFragments.add(CategoryArticleFragment.newInstance(CategoryType.ANDROID_STR,getActivity().getSupportFragmentManager()));
-            mFragments.add(CategoryArticleFragment.newInstance(CategoryType.IOS_STR,getActivity().getSupportFragmentManager()));
-            mFragments.add(CategoryArticleFragment.newInstance(CategoryType.FRONT_STR,getActivity().getSupportFragmentManager()));
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (findChildFragment(ViewPagerFragment.class) == null) {
+            loadRootFragment(R.id.fl_home_container, ViewPagerFragment.newInstance());
         }
-        mainPager.setOffscreenPageLimit(mFragments.size());
-        mainPager.setAdapter(new MianViewPagerAdapter(getChildFragmentManager(),mFragments));
-        tabs.setupWithViewPager(mainPager);
     }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        ///这里可以不用懒加载,因为Adapter的场景下,Adapter内的子Fragment只有在父Fragment是show状态时,才会被Attach,Create
+    }
+
 
     @Override
     public boolean onBackPressedSupport() {
