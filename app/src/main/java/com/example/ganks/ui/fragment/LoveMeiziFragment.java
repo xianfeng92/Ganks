@@ -2,12 +2,10 @@ package com.example.ganks.ui.fragment;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -20,7 +18,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -273,7 +270,7 @@ public class LoveMeiziFragment extends GankDelegate {
 
             @Override
             public void onNext(ResponseBody responseBody) {
-                byte[] bys = new byte[0];
+                byte[] bys;
                 try {
                     // OkHttp请求回调中responseBody.bytes();只能有效调用一次.
                     // 调用responseBody.bytes();的时候数据流已经关闭了，再次调用就会出现错误提示java.lang.IllegalStateException: closed

@@ -8,7 +8,6 @@ import com.xforg.gank_core.net.callbacks.IError;
 import com.xforg.gank_core.net.callbacks.IFailure;
 import com.xforg.gank_core.net.callbacks.IRequest;
 import com.xforg.gank_core.net.callbacks.ISuccess;
-import com.xforg.gank_core.utils.ToastUtils;
 
 import java.util.WeakHashMap;
 import okhttp3.ResponseBody;
@@ -73,9 +72,7 @@ public class DownloadHandler {
                                 DOWNLOAD_DIR,EXTENSION,body,NAME);
                         //这里一定要注意判断，否则文件下载不全
                         if(task.isCancelled()){
-                            if (REQUEST != null){
                                 REQUEST.onRequestEnd();
-                            }
                         }
                     }else {
                         if (ERROR != null){
