@@ -11,6 +11,8 @@ Just for fun，Let's coding
 
 [Picasso](https://github.com/square/picasso) --- 图片加载
 
+[glide](https://github.com/bumptech/glide) --- 图片加载
+
 [retrofit](https://github.com/square/retrofit) --- 网络请求
 
 [rxjava2](https://github.com/ReactiveX/RxJava) --- 响应式编程
