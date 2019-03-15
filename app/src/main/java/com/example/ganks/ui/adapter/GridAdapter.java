@@ -7,11 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-
 import com.example.ganks.R;
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
+
+import ImageLoader.ImageLoader;
+import ImageLoader.config.ConfigBuilder;
+import ImageLoader.config.ImageConfig;
 
 
 public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener,View.OnLongClickListener{
@@ -45,7 +46,12 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-            Picasso.with(context).load(urls.get(i)).into(((MyViewHolder) viewHolder).iv);
+        ImageConfig config = new ConfigBuilder(context)
+                .url(urls.get(i))
+                .placeHolder(R.mipmap.default_bg)
+                .error(R.mipmap.fail_load)
+                .build();
+        ImageLoader.getActualLoader().apply(config).into(((MyViewHolder) viewHolder).iv);
     }
 
     @Override

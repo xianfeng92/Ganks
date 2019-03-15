@@ -11,6 +11,7 @@ import com.xforg.gank_core.utils.Utils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import ImageLoader.ImageLoader;
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
@@ -65,6 +66,19 @@ public class BaseApplication extends Application {
             //初始化GreenDao
             GreenDaoHelper.initDataBase(this);
             Utils.init(this);
+            ImageLoader.init(this);
         }
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        ImageLoader.clearAllMemoryCaches();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        ImageLoader.trimMemory(level);
     }
 }

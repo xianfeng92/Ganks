@@ -70,9 +70,6 @@ dependencies {
     //Banner依赖
     api 'com.bigkoo:convenientbanner:2.0.5'
     api project(path: ':tantancardswipe')
-    api 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
-    api 'io.reactivex:rxjava:1.1.9'
-    api 'com.squareup.picasso:picasso:2.5.2'
     api 'com.android.support:recyclerview-v7:28.0.0'
     api 'com.blankj:utilcode:1.23.4'
     api 'com.android.support:cardview-v7:28.0.0'

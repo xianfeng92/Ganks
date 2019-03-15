@@ -31,8 +31,6 @@ public class DownloadHandler {
     private final IFailure FAILURE;
     private final IError ERROR;
 
-
-
     public DownloadHandler(String url,
                            WeakHashMap<String, Object> params,
                            IRequest request,
@@ -56,7 +54,6 @@ public class DownloadHandler {
     public static DownLoadHandlerBuilder builder(){
         return new DownLoadHandlerBuilder();
     }
-
 
     public final void handleDownLoad(){
         if(REQUEST != null){

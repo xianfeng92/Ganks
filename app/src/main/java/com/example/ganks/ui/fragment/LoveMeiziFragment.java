@@ -1,6 +1,5 @@
 package com.example.ganks.ui.fragment;
 
-import android.Manifest;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -18,7 +17,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
@@ -26,7 +24,6 @@ import com.chad.library.adapter.base.listener.OnItemDragListener;
 import com.chad.library.adapter.base.listener.OnItemSwipeListener;
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.LineAdapter;
-import com.tbruyelle.rxpermissions.RxPermissions;
 import com.xforg.gank_core.delegates.GankDelegate;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
 import com.xforg.gank_core.net.callbacks.IRequest;
@@ -49,7 +46,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.functions.Action1;
 
 /**
  * Created By apple on 2019/2/24
@@ -101,14 +97,6 @@ public class LoveMeiziFragment extends GankDelegate {
     public void initData() {
         initItemDargAndSwipe();
         loadDataByGreenDao();
-        RxPermissions.getInstance(getActivity()).request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Action1<Boolean>() {
-            @Override
-            public void call(Boolean aBoolean) {
-                if (aBoolean) {
-                    ToastUtils.showShortToastSafe("WRITE STORAGE Permission 获取成功");
-                }
-            }
-        });
     }
 
 
@@ -237,12 +225,12 @@ public class LoveMeiziFragment extends GankDelegate {
                 String url = resultsBeanList.get(position).url;
                 // 采用AsyncTask下载资源
                 // 需要指定url 、 request 以及 url
-                DownloadHandler.builder().url(subString(url))
-                        .dir(Environment.getExternalStorageState() + "/image/")
-                        .extension("png")
-                        .request(new MyRequest())
-                        .build().handleDownLoad();
-//                downLoad(url);
+//                DownloadHandler.builder().url(subString(url))
+//                        .dir(Environment.getExternalStorageState() + "/image/")
+//                        .extension("png")
+//                        .request(new MyRequest())
+//                        .build().handleDownLoad();
+                downLoad(url);
             }
         });
         recyclerView.setAdapter(mAdapter);

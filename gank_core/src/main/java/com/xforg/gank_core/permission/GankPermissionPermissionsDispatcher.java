@@ -6,16 +6,16 @@ import permissions.dispatcher.PermissionUtils;
  * Created By apple on 2019/2/21
  * github: https://github.com/xianfeng92
  */
-public class GankFragmentPermissionsDispatcher {
+public class GankPermissionPermissionsDispatcher {
 
     private static final int REQUEST_REQUESTFILEPERMISSION = 0;
 
     private static final String[] PERMISSION_REQUESTFILEPERMISSION = new String[] {"android.permission.WRITE_EXTERNAL_STORAGE"};
 
-    private GankFragmentPermissionsDispatcher() {
+    private GankPermissionPermissionsDispatcher() {
     }
 
-    static void requestFilePermissionWithPermissionCheck(GankFragment target) {
+    static void requestFilePermissionWithPermissionCheck(GankPermission target) {
         if (PermissionUtils.hasSelfPermissions(target.getActivity(), PERMISSION_REQUESTFILEPERMISSION)) {
             target.requestFilePermission();
         } else {
@@ -23,7 +23,7 @@ public class GankFragmentPermissionsDispatcher {
         }
     }
 
-    static void onRequestPermissionsResult(GankFragment target, int requestCode,
+    static void onRequestPermissionsResult(GankPermission target, int requestCode,
                                            int[] grantResults) {
         switch (requestCode) {
             case REQUEST_REQUESTFILEPERMISSION:

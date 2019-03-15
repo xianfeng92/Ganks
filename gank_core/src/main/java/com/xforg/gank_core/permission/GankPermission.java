@@ -13,19 +13,19 @@ import permissions.dispatcher.RuntimePermissions;
  * github: https://github.com/xianfeng92
  */
 @RuntimePermissions
-public abstract class GankFragment extends BaseDelegate {
+public abstract class GankPermission extends BaseDelegate {
 
     @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     void requestFilePermission() {
     }
 
     public void requestFilePermissionWithCheck() {
-        GankFragmentPermissionsDispatcher.requestFilePermissionWithPermissionCheck(this);
+        GankPermissionPermissionsDispatcher.requestFilePermissionWithPermissionCheck(this);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        GankFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+        GankPermissionPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 }
