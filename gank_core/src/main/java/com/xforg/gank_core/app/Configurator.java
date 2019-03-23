@@ -1,7 +1,6 @@
 package com.xforg.gank_core.app;
 import android.app.Activity;
 import android.os.Handler;
-
 import java.util.HashMap;
 
 /**
@@ -52,6 +51,13 @@ public class Configurator {
         GANK_CONFIGS.put(ConfigKeys.ACTIVITY.name(), activity);
         return this;
     }
+
+    public final Configurator removeActivity(Activity activity) {
+        GANK_CONFIGS.remove(ConfigKeys.ACTIVITY.name());
+        return this;
+    }
+
+
 
     public final Configurator withLoaderDelayed(int delay){
         GANK_CONFIGS.put(ConfigKeys.LOADER_DELAYED.name(),delay);

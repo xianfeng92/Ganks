@@ -23,7 +23,6 @@ public class EnterActivity extends ProxyActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter);
-        Gank.getConfigurator().withActivity(this);
     }
 
     @Override
@@ -36,6 +35,10 @@ public class EnterActivity extends ProxyActivity implements
         loadRootFragment(R.id.enter,new LauncherDelegate());
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public void onLauncherFinish(OnLauncherFinishTag tag) {
