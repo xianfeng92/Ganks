@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+
+import com.trello.rxlifecycle2.components.support.RxFragment;
 import com.xforg.gank_core.activitys.ProxyActivity;
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -24,7 +26,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * Created By apple on 2019/2/20
  * github: https://github.com/xianfeng92
  */
-public abstract class BaseDelegate extends Fragment implements ISupportFragment {
+public abstract class BaseDelegate extends RxFragment implements ISupportFragment {
     private static final String TAG = "BaseDelegate";
 
 

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.TanTanAdapter;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.xforg.gank_core.delegates.GankDelegate;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
 import com.xforg.gank_core.entity.Meizi;
@@ -86,6 +87,7 @@ public class TanTanFragment extends GankDelegate {
     private void getMeizi(){
         meiziService.getMeizi(page)
                 .subscribeOn(Schedulers.newThread())
+                .compose(this.<Meizi>bindUntilEvent(FragmentEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Meizi>() {
             @Override
             public void onSubscribe(Disposable d) {
