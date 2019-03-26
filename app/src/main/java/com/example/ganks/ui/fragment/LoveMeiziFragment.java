@@ -27,7 +27,6 @@ import com.example.ganks.ui.adapter.LineAdapter;
 import com.xforg.gank_core.delegates.GankDelegate;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
 import com.xforg.gank_core.net.callbacks.IRequest;
-import com.xforg.gank_core.net.download.DownloadHandler;
 import com.xforg.gank_core.net.rx.RxRestService;
 import com.xforg.gank_core.utils.File.FileUtil;
 import com.xforg.gank_core.utils.GreenDaoHelper;

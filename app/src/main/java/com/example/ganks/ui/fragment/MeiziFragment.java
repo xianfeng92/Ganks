@@ -19,8 +19,6 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.example.ganks.R;
 import com.example.ganks.ui.adapter.StaggerAdapter;
-import com.trello.rxlifecycle2.RxLifecycle;
-import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.xforg.gank_core.delegates.GankDelegate;
 import com.xforg.gank_core.entity.Meizi;

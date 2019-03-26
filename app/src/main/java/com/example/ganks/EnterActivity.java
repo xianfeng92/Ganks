@@ -7,7 +7,6 @@ import com.example.ganks.launcher.LauncherDelegate;
 import com.example.ganks.sign.ISignListener;
 import com.example.ganks.sign.IUserChecker;
 import com.example.ganks.ui.activitys.ContentActivity;
-import com.xforg.gank_core.app.Gank;
 import com.example.ganks.launcher.ILauncherListener;
 import com.example.ganks.launcher.OnLauncherFinishTag;
 import com.xforg.gank_core.activitys.ProxyActivity;
