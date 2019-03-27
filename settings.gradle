@@ -1,1 +1,1 @@
-include ':app', ':tantancardswipe', ':autosize', ':gank_core', ':imageloader'
+include ':app', ':tantancardswipe', ':autosize', ':gank_core', ':imageloader', ':retrohttp'
