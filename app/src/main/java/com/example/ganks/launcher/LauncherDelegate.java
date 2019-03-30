@@ -11,7 +11,7 @@ import com.example.ganks.R;
 import com.example.ganks.sign.AccountManager;
 import com.example.ganks.sign.IUserChecker;
 import com.example.ganks.sign.SignUpDelegate;
-import com.xforg.gank_core.delegates.GankDelegate;
+import com.example.ganks.delegates.GankDelegate;
 import com.xforg.gank_core.utils.timer.BaseTimerTask;
 import com.xforg.gank_core.utils.timer.ITimerListener;
 import com.xforg.gank_core.utils.storage.GankPreference;

@@ -6,11 +6,11 @@ import android.util.Log;
 import com.example.ganks.launcher.LauncherDelegate;
 import com.example.ganks.sign.ISignListener;
 import com.example.ganks.sign.IUserChecker;
-import com.example.ganks.ui.activitys.ContentActivity;
+import com.example.ganks.mvp.ui.activitys.ContentActivity;
 import com.example.ganks.launcher.ILauncherListener;
 import com.example.ganks.launcher.OnLauncherFinishTag;
 import com.xforg.gank_core.activitys.ProxyActivity;
-import com.xforg.gank_core.delegates.GankDelegate;
+import com.example.ganks.delegates.GankDelegate;
 import org.greenrobot.eventbus.EventBus;
 
 

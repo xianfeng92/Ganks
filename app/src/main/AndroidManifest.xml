@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activitys.ContentActivity">
+        <activity android:name=".mvp.ui.activitys.ContentActivity">
         </activity>
         <activity android:name=".EnterActivity"
             android:theme="@style/AppStartLoad">

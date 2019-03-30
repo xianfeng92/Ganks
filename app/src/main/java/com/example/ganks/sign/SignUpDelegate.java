@@ -11,7 +11,7 @@ import android.util.Patterns;
 import android.view.View;
 
 import com.example.ganks.R;
-import com.xforg.gank_core.delegates.GankDelegate;
+import com.example.ganks.delegates.GankDelegate;
 
 /**
  * Created By apple on 2019/2/23

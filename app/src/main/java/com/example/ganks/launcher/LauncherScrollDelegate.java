@@ -9,7 +9,7 @@ import android.view.View;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.ganks.R;
-import com.xforg.gank_core.delegates.BaseDelegate;
+import com.example.ganks.delegates.BaseDelegate;
 import com.xforg.gank_core.utils.storage.GankPreference;
 
 import java.util.ArrayList;
