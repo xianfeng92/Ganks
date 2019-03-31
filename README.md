@@ -2,6 +2,8 @@
 
 👌一个简单的Gank.io Demo, 主要用于玩一些优秀的开源库
 
+![](https://github.com/xianfeng92/Ganks/blob/master/images/bugbug.gif)
+
 ----------------------------------------------------
 
 ## MVP
