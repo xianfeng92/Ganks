@@ -50,7 +50,7 @@ Fragmentation 封装了 Fragment 的管理,很 powerful 的一个项目
 
 我们知道 DisplayMetrics#density 是公有的,谁都有权限修改, AndroidAutoSize 可以把 DisplayMetrics#density 修改成一个可以完成屏幕适配的值,其他三方库、Android 系统、以及项目成员就可以把 DisplayMetrics#density 修改或恢复成另一个值,这都将导致屏幕适配的失效,特别是在某些定制系统上,因为这个定制系统做的某些特殊操作都是未知的. 还有当AndroidAutoSize遇到屏幕差异很大的机型,显示的效果就不尽如人意了.
 
-个人觉得:smallestWidth适配 + AndroidAutoSize 可能是更好的选择 + 不同机型控制UI布局
+个人觉得可以综合考虑: smallestWidth适配 + AndroidAutoSize 可能是更好的选择 + 屏幕尺寸差异大的机型控制UI布局
 
 -------------------------------------------------
 ## imageloader
@@ -77,7 +77,6 @@ Skeleton Screen Loading，中文叫做骨架屏,即表示在页面完全渲染�
 ## LeakCanary
 
 Android 和 Java 内存泄露检测
-
 
 --------------------------------------------------
 
