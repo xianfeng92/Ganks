@@ -1,15 +1,12 @@
 # Ganks
+
 Just for fun，Let's coding
 
 --------------------------------------------------
 
 # Core
 
-[Fragmentation](https://github.com/YoKeyword/Fragmentation) ---Fragment
-
-[BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper) ---ViewAdapter
-
-[CardSwipeLayout](https://github.com/yuqirong/CardSwipeLayout) --- 自定义布局
+[Mvp 是 Google 官方出品的 Mvp 架构项目](https://github.com/googlesamples/android-architecture/tree/todo-mvp/)
 
 [glide](https://github.com/bumptech/glide) --- 图片加载
 
@@ -18,6 +15,10 @@ Just for fun，Let's coding
 [rxjava2](https://github.com/ReactiveX/RxJava) --- 响应式编程
 
 [LeakCanary](https://github.com/square/leakcanary) ---Android 和 Java 内存泄露检测
+
+[Fragmentation](https://github.com/YoKeyword/Fragmentation) ---Fragment
+
+[BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper) ---ViewAdapter
 
 okhttp3的封装
 
