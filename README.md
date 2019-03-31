@@ -43,11 +43,14 @@ Fragmentation 封装了 Fragment 的管理,很 powerful 的一个项目
 
 [今日头条屏幕适配方案终极版,一个极低成本的 Android 屏幕适配方案](https://github.com/JessYanCoding/AndroidAutoSize)
 
-Gank 中手动撸了一把 AndroidAutoSize 的简化版的实现,其核心也就是在不同尺寸和分辨率的设备上,根据设计图的总宽度,
-强行修改 density 值,来完成屏幕的适配, 完成这个其实就是几行代码的事, AndroidAutoSize 能够将其封装成几千行代码,实属优秀.
-该方案其实也没有说的那么好,遇到屏幕差异很大的机型,显示的效果就不尽如人意了~~
+今日头条适配方案的原理来源于修改DisplayMetrics#density,因为 DisplayMetrics#density 是全局的,所以只要 DisplayMetrics#density 一经修改,项目中的所有页面、所有控件都可以奏效,包括三方库控件和系统控件,这就使今日头条屏幕适配方案天然拥有优于其他屏幕适配方案的低成本和低侵入性
 
-个人觉得:smallestWidth适配 + AndroidAutoSize 可能是更好的选择
+在Gank 中手动撸了一把 AndroidAutoSize 的简化版的实现,其核心也就是在不同尺寸和分辨率的设备上,根据设计图的总宽度,
+强行修改 density 值,来完成屏幕的适配, 完成这个其实就是几行代码的事, AndroidAutoSize 能够将其封装成几千行代码,实属优秀.
+
+我们知道 DisplayMetrics#density 是公有的,谁都有权限修改, AndroidAutoSize 可以把 DisplayMetrics#density 修改成一个可以完成屏幕适配的值,其他三方库、Android 系统、以及项目成员就可以把 DisplayMetrics#density 修改或恢复成另一个值,这都将导致屏幕适配的失效,特别是在某些定制系统上,因为这个定制系统做的某些特殊操作都是未知的. 还有当AndroidAutoSize遇到屏幕差异很大的机型,显示的效果就不尽如人意了.
+
+个人觉得:smallestWidth适配 + AndroidAutoSize 可能是更好的选择 + 不同机型控制UI布局
 
 -------------------------------------------------
 ## imageloader
