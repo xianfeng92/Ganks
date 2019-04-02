@@ -6,6 +6,10 @@
 
 ----------------------------------------------------
 
+[![API](https://img.shields.io/badge/API-28%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=28)
+
+----------------------------------------------------
+
 ## MVP
 
 [Mvp 是 Google 官方出品的 Mvp 架构项目,Demo可参考todo-mvp](https://github.com/googlesamples/android-architecture/tree/todo-mvp/)
