@@ -7,7 +7,7 @@
 ----------------------------------------------------
 
 [![API](https://img.shields.io/badge/API-28%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=28)
-[![作者](https://img.shields.io/badge/作者-xianfeng92-brightgreen.svg)]
+![作者](https://img.shields.io/badge/Author-xianfeng92-brightgreen.svg)
 
 ----------------------------------------------------
 
