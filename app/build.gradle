@@ -25,6 +25,8 @@ dependencies {
     implementation project(':autosize')
     implementation project(':gank_core')
     implementation project(':imageloader')
+    implementation rootProject.ext.dependencies.junit
+    implementation rootProject.ext.dependencies.testrunner
     // Skeleton
     implementation rootProject.ext.dependencies.skeleton
     implementation rootProject.ext.dependencies.shimmerlayout
