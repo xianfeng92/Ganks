@@ -2,17 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
-    compileSdkVersion 28
-
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject .ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner rootProject.ext.dependencies.AndroidJUnitRunner
     }
 
     buildTypes {
@@ -30,51 +28,51 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api 'com.android.support:appcompat-v7:28.0.0'
-    api 'com.android.support.constraint:constraint-layout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    api project(path: ':tantancardswipe')
+    api rootProject.ext.dependencies.appcompatV7
+    api rootProject.ext.dependencies.constraint
+    testImplementation rootProject.ext.dependencies.junit
+    androidTestImplementation rootProject.ext.dependencies.testrunner
+    androidTestImplementation rootProject.ext.dependencies.espresso
     //Fragment依赖
-    api 'me.yokeyword:fragmentation:1.3.3'
+    api rootProject.ext.dependencies.fragmentation
     // okhttp
-    api 'com.squareup.okio:okio:1.14.1'
-    api 'com.squareup.okhttp3:okhttp:3.10.0'
+    api rootProject.ext.dependencies.okio
+    api rootProject.ext.dependencies.okhttp
     // retrofit
-    api 'com.squareup.retrofit2:retrofit:2.4.0'
-    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    api rootProject.ext.dependencies.retrofit
+    api rootProject.ext.dependencies.retrofitJson
     //支持gson解析数据
-    api 'com.squareup.retrofit2:converter-scalars:2.4.0'
+    api rootProject.ext.dependencies.retrofitScalars
     //rxjava
-    api 'io.reactivex.rxjava2:rxjava:2.2.3'
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
-    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    api rootProject.ext.dependencies.rxJava
+    api rootProject.ext.dependencies.retrofitAdapterRxjava
+    api rootProject.ext.dependencies.rxAndroid
     // EventBus
-    api 'org.greenrobot:eventbus:3.0.0'
+    api rootProject.ext.dependencies.eventbus
     //Json
-    api 'com.alibaba:fastjson:1.1.70.android'
+    api rootProject.ext.dependencies.fastJson
 
     //权限
-    api('com.github.hotchemi:permissionsdispatcher:3.2.0') {
+    api(rootProject.ext.dependencies.permissionsdispatcher) {
         exclude module: 'support-v13'
     }
     //RecyclerView依赖
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
-    api 'org.greenrobot:greendao:3.2.2' // greenDao
+    api rootProject.ext.dependencies.recyclerview
+    api rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
+    api rootProject.ext.dependencies.greendao
     //ButterKnife依赖
-    api 'com.jakewharton:butterknife:9.0.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'
+    api rootProject.ext.dependencies.butterknife
+    annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
     //Banner依赖
-    api 'com.bigkoo:convenientbanner:2.0.5'
-    api project(path: ':tantancardswipe')
-    api 'com.android.support:recyclerview-v7:28.0.0'
-    api 'com.blankj:utilcode:1.23.4'
-    api 'com.android.support:cardview-v7:28.0.0'
-    api 'com.github.lzyzsd:circleprogress:1.2.1'
-    api 'com.android.support:design:28.0.0'
-    api 'com.wang.avi:library:2.1.3'
+    api rootProject.ext.dependencies.Banner
+    api rootProject.ext.dependencies.utilcode
+    api rootProject.ext.dependencies.cardView
+    api rootProject.ext.dependencies.circleprogress
+    api rootProject.ext.dependencies.design
+    api rootProject.ext.dependencies.avi
     // rxlifecycle2
-    api 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
-    api 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1'
-    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
+    api rootProject.ext.dependencies.rxlifecycle
+    api rootProject.ext.dependencies.rxlifecycleAndroid
+    api rootProject.ext.dependencies.rxlifecycleComponents
 }

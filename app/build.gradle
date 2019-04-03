@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject .ext.android.buildToolsVersion
     defaultConfig {
-        applicationId "com.example.ganks"
-        minSdkVersion 28
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner rootProject.ext.dependencies.AndroidJUnitRunner
     }
     buildTypes {
         release {
@@ -23,12 +24,12 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':autosize')
     implementation project(':gank_core')
-    // Skeleton
-    implementation 'com.ethanhua:skeleton:1.1.2'
-    implementation 'io.supercharge:shimmerlayout:2.1.0'
     implementation project(':imageloader')
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+    // Skeleton
+    implementation rootProject.ext.dependencies.skeleton
+    implementation rootProject.ext.dependencies.shimmerlayout
+    debugImplementation rootProject.ext.dependencies.leakcanaryAndroid
+    releaseImplementation rootProject.ext.dependencies.leakcanaryAndroidNoOp
     // Optional, if you use support library fragments:
-    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
+    debugImplementation rootProject.ext.dependencies.leakcanarySupportFragment
 }
