@@ -5,13 +5,12 @@ import android.text.TextUtils;
 import com.example.ganks.mvp.base.BasePresenter;
 import com.example.ganks.mvp.contract.MeiziContract;
 import com.xforg.gank_core.entity.Meizi;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DefaultObserver;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -56,9 +55,29 @@ public class MeiziPresenter extends BasePresenter<MeiziContract.Model,MeiziContr
                 });
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+
+    private class MeiziObserver extends DefaultObserver<List<Meizi>>{
+
+        @Override
+        public void onNext(List<Meizi> meizis) {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+
+        }
+
+        @Override
+        public void onComplete() {
+
+        }
     }
 
 }

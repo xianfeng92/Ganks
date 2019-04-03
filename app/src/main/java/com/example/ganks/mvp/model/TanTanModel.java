@@ -3,7 +3,6 @@ package com.example.ganks.mvp.model;
 import com.example.ganks.mvp.contract.TanTanContract;
 import com.xforg.gank_core.entity.Meizi;
 import com.xforg.gank_core.net.RestCreator;
-
 import io.reactivex.Observable;
 
 /**

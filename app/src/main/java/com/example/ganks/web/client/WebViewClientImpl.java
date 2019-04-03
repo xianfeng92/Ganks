@@ -3,7 +3,6 @@ package com.example.ganks.web.client;
 import android.graphics.Bitmap;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import com.example.ganks.web.route.WebDelegate;
 import com.example.ganks.web.route.Router;
 

@@ -3,7 +3,6 @@ package com.example.ganks.mvp.contract;
 import com.example.ganks.mvp.base.IModel;
 import com.example.ganks.mvp.base.IView;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
-
 import java.util.List;
 
 /**

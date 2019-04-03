@@ -2,7 +2,6 @@ package com.example.ganks.delegates;
 
 import android.Manifest;
 import android.support.annotation.NonNull;
-
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
 

@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-
 import com.example.ganks.mvp.base.BasePresenter;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 import com.xforg.gank_core.activitys.ProxyActivity;
@@ -38,11 +37,9 @@ public abstract class BaseDelegate<P extends BasePresenter> extends RxFragment i
 
     public abstract void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView);
 
-
     public void initData(){
 
     }
-
 
     public <T extends View> T $(@IdRes int viewId) {
         if (mRootView != null) {

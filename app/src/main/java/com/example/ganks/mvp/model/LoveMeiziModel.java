@@ -3,7 +3,6 @@ package com.example.ganks.mvp.model;
 import com.example.ganks.mvp.contract.LoveMeiziContract;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
 import com.xforg.gank_core.utils.GreenDaoHelper;
-
 import java.util.List;
 
 /**

@@ -1,6 +1,5 @@
 package com.example.ganks.mvp.model;
 
-
 import com.example.ganks.mvp.contract.MeiziContract;
 import com.xforg.gank_core.entity.Meizi;
 import com.xforg.gank_core.net.RestCreator;
@@ -11,17 +10,12 @@ import io.reactivex.Observable;
  * github: https://github.com/xianfeng92
  */
 public class MeiziModel implements MeiziContract.Model {
-
     @Override
     public Observable<Meizi> getMeizi(int page) {
-
         Observable<Meizi> meizi = RestCreator.getRxRestService().getMeizi(page);
         return meizi ;
     }
 
     @Override
-    public void onDestroy() {
-
-    }
-
+    public void onDestroy() {}
 }
