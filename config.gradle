@@ -1,0 +1,102 @@
+ext {
+    
+    android = [
+            applicationId : "com.example.ganks",
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.3",
+            minSdkVersion    : 26,
+            targetSdkVersion : 26,
+            versionCode      : 1,
+            versionName      : "1.0"
+    ]
+ 
+    dependVersion = [
+            support: "28.0.0"
+    ]
+ 
+    dependencies = [
+            // ------------- Android -------------
+            supportV4            : "com.android.support:support-v4:${dependVersion.support}",
+            appcompatV7          : "com.android.support:appcompat-v7:${dependVersion.support}",
+            design               : "com.android.support:design:${dependVersion.support}",
+            cardView             : "com.android.support:cardview-v7:${dependVersion.support}",
+            constraint           : 'com.android.support.constraint:constraint-layout:1.1.3',
+            junit                : "junit:junit:4.12",
+            testrunner           : 'com.android.support.test:runner:1.0.2',
+            AndroidJUnitRunner   : "android.support.test.runner.AndroidJUnitRunner",
+            //------------- 测试 -------------
+            espresso             : "com.android.support.test.espresso:espresso-core:3.0.2",
+
+            // ------------- RecycleView依赖 -------------
+            recyclerview         : "com.android.support:recyclerview-v7:${dependVersion.support}",
+            BaseRecyclerViewAdapterHelper : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40',
+
+           //---------------Fragment依赖--------------
+            fragmentation        : 'me.yokeyword:fragmentation:1.3.3',
+
+            // ------------- eventbus -------------
+            eventbus             : 'org.greenrobot:eventbus:3.0.0',
+
+            // ------------- permissionsdispatcher -------------
+            permissionsdispatcher :'com.github.hotchemi:permissionsdispatcher:3.2.0',
+            // ------------- 网络请求 -------------
+            okhttp               : 'com.squareup.okhttp3:okhttp:3.10.0',
+            okio                 : 'com.squareup.okhttp3:okhttp:1.14.1',
+            retrofit             : 'com.squareup.retrofit2:retrofit:2.4.0',
+            retrofitJson         : 'com.squareup.retrofit2:converter-gson:2.4.0',
+            retrofitScalars      : 'com.squareup.retrofit2:converter-scalars:2.4.0',
+            retrofitAdapterRxjava:'com.squareup.retrofit2:adapter-rxjava2:2.4.0',
+ 
+            // ------------- 图片加载 -------------
+            glide               : 'com.github.bumptech.glide:glide:4.8.0',
+            glideCompiler       : 'com.github.bumptech.glide:compiler:4.8.0',
+            glideTransformations: 'jp.wasabeef:glide-transformations:4.0.0',
+            gpuimage            : 'jp.co.cyberagent.android:gpuimage:2.0.0',
+            glideOkhttp3Integration : 'com.github.bumptech.glide:okhttp3-integration:4.5.0',
+ 
+            // ------------- RxAndroid -------------
+            rxAndroid            : 'io.reactivex.rxjava2:rxandroid:2.1.0',
+            rxJava               : 'io.reactivex.rxjava2:rxjava:2.2.3',
+ 
+            // ------------- json解析 -------------
+            fastJson             : 'com.alibaba:fastjson:1.1.70.android',
+            gson                 : 'com.google.code.gson:gson:2.8.0',
+
+            // -------------greendao -------------
+            greendao             : 'org.greenrobot:greendao:3.2.2',
+ 
+            // ------------- ButterKnife -------------
+            butterknife          : 'com.jakewharton:butterknife:9.0.0',
+            butterknifeCompiler  : 'com.jakewharton:butterknife-compiler:9.0.0',
+ 
+            // ------------- LeakCanary -------------
+            leakcanaryAndroid    : 'com.squareup.leakcanary:leakcanary-android:1.6.3',
+            leakcanaryAndroidNoOp: 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3',
+            leakcanarySupportFragment : 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3',
+
+            //---------------Banner依赖---------------
+            Banner               : 'com.bigkoo:convenientbanner:2.0.5',
+
+            //--------------circleprogress-----------
+            circleprogress       : 'com.github.lzyzsd:circleprogress:1.2.1',
+
+           //----------------shimmerlayout------------
+           shimmerlayout         : 'io.supercharge:shimmerlayout:2.1.0',
+
+            //--------------rxlifecycle--------------
+            rxlifecycle          : 'com.trello.rxlifecycle2:rxlifecycle:2.2.1',
+            rxlifecycleAndroid   : 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1',
+            rxlifecycleComponents: 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1',
+            
+            //--------------skeleton骨碌屏-----------
+            skeleton             : 'com.ethanhua:skeleton:1.1.2',
+
+            //-------------utilcode------------------
+            utilcode             : 'com.blankj:utilcode:1.23.4',
+            
+           //---------------avi-----------------------
+            avi                 : 'com.wang.avi:library:2.1.3'
+
+    ]
+}
+
