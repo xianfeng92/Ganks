@@ -21,9 +21,11 @@ import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
 import com.chad.library.adapter.base.listener.OnItemDragListener;
 import com.chad.library.adapter.base.listener.OnItemSwipeListener;
 import com.example.ganks.R;
+import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
+import com.example.ganks.internal.di.components.DaggerLoveMeiziComponent;
+import com.example.ganks.internal.di.modules.LoveMeiziModule;
 import com.example.ganks.mvp.contract.LoveMeiziContract;
-import com.example.ganks.mvp.model.LoveMeiziModel;
 import com.example.ganks.mvp.presenter.LoveMeiziPresenter;
 import com.example.ganks.mvp.ui.adapter.LineAdapter;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
@@ -65,7 +67,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
         coordinatorLayout = rootView.findViewById(R.id.meizi_line_coordinatorLayout);
         mlayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mlayoutManager);
-        mPresenter = new LoveMeiziPresenter(new LoveMeiziModel(),this);
+        initializeInjector();
         notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) recyclerView.getParent(), false);
         notDataView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,5 +212,13 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
         } else {
             mAdapter.setNewData(resultsBeanList);
         }
+    }
+
+    private void initializeInjector(){
+        DaggerLoveMeiziComponent.builder()
+                .applicationComponent(BaseApplication.getApplicationComponent())
+                .loveMeiziModule(new LoveMeiziModule(this))
+                .build()
+                .inject(this);
     }
 }

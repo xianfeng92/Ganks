@@ -15,9 +15,11 @@ import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.SkeletonScreen;
 import com.example.ganks.DataConvert.HomeDataConvert;
 import com.example.ganks.R;
+import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
+import com.example.ganks.internal.di.components.DaggerCategoryComponent;
+import com.example.ganks.internal.di.modules.CategoryModule;
 import com.example.ganks.mvp.contract.CategoryContract;
-import com.example.ganks.mvp.model.CategoryModel;
 import com.example.ganks.mvp.presenter.CategoryPresenter;
 import com.example.ganks.mvp.ui.adapter.MultipleRecyclerAdapter;
 import com.xforg.gank_core.net.RestClient;
@@ -70,7 +72,7 @@ public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> imp
         articleService = RestCreator.getRestService();
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         mSwipeRefreshLayout = rootView.findViewById(R.id.refreshLayout);
-        mPresenter = new CategoryPresenter(new CategoryModel(),this);
+        initializeInjector();
         type = getArguments().getString("type");
     }
 
@@ -173,6 +175,14 @@ public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> imp
                 .build()
                 .get();
         mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    private void initializeInjector(){
+        DaggerCategoryComponent.builder()
+                .applicationComponent(BaseApplication.getApplicationComponent())
+                .categoryModule(new CategoryModule(this))
+                .build()
+                .inject(this);
     }
 
 }

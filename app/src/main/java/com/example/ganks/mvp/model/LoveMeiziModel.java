@@ -4,6 +4,7 @@ import com.example.ganks.mvp.contract.LoveMeiziContract;
 import com.xforg.gank_core.entity.DaoMeiziEntity;
 import com.xforg.gank_core.utils.GreenDaoHelper;
 import java.util.List;
+import javax.inject.Inject;
 
 /**
  * Created By apple on 2019/3/30
@@ -11,10 +12,11 @@ import java.util.List;
  */
 public class LoveMeiziModel implements LoveMeiziContract.Model {
 
-    @Override
-    public void onDestroy() {
+    @Inject
+    LoveMeiziModel(){}
 
-    }
+    @Override
+    public void onDestroy() {}
 
     @Override
     public List<DaoMeiziEntity> getMeiziFromDao() {

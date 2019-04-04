@@ -1,6 +1,7 @@
 package com.example.ganks.mvp.model;
 
 import com.example.ganks.mvp.contract.HomeContract;
+import javax.inject.Inject;
 
 /**
  * Created By apple on 2019/3/30
@@ -8,8 +9,9 @@ import com.example.ganks.mvp.contract.HomeContract;
  */
 public class HomeModel implements HomeContract.Model {
 
-    @Override
-    public void onDestroy() {
+    @Inject
+    HomeModel(){}
 
-    }
+    @Override
+    public void onDestroy() {}
 }

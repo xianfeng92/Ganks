@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import javax.inject.Inject;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -35,6 +36,7 @@ public class LoveMeiziPresenter extends BasePresenter<LoveMeiziContract.Model,Lo
 
     private Retrofit retrofit;
 
+    @Inject
     public LoveMeiziPresenter(LoveMeiziContract.Model model,LoveMeiziContract.View view){
         super(model,view);
     }

@@ -38,6 +38,7 @@ ext {
 
             // ------------- permissionsdispatcher -------------
             permissionsdispatcher :'com.github.hotchemi:permissionsdispatcher:3.2.0',
+
             // ------------- 网络请求 -------------
             okhttp               : 'com.squareup.okhttp3:okhttp:3.10.0',
             okio                 : 'com.squareup.okhttp3:okhttp:1.14.1',
@@ -53,9 +54,19 @@ ext {
             gpuimage            : 'jp.co.cyberagent.android:gpuimage:2.0.0',
             glideOkhttp3Integration : 'com.github.bumptech.glide:okhttp3-integration:4.5.0',
  
-            // ------------- RxAndroid -------------
+            // ------------- Rxjava -------------
             rxAndroid            : 'io.reactivex.rxjava2:rxandroid:2.1.0',
             rxJava               : 'io.reactivex.rxjava2:rxjava:2.2.3',
+
+            //--------------Rxlifecycle--------------
+            rxlifecycle          : 'com.trello.rxlifecycle2:rxlifecycle:2.2.1',
+            rxlifecycleAndroid   : 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1',
+            rxlifecycleComponents: 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1',
+
+            //----------------Dagger2---------------
+
+            dagger               : 'com.google.dagger:dagger-compiler:2.8',
+            daggerCompiler      : 'com.google.dagger:dagger-compiler:2.8',
  
             // ------------- json解析 -------------
             fastJson             : 'com.alibaba:fastjson:1.1.70.android',
@@ -81,11 +92,6 @@ ext {
 
            //----------------shimmerlayout------------
            shimmerlayout         : 'io.supercharge:shimmerlayout:2.1.0',
-
-            //--------------rxlifecycle--------------
-            rxlifecycle          : 'com.trello.rxlifecycle2:rxlifecycle:2.2.1',
-            rxlifecycleAndroid   : 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1',
-            rxlifecycleComponents: 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1',
             
             //--------------skeleton骨碌屏-----------
             skeleton             : 'com.ethanhua:skeleton:1.1.2',

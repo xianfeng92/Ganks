@@ -2,8 +2,10 @@ package com.example.ganks.base;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 import com.example.ganks.MessageEvent;
+import com.example.ganks.internal.di.components.ApplicationComponent;
+import com.example.ganks.internal.di.components.DaggerApplicationComponent;
+import com.example.ganks.internal.di.modules.ApplicationModule;
 import com.squareup.leakcanary.LeakCanary;
 import com.xforg.gank_core.net.Api;
 import com.xforg.gank_core.app.Gank;
@@ -22,7 +24,7 @@ import me.yokeyword.fragmentation.helper.ExceptionHandler;
  */
 public class BaseApplication extends Application {
 
-    private static final String TAG = "EnterActivity";
+    private  static ApplicationComponent applicationComponent;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -31,8 +33,8 @@ public class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
-        Log.d(TAG, "onCreate: ");
         super.onCreate();
+        initializeInjector();
         Fragmentation.builder()
                 // 设置 栈视图 模式为 （默认）悬浮球模式   SHAKE: 摇一摇唤出  NONE：隐藏， 仅在Debug环境生效
                 .stackViewMode(Fragmentation.BUBBLE)
@@ -58,11 +60,22 @@ public class BaseApplication extends Application {
         EventBus.getDefault().unregister(this);
     }
 
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        ImageLoader.clearAllMemoryCaches();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        ImageLoader.trimMemory(level);
+    }
+
     //当进入欢迎画面时，再去初期化第三方框架
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void lazyInit(MessageEvent messageEvent) {
         if (110 == (Integer) messageEvent.getMessage()){
-            Log.d(TAG, "lazyInit: LOAD");
             Gank.init(this).withBaseUrl(Api.APP_DOMAIN).configure();
             //初始化GreenDao
             GreenDaoHelper.initDataBase(this);
@@ -78,15 +91,13 @@ public class BaseApplication extends Application {
         }
     }
 
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        ImageLoader.clearAllMemoryCaches();
+    private void initializeInjector() {
+        this.applicationComponent= DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .build();
     }
 
-    @Override
-    public void onTrimMemory(int level) {
-        super.onTrimMemory(level);
-        ImageLoader.trimMemory(level);
+    public  static ApplicationComponent getApplicationComponent(){
+        return applicationComponent;
     }
 }

@@ -6,6 +6,7 @@ import com.example.data.net.RestApiImpl;
 import com.example.domain.Meizi;
 import com.example.domain.repository.MeiziRepository;
 import java.util.List;
+import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
@@ -14,6 +15,9 @@ import io.reactivex.functions.Function;
  * github: https://github.com/xianfeng92
  */
 public class MeiziDataRepository implements MeiziRepository {
+
+    @Inject
+    MeiziDataRepository(){}
 
     @Override
     public Observable<List<Meizi>> meizis(int page) {

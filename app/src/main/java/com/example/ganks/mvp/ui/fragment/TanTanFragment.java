@@ -11,9 +11,11 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Toast;
 import com.example.ganks.R;
+import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
+import com.example.ganks.internal.di.components.DaggerTanTanComponent;
+import com.example.ganks.internal.di.modules.TanTanModule;
 import com.example.ganks.mvp.contract.TanTanContract;
-import com.example.ganks.mvp.model.TanTanModel;
 import com.example.ganks.mvp.presenter.TanTanPresenter;
 import com.example.ganks.mvp.ui.adapter.TanTanAdapter;
 import com.xforg.gank_core.entity.Meizi;
@@ -57,7 +59,7 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         recyclerView = rootView.findViewById(R.id.recyclerView);
         swipeRefreshLayout = rootView.findViewById(R.id.refreshLayout);
-        mPresenter = new TanTanPresenter(new TanTanModel(),this);
+        initializeInjector();
     }
 
     @Override
@@ -125,4 +127,13 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
             resultsBeanList.addAll(mData);
         }
     }
+
+    private void initializeInjector(){
+        DaggerTanTanComponent.builder()
+                .applicationComponent(BaseApplication.getApplicationComponent())
+                .tanTanModule(new TanTanModule(this))
+                .build()
+                .inject(this);
+    }
+
 }

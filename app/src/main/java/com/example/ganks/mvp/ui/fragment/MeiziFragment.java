@@ -17,9 +17,11 @@ import android.view.View;
 import android.widget.Toast;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.example.ganks.R;
+import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
+import com.example.ganks.internal.di.components.DaggerMeiziComponent;
+import com.example.ganks.internal.di.modules.MeiziModule;
 import com.example.ganks.mvp.contract.MeiziContract;
-import com.example.ganks.mvp.model.MeiziModel;
 import com.example.ganks.mvp.presenter.MeiziPresenter;
 import com.example.ganks.mvp.ui.adapter.StaggerAdapter;
 import java.util.ArrayList;
@@ -36,10 +38,8 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Stagg
     public StaggeredGridLayoutManager staggeredGridLayoutManager;
     private int lastVisibleItem;
     private ItemTouchHelper itemTouchHelper;
-//    private RxRestService meiziService;
     private int page = 1;
     private int screenwidth;
-
     public BaseDelegate.OnBackToFirstListener _mBackToFirstListener;
 
     @Override
@@ -52,11 +52,9 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Stagg
         recyclerView = rootView.findViewById(R.id.stagger_recycleView);
         coordinatorLayout = rootView.findViewById(R.id.stagger_coordinatorLayout);
         swipeRefreshLayout = rootView.findViewById(R.id.stagger_swipe_refresh);
-//        meiziService = RestCreator.getRxRestService();
         screenwidth = ScreenUtils.getScreenWidth();
-        mPresenter = new MeiziPresenter(new MeiziModel(),this);
+        initializeInjector();
     }
-
 
     public static MeiziFragment newInstance(){
         Bundle args = new Bundle();
@@ -92,7 +90,6 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Stagg
             public void onRefresh() {
                 page = 1;
                 mPresenter.requestData(page);
-//                getMeizi();
             }
         });
         itemTouchHelper=new ItemTouchHelper(new ItemTouchHelper.Callback() {
@@ -151,7 +148,6 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Stagg
                         && lastVisibleItem +2 >= staggeredGridLayoutManager.getItemCount()) {
                     page++;
                     mPresenter.requestData(page);
-//                    getMeizi();
                 }
             }
 
@@ -163,37 +159,8 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Stagg
             }
         });
         mPresenter.requestData(page);
-//        getMeizi();
     }
 
-//    private void getMeizi(){
-//        meiziService.getMeizi(page)
-//                .subscribeOn(Schedulers.newThread())
-//                .compose(this.<Meizi>bindUntilEvent(FragmentEvent.DESTROY))
-//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Meizi>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//
-//            }
-//
-//            @Override
-//            public void onNext(Meizi meizis) {
-//                for (Meizi.ResultsBean resultsBean:meizis.results){
-//                    if (!TextUtils.isEmpty(resultsBean.url))
-//                        urls.add(resultsBean.url);
-//                }
-//                updateAdapter(urls);
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//            }
-//        });
-//    }
 
     @Override
     public boolean onBackPressedSupport() {
@@ -219,5 +186,13 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Stagg
             mAdapter.notifyDataSetChanged();
         }
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    private void initializeInjector() {
+        DaggerMeiziComponent.builder()
+                .applicationComponent(BaseApplication.getApplicationComponent())
+                .meiziModule(new MeiziModule(this))
+                .build()
+                .inject(this);
     }
 }

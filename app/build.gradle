@@ -34,4 +34,8 @@ dependencies {
     releaseImplementation rootProject.ext.dependencies.leakcanaryAndroidNoOp
     // Optional, if you use support library fragments:
     debugImplementation rootProject.ext.dependencies.leakcanarySupportFragment
+    annotationProcessor rootProject.ext.dependencies.daggerCompiler
+    implementation rootProject.ext.dependencies.dagger
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
 }

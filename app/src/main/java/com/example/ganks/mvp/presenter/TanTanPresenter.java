@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.inject.Inject;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -25,6 +27,7 @@ public class TanTanPresenter extends BasePresenter<TanTanContract.Model,TanTanCo
     private static final String TAG = "TanTanPresenter";
     private DaoMeiziEntity daoGankEntity;
 
+    @Inject
     public TanTanPresenter(TanTanContract.Model model, TanTanContract.View rootView){
         super(model,rootView);
     }
