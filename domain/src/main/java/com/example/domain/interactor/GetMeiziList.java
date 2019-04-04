@@ -5,6 +5,7 @@ import com.example.domain.executor.PostExecutionThread;
 import com.example.domain.executor.ThreadExecutor;
 import com.example.domain.repository.MeiziRepository;
 import java.util.List;
+import javax.inject.Inject;
 import io.reactivex.Observable;
 
 /**
@@ -15,6 +16,7 @@ public class GetMeiziList extends MeiziCase<Meizi,Integer> {
 
     private final MeiziRepository meiziRepository;
 
+    @Inject
     GetMeiziList(MeiziRepository meiziRepository, ThreadExecutor threadExecutor,
                  PostExecutionThread postExecutionThread) {
         super(threadExecutor, postExecutionThread);

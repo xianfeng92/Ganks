@@ -1,18 +1,16 @@
 package com.example.ganks.mvp.presenter;
 
+
 import android.text.TextUtils;
+import com.example.domain.Meizi;
+import com.example.domain.interactor.DefaultObserver;
+import com.example.domain.interactor.GetMeiziList;
 import com.example.ganks.internal.di.PerActivity;
 import com.example.ganks.mvp.base.BasePresenter;
 import com.example.ganks.mvp.contract.MeiziContract;
-import com.xforg.gank_core.entity.Meizi;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DefaultObserver;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created By apple on 2019/3/30
@@ -21,41 +19,16 @@ import io.reactivex.schedulers.Schedulers;
 @PerActivity
 public class MeiziPresenter extends BasePresenter<MeiziContract.Model,MeiziContract.View> {
 
+    GetMeiziList getMeiziList;
+
     @Inject
-    public MeiziPresenter(MeiziContract.Model model, MeiziContract.View rootView){
+    public MeiziPresenter(MeiziContract.Model model, MeiziContract.View rootView,GetMeiziList getMeiziList){
         super(model, rootView);
+        this.getMeiziList = getMeiziList;
     }
 
     public void requestData(int page){
-        mModel.getMeizi(page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Meizi>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Meizi meizi) {
-                        List<String> urls = new ArrayList<>();
-                        for (Meizi.ResultsBean resultsBean:meizi.results) {
-                            if (!TextUtils.isEmpty(resultsBean.url))
-                                urls.add(resultsBean.url);
-                            mRootView.setNewData(urls);
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+        this.getMeiziList.execute(new MeiziObserver(),page);
     }
 
 
@@ -65,11 +38,17 @@ public class MeiziPresenter extends BasePresenter<MeiziContract.Model,MeiziContr
     }
 
 
-    private class MeiziObserver extends DefaultObserver<List<Meizi>>{
+    private final class MeiziObserver extends DefaultObserver<List<Meizi>> {
 
         @Override
         public void onNext(List<Meizi> meizis) {
-
+            List<String> urls = new ArrayList<>();
+            for (Meizi meizi : meizis){
+                if (!TextUtils.isEmpty(meizi.getUrl())){
+                    urls.add(meizi.getUrl());
+                    mRootView.setNewData(urls);
+                }
+            }
         }
 
         @Override

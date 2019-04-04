@@ -161,7 +161,6 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Stagg
         mPresenter.requestData(page);
     }
 
-
     @Override
     public boolean onBackPressedSupport() {
         if (_mBackToFirstListener != null){

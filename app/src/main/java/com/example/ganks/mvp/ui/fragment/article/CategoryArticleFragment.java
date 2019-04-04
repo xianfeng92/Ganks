@@ -132,8 +132,6 @@ public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> imp
     }
 
 
-
-
     /***************************************************private Methods***********************************/
     private void getDatas() {
         final SkeletonScreen skeletonScreen = Skeleton.bind(mRecyclerView)

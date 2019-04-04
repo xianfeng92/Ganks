@@ -1,5 +1,6 @@
 package com.example.domain.interactor;
 
+import com.example.domain.Meizi;
 import com.example.domain.executor.PostExecutionThread;
 import com.example.domain.executor.ThreadExecutor;
 import com.fernandocejas.arrow.checks.Preconditions;
@@ -29,18 +30,17 @@ public abstract class MeiziCase<T,Params> {
     /**
      * Builds an {@link Observable} which will be used when executing the current {@link MeiziCase}.
      */
-    abstract Observable<List<T>> buildUseCaseObservable(Params params);
+    abstract Observable<List<Meizi>> buildUseCaseObservable(Params params);
 
     /**
      * Executes the current use case.
-     *
-     * @param observer {@link DisposableObserver} which will be listening to the observable build
+     *  @param observer {@link DisposableObserver} which will be listening to the observable build
      * by {@link #buildUseCaseObservable(Params)} ()} method.
      * @param params Parameters (Optional) used to build/execute this use case.
      */
-    public void execute(DisposableObserver<List<T>> observer, Params params) {
+    public void execute(DefaultObserver observer, Integer params) {
         Preconditions.checkNotNull(observer);
-        final Observable<List<T>> observable = this.buildUseCaseObservable(params)
+        final Observable<List<Meizi>> observable = this.buildUseCaseObservable((Params) params)
                 .subscribeOn(Schedulers.from(threadExecutor))
                 .observeOn(postExecutionThread.getScheduler());
         addDisposable(observable.subscribeWith(observer));
