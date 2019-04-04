@@ -1,14 +1,18 @@
 language: android
-
 android:
   components:
-    - tools
-    - platform-tools
-    - tools
-    - build-tools-28.0.3
-    - android-26
-    - extra-google-m2repository
-    - extra-android-m2repository
+  - tools
+  - platform-tools
+  - tools
+  - build-tools-28.0.3
+  - android-26
+  - android-$EMULATOR_API
+  - extra-google-google_play_services
+  - extra-google-m2repository
+  - extra-android-m2repository
+  - addon-google_apis-google-28
 
-script:
-  ./gradlew build
+  licenses:
+  - android-sdk-preview-license-.+
+  - android-sdk-license-.+
+  - google-gdk-license-.+
