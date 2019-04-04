@@ -1,6 +1,8 @@
 package com.xforg.gank_core.net.rx;
 
-import com.xforg.gank_core.entity.Meizi;
+
+
+import com.example.domain.Meizi;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;

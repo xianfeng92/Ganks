@@ -1,23 +1,12 @@
 package com.example.ganks.mvp.presenter;
 
-import android.text.TextUtils;
-import android.util.Log;
-
+import com.example.domain.Meizi;
+import com.example.domain.interactor.DefaultObserver;
+import com.example.domain.interactor.GetMeiziList;
 import com.example.ganks.mvp.base.BasePresenter;
 import com.example.ganks.mvp.contract.TanTanContract;
-import com.xforg.gank_core.entity.DaoMeiziEntity;
-import com.xforg.gank_core.entity.Meizi;
-import com.xforg.gank_core.utils.GreenDaoHelper;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import javax.inject.Inject;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created By apple on 2019/3/30
@@ -25,83 +14,46 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class TanTanPresenter extends BasePresenter<TanTanContract.Model,TanTanContract.View> {
     private static final String TAG = "TanTanPresenter";
-    private DaoMeiziEntity daoGankEntity;
+    private GetMeiziList getMeiziList;
 
     @Inject
-    public TanTanPresenter(TanTanContract.Model model, TanTanContract.View rootView){
+    public TanTanPresenter(TanTanContract.Model model, TanTanContract.View rootView, GetMeiziList getMeiziList){
         super(model,rootView);
+        this.getMeiziList = getMeiziList;
     }
 
     public void requestData(int page){
-        mModel.getMeizi(page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Meizi>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Meizi meizi) {
-                        List<Meizi.ResultsBean> resultsBeans = new ArrayList<>();
-                        for (Meizi.ResultsBean resultsBean:meizi.results) {
-                            if (!TextUtils.isEmpty(resultsBean.url))
-                                resultsBeans.add(resultsBean);
-                            mRootView.setNewData(resultsBeans);
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    private DaoMeiziEntity entityToDao(Meizi.ResultsBean entity){
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String str = formatter.format(curDate);
-        if (daoGankEntity == null){
-            daoGankEntity = new DaoMeiziEntity();
-        }
-        daoGankEntity._id = entity._id;
-        daoGankEntity.createdAt = entity.createdAt;
-        daoGankEntity.desc = entity.desc;
-        daoGankEntity.publishedAt = entity.publishedAt;
-        daoGankEntity.source = entity.source;
-        daoGankEntity.type = entity.type;
-        daoGankEntity.url = entity.url;
-        daoGankEntity.used = entity.used;
-        daoGankEntity.who = entity.who;
-        daoGankEntity.addTime =str;
-        return daoGankEntity;
-    }
-
-    public void addToFavorites(Object o){
-        Meizi.ResultsBean resultsBean = (Meizi.ResultsBean)o;
-        DaoMeiziEntity daoMeiziEntity = entityToDao(resultsBean);
-        if (!GreenDaoHelper.isDaoContainMeizi(daoMeiziEntity._id)){
-            GreenDaoHelper.insert(daoMeiziEntity);
-        }else {
-            Log.d(TAG, "you already love It!!");
-        }
-    }
-
-
-    public void removeByid(Meizi.ResultsBean entity) {
-        DaoMeiziEntity daoGankEntity = entityToDao(entity);
-        GreenDaoHelper.removeById(daoGankEntity._id);
+        this.getMeiziList.execute(new TanTanObserver(),page);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
+
+    private final class TanTanObserver extends DefaultObserver<List<Meizi>> {
+
+        @Override
+        public void onNext(List<Meizi> meizis) {
+            if (meizis != null && meizis.size() > 0){
+                mRootView.setNewData(meizis);
+            }
+        }
+
+        @Override
+        public void onError(Throwable e) {
+
+        }
+
+        @Override
+        public void onComplete() {
+
+        }
+    }
+
+//
+//    public void removeByid(Meizi entity) {
+//        DaoMeiziEntity daoGankEntity = entityToDao(entity);
+//        GreenDaoHelper.removeById(daoGankEntity._id);
+//    }
 }

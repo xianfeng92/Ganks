@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -19,15 +18,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    greendao {
-        schemaVersion 1//数据库版本号
-        daoPackage 'com.example.ganks.greendao'//设置DaoMaster、DaoSession、Dao包名
-        targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
-    }
+
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(include: ['*.jar'], dir: 'libs')
     api project(path: ':tantancardswipe')
     api rootProject.ext.dependencies.appcompatV7
     api rootProject.ext.dependencies.constraint
@@ -52,7 +47,6 @@ dependencies {
     api rootProject.ext.dependencies.eventbus
     //Json
     api rootProject.ext.dependencies.fastJson
-
     //权限
     api(rootProject.ext.dependencies.permissionsdispatcher) {
         exclude module: 'support-v13'
@@ -75,4 +69,5 @@ dependencies {
     api rootProject.ext.dependencies.rxlifecycle
     api rootProject.ext.dependencies.rxlifecycleAndroid
     api rootProject.ext.dependencies.rxlifecycleComponents
+    implementation project(':domain')
 }

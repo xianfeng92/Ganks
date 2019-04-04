@@ -20,6 +20,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
 import com.chad.library.adapter.base.listener.OnItemDragListener;
 import com.chad.library.adapter.base.listener.OnItemSwipeListener;
+import com.example.domain.Meizi;
 import com.example.ganks.R;
 import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
@@ -28,8 +29,7 @@ import com.example.ganks.internal.di.modules.LoveMeiziModule;
 import com.example.ganks.mvp.contract.LoveMeiziContract;
 import com.example.ganks.mvp.presenter.LoveMeiziPresenter;
 import com.example.ganks.mvp.ui.adapter.LineAdapter;
-import com.xforg.gank_core.entity.DaoMeiziEntity;
-import com.xforg.gank_core.utils.GreenDaoHelper;
+import com.example.data.GreenDaoHelper;
 import com.xforg.gank_core.utils.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
     public CoordinatorLayout coordinatorLayout;
     public LineAdapter mAdapter;
     public LinearLayoutManager mlayoutManager;
-    public List<DaoMeiziEntity> resultsBeanList = new ArrayList<>();
+    public List<Meizi> resultsBeanList = new ArrayList<>();
     public static LoveMeiziFragment newInstance() {
         Bundle args = new Bundle();
         LoveMeiziFragment loveMeiziFragment = new LoveMeiziFragment();
@@ -147,7 +147,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
             @Override
             public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
                 Log.d(TAG, "View Swiped: " + pos);
-                GreenDaoHelper.removeById(resultsBeanList.get(pos)._id);
+                GreenDaoHelper.removeById(resultsBeanList.get(pos).getId());
                 mPresenter.loadDataByGreenDao();
             }
 
@@ -181,8 +181,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Log.d(TAG, "onItemClick: " + resultsBeanList.get(position).url);
-                String url = resultsBeanList.get(position).url;
+                String url = resultsBeanList.get(position).getUrl();
                 mPresenter.downLoad(url);
             }
         });
@@ -190,7 +189,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
     }
 
     @Override
-    public void setNewData(List<DaoMeiziEntity> mData) {
+    public void setNewData(List<Meizi> mData) {
         updateAdapter(mData);
     }
 
@@ -202,7 +201,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
         return true;
     }
 
-    private void updateAdapter(List<DaoMeiziEntity> resultsBeanList) {
+    private void updateAdapter(List<Meizi> resultsBeanList) {
         if (resultsBeanList.size() == 0) {
             mAdapter.setEmptyView(notDataView);
         }

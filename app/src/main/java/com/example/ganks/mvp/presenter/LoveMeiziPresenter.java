@@ -3,9 +3,11 @@ package com.example.ganks.mvp.presenter;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
+
+import com.example.domain.Meizi;
+import com.example.domain.interactor.GetMeiziList;
 import com.example.ganks.mvp.base.BasePresenter;
 import com.example.ganks.mvp.contract.LoveMeiziContract;
-import com.xforg.gank_core.entity.DaoMeiziEntity;
 import com.xforg.gank_core.net.rx.RxRestService;
 import com.xforg.gank_core.utils.File.FileUtil;
 import com.xforg.gank_core.utils.ToastUtils;
@@ -30,23 +32,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class LoveMeiziPresenter extends BasePresenter<LoveMeiziContract.Model,LoveMeiziContract.View> {
     private static final String TAG = "LoveMeiziPresenter";
-
-    public List<DaoMeiziEntity> resultsBeanList = new ArrayList<>();
+    private GetMeiziList getMeiziList;
+    public List<Meizi> resultsBeanList = new ArrayList<>();
     private Set<String> downLoadUrls = new TreeSet<>();
-
     private Retrofit retrofit;
 
     @Inject
-    public LoveMeiziPresenter(LoveMeiziContract.Model model,LoveMeiziContract.View view){
+    public LoveMeiziPresenter(LoveMeiziContract.Model model,LoveMeiziContract.View view, GetMeiziList getMeiziList){
         super(model,view);
+        this.getMeiziList = getMeiziList;
     }
 
     public void loadDataByGreenDao() {
         resultsBeanList.clear();
-        List<DaoMeiziEntity> list = mModel.getMeiziFromDao();
-        Log.d(TAG, "loadDataByGreenDao: " + list.size());
-        resultsBeanList.addAll(list);
-        mRootView.setNewData(resultsBeanList);
+//        List<Meizi> list = mModel.getMeiziFromDao();
+//        Log.d(TAG, "loadDataByGreenDao: " + list.size());
+//        resultsBeanList.addAll(list);
+//        mRootView.setNewData(resultsBeanList);
     }
 
     // 保存指定url的图片

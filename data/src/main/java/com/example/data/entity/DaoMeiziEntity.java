@@ -1,10 +1,6 @@
 package com.example.data.entity;
-
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.Transient;
-
-import java.util.List;
 
 @Entity
 public class DaoMeiziEntity {
@@ -25,30 +21,18 @@ public class DaoMeiziEntity {
         public String _id;
         public String createdAt;
         public String desc;
-        public String publishedAt;
-        public String source;
         public String type;
         public String url;
-        public boolean used;
-        public String who;
         public String addTime;
 
-        @Transient
-        public List<String> images;
-
-        @Generated(hash = 1872718824)
-        public DaoMeiziEntity(String _id, String createdAt, String desc, String publishedAt,
-                              String source, String type, String url, boolean used, String who,
+        @Generated(hash = 1383321709)
+        public DaoMeiziEntity(String _id, String createdAt, String desc, String type, String url,
                               String addTime) {
             this._id = _id;
             this.createdAt = createdAt;
             this.desc = desc;
-            this.publishedAt = publishedAt;
-            this.source = source;
             this.type = type;
             this.url = url;
-            this.used = used;
-            this.who = who;
             this.addTime = addTime;
         }
 
@@ -80,22 +64,6 @@ public class DaoMeiziEntity {
             this.desc = desc;
         }
 
-        public String getPublishedAt() {
-            return this.publishedAt;
-        }
-
-        public void setPublishedAt(String publishedAt) {
-            this.publishedAt = publishedAt;
-        }
-
-        public String getSource() {
-            return this.source;
-        }
-
-        public void setSource(String source) {
-            this.source = source;
-        }
-
         public String getType() {
             return this.type;
         }
@@ -110,22 +78,6 @@ public class DaoMeiziEntity {
 
         public void setUrl(String url) {
             this.url = url;
-        }
-
-        public boolean getUsed() {
-            return this.used;
-        }
-
-        public void setUsed(boolean used) {
-            this.used = used;
-        }
-
-        public String getWho() {
-            return this.who;
-        }
-
-        public void setWho(String who) {
-            this.who = who;
         }
 
         public String getAddTime() {

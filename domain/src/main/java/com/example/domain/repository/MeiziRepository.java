@@ -13,4 +13,8 @@ public interface MeiziRepository {
      * Get an {@link Observable} which will emit a List of {@link Meizi}.
      */
     Observable<List<Meizi>> meizis(int page);
+
+    void addToFavorite(Meizi meizi);
+
+    List<Meizi> getMeiziFromDao();
 }

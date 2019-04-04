@@ -1,13 +1,15 @@
-package com.xforg.gank_core.utils;
+package com.example.data;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.ganks.greendao.DaoMaster;
-import com.example.ganks.greendao.DaoMeiziEntityDao;
-import com.example.ganks.greendao.DaoSession;
-import com.xforg.gank_core.entity.DaoMeiziEntity;
+import com.example.Dao.greendao.DaoMaster;
+import com.example.Dao.greendao.DaoMeiziEntityDao;
+import com.example.Dao.greendao.DaoSession;
+import com.example.data.entity.DaoMeiziEntity;
+
 import java.util.List;
+
 
 /**
  * Created By apple on 2019/2/24

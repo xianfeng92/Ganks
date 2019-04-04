@@ -9,7 +9,7 @@ import com.example.ganks.internal.di.modules.ApplicationModule;
 import com.squareup.leakcanary.LeakCanary;
 import com.xforg.gank_core.net.Api;
 import com.xforg.gank_core.app.Gank;
-import com.xforg.gank_core.utils.GreenDaoHelper;
+import com.example.data.GreenDaoHelper;
 import com.xforg.gank_core.utils.Utils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

@@ -38,4 +38,5 @@ dependencies {
     implementation rootProject.ext.dependencies.dagger
     implementation project(path: ':domain')
     implementation project(path: ':data')
+    implementation project(':domain')
 }

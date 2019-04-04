@@ -1,8 +1,8 @@
 package com.example.ganks.mvp.contract;
 
+import com.example.domain.Meizi;
 import com.example.ganks.mvp.base.IModel;
 import com.example.ganks.mvp.base.IView;
-import com.xforg.gank_core.entity.DaoMeiziEntity;
 import java.util.List;
 
 /**
@@ -12,10 +12,10 @@ import java.util.List;
 public interface LoveMeiziContract {
 
     interface View extends IView{
-        void setNewData(List<DaoMeiziEntity> mData);
+        void setNewData(List<Meizi> mData);
     }
 
     interface Model extends IModel{
-        List<DaoMeiziEntity> getMeiziFromDao();
+//        List<Meizi> getMeiziFromDao();
     }
 }

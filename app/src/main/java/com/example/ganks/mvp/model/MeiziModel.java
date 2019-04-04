@@ -1,13 +1,11 @@
 package com.example.ganks.mvp.model;
 
 
-import com.example.domain.interactor.GetMeiziList;
+import com.example.domain.Meizi;
 import com.example.ganks.internal.di.PerActivity;
 import com.example.ganks.mvp.contract.MeiziContract;
-import com.xforg.gank_core.entity.Meizi;
 import com.xforg.gank_core.net.RestCreator;
 import javax.inject.Inject;
-
 import io.reactivex.Observable;
 
 /**
@@ -16,8 +14,6 @@ import io.reactivex.Observable;
  */
 @PerActivity
 public class MeiziModel implements MeiziContract.Model {
-
-    private GetMeiziList getMeiziList;
 
     @Inject
      MeiziModel(){}

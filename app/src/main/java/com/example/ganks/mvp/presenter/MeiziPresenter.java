@@ -61,5 +61,4 @@ public class MeiziPresenter extends BasePresenter<MeiziContract.Model,MeiziContr
 
         }
     }
-
 }

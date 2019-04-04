@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Toast;
+import com.example.domain.Meizi;
 import com.example.ganks.R;
 import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
@@ -18,7 +19,6 @@ import com.example.ganks.internal.di.modules.TanTanModule;
 import com.example.ganks.mvp.contract.TanTanContract;
 import com.example.ganks.mvp.presenter.TanTanPresenter;
 import com.example.ganks.mvp.ui.adapter.TanTanAdapter;
-import com.xforg.gank_core.entity.Meizi;
 import com.example.tantancardswipe.CardConfig;
 import com.example.tantancardswipe.OnSwipeListener;
 import com.example.tantancardswipe.CardItemTouchHelperCallback;
@@ -33,12 +33,11 @@ import java.util.List;
 public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements TanTanContract.View {
 
     private static final String TAG = "TanTanFragment";
-
     private TanTanAdapter tanTanAdapter;
     private CardItemTouchHelperCallback cardItemTouchHelperCallback;
     private CardLayoutManager cardLayoutManager;
     private RecyclerView recyclerView;
-    private List<Meizi.ResultsBean> resultsBeanList = new ArrayList<>();
+    private List<Meizi> resultsBeanList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
     private List<String> urls = new ArrayList<>();
     private int page = 1;
@@ -98,7 +97,7 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
                     toastView.setBackgroundResource(R.mipmap.img_dislike);
                 }else {
                     toastView.setBackgroundResource(R.mipmap.img_like);
-                    mPresenter.addToFavorites(o);
+//                    mPresenter.addToFavorites(o);
                 }
                 toast.setView(toastView);
                 toast.show();
@@ -122,7 +121,7 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
     }
 
     @Override
-    public void setNewData(List<Meizi.ResultsBean> mData) {
+    public void setNewData(List<Meizi> mData) {
         if (resultsBeanList != null){
             resultsBeanList.addAll(mData);
         }
@@ -135,5 +134,4 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
                 .build()
                 .inject(this);
     }
-
 }

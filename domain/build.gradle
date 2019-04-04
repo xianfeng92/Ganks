@@ -1,7 +1,7 @@
 apply plugin: 'java-library'
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation rootProject.ext.dependencies.rxJava
     implementation rootProject.ext.dependencies.arrow
     annotationProcessor rootProject.ext.dependencies.daggerCompiler
