@@ -39,7 +39,6 @@ public class MeiziPresenter extends BasePresenter<MeiziContract.Model,MeiziContr
 
 
     private final class MeiziObserver extends DefaultObserver<List<Meizi>> {
-
         @Override
         public void onNext(List<Meizi> meizis) {
             List<String> urls = new ArrayList<>();

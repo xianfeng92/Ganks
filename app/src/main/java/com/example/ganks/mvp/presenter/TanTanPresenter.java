@@ -22,13 +22,18 @@ public class TanTanPresenter extends BasePresenter<TanTanContract.Model,TanTanCo
         this.getMeiziList = getMeiziList;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+
     public void requestData(int page){
         this.getMeiziList.execute(new TanTanObserver(),page);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void addToFavorites(Meizi meizi){
+        this.getMeiziList.addToFavorite(meizi);
     }
 
     private final class TanTanObserver extends DefaultObserver<List<Meizi>> {
@@ -50,10 +55,4 @@ public class TanTanPresenter extends BasePresenter<TanTanContract.Model,TanTanCo
 
         }
     }
-
-//
-//    public void removeByid(Meizi entity) {
-//        DaoMeiziEntity daoGankEntity = entityToDao(entity);
-//        GreenDaoHelper.removeById(daoGankEntity._id);
-//    }
 }

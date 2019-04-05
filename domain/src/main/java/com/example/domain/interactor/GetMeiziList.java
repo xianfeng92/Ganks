@@ -27,4 +27,14 @@ public class GetMeiziList extends MeiziCase<Meizi,Integer> {
     Observable<List<Meizi>> buildUseCaseObservable(Integer page) {
         return this.meiziRepository.meizis(page);
     }
+
+    @Override
+    Observable<List<Meizi>> buildUseCaseObservable() {
+        return Observable.fromArray(this.meiziRepository.getMeiziFromDao());
+    }
+
+    @Override
+    public void addToFavorite(Meizi meizi) {
+        this.meiziRepository.addToFavorite(meizi);
+    }
 }

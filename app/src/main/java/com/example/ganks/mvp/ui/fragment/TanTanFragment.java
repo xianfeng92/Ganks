@@ -97,7 +97,7 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
                     toastView.setBackgroundResource(R.mipmap.img_dislike);
                 }else {
                     toastView.setBackgroundResource(R.mipmap.img_like);
-//                    mPresenter.addToFavorites(o);
+                    mPresenter.addToFavorites((Meizi) o);
                 }
                 toast.setView(toastView);
                 toast.show();

@@ -37,20 +37,24 @@ public class MeiziDataRepository implements MeiziRepository {
     @Override
     public void addToFavorite(Meizi meizi) {
         DaoMeiziEntity daoMeiziEntity = MeiziEntityDataMapper.getInstance().transformMeizi2Dao(meizi);
-        if (!GreenDaoHelper.isDaoContainMeizi(daoMeiziEntity._id)){
-            GreenDaoHelper.insert(daoMeiziEntity);
-        }else {
-            Log.d(TAG, "you already love It!!");
-        }
+        Log.d(TAG, "addToFavorite: "+daoMeiziEntity.url);
+        GreenDaoHelper.insert(daoMeiziEntity);
+//        if (!GreenDaoHelper.isDaoContainMeizi(daoMeiziEntity._id)){
+//            GreenDaoHelper.insert(daoMeiziEntity);
+//        }else {
+//            Log.d(TAG, "you already love It!!");
+//        }
     }
 
     @Override
     public List<Meizi> getMeiziFromDao() {
         List<Meizi> meizis = new ArrayList<>();
-        meizis.clear();
         List<DaoMeiziEntity> daoMeiziEntities = GreenDaoHelper.getAllMeiziEntity();
         for(DaoMeiziEntity daoMeiziEntity:daoMeiziEntities){
             meizis.add(MeiziEntityDataMapper.getInstance().transformDao2Meizi(daoMeiziEntity));
+        }
+        for (Meizi meizi : meizis){
+            Log.d(TAG, "getMeiziFromDao: "+meizi.getUrl());
         }
         return meizis;
     }

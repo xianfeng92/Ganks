@@ -13,10 +13,6 @@ import java.util.List;
  * github: https://github.com/xianfeng92
  */
 public class MeiziEntityDataMapper {
-
-    private DaoMeiziEntity daoGankEntity;
-    private Meizi meizi;
-
     private MeiziEntityDataMapper(){}
 
     public static MeiziEntityDataMapper getInstance(){
@@ -45,9 +41,7 @@ public class MeiziEntityDataMapper {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String str = formatter.format(curDate);
-        if (daoGankEntity == null){
-            daoGankEntity = new DaoMeiziEntity();
-        }
+        DaoMeiziEntity daoGankEntity = new DaoMeiziEntity();
         daoGankEntity._id = meizi.getId();
         daoGankEntity.createdAt = meizi.getCreatedAt();
         daoGankEntity.desc = meizi.getDesc();
@@ -58,12 +52,7 @@ public class MeiziEntityDataMapper {
     }
 
     public Meizi transformDao2Meizi(DaoMeiziEntity daoMeiziEntity){
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String str = formatter.format(curDate);
-        if (meizi == null){
-            meizi = new Meizi();
-        }
+        Meizi meizi = new Meizi();
         meizi.setUrl(daoMeiziEntity.url);
         meizi.setType(daoMeiziEntity.type);
         meizi.setDesc(daoMeiziEntity.desc);
@@ -84,5 +73,4 @@ public class MeiziEntityDataMapper {
         }
         return meizi;
     }
-
 }

@@ -32,6 +32,10 @@ public abstract class MeiziCase<T,Params> {
      */
     abstract Observable<List<Meizi>> buildUseCaseObservable(Params params);
 
+    abstract Observable<List<Meizi>> buildUseCaseObservable();
+
+    public void addToFavorite(Meizi meizi){}
+
     /**
      * Executes the current use case.
      *  @param observer {@link DisposableObserver} which will be listening to the observable build
@@ -41,6 +45,17 @@ public abstract class MeiziCase<T,Params> {
     public void execute(DefaultObserver observer, Integer params) {
         Preconditions.checkNotNull(observer);
         final Observable<List<Meizi>> observable = this.buildUseCaseObservable((Params) params)
+                .subscribeOn(Schedulers.from(threadExecutor))
+                .observeOn(postExecutionThread.getScheduler());
+        addDisposable(observable.subscribeWith(observer));
+    }
+
+    /**
+     * Executes the current use case.
+     */
+    public void execute(DefaultObserver observer) {
+        Preconditions.checkNotNull(observer);
+        final Observable<List<Meizi>> observable = this.buildUseCaseObservable()
                 .subscribeOn(Schedulers.from(threadExecutor))
                 .observeOn(postExecutionThread.getScheduler());
         addDisposable(observable.subscribeWith(observer));

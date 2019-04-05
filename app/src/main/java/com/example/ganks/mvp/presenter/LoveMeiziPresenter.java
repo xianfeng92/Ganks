@@ -3,8 +3,8 @@ package com.example.ganks.mvp.presenter;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
-
 import com.example.domain.Meizi;
+import com.example.domain.interactor.DefaultObserver;
 import com.example.domain.interactor.GetMeiziList;
 import com.example.ganks.mvp.base.BasePresenter;
 import com.example.ganks.mvp.contract.LoveMeiziContract;
@@ -45,11 +45,30 @@ public class LoveMeiziPresenter extends BasePresenter<LoveMeiziContract.Model,Lo
 
     public void loadDataByGreenDao() {
         resultsBeanList.clear();
-//        List<Meizi> list = mModel.getMeiziFromDao();
-//        Log.d(TAG, "loadDataByGreenDao: " + list.size());
-//        resultsBeanList.addAll(list);
-//        mRootView.setNewData(resultsBeanList);
+        this.getMeiziList.execute(new LoveMeiziObserver());
     }
+
+    private final class LoveMeiziObserver extends DefaultObserver<List<Meizi>> {
+
+        @Override
+        public void onNext(List<Meizi> meizis) {
+            resultsBeanList.addAll(meizis);
+            mRootView.setNewData(resultsBeanList);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+
+        }
+
+        @Override
+        public void onComplete() {
+
+        }
+    }
+
+
+
 
     // 保存指定url的图片
     public void downLoad(final String url) {

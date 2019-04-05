@@ -2,7 +2,7 @@ package com.example.data;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
-
+import android.util.Log;
 import com.example.Dao.greendao.DaoMaster;
 import com.example.Dao.greendao.DaoMeiziEntityDao;
 import com.example.Dao.greendao.DaoSession;
@@ -16,6 +16,7 @@ import java.util.List;
  * github: https://github.com/xianfeng92
  */
 public class GreenDaoHelper {
+    private static final String TAG = "GreenDaoHelper";
 
     private static DaoMaster.DevOpenHelper devOpenHelper;
     private static DaoMaster daoMaster;
@@ -30,7 +31,7 @@ public class GreenDaoHelper {
         // 通过 DaoMaster 的内部类 DevOpenHelper，你可以得到一个便利的 SQLiteOpenHelper 对象。
         // 可能你已经注意到了，你并不需要去编写「CREATE TABLE」这样的 SQL 语句，因为 greenDAO 已经帮你做了。
         // 注意：默认的 DaoMaster.DevOpenHelper 会在数据库升级时，删除所有的表，意味着这将导致数据的丢失。
-        devOpenHelper = new DaoMaster.DevOpenHelper(application,"meizi");
+        devOpenHelper = new DaoMaster.DevOpenHelper(application,"Meizi");
         sq = devOpenHelper.getWritableDatabase();
         daoMaster = new DaoMaster(sq);
         daoSession = daoMaster.newSession();
@@ -45,7 +46,8 @@ public class GreenDaoHelper {
     }
 
     public static void insert(DaoMeiziEntity daoMeiziEntity){
-        daoSession.getDaoMeiziEntityDao().insert(daoMeiziEntity);
+        Long num = daoSession.getDaoMeiziEntityDao().insert(daoMeiziEntity);
+        Log.d(TAG, "insert: "+num);
     }
 
     public static void removeById(String id){
