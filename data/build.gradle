@@ -2,15 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
-
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject .ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 26
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner rootProject.ext.dependencies.AndroidJUnitRunner
     }
 
     buildTypes {
