@@ -13,7 +13,6 @@ import java.util.List;
  * github: https://github.com/xianfeng92
  */
 public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItemEntity, BaseViewHolder> {
-
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.

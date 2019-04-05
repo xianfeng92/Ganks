@@ -1,14 +1,12 @@
 package com.example.ganks.mvp.presenter;
 
 
-import android.text.TextUtils;
 import com.example.domain.Meizi;
 import com.example.domain.interactor.DefaultObserver;
 import com.example.domain.interactor.GetMeiziList;
 import com.example.ganks.internal.di.PerActivity;
 import com.example.ganks.mvp.base.BasePresenter;
 import com.example.ganks.mvp.contract.MeiziContract;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -37,18 +35,11 @@ public class MeiziPresenter extends BasePresenter<MeiziContract.Model,MeiziContr
         super.onDestroy();
     }
 
-
     private final class MeiziObserver extends DefaultObserver<List<Meizi>> {
         @Override
         public void onNext(List<Meizi> meizis) {
-            List<String> urls = new ArrayList<>();
-            for (Meizi meizi : meizis){
-                if (!TextUtils.isEmpty(meizi.getUrl())){
-                    urls.add(meizi.getUrl());
-                    mRootView.setNewData(urls);
-                }
+                    mRootView.setNewData(meizis);
             }
-        }
 
         @Override
         public void onError(Throwable e) {

@@ -4,7 +4,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
 import com.example.ganks.delegates.BaseDelegate;
 import com.xforg.gank_core.app.CategoryType;
 import java.util.List;

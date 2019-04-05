@@ -16,7 +16,6 @@ import ImageLoader.config.ImageConfig;
  */
 public class TanTanAdapter extends BaseQuickAdapter<Meizi, BaseViewHolder> {
 
-
     public TanTanAdapter(int layoutResId, List<Meizi> resultsBeanList){
         super(layoutResId,resultsBeanList);
     }

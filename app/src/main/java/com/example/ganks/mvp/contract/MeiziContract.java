@@ -14,7 +14,7 @@ import io.reactivex.Observable;
 public interface MeiziContract {
 
     interface View extends IView{
-        void setNewData(List<String> mData);
+        void setNewData(List<Meizi> mData);
     }
 
     interface Model extends IModel{

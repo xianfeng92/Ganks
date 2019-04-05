@@ -14,8 +14,8 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.Toast;
 import com.blankj.utilcode.util.ScreenUtils;
+import com.example.domain.Meizi;
 import com.example.ganks.R;
 import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
@@ -28,13 +28,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements StaggerAdapter.onItemClickListener, MeiziContract.View {
+public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements MeiziContract.View {
 
     public RecyclerView recyclerView;
     public CoordinatorLayout coordinatorLayout;
     public SwipeRefreshLayout swipeRefreshLayout;
     public StaggerAdapter mAdapter;
-    public List<String> urls = new ArrayList<>();
+    public List<Meizi> meizis = new ArrayList<>();
     public StaggeredGridLayoutManager staggeredGridLayoutManager;
     private int lastVisibleItem;
     private ItemTouchHelper itemTouchHelper;
@@ -75,12 +75,6 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Stagg
     }
 
     @Override
-    public void onItemClick(View view, int postion) {
-        Toast.makeText(getContext(),"此处功能待开发，谢谢您的厚爱",Toast.LENGTH_SHORT).show();
-    }
-
-
-    @Override
     public void initData(){
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
@@ -110,7 +104,7 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Stagg
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 int from=viewHolder.getAdapterPosition();
                 int to=target.getAdapterPosition();
-                Collections.swap(urls,from,to);
+                Collections.swap(meizis,from,to);
                 mAdapter.notifyItemMoved(from,to);
                 return true;
             }
@@ -170,15 +164,14 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Stagg
     }
 
     @Override
-    public void setNewData(List<String> mData) {
-        urls.addAll(mData);
-        updateAdapter(urls);
+    public void setNewData(List<Meizi> mData) {
+        meizis.addAll(mData);
+        updateAdapter(meizis);
     }
 
-    private void updateAdapter(List<String> urls){
+    private void updateAdapter(List<Meizi> meizis){
         if (mAdapter == null){
-            mAdapter = new StaggerAdapter(getActivity(),urls);
-            mAdapter.setOnItemClickListener(this);
+            mAdapter = new StaggerAdapter(R.layout.stagger_meizi_item,meizis);
             recyclerView.setAdapter(mAdapter);
             itemTouchHelper.attachToRecyclerView(recyclerView);
         }else {
