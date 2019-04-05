@@ -2,7 +2,7 @@ ext {
 
     android = [
             applicationId : "com.example.ganks",
-            compileSdkVersion: 28,
+            compileSdkVersion: 26,
             buildToolsVersion: "28.0.3",
             minSdkVersion    : 26,
             targetSdkVersion : 26,
