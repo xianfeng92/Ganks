@@ -24,6 +24,9 @@ android {
         daoPackage 'com.example.Dao.greendao'//设置DaoMaster、DaoSession、Dao包名
         targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
