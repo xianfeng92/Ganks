@@ -13,6 +13,12 @@
 
 ----------------------------------------------------
 
+## Tips
+### 1. Favor composition over inheritance
+
+
+----------------------------------------------------
+
 ## MVP
 
 [Mvp 是 Google 官方出品的 Mvp 架构项目,Demo可参考todo-mvp](https://github.com/googlesamples/android-architecture/tree/todo-mvp/)
