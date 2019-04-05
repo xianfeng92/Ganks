@@ -5,7 +5,7 @@
 ![](https://github.com/xianfeng92/Ganks/blob/master/images/bugbug.gif)
 
 ----------------------------------------------------
-
+![](https://img.shields.io/badge/Build-passing-brightgreen.svg)
 [![API](https://img.shields.io/badge/API-28%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=28)
 ![commit](https://img.shields.io/github/commit-activity/m/xianfeng92/Ganks.svg)
 ![](https://img.shields.io/github/repo-size/xianfeng92/Ganks.svg)
