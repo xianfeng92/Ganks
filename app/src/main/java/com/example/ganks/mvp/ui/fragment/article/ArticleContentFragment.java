@@ -9,7 +9,6 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import com.example.ganks.R;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.example.ganks.delegates.BaseDelegate;

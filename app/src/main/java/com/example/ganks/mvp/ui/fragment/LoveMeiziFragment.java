@@ -25,10 +25,10 @@ import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.internal.di.components.DaggerLoveMeiziComponent;
 import com.example.ganks.internal.di.modules.LoveMeiziModule;
-import com.example.ganks.mvp.contract.LoveMeiziContract;
 import com.example.ganks.mvp.presenter.LoveMeiziPresenter;
 import com.example.ganks.mvp.ui.adapter.LineAdapter;
 import com.example.data.GreenDaoHelper;
+import com.example.ganks.mvp.view.LoveMeiziView;
 import com.orhanobut.logger.Logger;
 import com.xforg.gank_core.utils.ToastUtils;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ import java.util.List;
  * Created By apple on 2019/2/24
  * github: https://github.com/xianfeng92
  */
-public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implements LoveMeiziContract.View {
+public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implements LoveMeiziView {
 
     public OnBackToFirstListener _mBackToFirstListener;
     private View notDataView;

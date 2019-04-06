@@ -21,16 +21,16 @@ import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.internal.di.components.DaggerMeiziComponent;
 import com.example.ganks.internal.di.modules.MeiziModule;
-import com.example.ganks.mvp.contract.MeiziContract;
 import com.example.ganks.mvp.presenter.MeiziPresenter;
 import com.example.ganks.mvp.ui.adapter.StaggerAdapter;
+import com.example.ganks.mvp.view.MeiziView;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements MeiziContract.View {
+public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements MeiziView {
 
     public RecyclerView recyclerView;
     public CoordinatorLayout coordinatorLayout;

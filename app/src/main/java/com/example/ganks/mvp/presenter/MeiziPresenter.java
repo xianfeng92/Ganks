@@ -6,7 +6,8 @@ import com.example.domain.interactor.DefaultObserver;
 import com.example.domain.interactor.GetMeiziList;
 import com.example.ganks.internal.di.PerActivity;
 import com.example.ganks.mvp.base.BasePresenter;
-import com.example.ganks.mvp.contract.MeiziContract;
+import com.example.ganks.mvp.view.MeiziView;
+
 import java.util.List;
 import javax.inject.Inject;
 
@@ -15,13 +16,13 @@ import javax.inject.Inject;
  * github: https://github.com/xianfeng92
  */
 @PerActivity
-public class MeiziPresenter extends BasePresenter<MeiziContract.Model,MeiziContract.View> {
+public class MeiziPresenter extends BasePresenter<MeiziView> {
 
     GetMeiziList getMeiziList;
 
     @Inject
-    public MeiziPresenter(MeiziContract.Model model, MeiziContract.View rootView,GetMeiziList getMeiziList){
-        super(model, rootView);
+    public MeiziPresenter( MeiziView rootView,GetMeiziList getMeiziList){
+        super(rootView);
         this.getMeiziList = getMeiziList;
     }
 

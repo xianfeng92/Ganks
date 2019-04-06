@@ -7,7 +7,7 @@ import com.example.domain.Meizi;
 import com.example.domain.interactor.DefaultObserver;
 import com.example.domain.interactor.GetMeiziList;
 import com.example.ganks.mvp.base.BasePresenter;
-import com.example.ganks.mvp.contract.LoveMeiziContract;
+import com.example.ganks.mvp.view.LoveMeiziView;
 import com.xforg.gank_core.net.rx.RxRestService;
 import com.xforg.gank_core.utils.File.FileUtil;
 import com.xforg.gank_core.utils.ToastUtils;
@@ -30,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created By apple on 2019/3/30
  * github: https://github.com/xianfeng92
  */
-public class LoveMeiziPresenter extends BasePresenter<LoveMeiziContract.Model,LoveMeiziContract.View> {
+public class LoveMeiziPresenter extends BasePresenter<LoveMeiziView> {
     private static final String TAG = "LoveMeiziPresenter";
     private GetMeiziList getMeiziList;
     public List<Meizi> resultsBeanList = new ArrayList<>();
@@ -38,8 +38,8 @@ public class LoveMeiziPresenter extends BasePresenter<LoveMeiziContract.Model,Lo
     private Retrofit retrofit;
 
     @Inject
-    public LoveMeiziPresenter(LoveMeiziContract.Model model,LoveMeiziContract.View view, GetMeiziList getMeiziList){
-        super(model,view);
+    public LoveMeiziPresenter(LoveMeiziView view, GetMeiziList getMeiziList){
+        super(view);
         this.getMeiziList = getMeiziList;
     }
 

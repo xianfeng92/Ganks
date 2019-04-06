@@ -18,9 +18,9 @@ import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.internal.di.components.DaggerCategoryComponent;
 import com.example.ganks.internal.di.modules.CategoryModule;
-import com.example.ganks.mvp.contract.CategoryContract;
 import com.example.ganks.mvp.presenter.CategoryPresenter;
 import com.example.ganks.mvp.ui.adapter.MultipleRecyclerAdapter;
+import com.example.ganks.mvp.view.CategoryView;
 import com.orhanobut.logger.Logger;
 import com.xforg.gank_core.net.RestClient;
 import com.xforg.gank_core.net.RestCreator;
@@ -35,7 +35,7 @@ import java.util.List;
  * Created By zhongxianfeng on 19-2-1
  * github: https://github.com/xianfeng92
  */
-public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> implements SwipeRefreshLayout.OnRefreshListener, CategoryContract.View {
+public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> implements SwipeRefreshLayout.OnRefreshListener, CategoryView {
 
     private static FragmentManager fManager;
     private MultipleRecyclerAdapter mAdapter;

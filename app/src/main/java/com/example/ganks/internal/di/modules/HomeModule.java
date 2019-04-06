@@ -1,8 +1,5 @@
 package com.example.ganks.internal.di.modules;
-
-import com.example.ganks.mvp.contract.HomeContract;
-import com.example.ganks.mvp.model.HomeModel;
-
+import com.example.ganks.mvp.view.HomeView;
 import dagger.Module;
 import dagger.Provides;
 
@@ -12,19 +9,14 @@ import dagger.Provides;
  */
 @Module
 public class HomeModule {
-    private HomeContract.View view;
+    private HomeView view;
 
-    public HomeModule(HomeContract.View view){
+    public HomeModule(HomeView view){
         this.view = view;
     }
 
     @Provides
-    HomeContract.View provideHomeContractView(){
+    HomeView provideHomeContractView(){
         return this.view;
-    }
-
-    @Provides
-    HomeContract.Model provideHomeContractModel(HomeModel model){
-        return model;
     }
 }

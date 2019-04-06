@@ -4,7 +4,8 @@ import com.example.domain.Meizi;
 import com.example.domain.interactor.DefaultObserver;
 import com.example.domain.interactor.GetMeiziList;
 import com.example.ganks.mvp.base.BasePresenter;
-import com.example.ganks.mvp.contract.TanTanContract;
+import com.example.ganks.mvp.view.TanTanView;
+
 import java.util.List;
 import javax.inject.Inject;
 
@@ -12,12 +13,12 @@ import javax.inject.Inject;
  * Created By apple on 2019/3/30
  * github: https://github.com/xianfeng92
  */
-public class TanTanPresenter extends BasePresenter<TanTanContract.Model,TanTanContract.View> {
+public class TanTanPresenter extends BasePresenter<TanTanView> {
     private GetMeiziList getMeiziList;
 
     @Inject
-    public TanTanPresenter(TanTanContract.Model model, TanTanContract.View rootView, GetMeiziList getMeiziList){
-        super(model,rootView);
+    public TanTanPresenter(TanTanView rootView, GetMeiziList getMeiziList){
+        super(rootView);
         this.getMeiziList = getMeiziList;
     }
 

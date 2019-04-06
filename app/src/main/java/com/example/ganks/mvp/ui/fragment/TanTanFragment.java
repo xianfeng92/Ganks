@@ -16,9 +16,9 @@ import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.internal.di.components.DaggerTanTanComponent;
 import com.example.ganks.internal.di.modules.TanTanModule;
-import com.example.ganks.mvp.contract.TanTanContract;
 import com.example.ganks.mvp.presenter.TanTanPresenter;
 import com.example.ganks.mvp.ui.adapter.TanTanAdapter;
+import com.example.ganks.mvp.view.TanTanView;
 import com.example.tantancardswipe.CardConfig;
 import com.example.tantancardswipe.OnSwipeListener;
 import com.example.tantancardswipe.CardItemTouchHelperCallback;
@@ -32,7 +32,7 @@ import java.util.List;
  * Created By zhongxianfeng on 19-2-2
  * github: https://github.com/xianfeng92
  */
-public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements TanTanContract.View {
+public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements TanTanView {
 
     private TanTanAdapter tanTanAdapter;
     private CardItemTouchHelperCallback cardItemTouchHelperCallback;

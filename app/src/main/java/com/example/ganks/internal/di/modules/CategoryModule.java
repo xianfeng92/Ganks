@@ -1,8 +1,6 @@
 package com.example.ganks.internal.di.modules;
 
-import com.example.ganks.mvp.contract.CategoryContract;
-import com.example.ganks.mvp.model.CategoryModel;
-
+import com.example.ganks.mvp.view.CategoryView;
 import dagger.Module;
 import dagger.Provides;
 
@@ -12,19 +10,14 @@ import dagger.Provides;
  */
 @Module
 public class CategoryModule {
-    private CategoryContract.View view;
+    private CategoryView view;
 
-    public CategoryModule(CategoryContract.View view){
+    public CategoryModule(CategoryView view){
         this.view = view;
     }
 
     @Provides
-    CategoryContract.View provideCategoryContractView(){
+    CategoryView provideCategoryContractView(){
         return this.view;
-    }
-
-    @Provides
-    CategoryContract.Model proviceCategoryContractModel(CategoryModel model){
-        return model;
     }
 }

@@ -19,6 +19,7 @@ import io.reactivex.functions.Function;
  * github: https://github.com/xianfeng92
  */
 public class MeiziDataRepository implements MeiziRepository {
+
     @Inject
     MeiziDataRepository(){}
 
