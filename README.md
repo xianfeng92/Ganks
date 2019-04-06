@@ -18,6 +18,11 @@
 
 
 ----------------------------------------------------
+## Ganks Architecture
+
+![Ganks Architecture](https://github.com/xianfeng92/Ganks/blob/master/images/MVP.jpg)
+
+---------------------------------------------------
 
 ## MVP
 
