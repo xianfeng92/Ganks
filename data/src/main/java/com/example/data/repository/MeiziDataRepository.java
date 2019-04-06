@@ -1,6 +1,5 @@
 package com.example.data.repository;
 
-import android.util.Log;
 import com.example.data.entity.DaoMeiziEntity;
 import com.example.data.entity.MeiziList;
 import com.example.data.entity.mapper.MeiziEntityDataMapper;
@@ -8,6 +7,7 @@ import com.example.data.net.RestApiImpl;
 import com.example.domain.Meizi;
 import com.example.domain.repository.MeiziRepository;
 import com.example.data.GreenDaoHelper;
+import com.orhanobut.logger.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -19,8 +19,6 @@ import io.reactivex.functions.Function;
  * github: https://github.com/xianfeng92
  */
 public class MeiziDataRepository implements MeiziRepository {
-    private static final String TAG = "MeiziDataRepository";
-
     @Inject
     MeiziDataRepository(){}
 
@@ -37,13 +35,12 @@ public class MeiziDataRepository implements MeiziRepository {
     @Override
     public void addToFavorite(Meizi meizi) {
         DaoMeiziEntity daoMeiziEntity = MeiziEntityDataMapper.getInstance().transformMeizi2Dao(meizi);
-        Log.d(TAG, "addToFavorite: "+daoMeiziEntity.url);
-        GreenDaoHelper.insert(daoMeiziEntity);
-//        if (!GreenDaoHelper.isDaoContainMeizi(daoMeiziEntity._id)){
-//            GreenDaoHelper.insert(daoMeiziEntity);
-//        }else {
-//            Log.d(TAG, "you already love It!!");
-//        }
+        Logger.d("addToFavorite %s",daoMeiziEntity.url);
+        if (!GreenDaoHelper.isDaoContainMeizi(daoMeiziEntity._id)){
+            GreenDaoHelper.insert(daoMeiziEntity);
+        }else {
+            Logger.d("addToFavorite %s","you already love It!!");
+        }
     }
 
     @Override
@@ -53,10 +50,7 @@ public class MeiziDataRepository implements MeiziRepository {
         for(DaoMeiziEntity daoMeiziEntity:daoMeiziEntities){
             meizis.add(MeiziEntityDataMapper.getInstance().transformDao2Meizi(daoMeiziEntity));
         }
-        for (Meizi meizi : meizis){
-            Log.d(TAG, "getMeiziFromDao: "+meizi.getUrl());
-        }
+        Logger.d("meizi %d",meizis.size());
         return meizis;
     }
-
 }

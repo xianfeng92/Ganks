@@ -4,7 +4,6 @@ import com.xforg.gank_core.net.callbacks.IError;
 import com.xforg.gank_core.net.callbacks.IFailure;
 import com.xforg.gank_core.net.callbacks.IRequest;
 import com.xforg.gank_core.net.callbacks.ISuccess;
-
 import java.io.File;
 import java.util.WeakHashMap;
 

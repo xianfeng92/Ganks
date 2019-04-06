@@ -6,10 +6,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

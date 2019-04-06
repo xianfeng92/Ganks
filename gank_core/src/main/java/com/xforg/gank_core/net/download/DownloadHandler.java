@@ -1,14 +1,11 @@
 package com.xforg.gank_core.net.download;
 
 import android.os.AsyncTask;
-import android.util.Log;
-
 import com.xforg.gank_core.net.RestCreator;
 import com.xforg.gank_core.net.callbacks.IError;
 import com.xforg.gank_core.net.callbacks.IFailure;
 import com.xforg.gank_core.net.callbacks.IRequest;
 import com.xforg.gank_core.net.callbacks.ISuccess;
-
 import java.util.WeakHashMap;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -20,7 +17,6 @@ import retrofit2.Response;
  * github: https://github.com/xianfeng92
  */
 public class DownloadHandler {
-    private static final String TAG = "DownloadHandler";
     private final String URL;
     private final WeakHashMap<String,Object> PARAMS;
     private final IRequest REQUEST;
@@ -62,7 +58,6 @@ public class DownloadHandler {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if(response.isSuccessful()){
-                        Log.d(TAG, "onResponse: ");
                         final ResponseBody body = response.body();
                         final SaveFileTask task = new SaveFileTask(REQUEST,SUCCESS);
                         task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,

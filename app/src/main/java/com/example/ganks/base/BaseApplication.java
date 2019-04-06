@@ -6,6 +6,8 @@ import com.example.ganks.MessageEvent;
 import com.example.ganks.internal.di.components.ApplicationComponent;
 import com.example.ganks.internal.di.components.DaggerApplicationComponent;
 import com.example.ganks.internal.di.modules.ApplicationModule;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 import com.xforg.gank_core.net.Api;
 import com.xforg.gank_core.app.Gank;
@@ -81,6 +83,7 @@ public class BaseApplication extends Application {
             GreenDaoHelper.initDataBase(this);
             Utils.init(this);
             ImageLoader.init(this);
+            Logger.addLogAdapter(new AndroidLogAdapter());
             if (LeakCanary.isInAnalyzerProcess(this)) {
                 // This process is dedicated to LeakCanary for heap analysis.
                 // You should not init your app in this process.

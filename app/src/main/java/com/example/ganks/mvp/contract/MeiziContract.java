@@ -4,7 +4,6 @@ import com.example.domain.Meizi;
 import com.example.ganks.mvp.base.IModel;
 import com.example.ganks.mvp.base.IView;
 import java.util.List;
-import io.reactivex.Observable;
 
 
 /**
@@ -18,6 +17,5 @@ public interface MeiziContract {
     }
 
     interface Model extends IModel{
-        Observable<Meizi> getMeizi(int page);
     }
 }

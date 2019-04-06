@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ethanhua.skeleton.Skeleton;
@@ -22,6 +21,7 @@ import com.example.ganks.internal.di.modules.CategoryModule;
 import com.example.ganks.mvp.contract.CategoryContract;
 import com.example.ganks.mvp.presenter.CategoryPresenter;
 import com.example.ganks.mvp.ui.adapter.MultipleRecyclerAdapter;
+import com.orhanobut.logger.Logger;
 import com.xforg.gank_core.net.RestClient;
 import com.xforg.gank_core.net.RestCreator;
 import com.xforg.gank_core.net.RestService;
@@ -36,8 +36,6 @@ import java.util.List;
  * github: https://github.com/xianfeng92
  */
 public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> implements SwipeRefreshLayout.OnRefreshListener, CategoryContract.View {
-
-    private static final String TAG = "CategoryArticleFragment";
 
     private static FragmentManager fManager;
     private MultipleRecyclerAdapter mAdapter;
@@ -78,7 +76,7 @@ public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> imp
 
     @Override
     public void onRefresh() {
-        Log.d(TAG, "onRefresh: ");
+        Logger.d("onRefresh");
         page++;
         getDatas();
     }
@@ -151,7 +149,7 @@ public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> imp
                 .error(new IError() {
                     @Override
                     public void onError(int code, String msg) {
-                        Log.d(TAG, "onError: " + msg);
+                        Logger.e("onError %s",msg);
                     }
                 })
                 .success(new ISuccess() {

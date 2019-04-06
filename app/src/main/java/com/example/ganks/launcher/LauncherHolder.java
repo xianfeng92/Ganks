@@ -3,7 +3,6 @@ package com.example.ganks.launcher;
 import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
-
 import com.bigkoo.convenientbanner.holder.Holder;
 
 /**

@@ -68,5 +68,7 @@ dependencies {
     api rootProject.ext.dependencies.rxlifecycle
     api rootProject.ext.dependencies.rxlifecycleAndroid
     api rootProject.ext.dependencies.rxlifecycleComponents
+    //Json
+    api rootProject.ext.dependencies.logger
     implementation project(':domain')
 }

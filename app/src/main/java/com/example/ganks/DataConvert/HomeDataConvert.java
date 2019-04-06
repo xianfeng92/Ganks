@@ -26,8 +26,6 @@ public class HomeDataConvert extends DataConverter {
      * "url":"https://tech.meituan.com/2018/07/26/android-livedatabus.html",
      * "used":true,
      * "who":"\u6f47\u6e58\u5251\u96e8"}
-     *
-     *
      */
 
     @Override

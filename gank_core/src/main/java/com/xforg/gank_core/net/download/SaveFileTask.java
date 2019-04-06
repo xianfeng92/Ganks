@@ -4,10 +4,8 @@ import android.os.AsyncTask;
 import com.xforg.gank_core.net.callbacks.IRequest;
 import com.xforg.gank_core.net.callbacks.ISuccess;
 import com.xforg.gank_core.utils.File.FileUtil;
-
 import java.io.File;
 import java.io.InputStream;
-
 import okhttp3.ResponseBody;
 
 /**
@@ -16,11 +14,8 @@ import okhttp3.ResponseBody;
  */
 public class SaveFileTask extends AsyncTask<Object,Void, File> {
 
-    private static final String TAG = "SaveFileTask";
-
     private final IRequest REQUEST;
     private final ISuccess SUCCESS;
-
 
     public SaveFileTask(IRequest request, ISuccess success) {
         REQUEST = request;

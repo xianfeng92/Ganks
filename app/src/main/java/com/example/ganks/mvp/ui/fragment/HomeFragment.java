@@ -3,20 +3,20 @@ package com.example.ganks.mvp.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import com.example.ganks.R;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.mvp.presenter.HomePresenter;
+import com.orhanobut.logger.Logger;
 
 /**
  * Created By zhongxianfeng on 19-2-1
  * github: https://github.com/xianfeng92
  */
 public class HomeFragment extends BaseDelegate<HomePresenter> {
-    private static final String TAG = "HomeFragment";
 
     public static HomeFragment newInstance(){
+        Logger.d("newInstance");
         Bundle args = new Bundle();
         HomeFragment homeFragment = new HomeFragment();
         homeFragment.setArguments(args);
@@ -25,8 +25,8 @@ public class HomeFragment extends BaseDelegate<HomePresenter> {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
+        Logger.d("onCreate");
     }
 
     @Override
@@ -50,6 +50,7 @@ public class HomeFragment extends BaseDelegate<HomePresenter> {
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
+        Logger.d("onLazyInitView");
         ///这里可以不用懒加载,因为Adapter的场景下,Adapter内的子Fragment只有在父Fragment是show状态时,才会被Attach,Create
     }
 

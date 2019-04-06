@@ -26,8 +26,6 @@ import butterknife.OnClick;
  */
 public class LauncherDelegate extends GankDelegate implements ITimerListener {
 
-    private static final String TAG = "LauncherDelegate";
-
     private Timer mTimer = null;
     private int mCount = 5;
     private ILauncherListener mILauncherListener = null;
@@ -70,7 +68,6 @@ public class LauncherDelegate extends GankDelegate implements ITimerListener {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        Log.d(TAG, "onBindView: ");
         initTimer();
         mTvTimer = rootView.findViewById(R.id.tv_launcher_timer);
         mTvTimer.setOnClickListener(new View.OnClickListener() {

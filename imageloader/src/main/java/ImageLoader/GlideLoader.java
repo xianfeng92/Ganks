@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PointF;
 import android.view.View;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.MemoryCategory;
@@ -15,7 +14,6 @@ import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-
 import ImageLoader.config.GlobalConfig;
 import ImageLoader.config.ImageConfig;
 import ImageLoader.config.PriorityMode;
@@ -44,7 +42,6 @@ import jp.wasabeef.glide.transformations.gpu.VignetteFilterTransformation;
  * github: https://github.com/xianfeng92
  */
 public class GlideLoader implements ILoader {
-    private static final String TAG = "GlideLoader";
 
     private RequestOptions options = new RequestOptions();
 

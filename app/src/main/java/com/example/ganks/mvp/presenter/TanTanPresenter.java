@@ -13,7 +13,6 @@ import javax.inject.Inject;
  * github: https://github.com/xianfeng92
  */
 public class TanTanPresenter extends BasePresenter<TanTanContract.Model,TanTanContract.View> {
-    private static final String TAG = "TanTanPresenter";
     private GetMeiziList getMeiziList;
 
     @Inject

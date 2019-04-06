@@ -23,6 +23,8 @@ import com.example.tantancardswipe.CardConfig;
 import com.example.tantancardswipe.OnSwipeListener;
 import com.example.tantancardswipe.CardItemTouchHelperCallback;
 import com.example.tantancardswipe.CardLayoutManager;
+import com.orhanobut.logger.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,6 @@ import java.util.List;
  */
 public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements TanTanContract.View {
 
-    private static final String TAG = "TanTanFragment";
     private TanTanAdapter tanTanAdapter;
     private CardItemTouchHelperCallback cardItemTouchHelperCallback;
     private CardLayoutManager cardLayoutManager;
@@ -45,6 +46,7 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
     public OnBackToFirstListener _mBackToFirstListener;
 
     public static TanTanFragment newInstance(){
+        Logger.d("newInstance");
         TanTanFragment tanTanFragment = new TanTanFragment();
         return tanTanFragment;
     }

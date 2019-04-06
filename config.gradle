@@ -84,6 +84,9 @@ ext {
             leakcanaryAndroidNoOp: 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3',
             leakcanarySupportFragment : 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3',
 
+            // --------------logger-------------------
+            logger               : 'com.orhanobut:logger:2.2.0',
+
             //---------------Banner依赖---------------
             Banner               : 'com.bigkoo:convenientbanner:2.0.5',
 

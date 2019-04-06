@@ -12,7 +12,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -30,6 +29,7 @@ import com.example.ganks.mvp.contract.LoveMeiziContract;
 import com.example.ganks.mvp.presenter.LoveMeiziPresenter;
 import com.example.ganks.mvp.ui.adapter.LineAdapter;
 import com.example.data.GreenDaoHelper;
+import com.orhanobut.logger.Logger;
 import com.xforg.gank_core.utils.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +40,6 @@ import java.util.List;
  */
 public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implements LoveMeiziContract.View {
 
-    public static final String TAG = "LoveMeiziFragment";
-
     public OnBackToFirstListener _mBackToFirstListener;
     private View notDataView;
     public RecyclerView recyclerView;
@@ -50,6 +48,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
     public LinearLayoutManager mlayoutManager;
     public List<Meizi> resultsBeanList = new ArrayList<>();
     public static LoveMeiziFragment newInstance() {
+        Logger.d("newInstance");
         Bundle args = new Bundle();
         LoveMeiziFragment loveMeiziFragment = new LoveMeiziFragment();
         loveMeiziFragment.setArguments(args);
@@ -111,18 +110,18 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
         OnItemDragListener listener = new OnItemDragListener() {
             @Override
             public void onItemDragStart(RecyclerView.ViewHolder viewHolder, int pos) {
-                Log.d(TAG, "drag start");
+                Logger.d("onItemDragStart %d",pos);
                 BaseViewHolder holder = ((BaseViewHolder) viewHolder);
             }
 
             @Override
             public void onItemDragMoving(RecyclerView.ViewHolder source, int from, RecyclerView.ViewHolder target, int to) {
-                Log.d(TAG, "move from: " + source.getAdapterPosition() + " to: " + target.getAdapterPosition());
+                Logger.d("onItemDragMoving");
             }
 
             @Override
             public void onItemDragEnd(RecyclerView.ViewHolder viewHolder, int pos) {
-                Log.d(TAG, "drag end");
+                Logger.d("onItemDragEnd");
                 BaseViewHolder holder = ((BaseViewHolder) viewHolder);
             }
         };
@@ -134,19 +133,19 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
         OnItemSwipeListener onItemSwipeListener = new OnItemSwipeListener() {
             @Override
             public void onItemSwipeStart(RecyclerView.ViewHolder viewHolder, int pos) {
-                Log.d(TAG, "view swiped start: " + pos);
+                Logger.d("onItemSwipeStart %d",pos);
                 BaseViewHolder holder = ((BaseViewHolder) viewHolder);
             }
 
             @Override
             public void clearView(RecyclerView.ViewHolder viewHolder, int pos) {
-                Log.d(TAG, "View reset: " + pos);
+                Logger.d("clearView %d",pos);
                 BaseViewHolder holder = ((BaseViewHolder) viewHolder);
             }
 
             @Override
             public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
-                Log.d(TAG, "View Swiped: " + pos);
+                Logger.d("onItemSwiped %d",pos);
                 GreenDaoHelper.removeById(resultsBeanList.get(pos).getId());
                 mPresenter.loadDataByGreenDao();
             }

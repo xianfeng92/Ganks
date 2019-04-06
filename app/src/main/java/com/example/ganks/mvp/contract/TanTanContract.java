@@ -4,7 +4,6 @@ import com.example.domain.Meizi;
 import com.example.ganks.mvp.base.IModel;
 import com.example.ganks.mvp.base.IView;
 import java.util.List;
-import io.reactivex.Observable;
 
 /**
  * Created By apple on 2019/3/30
@@ -17,6 +16,5 @@ public interface TanTanContract {
     }
 
     interface Model extends IModel{
-        Observable<Meizi> getMeizi(int page);
     }
 }

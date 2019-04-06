@@ -16,6 +16,5 @@ public interface LoveMeiziContract {
     }
 
     interface Model extends IModel{
-//        List<Meizi> getMeiziFromDao();
     }
 }

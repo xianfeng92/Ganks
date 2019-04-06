@@ -5,10 +5,10 @@ package com.xforg.gank_core.app;
  * github: https://github.com/xianfeng92
  */
 public class CategoryType {
+
     public static final String ANDROID_STR = "Android";
     public static final String IOS_STR = "iOS";
     public static final String FRONT_STR = "前端";
-
 
     public static String getPageTitleByPosition(int position) {
         if (position == 0){

@@ -24,6 +24,8 @@ import com.example.ganks.internal.di.modules.MeiziModule;
 import com.example.ganks.mvp.contract.MeiziContract;
 import com.example.ganks.mvp.presenter.MeiziPresenter;
 import com.example.ganks.mvp.ui.adapter.StaggerAdapter;
+import com.orhanobut.logger.Logger;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -57,6 +59,7 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Meizi
     }
 
     public static MeiziFragment newInstance(){
+        Logger.d("newInstance");
         Bundle args = new Bundle();
         MeiziFragment meiziFragment = new MeiziFragment();
         meiziFragment.setArguments(args);

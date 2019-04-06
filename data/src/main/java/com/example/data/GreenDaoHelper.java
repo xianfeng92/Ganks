@@ -2,12 +2,10 @@ package com.example.data;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import com.example.Dao.greendao.DaoMaster;
 import com.example.Dao.greendao.DaoMeiziEntityDao;
 import com.example.Dao.greendao.DaoSession;
 import com.example.data.entity.DaoMeiziEntity;
-
 import java.util.List;
 
 
@@ -16,7 +14,6 @@ import java.util.List;
  * github: https://github.com/xianfeng92
  */
 public class GreenDaoHelper {
-    private static final String TAG = "GreenDaoHelper";
 
     private static DaoMaster.DevOpenHelper devOpenHelper;
     private static DaoMaster daoMaster;
@@ -47,7 +44,6 @@ public class GreenDaoHelper {
 
     public static void insert(DaoMeiziEntity daoMeiziEntity){
         Long num = daoSession.getDaoMeiziEntityDao().insert(daoMeiziEntity);
-        Log.d(TAG, "insert: "+num);
     }
 
     public static void removeById(String id){

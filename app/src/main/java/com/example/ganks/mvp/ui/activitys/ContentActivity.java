@@ -1,7 +1,6 @@
 package com.example.ganks.mvp.ui.activitys;
 
 import android.os.Bundle;
-import android.util.Log;
 import com.example.ganks.R;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.mvp.ui.TabSelectedEvent;
@@ -18,7 +17,6 @@ import com.xforg.gank_core.app.EventBusActivityScope;
 
 
 public class ContentActivity extends ProxyActivity implements GankDelegate.OnBackToFirstListener{
-    private static final String TAG = "ContentActivity";
 
     public static final int FIRST = 0;
     public static final int SECOND = 1;
@@ -40,7 +38,6 @@ public class ContentActivity extends ProxyActivity implements GankDelegate.OnBac
         setContentView(R.layout.activity_content);
         BaseDelegate firstFragment = findFragment(HomeFragment.class);
         if (firstFragment == null){
-            Log.d(TAG, "onCreate:firstFragment is null ");
             mFragments[0] = HomeFragment.newInstance();
             mFragments[1] = TanTanFragment.newInstance();
             mFragments[2] = LoveMeiziFragment.newInstance();
