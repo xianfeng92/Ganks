@@ -27,47 +27,36 @@
 ---------------------------------------------------
 # Display
 
-[AppDisplayPicture](https://github.com/xianfeng92/Ganks/blob/master/images/Display.md)
-
+[App Display](https://github.com/xianfeng92/Ganks/blob/master/images/Display.md)
 
 -------------------------------------------------
 
 ## Library Used
 
-1. BaseRecyclerViewAdapterHelper
+#### 1. [BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
 
-A powerful Recycler Adapter framework that integrates most common list requirements solutions.
+       A powerful Recycler Adapter framework that integrates most common list requirements solutions.
 
-[BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
+#### 2. [Fragmentation](https://github.com/YoKeyword/Fragmentation/wiki/2.-API)
 
-2. Fragmentation
+      A powerful library that manage Fragment for Android!
 
-A powerful library that manage Fragment for Android!
+#### 3. [Retrofit](https://github.com/square/retrofit)
 
-[Fragmentation API](https://github.com/YoKeyword/Fragmentation/wiki/2.-API)
+      Type-safe HTTP client for Android and Java by Square
 
-3. Retrofit
+#### 4. [Rxjava](https://github.com/ReactiveX/RxJava)
 
-Type-safe HTTP client for Android and Java by Square
-
-[retrofit](https://github.com/square/retrofit)
-
-4.  Rxjava2
-
-RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.
-
-[RxJava](https://github.com/ReactiveX/RxJava)
-
-5.  AndroidAutoSize
+       RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences 
+       for the Java VM.
+       
+#### 5.  [AndroidAutoSize](https://github.com/JessYanCoding/AndroidAutoSize)
 
 A low-cost Android screen adaptation solution
-[A low-cost Android screen adaptation solution](https://github.com/JessYanCoding/AndroidAutoSize)
 
-6.  LeakCanary
+#### 6.  [LeakCanary](https://github.com/square/leakcanary)
 
-A memory leak detection library for Android and Java.
-
-[leakcanary](https://github.com/square/leakcanary)
+     A memory leak detection library for Android and Java.
 
 -------------------------------------------------------
 # Thanks
