@@ -1,6 +1,6 @@
 # Ganks
 
-👌一个简单的Gank.io Demo, 主要用于玩一些优秀的开源库
+👌This is a simple app using the Uncle Bob's clean architecture approach.
 
 ![](https://github.com/xianfeng92/Ganks/blob/master/images/bugbug.gif)
 
@@ -9,100 +9,96 @@
 [![API](https://img.shields.io/badge/API-28%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=28)
 ![commit](https://img.shields.io/github/commit-activity/m/xianfeng92/Ganks.svg)
 ![](https://img.shields.io/github/repo-size/xianfeng92/Ganks.svg)
-![作者](https://img.shields.io/badge/Author-xianfeng92-brightgreen.svg)
-
-----------------------------------------------------
-
-## Tips
-### 1. Favor composition over inheritance
-
+![Author](https://img.shields.io/badge/Author-xianfeng92-brightgreen.svg)
 
 ----------------------------------------------------
 ## Ganks Architecture
 
 ![Ganks Architecture](https://github.com/xianfeng92/Ganks/blob/master/images/MVP.png)
 
----------------------------------------------------
+### some Details
 
-## MVP
+1. Presenters in this layer are composed with interactors that perform the job in a new thread outside the main android UI thread, and come back using a callback with the data that will be rendered in the view.
 
-[Mvp 是 Google 官方出品的 Mvp 架构项目,Demo可参考todo-mvp](https://github.com/googlesamples/android-architecture/tree/todo-mvp/)
+2. Domain Library a pure java module without any android dependencies. All the external components use interfaces when connecting to the data Library.
 
-框架的主要结构如下:
-
-通过 Contract 来管理 View Model Presenter 接口:
-
-* Model -- 主要处理业务, 如网络数据的请求以及存储
-* View --  用于把数据展示,并且提供交互
-* Presenter -- View 和 Model 交互的桥梁, 二者通过 Presenter 建立联系
-
-MVP框架通过引入接口 View, 让相应的视图组件如 Activity, Fragment 去实现 View, 此时涉及到数据展示的部分交给了View来处理,即实现了视图层的独立.通过中间层Preseter实现了 Model 和 View 的完全解耦。
-
-从此显示交给 View, 逻辑交给 Presenter, 数据交给 Model. 
-
-Activity 和 Fragment 又可以瘦下来了~~
+3. All data needed for the application comes from data Library , through a MeiziRepository implementation (the interface is in the domain)
 
 ---------------------------------------------------
-## Rxjava2 + Retrofit
 
-异步和网络请求的不二之选, 后期计划封装一下 Rxjava2 + Retrofit
-
---------------------------------------------------
-## Fragmentation
-
-Fragmentation 封装了 Fragment 的管理,很 powerful 的一个项目
-
-使用 delegate + interface hook 上系统的 Fragment 的生命周期的回调,然后起飞~
-
-[Fragmentation API](https://github.com/YoKeyword/Fragmentation/wiki/2.-API)
-
--------------------------------------------------
-## AndroidAutoSize
-
-[今日头条屏幕适配方案终极版,一个极低成本的 Android 屏幕适配方案](https://github.com/JessYanCoding/AndroidAutoSize)
-
-今日头条适配方案的原理来源于修改DisplayMetrics#density,因为 DisplayMetrics#density 是全局的,所以只要 DisplayMetrics#density 一经修改,项目中的所有页面、所有控件都可以奏效,包括三方库控件和系统控件,这就使今日头条屏幕适配方案天然拥有优于其他屏幕适配方案的低成本和低侵入性
-
-在Gank 中手动撸了一把 AndroidAutoSize 的简化版的实现,其核心也就是在不同尺寸和分辨率的设备上,根据设计图的总宽度,
-强行修改 density 值,来完成屏幕的适配, 完成这个其实就是几行代码的事, AndroidAutoSize 能够将其封装成几千行代码,实属优秀.
-
-我们知道 DisplayMetrics#density 是公有的,谁都有权限修改, AndroidAutoSize 可以把 DisplayMetrics#density 修改成一个可以完成屏幕适配的值,其他三方库、Android 系统、以及项目成员就可以把 DisplayMetrics#density 修改或恢复成另一个值,这都将导致屏幕适配的失效,特别是在某些定制系统上,因为这个定制系统做的某些特殊操作都是未知的. 还有当AndroidAutoSize遇到屏幕差异很大的机型,显示的效果就不尽如人意了.
-
-个人觉得可以综合考虑: smallestWidth适配 + AndroidAutoSize 可能是更好的选择 + 屏幕尺寸差异大的机型控制UI布局
-
--------------------------------------------------
-## imageloader
-
-自己对 Glide 进行简单的封装, 后期还会继续优化
-
+## Library Used
 
 -----------------------------------------------
-## BaseRecyclerViewAdapterHelper
+## ViewAdapter
 
-一个强大的RecyclerAdapter框架,集成了大部分列表常用需求解决方案.
+### BaseRecyclerViewAdapterHelper
+
+A powerful Recycler Adapter framework that integrates most common list requirements solutions.
 
 [BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
 
+-----------------------------------------------
+
+## FragmentManager
+### Fragmentation
+
+A powerful library that manage Fragment for Android!
+
+[Fragmentation API](https://github.com/YoKeyword/Fragmentation/wiki/2.-API)
+
+----------------------------------------------
+
+## HTTP
+### Retrofit
+
+Type-safe HTTP client for Android and Java by Square
+
+[retrofit](https://github.com/square/retrofit)
+
+-----------------------------------------------
+
+## Async
+### Rxjava2
+
+RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.
+
+[RxJava](https://github.com/ReactiveX/RxJava)
+
+---------------------------------------------
+## ScreenAdapter
+###  AndroidAutoSize
+
+A low-cost Android screen adaptation solution
+[A low-cost Android screen adaptation solution](https://github.com/JessYanCoding/AndroidAutoSize)
+
 -------------------------------------------------
-## Skeleton
+###  ImageLoader
 
-Skeleton Screen Loading，中文叫做骨架屏,即表示在页面完全渲染完成之前,用户会看到一个占位的样式,
-用以描绘了当前页面的大致框架,加载完成后,最终骨架屏中各个占位部分将被真实的数据替换。
+Simple wapper of Glide by me, needs  further optimized.
 
-[Skeleton](https://github.com/ethanhua/Skeleton)
+-------------------------------------------------
 
---------------------------------------------------
-## LeakCanary
+## Memory
 
-Android 和 Java 内存泄露检测
+### LeakCanary
 
---------------------------------------------------
+A memory leak detection library for Android and Java.
+
+[leakcanary](https://github.com/square/leakcanary)
+
+-----------------------------------------------------
+
+# Tips
+
+## 1. Favor composition over inheritance
+
+------------------------------------------------------
 
 # Display
 
-[App 运行效果图](https://github.com/xianfeng92/Ganks/blob/master/images/Display.md)
+[AppDisplayPicture](https://github.com/xianfeng92/Ganks/blob/master/images/Display.md)
   
 
 # Thanks
 
-[干货集中营](https://gank.io/api)
+[Gank io](https://gank.io/api)
