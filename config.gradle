@@ -51,9 +51,6 @@ ext {
             glide               : 'com.github.bumptech.glide:glide:4.8.0',
             glideCompiler       : 'com.github.bumptech.glide:compiler:4.8.0',
             glideTransformations: 'jp.wasabeef:glide-transformations:4.0.0',
-            gpuimage            : 'jp.co.cyberagent.android:gpuimage:2.0.0',
-            glideOkhttp3Integration : 'com.github.bumptech.glide:okhttp3-integration:4.5.0',
- 
             // ------------- Rxjava -------------
             rxAndroid            : 'io.reactivex.rxjava2:rxandroid:2.1.0',
             rxJava               : 'io.reactivex.rxjava2:rxjava:2.2.3',
@@ -106,7 +103,13 @@ ext {
             avi                 : 'com.wang.avi:library:2.1.3',
 
             // -------------------arrow---------------
-            arrow              :'com.fernandocejas:arrow:1.0.0'
+            arrow              :'com.fernandocejas:arrow:1.0.0',
+
+            // ------------------EasyImageLoader ----------
+            EasyImageLoader : 'com.github.xianfeng92:EasyImageLoader:V0.1',
+
+            // ------------------- AndroidScreenAdapter ---------
+            AndroidScreenAdapter :  'com.github.xianfeng92:AndroidScreenAdapter:V0.1'
     ]
 }
 

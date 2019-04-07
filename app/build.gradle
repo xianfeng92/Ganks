@@ -10,6 +10,12 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner rootProject.ext.dependencies.AndroidJUnitRunner
+        javaCompileOptions {
+            // 显式声明支持注解
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
     buildTypes {
         release {
@@ -21,9 +27,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':autosize')
     implementation project(':gank_core')
-    implementation project(':imageloader')
     implementation rootProject.ext.dependencies.junit
     implementation rootProject.ext.dependencies.testrunner
     // Skeleton
@@ -35,6 +39,8 @@ dependencies {
     debugImplementation rootProject.ext.dependencies.leakcanarySupportFragment
     annotationProcessor rootProject.ext.dependencies.daggerCompiler
     implementation rootProject.ext.dependencies.dagger
+    implementation rootProject.ext.dependencies.AndroidScreenAdapter
+    implementation rootProject.ext.dependencies.EasyImageLoader
     implementation project(path: ':domain')
     implementation project(path: ':data')
     implementation project(':domain')

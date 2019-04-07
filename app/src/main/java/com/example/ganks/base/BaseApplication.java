@@ -9,6 +9,7 @@ import com.example.ganks.internal.di.modules.ApplicationModule;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
+import com.xforg.easyimage.ImageLoader;
 import com.xforg.gank_core.net.Api;
 import com.xforg.gank_core.app.Gank;
 import com.example.data.GreenDaoHelper;
@@ -16,7 +17,6 @@ import com.xforg.gank_core.utils.Utils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import ImageLoader.ImageLoader;
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
 

@@ -1,1 +1,1 @@
-include ':app', ':tantancardswipe', ':autosize', ':gank_core', ':imageloader', ':domain', ':data'
+include ':app', ':tantancardswipe', ':gank_core', ':domain', ':data'

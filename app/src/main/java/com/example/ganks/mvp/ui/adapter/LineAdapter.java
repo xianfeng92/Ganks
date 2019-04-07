@@ -5,10 +5,11 @@ import com.chad.library.adapter.base.BaseItemDraggableAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.domain.Meizi;
 import com.example.ganks.R;
+import com.xforg.easyimage.ImageLoader;
+import com.xforg.easyimage.config.ConfigBuilder;
+import com.xforg.easyimage.config.ImageConfig;
+
 import java.util.List;
-import ImageLoader.ImageLoader;
-import ImageLoader.config.ConfigBuilder;
-import ImageLoader.config.ImageConfig;
 
 public class LineAdapter extends BaseItemDraggableAdapter<Meizi,BaseViewHolder> {
 
