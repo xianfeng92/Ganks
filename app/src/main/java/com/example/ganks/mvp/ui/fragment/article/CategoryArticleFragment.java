@@ -70,6 +70,7 @@ public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> imp
         articleService = RestCreator.getRestService();
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         mSwipeRefreshLayout = rootView.findViewById(R.id.refreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         initializeInjector();
         type = getArguments().getString("type");
     }
@@ -83,7 +84,6 @@ public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> imp
 
     @Override
     public void initData() {
-        mSwipeRefreshLayout.setOnRefreshListener(this);
         layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
@@ -180,5 +180,4 @@ public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> imp
                 .build()
                 .inject(this);
     }
-
 }

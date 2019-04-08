@@ -31,7 +31,6 @@ import com.example.data.GreenDaoHelper;
 import com.example.ganks.mvp.view.LoveMeiziView;
 import com.orhanobut.logger.Logger;
 import com.xforg.gank_core.utils.ToastUtils;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,7 +45,6 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
     public CoordinatorLayout coordinatorLayout;
     public LineAdapter mAdapter;
     public LinearLayoutManager mlayoutManager;
-    public List<Meizi> resultsBeanList = new ArrayList<>();
     public static LoveMeiziFragment newInstance() {
         Logger.d("newInstance");
         Bundle args = new Bundle();
@@ -103,7 +101,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        updateAdapter(resultsBeanList);
+        updateAdapter(mPresenter.resultsBeanList);
     }
 
     private void initItemDargAndSwipe() {
@@ -146,7 +144,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
             @Override
             public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
                 Logger.d("onItemSwiped %d",pos);
-                GreenDaoHelper.removeById(resultsBeanList.get(pos).getId());
+                GreenDaoHelper.removeById(mPresenter.resultsBeanList.get(pos).getId());
                 mPresenter.loadDataByGreenDao();
             }
 
@@ -158,7 +156,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
             }
         };
 
-        mAdapter = new LineAdapter(R.layout.line_meizi_item, resultsBeanList);
+        mAdapter = new LineAdapter(R.layout.line_meizi_item, mPresenter.resultsBeanList);
         ItemDragAndSwipeCallback mItemDragAndSwipeCallback = new ItemDragAndSwipeCallback(mAdapter);
         ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(mItemDragAndSwipeCallback);
         mItemTouchHelper.attachToRecyclerView(recyclerView);
@@ -180,7 +178,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                String url = resultsBeanList.get(position).getUrl();
+                String url = mPresenter.resultsBeanList.get(position).getUrl();
                 mPresenter.downLoad(url);
             }
         });

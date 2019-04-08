@@ -22,7 +22,6 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api project(path: ':tantancardswipe')
     api rootProject.ext.dependencies.appcompatV7
     api rootProject.ext.dependencies.constraint
     testImplementation rootProject.ext.dependencies.junit
@@ -68,6 +67,8 @@ dependencies {
     api rootProject.ext.dependencies.rxlifecycle
     api rootProject.ext.dependencies.rxlifecycleAndroid
     api rootProject.ext.dependencies.rxlifecycleComponents
+    // LayoutManager
+    api rootProject.ext.dependencies.BeautyLayoutManager
     //Json
     api rootProject.ext.dependencies.logger
     implementation project(':domain')

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-        <com.example.tantancardswipe.RoundImageView
+        <com.xianfeng92.beautylayoutmanager.CardLayoutManager.RoundImageView
             android:id="@+id/iv_avatar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

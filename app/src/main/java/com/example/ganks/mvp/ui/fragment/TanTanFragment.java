@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -19,12 +18,11 @@ import com.example.ganks.internal.di.modules.TanTanModule;
 import com.example.ganks.mvp.presenter.TanTanPresenter;
 import com.example.ganks.mvp.ui.adapter.TanTanAdapter;
 import com.example.ganks.mvp.view.TanTanView;
-import com.example.tantancardswipe.CardConfig;
-import com.example.tantancardswipe.OnSwipeListener;
-import com.example.tantancardswipe.CardItemTouchHelperCallback;
-import com.example.tantancardswipe.CardLayoutManager;
 import com.orhanobut.logger.Logger;
-
+import com.xianfeng92.beautylayoutmanager.CardLayoutManager.CardConfig;
+import com.xianfeng92.beautylayoutmanager.CardLayoutManager.CardItemTouchHelperCallback;
+import com.xianfeng92.beautylayoutmanager.CardLayoutManager.CardLayoutManager;
+import com.xianfeng92.beautylayoutmanager.CardLayoutManager.OnCardSwipeListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +37,6 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
     private CardLayoutManager cardLayoutManager;
     private RecyclerView recyclerView;
     private List<Meizi> resultsBeanList = new ArrayList<>();
-    private SwipeRefreshLayout swipeRefreshLayout;
     private List<String> urls = new ArrayList<>();
     private int page = 1;
 
@@ -53,13 +50,12 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
 
     @Override
     public Object setLayout() {
-        return R.layout.layout_refresh_list;
+        return R.layout.tantan_layout;
     }
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         recyclerView = rootView.findViewById(R.id.recyclerView);
-        swipeRefreshLayout = rootView.findViewById(R.id.refreshLayout);
         initializeInjector();
     }
 
@@ -84,7 +80,7 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
         cardLayoutManager = new CardLayoutManager(recyclerView,itemTouchHelper);
         recyclerView.setLayoutManager(cardLayoutManager);
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        cardItemTouchHelperCallback.setOnSwipeListener(new OnSwipeListener() {
+        cardItemTouchHelperCallback.setOnCardSwipeListener(new OnCardSwipeListener() {
             @Override
             public void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
 

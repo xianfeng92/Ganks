@@ -109,7 +109,9 @@ ext {
             EasyImageLoader : 'com.github.xianfeng92:EasyImageLoader:V0.1',
 
             // ------------------- AndroidScreenAdapter ---------
-            AndroidScreenAdapter :  'com.github.xianfeng92:AndroidScreenAdapter:V0.1'
+            AndroidScreenAdapter :  'com.github.xianfeng92:AndroidScreenAdapter:V0.1',
+            // ---------------------BeautyLayoutManager------------------
+            BeautyLayoutManager : 'com.github.xianfeng92:BeautyLayoutManager:V0.3'
     ]
 }
 
