@@ -37,7 +37,6 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
     private CardLayoutManager cardLayoutManager;
     private RecyclerView recyclerView;
     private List<Meizi> resultsBeanList = new ArrayList<>();
-    private List<String> urls = new ArrayList<>();
     private int page = 1;
 
     public OnBackToFirstListener _mBackToFirstListener;

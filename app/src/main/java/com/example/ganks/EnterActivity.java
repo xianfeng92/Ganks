@@ -9,6 +9,7 @@ import com.example.ganks.mvp.ui.activitys.ContentActivity;
 import com.example.ganks.launcher.ILauncherListener;
 import com.example.ganks.launcher.OnLauncherFinishTag;
 import com.orhanobut.logger.Logger;
+import com.xforg.gank_core.StatusBar.StatusBarUtil;
 import com.xforg.gank_core.activitys.ProxyActivity;
 import com.example.ganks.delegates.GankDelegate;
 import org.greenrobot.eventbus.EventBus;
@@ -20,6 +21,9 @@ public class EnterActivity extends ProxyActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter);
+        StatusBarUtil.setRootViewFitsSystemWindows(this,false);
+        //设置状态栏透明
+        StatusBarUtil.setTranslucentStatus(this);
     }
 
     @Override

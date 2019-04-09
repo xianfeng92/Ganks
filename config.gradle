@@ -111,7 +111,9 @@ ext {
             // ------------------- AndroidScreenAdapter ---------
             AndroidScreenAdapter :  'com.github.xianfeng92:AndroidScreenAdapter:V0.1',
             // ---------------------BeautyLayoutManager------------------
-            BeautyLayoutManager : 'com.github.xianfeng92:BeautyLayoutManager:V0.3'
+            BeautyLayoutManager : 'com.github.xianfeng92:BeautyLayoutManager:V0.4',
+            // -----------------------systembartint-----------------------
+            SystemBarTint       : 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     ]
 }
 

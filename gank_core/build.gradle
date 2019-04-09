@@ -71,5 +71,7 @@ dependencies {
     api rootProject.ext.dependencies.BeautyLayoutManager
     //Json
     api rootProject.ext.dependencies.logger
+    // SystemBarTint
+    api rootProject.ext.dependencies.SystemBarTint
     implementation project(':domain')
 }

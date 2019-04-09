@@ -8,6 +8,7 @@ import com.example.ganks.mvp.ui.fragment.HomeFragment;
 import com.example.ganks.mvp.ui.fragment.LoveMeiziFragment;
 import com.example.ganks.mvp.ui.fragment.MeiziFragment;
 import com.example.ganks.mvp.ui.fragment.TanTanFragment;
+import com.xforg.gank_core.StatusBar.StatusBarUtil;
 import com.xforg.gank_core.activitys.ProxyActivity;
 import com.example.ganks.delegates.GankDelegate;
 import com.xforg.gank_core.utils.ToastUtils;
@@ -82,11 +83,10 @@ public class ContentActivity extends ProxyActivity implements GankDelegate.OnBac
                 int count = currentFragment.getChildFragmentManager().getBackStackEntryCount();
                 if (count > 1){
                     if (currentFragment instanceof HomeFragment) {
-                        currentFragment.popToChild(HomeFragment.class, false);
                     } else if (currentFragment instanceof TanTanFragment) {
                         currentFragment.popToChild(TanTanFragment.class, false);
                     } else if (currentFragment instanceof LoveMeiziFragment) {
-                        currentFragment.popToChild(LoveMeiziFragment.class, false);
+                        StatusBarUtil.setStatusBarAndNavigationBarTranslucent(ContentActivity.this);
                     } else if(currentFragment instanceof MeiziFragment){
                         currentFragment.popToChild(MeiziFragment.class,false);
                     }
