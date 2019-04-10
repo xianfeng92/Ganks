@@ -45,8 +45,8 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
     public CoordinatorLayout coordinatorLayout;
     public LineAdapter mAdapter;
     public LinearLayoutManager mlayoutManager;
+
     public static LoveMeiziFragment newInstance() {
-        Logger.d("newInstance");
         Bundle args = new Bundle();
         LoveMeiziFragment loveMeiziFragment = new LoveMeiziFragment();
         loveMeiziFragment.setArguments(args);
@@ -56,6 +56,18 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
     @Override
     public Object setLayout() {
         return R.layout.fragment_meizi_love;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Logger.d("onCreate");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Logger.d("onResume");
     }
 
     @Override
@@ -96,6 +108,12 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
     public void onSupportVisible() {
         super.onSupportVisible();
         mPresenter.loadDataByGreenDao();
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        Logger.d("onLazyInitView");
     }
 
     @Override
@@ -197,6 +215,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
         }
         return true;
     }
+
 
     private void updateAdapter(List<Meizi> resultsBeanList) {
         if (resultsBeanList.size() == 0) {

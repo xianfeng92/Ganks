@@ -8,6 +8,7 @@ import com.example.ganks.mvp.ui.fragment.HomeFragment;
 import com.example.ganks.mvp.ui.fragment.LoveMeiziFragment;
 import com.example.ganks.mvp.ui.fragment.MeiziFragment;
 import com.example.ganks.mvp.ui.fragment.TanTanFragment;
+import com.orhanobut.logger.Logger;
 import com.xforg.gank_core.StatusBar.StatusBarUtil;
 import com.xforg.gank_core.activitys.ProxyActivity;
 import com.example.ganks.delegates.GankDelegate;
@@ -32,9 +33,9 @@ public class ContentActivity extends ProxyActivity implements GankDelegate.OnBac
     private static final long WAIT_TIME = 2000L;
     private long TOUCH_TIME = 0;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Logger.d("onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
         BaseDelegate firstFragment = findFragment(HomeFragment.class);
@@ -58,6 +59,12 @@ public class ContentActivity extends ProxyActivity implements GankDelegate.OnBac
             mFragments[FOURTH] = findFragment(MeiziFragment.class);
         }
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Logger.d("onResume");
     }
 
     private void initView(){
@@ -119,7 +126,7 @@ public class ContentActivity extends ProxyActivity implements GankDelegate.OnBac
                     }
                     flag = 0;
                 }
-            }
+        }
     }
 
     @Override

@@ -16,7 +16,6 @@ import com.orhanobut.logger.Logger;
 public class HomeFragment extends BaseDelegate<HomePresenter> {
 
     public static HomeFragment newInstance(){
-        Logger.d("newInstance");
         Bundle args = new Bundle();
         HomeFragment homeFragment = new HomeFragment();
         homeFragment.setArguments(args);
@@ -36,22 +35,27 @@ public class HomeFragment extends BaseDelegate<HomePresenter> {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         if (findChildFragment(ViewPagerFragment.class) == null) {
             loadRootFragment(R.id.fl_home_container, ViewPagerFragment.newInstance());
         }
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Logger.d("onResume");
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+    }
+
+    @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         Logger.d("onLazyInitView");
-        ///这里可以不用懒加载,因为Adapter的场景下,Adapter内的子Fragment只有在父Fragment是show状态时,才会被Attach,Create
     }
 
     @Override

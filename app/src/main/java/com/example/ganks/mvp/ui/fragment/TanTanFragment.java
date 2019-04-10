@@ -1,5 +1,4 @@
 package com.example.ganks.mvp.ui.fragment;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -42,7 +41,6 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
     public OnBackToFirstListener _mBackToFirstListener;
 
     public static TanTanFragment newInstance(){
-        Logger.d("newInstance");
         TanTanFragment tanTanFragment = new TanTanFragment();
         return tanTanFragment;
     }
@@ -59,6 +57,18 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Logger.d("onCreate");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Logger.d("onResume");
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if(context instanceof OnBackToFirstListener){
@@ -67,6 +77,12 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
             throw new RuntimeException(context.toString()
                     + " must implement OnBackToFirstListener");
         }
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        Logger.d("onLazyInitView");
     }
 
     @Override
@@ -108,7 +124,6 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
         });
         mPresenter.requestData(page);
     }
-
 
     @Override
     public boolean onBackPressedSupport() {

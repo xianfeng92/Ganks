@@ -25,6 +25,7 @@ import com.example.ganks.mvp.presenter.MeiziPresenter;
 import com.example.ganks.mvp.ui.adapter.StaggerAdapter;
 import com.example.ganks.mvp.view.MeiziView;
 import com.orhanobut.logger.Logger;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -58,7 +59,6 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Meizi
     }
 
     public static MeiziFragment newInstance(){
-        Logger.d("newInstance");
         Bundle args = new Bundle();
         MeiziFragment meiziFragment = new MeiziFragment();
         meiziFragment.setArguments(args);
@@ -74,6 +74,25 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Meizi
             throw new RuntimeException(context.toString()
                     + " must implement OnBackToFirstListener");
         }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Logger.d("onCreate");
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Logger.d("onResume");
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        Logger.d("onLazyInitView");
     }
 
     @Override

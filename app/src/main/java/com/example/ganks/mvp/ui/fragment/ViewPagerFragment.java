@@ -10,7 +10,6 @@ import com.example.ganks.R;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.mvp.ui.adapter.MianViewPagerAdapter;
 import com.example.ganks.mvp.ui.fragment.article.CategoryArticleFragment;
-import com.orhanobut.logger.Logger;
 import com.xforg.gank_core.app.CategoryType;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,6 @@ public class ViewPagerFragment extends BaseDelegate {
     ViewPager mainPager;
 
     public static ViewPagerFragment newInstance(){
-        Logger.d("newInstance");
         Bundle args = new Bundle();
         ViewPagerFragment viewPagerFragment = new ViewPagerFragment();
         viewPagerFragment.setArguments(args);
