@@ -30,6 +30,14 @@
 
 3. All data needed for the application comes from data Library , through a MeiziRepository implementation (the interface is in the domain)
 
+### LifeCycle about Ganks
+
+see:
+
+[When we cool start and entering the HomeFragment](https://github.com/xianfeng92/Ganks/blob/master/notes/LifeCycle.md)
+
+[when entering the TanTanFragment](https://github.com/xianfeng92/Ganks/blob/master/notes/TanTanFragment.md)
+
 ---------------------------------------------------
 # Display
 
