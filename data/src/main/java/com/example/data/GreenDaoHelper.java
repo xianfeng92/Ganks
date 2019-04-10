@@ -8,7 +8,6 @@ import com.example.Dao.greendao.DaoSession;
 import com.example.data.entity.DaoMeiziEntity;
 import java.util.List;
 
-
 /**
  * Created By apple on 2019/2/24
  * github: https://github.com/xianfeng92
@@ -43,7 +42,7 @@ public class GreenDaoHelper {
     }
 
     public static void insert(DaoMeiziEntity daoMeiziEntity){
-        Long num = daoSession.getDaoMeiziEntityDao().insert(daoMeiziEntity);
+        daoSession.getDaoMeiziEntityDao().insert(daoMeiziEntity);
     }
 
     public static void removeById(String id){
@@ -73,5 +72,4 @@ public class GreenDaoHelper {
     public static List<DaoMeiziEntity> getAllMeiziEntity(){
         return daoSession.getDaoMeiziEntityDao().queryBuilder().list();
     }
-
 }

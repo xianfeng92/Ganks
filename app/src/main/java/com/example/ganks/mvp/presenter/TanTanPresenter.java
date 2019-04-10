@@ -5,7 +5,6 @@ import com.example.domain.interactor.DefaultObserver;
 import com.example.domain.interactor.GetMeiziList;
 import com.example.ganks.mvp.base.BasePresenter;
 import com.example.ganks.mvp.view.TanTanView;
-
 import java.util.List;
 import javax.inject.Inject;
 

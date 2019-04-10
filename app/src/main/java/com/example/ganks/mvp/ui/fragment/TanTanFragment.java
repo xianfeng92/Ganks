@@ -102,6 +102,7 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
 
             @Override
             public void onSwipedClear() {
+                page++;
                 mPresenter.requestData(page);
             }
         });
@@ -119,8 +120,10 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
 
     @Override
     public void setNewData(List<Meizi> mData) {
+        resultsBeanList.clear();
         if (resultsBeanList != null){
             resultsBeanList.addAll(mData);
+            tanTanAdapter.notifyDataSetChanged();
         }
     }
 
