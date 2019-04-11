@@ -67,9 +67,6 @@ public class LoveMeiziPresenter extends BasePresenter<LoveMeiziView> {
         }
     }
 
-
-
-
     // 保存指定url的图片
     public void downLoad(final String url) {
         Log.d(TAG, "downLoad: " + url);

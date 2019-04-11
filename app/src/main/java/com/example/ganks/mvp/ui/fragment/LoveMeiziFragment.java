@@ -216,7 +216,6 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
         return true;
     }
 
-
     private void updateAdapter(List<Meizi> resultsBeanList) {
         if (resultsBeanList.size() == 0) {
             mAdapter.setEmptyView(notDataView);

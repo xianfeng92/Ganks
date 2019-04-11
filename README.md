@@ -18,6 +18,7 @@
 ![Author](https://img.shields.io/badge/Author-xianfeng92-brightgreen.svg)
 
 ----------------------------------------------------
+
 ## Ganks Architecture
 
 ![Ganks Architecture](https://github.com/xianfeng92/Ganks/blob/master/images/MVP.jpg)
@@ -37,6 +38,14 @@ see:
 [When we cool start and entering the HomeFragment](https://github.com/xianfeng92/Ganks/blob/master/notes/LifeCycle.md)
 
 [when entering the TanTanFragment](https://github.com/xianfeng92/Ganks/blob/master/notes/TanTanFragment.md)
+
+---------------------------------------------------
+
+# UI performance problems
+
+1. Using [AndroidPerformanceMonitor](https://github.com/markzhai/AndroidPerformanceMonitor) to detec ui-block, especially the block of message event in Ui thread.The default BlockThreshold is 500ms.
+
+2. [systrace](https://developer.android.com/studio/command-line/systrace),systrace is particularly useful for inspecting app's UI performance because it can analyze code and frame rate to identify problem areas and suggest possible solutions. 
 
 ---------------------------------------------------
 # Display
