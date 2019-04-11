@@ -6,6 +6,7 @@ import com.example.ganks.MessageEvent;
 import com.example.ganks.internal.di.components.ApplicationComponent;
 import com.example.ganks.internal.di.components.DaggerApplicationComponent;
 import com.example.ganks.internal.di.modules.ApplicationModule;
+import com.github.moduth.blockcanary.BlockCanary;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
@@ -53,6 +54,7 @@ public class BaseApplication extends Application {
                     }
                 })
                 .install();
+        BlockCanary.install(this, new AppBlockCanaryContext()).start();
         EventBus.getDefault().register(this);
     }
 
