@@ -2,83 +2,93 @@ package com.example.ganks;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.example.ganks.launcher.LauncherDelegate;
-import com.example.ganks.sign.ISignListener;
-import com.example.ganks.sign.IUserChecker;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
+import android.view.View;
 import com.example.ganks.mvp.ui.activitys.ContentActivity;
-import com.example.ganks.launcher.ILauncherListener;
-import com.example.ganks.launcher.OnLauncherFinishTag;
 import com.orhanobut.logger.Logger;
 import com.xforg.gank_core.StatusBar.StatusBarUtil;
-import com.xforg.gank_core.activitys.ProxyActivity;
 import com.example.ganks.delegates.GankDelegate;
-import org.greenrobot.eventbus.EventBus;
+import com.xforg.gank_core.utils.timer.BaseTimerTask;
+import com.xforg.gank_core.utils.timer.ITimerListener;
+import java.text.MessageFormat;
+import java.util.Timer;
+import butterknife.BindView;
+import butterknife.OnClick;
 
+public class EnterActivity extends AppCompatActivity implements GankDelegate.OnBackToFirstListener, ITimerListener {
 
-public class EnterActivity extends ProxyActivity implements
-        ILauncherListener, ISignListener, IUserChecker, GankDelegate.OnBackToFirstListener {
+    private Timer mTimer = null;
+    private int mCount = 5;
+    private AppCompatTextView mTvTimer = null;
+
+    @BindView(R.id.tv_launcher_timer)
+    public AppCompatTextView textView;
+
+    @OnClick(R.id.tv_launcher_timer)
+    void onClickTimerView(){
+        if (mTimer != null){
+            mTimer.cancel();
+            mTimer = null;
+            enterContentActivity();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter);
-        StatusBarUtil.setRootViewFitsSystemWindows(this,false);
-        //设置状态栏透明
-        StatusBarUtil.setTranslucentStatus(this);
+        StatusBarUtil.setStatusBarAndNavigationBarTranslucent(this);
+        initTimer();
+        mTvTimer = findViewById(R.id.tv_launcher_timer);
+        mTvTimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickTimerView();
+            }
+        });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        MessageEvent<Integer> messageEvent = new MessageEvent<>();
-        messageEvent.setMessage(110);
-        EventBus.getDefault().post(messageEvent);
-        loadRootFragment(R.id.enter,new LauncherDelegate());
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
 
-    @Override
-    public void onLauncherFinish(OnLauncherFinishTag tag) {
-        Logger.d("onLauncherFinish %s", tag);
-        switch (tag){
-            case SIGNED:
-                startActivity(new Intent(EnterActivity.this, ContentActivity.class));
-                finish();
-                break;
-            case NOT_SIGNED:
-                break;
-                default:
-                    break;
-        }
-    }
-
-    @Override
-    public void onSignIn() {
+    private void enterContentActivity(){
         startActivity(new Intent(EnterActivity.this, ContentActivity.class));
         finish();
     }
 
-    @Override
-    public void onNotSignIn() {
-
-    }
-
-    @Override
-    public void onSignInSuccess() {
-        startActivity(new Intent(EnterActivity.this, ContentActivity.class));
-        finish();
-    }
-
-    @Override
-    public void onSignUpSuccess() {
-
+    private void initTimer(){
+        mTimer = new Timer();
+        final BaseTimerTask baseTimerTask = new BaseTimerTask(this);
+        mTimer.schedule(baseTimerTask,0,1000);
     }
 
     @Override
     public void onBackToFirstFragment() {
         finish();
+    }
+
+    @Override
+    public void onTimer() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Logger.d("onTimer");
+                if (mTvTimer != null){
+                    mTvTimer.setText(MessageFormat.format("跳过\n{0}s", mCount));
+                    mCount--;
+                    if (mCount < 0){
+                        enterContentActivity();
+                        if (mTimer != null){
+                            mTimer.cancel();
+                            mTimer = null;
+                        }
+                    }
+                }
+            }
+        });
     }
 }

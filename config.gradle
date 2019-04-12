@@ -84,12 +84,6 @@ ext {
             // --------------logger-------------------
             logger               : 'com.orhanobut:logger:2.2.0',
 
-            //---------------Banner依赖---------------
-            Banner               : 'com.bigkoo:convenientbanner:2.0.5',
-
-            //--------------circleprogress-----------
-            circleprogress       : 'com.github.lzyzsd:circleprogress:1.2.1',
-
            //----------------shimmerlayout------------
            shimmerlayout         : 'io.supercharge:shimmerlayout:2.1.0',
             
@@ -104,10 +98,8 @@ ext {
 
             // -------------------arrow---------------
             arrow              :'com.fernandocejas:arrow:1.0.0',
-
             // ------------------EasyImageLoader ----------
             EasyImageLoader : 'com.github.xianfeng92:EasyImageLoader:V0.1',
-
             // ------------------- AndroidScreenAdapter ---------
             AndroidScreenAdapter :  'com.github.xianfeng92:AndroidScreenAdapter:V0.1',
             // ---------------------BeautyLayoutManager------------------

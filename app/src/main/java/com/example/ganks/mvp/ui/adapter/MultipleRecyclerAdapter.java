@@ -33,13 +33,13 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
                 helper.setText(R.id.text_single,text);
                 break;
             case ItemType.IMAGE:
-                helper.setImageResource(R.id.img_single_1,R.mipmap.banner_1);
-                helper.setImageResource(R.id.img_single_2,R.mipmap.banner_2);
+                helper.setImageResource(R.id.img_single_1,R.mipmap.banner);
+                helper.setImageResource(R.id.img_single_2,R.mipmap.banner);
                 break;
             case ItemType.TEXT_IMAGE:
                 text = item.getField(MultipleFields.TEXT);
                 helper.setText(R.id.tv_multiple,text);
-                helper.setImageResource(R.id.img_multiple,R.mipmap.banner_3);
+                helper.setImageResource(R.id.img_multiple,R.mipmap.banner);
                 break;
             default:
                 break;

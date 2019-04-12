@@ -2,7 +2,6 @@ package com.example.ganks.base;
 
 import android.app.Application;
 import android.content.Context;
-import com.example.ganks.MessageEvent;
 import com.example.ganks.internal.di.components.ApplicationComponent;
 import com.example.ganks.internal.di.components.DaggerApplicationComponent;
 import com.example.ganks.internal.di.modules.ApplicationModule;
@@ -16,8 +15,6 @@ import com.xforg.gank_core.app.Gank;
 import com.example.data.GreenDaoHelper;
 import com.xforg.gank_core.utils.Utils;
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
@@ -55,7 +52,19 @@ public class BaseApplication extends Application {
                 })
                 .install();
         BlockCanary.install(this, new AppBlockCanaryContext()).start();
-        EventBus.getDefault().register(this);
+        Gank.init(this).withBaseUrl(Api.APP_DOMAIN).configure();
+        //初始化GreenDao
+        GreenDaoHelper.initDataBase(this);
+        Utils.init(this);
+        ImageLoader.init(this);
+        Logger.addLogAdapter(new AndroidLogAdapter());
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
+        // Normal app init code...
     }
 
     @Override
@@ -74,26 +83,6 @@ public class BaseApplication extends Application {
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
         ImageLoader.trimMemory(level);
-    }
-
-    //当进入欢迎画面时，再去初期化第三方框架
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void lazyInit(MessageEvent messageEvent) {
-        if (110 == (Integer) messageEvent.getMessage()){
-            Gank.init(this).withBaseUrl(Api.APP_DOMAIN).configure();
-            //初始化GreenDao
-            GreenDaoHelper.initDataBase(this);
-            Utils.init(this);
-            ImageLoader.init(this);
-            Logger.addLogAdapter(new AndroidLogAdapter());
-            if (LeakCanary.isInAnalyzerProcess(this)) {
-                // This process is dedicated to LeakCanary for heap analysis.
-                // You should not init your app in this process.
-                return;
-            }
-            LeakCanary.install(this);
-            // Normal app init code...
-        }
     }
 
     private void initializeInjector() {

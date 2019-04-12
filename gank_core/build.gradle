@@ -56,11 +56,8 @@ dependencies {
     //ButterKnife依赖
     api rootProject.ext.dependencies.butterknife
     annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
-    //Banner依赖
-    api rootProject.ext.dependencies.Banner
     api rootProject.ext.dependencies.utilcode
     api rootProject.ext.dependencies.cardView
-    api rootProject.ext.dependencies.circleprogress
     api rootProject.ext.dependencies.design
     api rootProject.ext.dependencies.avi
     // rxlifecycle2
