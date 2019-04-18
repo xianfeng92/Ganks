@@ -106,8 +106,6 @@ ext {
             BeautyLayoutManager : 'com.github.xianfeng92:BeautyLayoutManager:V0.4',
             // -----------------------systembartint-----------------------
             SystemBarTint       : 'com.readystatesoftware.systembartint:systembartint:1.0.3',
-            // -----------------------blockcanary-------------------------
-            blockcanary         :  'com.github.markzhai:blockcanary-android:1.5.0'
     ]
 }
 

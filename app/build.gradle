@@ -41,7 +41,6 @@ dependencies {
     implementation rootProject.ext.dependencies.dagger
     implementation rootProject.ext.dependencies.AndroidScreenAdapter
     implementation rootProject.ext.dependencies.EasyImageLoader
-    implementation rootProject.ext.dependencies.blockcanary
     implementation project(path: ':domain')
     implementation project(path: ':data')
     implementation project(':domain')
