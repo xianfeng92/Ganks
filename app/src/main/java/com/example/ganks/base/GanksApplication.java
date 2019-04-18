@@ -21,9 +21,10 @@ import me.yokeyword.fragmentation.helper.ExceptionHandler;
  * Created By zhongxianfeng on 19-2-2
  * github: https://github.com/xianfeng92
  */
-public class BaseApplication extends Application {
+public class GanksApplication extends Application {
 
     private  static ApplicationComponent applicationComponent;
+    private static  GanksApplication instance;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -33,6 +34,7 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         initializeInjector();
         Fragmentation.builder()
                 // 设置 栈视图 模式为 （默认）悬浮球模式   SHAKE: 摇一摇唤出  NONE：隐藏， 仅在Debug环境生效
@@ -91,5 +93,9 @@ public class BaseApplication extends Application {
 
     public  static ApplicationComponent getApplicationComponent(){
         return applicationComponent;
+    }
+
+    public static synchronized GanksApplication getInstance() {
+        return instance;
     }
 }

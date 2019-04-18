@@ -17,9 +17,8 @@ import android.view.View;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.example.domain.Meizi;
 import com.example.ganks.R;
-import com.example.ganks.base.BaseApplication;
+import com.example.ganks.base.GanksApplication;
 import com.example.ganks.delegates.BaseDelegate;
-import com.example.ganks.internal.di.modules.MeiziModule;
 import com.example.ganks.mvp.presenter.MeiziPresenter;
 import com.example.ganks.mvp.ui.adapter.StaggerAdapter;
 import com.example.ganks.mvp.view.MeiziView;
@@ -201,6 +200,6 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Meizi
     }
 
     private void initializeInjector() {
-        BaseApplication.getApplicationComponent().contentActivityComponent().build().meiziComponent().setMeiziView(this).build().inject(this);
+        GanksApplication.getApplicationComponent().contentActivityComponent().build().meiziComponent().setMeiziView(this).build().inject(this);
     }
 }

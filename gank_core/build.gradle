@@ -70,5 +70,10 @@ dependencies {
     api rootProject.ext.dependencies.logger
     // SystemBarTint
     api rootProject.ext.dependencies.SystemBarTint
+
+    api rootProject.ext.dependencies.stetho
+    api rootProject.ext.dependencies.stethookhttp3
+
+    api rootProject.ext.dependencies.loggingInterceptor
     implementation project(':domain')
 }

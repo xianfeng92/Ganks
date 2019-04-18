@@ -6,7 +6,7 @@ import com.example.data.repository.MeiziDataRepository;
 import com.example.domain.executor.PostExecutionThread;
 import com.example.domain.executor.ThreadExecutor;
 import com.example.domain.repository.MeiziRepository;
-import com.example.ganks.base.BaseApplication;
+import com.example.ganks.base.GanksApplication;
 import com.example.ganks.executor.UIThread;
 import com.example.ganks.internal.di.components.ContentActivityComponent;
 import javax.inject.Singleton;
@@ -20,9 +20,9 @@ import dagger.Provides;
 @Module(subcomponents = {ContentActivityComponent.class})
 public class ApplicationModule {
 
-    private final BaseApplication application;
+    private final GanksApplication application;
 
-    public ApplicationModule(BaseApplication application){
+    public ApplicationModule(GanksApplication application){
         this.application = application;
     }
 

@@ -2,7 +2,7 @@ package com.example.ganks.mvp.ui.activitys;
 
 import android.os.Bundle;
 import com.example.ganks.R;
-import com.example.ganks.base.BaseApplication;
+import com.example.ganks.base.GanksApplication;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.mvp.ui.TabSelectedEvent;
 import com.example.ganks.mvp.ui.fragment.HomeFragment;
@@ -137,6 +137,6 @@ public class ContentActivity extends ProxyActivity implements GankDelegate.OnBac
 
 
     private void initializeInjector(){
-        BaseApplication.getApplicationComponent().contentActivityComponent().build().inject(this);
+        GanksApplication.getApplicationComponent().contentActivityComponent().build().inject(this);
     }
 }

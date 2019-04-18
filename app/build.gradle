@@ -23,6 +23,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -41,6 +45,8 @@ dependencies {
     implementation rootProject.ext.dependencies.dagger
     implementation rootProject.ext.dependencies.AndroidScreenAdapter
     implementation rootProject.ext.dependencies.EasyImageLoader
+    implementation rootProject.ext.dependencies.PersistentCookieJar
+    implementation rootProject.ext.dependencies.retrofitUrlManager
     implementation project(path: ':domain')
     implementation project(path: ':data')
     implementation project(':domain')

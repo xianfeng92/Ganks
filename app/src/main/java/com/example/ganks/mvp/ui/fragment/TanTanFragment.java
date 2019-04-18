@@ -11,9 +11,8 @@ import android.view.View;
 import android.widget.Toast;
 import com.example.domain.Meizi;
 import com.example.ganks.R;
-import com.example.ganks.base.BaseApplication;
+import com.example.ganks.base.GanksApplication;
 import com.example.ganks.delegates.BaseDelegate;
-import com.example.ganks.internal.di.modules.TanTanModule;
 import com.example.ganks.mvp.presenter.TanTanPresenter;
 import com.example.ganks.mvp.ui.adapter.TanTanAdapter;
 import com.example.ganks.mvp.view.TanTanView;
@@ -143,6 +142,6 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
     }
 
     private void initializeInjector(){
-        BaseApplication.getApplicationComponent().contentActivityComponent().build().tantanComponent().setTanTanView(this).build().inject(this);
+        GanksApplication.getApplicationComponent().contentActivityComponent().build().tantanComponent().setTanTanView(this).build().inject(this);
     }
 }

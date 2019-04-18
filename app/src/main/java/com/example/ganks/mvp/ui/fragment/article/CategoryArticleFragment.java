@@ -13,7 +13,7 @@ import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.SkeletonScreen;
 import com.example.ganks.DataConvert.HomeDataConvert;
 import com.example.ganks.R;
-import com.example.ganks.base.BaseApplication;
+import com.example.ganks.base.GanksApplication;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.mvp.presenter.CategoryPresenter;
 import com.example.ganks.mvp.ui.adapter.MultipleRecyclerAdapter;
@@ -155,6 +155,6 @@ public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> imp
     }
 
     private void initializeInjector(){
-        BaseApplication.getApplicationComponent().contentActivityComponent().build().categoryComponent().setCateGoryComponentView(this).build().inject(this);
+        GanksApplication.getApplicationComponent().contentActivityComponent().build().categoryComponent().setCateGoryComponentView(this).build().inject(this);
     }
 }
