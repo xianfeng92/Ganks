@@ -13,7 +13,6 @@ import com.example.domain.Meizi;
 import com.example.ganks.R;
 import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
-import com.example.ganks.internal.di.components.DaggerTanTanComponent;
 import com.example.ganks.internal.di.modules.TanTanModule;
 import com.example.ganks.mvp.presenter.TanTanPresenter;
 import com.example.ganks.mvp.ui.adapter.TanTanAdapter;
@@ -144,10 +143,6 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
     }
 
     private void initializeInjector(){
-        DaggerTanTanComponent.builder()
-                .applicationComponent(BaseApplication.getApplicationComponent())
-                .tanTanModule(new TanTanModule(this))
-                .build()
-                .inject(this);
+        BaseApplication.getApplicationComponent().contentActivityComponent().build().tantanComponent().setTanTanView(this).build().inject(this);
     }
 }

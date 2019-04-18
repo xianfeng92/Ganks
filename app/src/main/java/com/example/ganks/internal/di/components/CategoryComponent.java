@@ -1,17 +1,27 @@
 package com.example.ganks.internal.di.components;
 
-import com.example.ganks.internal.di.PerActivity;
+import com.example.ganks.internal.di.PerFragment;
 import com.example.ganks.internal.di.modules.CategoryModule;
 import com.example.ganks.mvp.ui.fragment.article.CategoryArticleFragment;
+import com.example.ganks.mvp.view.CategoryView;
 
-import dagger.Component;
+import dagger.BindsInstance;
+import dagger.Subcomponent;
 
 /**
  * Created By zhongxianfeng on 19-4-4
  * github: https://github.com/xianfeng92
  */
-@PerActivity
-@Component(modules = CategoryModule.class,dependencies = ApplicationComponent.class)
+@PerFragment
+@Subcomponent(modules = CategoryModule.class)
 public interface CategoryComponent {
     void inject(CategoryArticleFragment categoryArticleFragment);
+
+    @Subcomponent.Builder
+    interface Builder{
+        CategoryComponent build();
+
+        @BindsInstance
+        CategoryComponent.Builder setCateGoryComponentView(CategoryView view);
+    }
 }

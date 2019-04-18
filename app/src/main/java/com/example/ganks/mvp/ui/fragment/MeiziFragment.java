@@ -19,7 +19,6 @@ import com.example.domain.Meizi;
 import com.example.ganks.R;
 import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
-import com.example.ganks.internal.di.components.DaggerMeiziComponent;
 import com.example.ganks.internal.di.modules.MeiziModule;
 import com.example.ganks.mvp.presenter.MeiziPresenter;
 import com.example.ganks.mvp.ui.adapter.StaggerAdapter;
@@ -202,10 +201,6 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Meizi
     }
 
     private void initializeInjector() {
-        DaggerMeiziComponent.builder()
-                .applicationComponent(BaseApplication.getApplicationComponent())
-                .meiziModule(new MeiziModule(this))
-                .build()
-                .inject(this);
+        BaseApplication.getApplicationComponent().contentActivityComponent().build().meiziComponent().setMeiziView(this).build().inject(this);
     }
 }

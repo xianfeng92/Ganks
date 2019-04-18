@@ -15,8 +15,6 @@ import com.example.ganks.DataConvert.HomeDataConvert;
 import com.example.ganks.R;
 import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
-import com.example.ganks.internal.di.components.DaggerCategoryComponent;
-import com.example.ganks.internal.di.modules.CategoryModule;
 import com.example.ganks.mvp.presenter.CategoryPresenter;
 import com.example.ganks.mvp.ui.adapter.MultipleRecyclerAdapter;
 import com.example.ganks.mvp.view.CategoryView;
@@ -157,10 +155,6 @@ public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> imp
     }
 
     private void initializeInjector(){
-        DaggerCategoryComponent.builder()
-                .applicationComponent(BaseApplication.getApplicationComponent())
-                .categoryModule(new CategoryModule(this))
-                .build()
-                .inject(this);
+        BaseApplication.getApplicationComponent().contentActivityComponent().build().categoryComponent().setCateGoryComponentView(this).build().inject(this);
     }
 }

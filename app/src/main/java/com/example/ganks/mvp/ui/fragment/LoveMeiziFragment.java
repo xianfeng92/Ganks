@@ -23,8 +23,6 @@ import com.example.domain.Meizi;
 import com.example.ganks.R;
 import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
-import com.example.ganks.internal.di.components.DaggerLoveMeiziComponent;
-import com.example.ganks.internal.di.modules.LoveMeiziModule;
 import com.example.ganks.mvp.presenter.LoveMeiziPresenter;
 import com.example.ganks.mvp.ui.adapter.LineAdapter;
 import com.example.data.GreenDaoHelper;
@@ -229,10 +227,6 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
     }
 
     private void initializeInjector(){
-        DaggerLoveMeiziComponent.builder()
-                .applicationComponent(BaseApplication.getApplicationComponent())
-                .loveMeiziModule(new LoveMeiziModule(this))
-                .build()
-                .inject(this);
+        BaseApplication.getApplicationComponent().contentActivityComponent().build().loveMeiziComponent().setLoveMeiziView(this).build().inject(this);
     }
 }

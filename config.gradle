@@ -62,8 +62,8 @@ ext {
 
             //----------------Dagger2---------------
 
-            dagger               : 'com.google.dagger:dagger-compiler:2.8',
-            daggerCompiler      : 'com.google.dagger:dagger-compiler:2.8',
+            dagger               : 'com.google.dagger:dagger-compiler:2.11',
+            daggerCompiler      : 'com.google.dagger:dagger-compiler:2.11',
  
             // ------------- json解析 -------------
             fastJson             : 'com.alibaba:fastjson:1.1.70.android',

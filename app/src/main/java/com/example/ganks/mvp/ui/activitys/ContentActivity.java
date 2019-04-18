@@ -2,6 +2,7 @@ package com.example.ganks.mvp.ui.activitys;
 
 import android.os.Bundle;
 import com.example.ganks.R;
+import com.example.ganks.base.BaseApplication;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.mvp.ui.TabSelectedEvent;
 import com.example.ganks.mvp.ui.fragment.HomeFragment;
@@ -132,5 +133,10 @@ public class ContentActivity extends ProxyActivity implements GankDelegate.OnBac
     @Override
     public void onBackToFirstFragment() {
         mBottomBar.setCurrentItem(0);
+    }
+
+
+    private void initializeInjector(){
+        BaseApplication.getApplicationComponent().contentActivityComponent().build().inject(this);
     }
 }
