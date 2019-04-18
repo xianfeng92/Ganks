@@ -8,7 +8,7 @@
 
 # Progress
 
-![Progress](http://progressed.io/bar/20)
+![Progress](http://progressed.io/bar/25)
 
 ----------------------------------------------------
 ![](https://img.shields.io/badge/Build-passing-brightgreen.svg)
@@ -30,6 +30,12 @@
 2. Domain Library a pure java module without any android dependencies. All the external components use interfaces when connecting to the data Library.
 
 3. All data needed for the application comes from data Library , through a MeiziRepository implementation (the interface is in the domain)
+
+
+---------------------------------
+### Ganks DI With Dagger
+
+![GankDIWithDagger](https://github.com/xianfeng92/Ganks/blob/master/images/GankDIWithDagger.png)
 
 ### LifeCycle about Ganks
 
