@@ -40,12 +40,12 @@ public class DaoMeiziEntity {
         public DaoMeiziEntity() {
         }
 
-        public String get_id() {
+        public String getid() {
             return this.id;
         }
 
-        public void set_id(String _id) {
-            this.id = _id;
+        public void setid(String id) {
+            this.id = id;
         }
 
         public String getCreatedAt() {

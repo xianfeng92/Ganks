@@ -3,10 +3,8 @@ package com.example.data.net;
 import com.example.domain.MeiziList;
 import java.util.List;
 import io.reactivex.Observable;
-import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import retrofit2.http.Streaming;
 
 /**
  * Created By apple on 2019/3/2
@@ -23,7 +21,6 @@ public interface RxRestService {
     @GET("api/data/福利/10/{page}")
     Observable<MeiziList.Meizi> getMeizi(@Path("page") int page);
 
-    @GET("{picture}")
-    @Streaming
-    Observable<ResponseBody> downloadWithRxjava(@Path("picture") String picture);
+    @GET("random/data/福利/{number}")
+    Observable<MeiziList> getRandomBeauties(@Path("number") int number);
 }
