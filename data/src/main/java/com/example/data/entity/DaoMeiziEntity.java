@@ -18,17 +18,17 @@ public class DaoMeiziEntity {
          * who : 代码家
          */
 
-        public String _id;
+        public String id;
         public String createdAt;
         public String desc;
         public String type;
         public String url;
         public String addTime;
 
-        @Generated(hash = 1383321709)
-        public DaoMeiziEntity(String _id, String createdAt, String desc, String type, String url,
-                              String addTime) {
-            this._id = _id;
+        @Generated(hash = 1932542763)
+        public DaoMeiziEntity(String id, String createdAt, String desc, String type, String url,
+                String addTime) {
+            this.id = id;
             this.createdAt = createdAt;
             this.desc = desc;
             this.type = type;
@@ -41,11 +41,11 @@ public class DaoMeiziEntity {
         }
 
         public String get_id() {
-            return this._id;
+            return this.id;
         }
 
         public void set_id(String _id) {
-            this._id = _id;
+            this.id = _id;
         }
 
         public String getCreatedAt() {
@@ -86,5 +86,13 @@ public class DaoMeiziEntity {
 
         public void setAddTime(String addTime) {
             this.addTime = addTime;
+        }
+
+        public String getId() {
+            return this.id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
         }
 }

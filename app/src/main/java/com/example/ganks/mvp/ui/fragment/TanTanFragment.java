@@ -9,7 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Toast;
-import com.example.domain.Meizi;
+
+import com.example.domain.MeiziList;
 import com.example.ganks.R;
 import com.example.ganks.base.GanksApplication;
 import com.example.ganks.delegates.BaseDelegate;
@@ -34,7 +35,7 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
     private CardItemTouchHelperCallback cardItemTouchHelperCallback;
     private CardLayoutManager cardLayoutManager;
     private RecyclerView recyclerView;
-    private List<Meizi> resultsBeanList = new ArrayList<>();
+    private List<MeiziList.Meizi> resultsBeanList = new ArrayList<>();
     private int page = 1;
 
     public OnBackToFirstListener _mBackToFirstListener;
@@ -109,7 +110,7 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
                     toastView.setBackgroundResource(R.mipmap.img_dislike);
                 }else {
                     toastView.setBackgroundResource(R.mipmap.img_like);
-                    mPresenter.addToFavorites((Meizi) o);
+                    mPresenter.addToFavorites((MeiziList.Meizi) o);
                 }
                 toast.setView(toastView);
                 toast.show();
@@ -133,7 +134,7 @@ public class TanTanFragment extends BaseDelegate<TanTanPresenter> implements Tan
     }
 
     @Override
-    public void setNewData(List<Meizi> mData) {
+    public void setNewData(List<MeiziList.Meizi> mData) {
         resultsBeanList.clear();
         if (resultsBeanList != null){
             resultsBeanList.addAll(mData);

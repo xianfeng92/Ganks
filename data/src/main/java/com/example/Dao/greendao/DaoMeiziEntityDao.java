@@ -24,7 +24,7 @@ public class DaoMeiziEntityDao extends AbstractDao<DaoMeiziEntity, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property _id = new Property(0, String.class, "_id", false, "_ID");
+        public final static Property Id = new Property(0, String.class, "id", false, "ID");
         public final static Property CreatedAt = new Property(1, String.class, "createdAt", false, "CREATED_AT");
         public final static Property Desc = new Property(2, String.class, "desc", false, "DESC");
         public final static Property Type = new Property(3, String.class, "type", false, "TYPE");
@@ -45,7 +45,7 @@ public class DaoMeiziEntityDao extends AbstractDao<DaoMeiziEntity, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"DAO_MEIZI_ENTITY\" (" + //
-                "\"_ID\" TEXT," + // 0: _id
+                "\"ID\" TEXT," + // 0: id
                 "\"CREATED_AT\" TEXT," + // 1: createdAt
                 "\"DESC\" TEXT," + // 2: desc
                 "\"TYPE\" TEXT," + // 3: type
@@ -63,9 +63,9 @@ public class DaoMeiziEntityDao extends AbstractDao<DaoMeiziEntity, Void> {
     protected final void bindValues(DatabaseStatement stmt, DaoMeiziEntity entity) {
         stmt.clearBindings();
  
-        String _id = entity.get_id();
-        if (_id != null) {
-            stmt.bindString(1, _id);
+        String id = entity.getId();
+        if (id != null) {
+            stmt.bindString(1, id);
         }
  
         String createdAt = entity.getCreatedAt();
@@ -98,9 +98,9 @@ public class DaoMeiziEntityDao extends AbstractDao<DaoMeiziEntity, Void> {
     protected final void bindValues(SQLiteStatement stmt, DaoMeiziEntity entity) {
         stmt.clearBindings();
  
-        String _id = entity.get_id();
-        if (_id != null) {
-            stmt.bindString(1, _id);
+        String id = entity.getId();
+        if (id != null) {
+            stmt.bindString(1, id);
         }
  
         String createdAt = entity.getCreatedAt();
@@ -137,7 +137,7 @@ public class DaoMeiziEntityDao extends AbstractDao<DaoMeiziEntity, Void> {
     @Override
     public DaoMeiziEntity readEntity(Cursor cursor, int offset) {
         DaoMeiziEntity entity = new DaoMeiziEntity( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // _id
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // createdAt
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // desc
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // type
@@ -149,7 +149,7 @@ public class DaoMeiziEntityDao extends AbstractDao<DaoMeiziEntity, Void> {
      
     @Override
     public void readEntity(Cursor cursor, DaoMeiziEntity entity, int offset) {
-        entity.set_id(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setCreatedAt(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setDesc(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setType(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));

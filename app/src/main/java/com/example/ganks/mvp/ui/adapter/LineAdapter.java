@@ -3,7 +3,7 @@ package com.example.ganks.mvp.ui.adapter;
 import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseItemDraggableAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.example.domain.Meizi;
+import com.example.domain.MeiziList;
 import com.example.ganks.R;
 import com.xforg.easyimage.ImageLoader;
 import com.xforg.easyimage.config.ConfigBuilder;
@@ -11,16 +11,16 @@ import com.xforg.easyimage.config.ImageConfig;
 
 import java.util.List;
 
-public class LineAdapter extends BaseItemDraggableAdapter<Meizi,BaseViewHolder> {
+public class LineAdapter extends BaseItemDraggableAdapter<MeiziList.Meizi,BaseViewHolder> {
 
-    public LineAdapter(int layoutResId,List<Meizi> resultsBeanList){
+    public LineAdapter(int layoutResId,List<MeiziList.Meizi> resultsBeanList){
         super(layoutResId,resultsBeanList);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, Meizi item) {
+    protected void convert(BaseViewHolder helper, MeiziList.Meizi item) {
         ImageConfig config = new ConfigBuilder(mContext)
-                .url(item.getUrl())
+                .url(item.url)
                 .placeHolder(R.mipmap.default_bg)
                 .error(R.mipmap.fail_load)
                 .build();

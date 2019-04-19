@@ -19,13 +19,13 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
 import com.chad.library.adapter.base.listener.OnItemDragListener;
 import com.chad.library.adapter.base.listener.OnItemSwipeListener;
-import com.example.domain.Meizi;
+import com.example.domain.MeiziList;
 import com.example.ganks.R;
 import com.example.ganks.base.GanksApplication;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.mvp.presenter.LoveMeiziPresenter;
 import com.example.ganks.mvp.ui.adapter.LineAdapter;
-import com.example.data.GreenDaoHelper;
+import com.example.data.HelperImpl.GreenDaoHelperImpl;
 import com.example.ganks.mvp.view.LoveMeiziView;
 import com.orhanobut.logger.Logger;
 import com.xforg.gank_core.utils.ToastUtils;
@@ -160,7 +160,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
             @Override
             public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
                 Logger.d("onItemSwiped %d",pos);
-                GreenDaoHelper.removeById(mPresenter.resultsBeanList.get(pos).getId());
+                GreenDaoHelperImpl.removeById(mPresenter.resultsBeanList.get(pos).id);
                 mPresenter.loadDataByGreenDao();
             }
 
@@ -194,15 +194,15 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                String url = mPresenter.resultsBeanList.get(position).getUrl();
-                mPresenter.downLoad(url);
+                String url = mPresenter.resultsBeanList.get(position).url;
+//                mPresenter.downLoad(url);
             }
         });
         recyclerView.setAdapter(mAdapter);
     }
 
     @Override
-    public void setNewData(List<Meizi> mData) {
+    public void setNewData(List<MeiziList.Meizi> mData) {
         updateAdapter(mData);
     }
 
@@ -214,7 +214,7 @@ public class LoveMeiziFragment extends BaseDelegate<LoveMeiziPresenter> implemen
         return true;
     }
 
-    private void updateAdapter(List<Meizi> resultsBeanList) {
+    private void updateAdapter(List<MeiziList.Meizi> resultsBeanList) {
         if (resultsBeanList.size() == 0) {
             mAdapter.setEmptyView(notDataView);
         }

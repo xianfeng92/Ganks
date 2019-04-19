@@ -3,24 +3,23 @@ package com.example.ganks.mvp.ui.adapter;
 import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.example.domain.Meizi;
+import com.example.domain.MeiziList;
 import com.example.ganks.R;
 import com.xforg.easyimage.ImageLoader;
 import com.xforg.easyimage.config.ConfigBuilder;
 import com.xforg.easyimage.config.ImageConfig;
-
 import java.util.List;
 
-public class StaggerAdapter extends BaseQuickAdapter<Meizi, BaseViewHolder> {
+public class StaggerAdapter extends BaseQuickAdapter<MeiziList.Meizi, BaseViewHolder> {
 
-    public StaggerAdapter(int layoutResId, List<Meizi> meizis){
+    public StaggerAdapter(int layoutResId, List<MeiziList.Meizi> meizis){
         super(layoutResId,meizis);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, Meizi item) {
+    protected void convert(BaseViewHolder helper, MeiziList.Meizi item) {
         ImageConfig config = new ConfigBuilder(mContext)
-                .url(item.getUrl())
+                .url(item.url)
                 .placeHolder(R.mipmap.default_bg)
                 .error(R.mipmap.fail_load)
                 .build();

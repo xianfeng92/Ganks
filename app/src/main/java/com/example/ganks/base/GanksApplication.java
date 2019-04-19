@@ -2,16 +2,16 @@ package com.example.ganks.base;
 
 import android.app.Application;
 import android.content.Context;
-import com.example.ganks.internal.di.components.ApplicationComponent;
-import com.example.ganks.internal.di.components.DaggerApplicationComponent;
-import com.example.ganks.internal.di.modules.ApplicationModule;
+import com.example.ganks.GanksApi;
+import com.example.ganks.di.components.ApplicationComponent;
+import com.example.ganks.di.components.DaggerApplicationComponent;
+import com.example.ganks.di.modules.ApplicationModule;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 import com.xforg.easyimage.ImageLoader;
-import com.xforg.gank_core.net.GanksApi;
 import com.xforg.gank_core.app.Gank;
-import com.example.data.GreenDaoHelper;
+import com.example.data.HelperImpl.GreenDaoHelperImpl;
 import com.xforg.gank_core.utils.Utils;
 import org.greenrobot.eventbus.EventBus;
 import me.yokeyword.fragmentation.Fragmentation;
@@ -54,7 +54,7 @@ public class GanksApplication extends Application {
                 .install();
         Gank.init(this).withBaseUrl(GanksApi.APP_DOMAIN).configure();
         //初始化GreenDao
-        GreenDaoHelper.initDataBase(this);
+        GreenDaoHelperImpl.initDataBase(this);
         Utils.init(this);
         ImageLoader.init(this);
         Logger.addLogAdapter(new AndroidLogAdapter());

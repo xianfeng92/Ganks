@@ -1,8 +1,7 @@
 package com.example.ganks.mvp.view;
 
-import com.example.domain.Meizi;
+import com.example.domain.MeiziList;
 import com.example.ganks.mvp.base.IView;
-
 import java.util.List;
 
 /**
@@ -10,6 +9,6 @@ import java.util.List;
  * github: https://github.com/xianfeng92
  */
 public interface LoveMeiziView extends IView {
-    void setNewData(List<Meizi> mData);
+    void setNewData(List<MeiziList.Meizi> mData);
 
 }

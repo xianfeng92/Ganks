@@ -15,7 +15,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.TypedValue;
 import android.view.View;
 import com.blankj.utilcode.util.ScreenUtils;
-import com.example.domain.Meizi;
+import com.example.domain.MeiziList;
 import com.example.ganks.R;
 import com.example.ganks.base.GanksApplication;
 import com.example.ganks.delegates.BaseDelegate;
@@ -33,7 +33,7 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Meizi
     public CoordinatorLayout coordinatorLayout;
     public SwipeRefreshLayout swipeRefreshLayout;
     public StaggerAdapter mAdapter;
-    public List<Meizi> meizis = new ArrayList<>();
+    public List<MeiziList.Meizi> meizis = new ArrayList<>();
     public StaggeredGridLayoutManager staggeredGridLayoutManager;
     private int lastVisibleItem;
     private ItemTouchHelper itemTouchHelper;
@@ -182,12 +182,12 @@ public class MeiziFragment extends BaseDelegate<MeiziPresenter> implements Meizi
     }
 
     @Override
-    public void setNewData(List<Meizi> mData) {
+    public void setNewData(List<MeiziList.Meizi> mData) {
         meizis.addAll(mData);
         updateAdapter(meizis);
     }
 
-    private void updateAdapter(List<Meizi> meizis){
+    private void updateAdapter(List<MeiziList.Meizi> meizis){
         if (mAdapter == null){
             mAdapter = new StaggerAdapter(R.layout.stagger_meizi_item,meizis);
             recyclerView.setAdapter(mAdapter);
