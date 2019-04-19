@@ -9,7 +9,7 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 import com.xforg.easyimage.ImageLoader;
-import com.xforg.gank_core.net.Api;
+import com.xforg.gank_core.net.GanksApi;
 import com.xforg.gank_core.app.Gank;
 import com.example.data.GreenDaoHelper;
 import com.xforg.gank_core.utils.Utils;
@@ -52,7 +52,7 @@ public class GanksApplication extends Application {
                     }
                 })
                 .install();
-        Gank.init(this).withBaseUrl(Api.APP_DOMAIN).configure();
+        Gank.init(this).withBaseUrl(GanksApi.APP_DOMAIN).configure();
         //初始化GreenDao
         GreenDaoHelper.initDataBase(this);
         Utils.init(this);

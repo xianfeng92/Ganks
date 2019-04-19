@@ -1,13 +1,16 @@
 package com.example.ganks.internal.di.modules;
 
+import com.example.data.net.RxRestService;
 import com.example.ganks.BuildConfig;
 import com.example.ganks.Common.CommonUtils;
 import com.example.ganks.Common.Constants;
 import com.example.ganks.base.GanksApplication;
+import com.example.ganks.internal.di.qualifier.GanksUrl;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.xforg.gank_core.net.GanksApi;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Singleton;
@@ -31,6 +34,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 @Module
 public class HttpModule {
+
+    @Singleton
+    @Provides
+    RxRestService provideRxRestService(@GanksUrl Retrofit retrofit){
+        return retrofit.create(RxRestService.class);
+    }
+
+    @Singleton
+    @Provides
+    @GanksUrl
+    Retrofit provideGanksRetrofit(Retrofit.Builder builder, OkHttpClient client){
+        return createRetrofit(builder,client, GanksApi.APP_DOMAIN);
+    }
 
     @Singleton
     @Provides
@@ -96,6 +112,7 @@ public class HttpModule {
         return RetrofitUrlManager.getInstance().with(builder).build();
     }
 
+    // 构建 retrofit 客户端
     private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {
         return builder
                 .baseUrl(url)

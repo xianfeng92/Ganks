@@ -8,7 +8,7 @@ public class DaoMeiziEntity {
         /**
          * _id : 595ad074421aa90ca3bb6a90
          * createdAt : 2017-07-04T07:17:08.609Z
-         * desc : Android 有两套相机 Api，使用起来很麻烦，好在 Foto 开源了他们在 Android 上的 Camera 封装 Api，力荐！
+         * desc : Android 有两套相机 GanksApi，使用起来很麻烦，好在 Foto 开源了他们在 Android 上的 Camera 封装 GanksApi，力荐！
          * images : ["http://img.gank.io/0a15bae7-c513-4feb-bbe2-1273b8b809ce"]
          * publishedAt : 2017-07-04T11:50:36.484Z
          * source : chrome

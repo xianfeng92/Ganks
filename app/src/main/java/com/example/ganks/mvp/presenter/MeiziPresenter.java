@@ -4,10 +4,9 @@ package com.example.ganks.mvp.presenter;
 import com.example.domain.Meizi;
 import com.example.domain.interactor.DefaultObserver;
 import com.example.domain.interactor.GetMeiziList;
-import com.example.ganks.internal.di.PerActivity;
+import com.example.ganks.internal.di.Scope.PerActivity;
 import com.example.ganks.mvp.base.BasePresenter;
 import com.example.ganks.mvp.view.MeiziView;
-
 import java.util.List;
 import javax.inject.Inject;
 

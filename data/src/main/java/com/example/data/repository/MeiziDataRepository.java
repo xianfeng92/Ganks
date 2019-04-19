@@ -3,7 +3,7 @@ package com.example.data.repository;
 import com.example.data.entity.DaoMeiziEntity;
 import com.example.data.entity.MeiziList;
 import com.example.data.entity.mapper.MeiziEntityDataMapper;
-import com.example.data.net.RestApiImpl;
+import com.example.data.net.HttpHelperImpl;
 import com.example.domain.Meizi;
 import com.example.domain.repository.MeiziRepository;
 import com.example.data.GreenDaoHelper;
@@ -23,9 +23,12 @@ public class MeiziDataRepository implements MeiziRepository {
     @Inject
     MeiziDataRepository(){}
 
+    @Inject
+    HttpHelperImpl httpHelper;
+
     @Override
     public Observable<List<Meizi>> meizis(int page) {
-        return RestApiImpl.getInstance().meiziList(page).map(new Function<MeiziList, List<Meizi>>() {
+        return httpHelper.meiziList(page).map(new Function<MeiziList, List<Meizi>>() {
             @Override
             public List<Meizi> apply(MeiziList meiziList) throws Exception {
                 return MeiziEntityDataMapper.getInstance().transform(meiziList);

@@ -1,11 +1,8 @@
 package com.example.ganks.internal.di.components;
 
-import android.content.Context;
-import com.example.domain.executor.PostExecutionThread;
-import com.example.domain.executor.ThreadExecutor;
-import com.example.domain.repository.MeiziRepository;
 import com.example.ganks.base.GanksApplication;
 import com.example.ganks.internal.di.modules.ApplicationModule;
+import com.example.ganks.internal.di.modules.HttpModule;
 import javax.inject.Singleton;
 import dagger.Component;
 
@@ -14,17 +11,10 @@ import dagger.Component;
  * github: https://github.com/xianfeng92
  */
 @Singleton
-@Component(modules = ApplicationModule.class)
+@Component(modules = {ApplicationModule.class, HttpModule.class})
 public interface ApplicationComponent {
 
     void inject(GanksApplication application);
-
-
-    Context context();
-    ThreadExecutor threadExecutor();
-    PostExecutionThread PostExecutionThread();
-    MeiziRepository meiziRepository();
-
 
     ContentActivityComponent.Builder contentActivityComponent();
 }

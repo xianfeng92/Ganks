@@ -1,6 +1,6 @@
 package com.example.ganks.internal.di.components;
 
-import com.example.ganks.internal.di.PerActivity;
+import com.example.ganks.internal.di.Scope.PerActivity;
 import com.example.ganks.internal.di.modules.MeiziModule;
 import com.example.ganks.mvp.ui.fragment.MeiziFragment;
 import com.example.ganks.mvp.view.MeiziView;

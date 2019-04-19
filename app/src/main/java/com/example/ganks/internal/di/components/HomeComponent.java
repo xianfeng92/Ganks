@@ -1,6 +1,6 @@
 package com.example.ganks.internal.di.components;
 
-import com.example.ganks.internal.di.PerFragment;
+import com.example.ganks.internal.di.Scope.PerFragment;
 import com.example.ganks.internal.di.modules.HomeModule;
 import com.example.ganks.mvp.ui.fragment.HomeFragment;
 import com.example.ganks.mvp.view.HomeView;

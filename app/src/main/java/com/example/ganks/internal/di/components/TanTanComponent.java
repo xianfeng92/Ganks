@@ -1,6 +1,6 @@
 package com.example.ganks.internal.di.components;
 
-import com.example.ganks.internal.di.PerFragment;
+import com.example.ganks.internal.di.Scope.PerFragment;
 import com.example.ganks.internal.di.modules.TanTanModule;
 import com.example.ganks.mvp.ui.fragment.TanTanFragment;
 import com.example.ganks.mvp.view.TanTanView;

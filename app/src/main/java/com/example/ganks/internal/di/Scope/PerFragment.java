@@ -1,4 +1,4 @@
-package com.example.ganks.internal.di;
+package com.example.ganks.internal.di.Scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
