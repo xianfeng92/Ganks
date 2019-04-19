@@ -1,28 +1,13 @@
 package com.example.ganks.mvp.presenter;
 
-import android.graphics.BitmapFactory;
-import android.os.Environment;
-import android.util.Log;
-
 import com.example.domain.MeiziList;
 import com.example.ganks.mvp.base.BasePresenter;
 import com.example.ganks.mvp.view.LoveMeiziView;
-import com.xforg.gank_core.utils.File.FileUtil;
-import com.xforg.gank_core.utils.ToastUtils;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.inject.Inject;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.ResponseBody;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created By apple on 2019/3/30
@@ -32,7 +17,6 @@ public class LoveMeiziPresenter extends BasePresenter<LoveMeiziView> {
     private static final String TAG = "LoveMeiziPresenter";
     public List<MeiziList.Meizi> resultsBeanList = new ArrayList<>();
     private Set<String> downLoadUrls = new TreeSet<>();
-    private Retrofit retrofit;
 
     @Inject
     public LoveMeiziPresenter(LoveMeiziView view){

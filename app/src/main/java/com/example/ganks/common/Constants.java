@@ -1,4 +1,4 @@
-package com.example.ganks.Common;
+package com.example.ganks.common;
 
 import com.example.ganks.base.GanksApplication;
 import java.io.File;

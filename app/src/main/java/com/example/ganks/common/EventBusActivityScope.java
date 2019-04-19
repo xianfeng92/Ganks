@@ -1,4 +1,4 @@
-package com.xforg.gank_core.app;
+package com.example.ganks.common;
 
 import android.app.Activity;
 import android.app.Application;
@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;

@@ -1,4 +1,4 @@
-package com.xforg.gank_core.app;
+package com.example.ganks.common;
 
 /**
  * Created By zhongxianfeng on 19-2-1

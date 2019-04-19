@@ -10,7 +10,7 @@ import com.example.ganks.R;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.mvp.ui.adapter.MianViewPagerAdapter;
 import com.example.ganks.mvp.ui.fragment.article.CategoryArticleFragment;
-import com.xforg.gank_core.app.CategoryType;
+import com.example.ganks.common.CategoryType;
 import java.util.ArrayList;
 import java.util.List;
 

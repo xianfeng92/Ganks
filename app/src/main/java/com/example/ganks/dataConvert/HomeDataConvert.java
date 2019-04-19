@@ -1,4 +1,4 @@
-package com.example.ganks.DataConvert;
+package com.example.ganks.dataConvert;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;

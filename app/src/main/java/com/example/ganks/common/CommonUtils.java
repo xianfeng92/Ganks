@@ -1,4 +1,4 @@
-package com.example.ganks.Common;
+package com.example.ganks.common;
 
 import android.app.Activity;
 import android.app.Application;

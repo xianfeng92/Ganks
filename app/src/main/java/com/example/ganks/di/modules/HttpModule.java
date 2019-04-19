@@ -2,9 +2,9 @@ package com.example.ganks.di.modules;
 
 import com.example.data.net.RxRestService;
 import com.example.ganks.BuildConfig;
-import com.example.ganks.Common.CommonUtils;
-import com.example.ganks.Common.Constants;
-import com.example.ganks.GanksApi;
+import com.example.ganks.common.CommonUtils;
+import com.example.ganks.common.Constants;
+import com.example.ganks.base.GanksApi;
 import com.example.ganks.base.GanksApplication;
 import com.example.ganks.di.qualifier.GanksUrl;
 import com.facebook.stetho.okhttp3.StethoInterceptor;

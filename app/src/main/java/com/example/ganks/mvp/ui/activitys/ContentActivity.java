@@ -16,7 +16,7 @@ import com.example.ganks.delegates.GankDelegate;
 import com.xforg.gank_core.utils.ToastUtils;
 import com.xforg.gank_core.widge.BottomBar;
 import com.xforg.gank_core.widge.BottomBarTab;
-import com.xforg.gank_core.app.EventBusActivityScope;
+import com.example.ganks.common.EventBusActivityScope;
 
 
 public class ContentActivity extends ProxyActivity implements GankDelegate.OnBackToFirstListener{

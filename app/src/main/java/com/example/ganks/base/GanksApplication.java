@@ -2,7 +2,6 @@ package com.example.ganks.base;
 
 import android.app.Application;
 import android.content.Context;
-import com.example.ganks.GanksApi;
 import com.example.ganks.di.components.ApplicationComponent;
 import com.example.ganks.di.components.DaggerApplicationComponent;
 import com.example.ganks.di.modules.ApplicationModule;
@@ -10,12 +9,10 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 import com.xforg.easyimage.ImageLoader;
-import com.xforg.gank_core.app.Gank;
 import com.example.data.HelperImpl.GreenDaoHelperImpl;
 import com.xforg.gank_core.utils.Utils;
 import org.greenrobot.eventbus.EventBus;
 import me.yokeyword.fragmentation.Fragmentation;
-import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
 /**
  * Created By zhongxianfeng on 19-2-2
@@ -40,19 +37,7 @@ public class GanksApplication extends Application {
                 // 设置 栈视图 模式为 （默认）悬浮球模式   SHAKE: 摇一摇唤出  NONE：隐藏， 仅在Debug环境生效
                 .stackViewMode(Fragmentation.BUBBLE)
                 .debug(true) // 实际场景建议.debug(BuildConfig.DEBUG)
-                /**
-                 * 可以获取到{@link me.yokeyword.fragmentation.exception.AfterSaveStateTransactionWarning}
-                 * 在遇到After onSaveInstanceState时，不会抛出异常，会回调到下面的ExceptionHandler
-                 */
-                .handleException(new ExceptionHandler() {
-                    @Override
-                    public void onException(Exception e) {
-                        // 以Bugtags为例子: 把捕获到的 Exception 传到 Bugtags 后台。
-                        // Bugtags.sendException(e);
-                    }
-                })
                 .install();
-        Gank.init(this).withBaseUrl(GanksApi.APP_DOMAIN).configure();
         //初始化GreenDao
         GreenDaoHelperImpl.initDataBase(this);
         Utils.init(this);
