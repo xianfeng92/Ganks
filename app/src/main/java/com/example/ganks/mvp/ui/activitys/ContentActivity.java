@@ -11,7 +11,7 @@ import com.example.ganks.mvp.ui.fragment.MeiziFragment;
 import com.example.ganks.mvp.ui.fragment.TanTanFragment;
 import com.orhanobut.logger.Logger;
 import com.xforg.gank_core.StatusBar.StatusBarUtil;
-import com.xforg.gank_core.activitys.ProxyActivity;
+import com.xforg.gank_core.Proxy.ProxyActivity;
 import com.example.ganks.delegates.GankDelegate;
 import com.xforg.gank_core.utils.ToastUtils;
 import com.xforg.gank_core.widge.BottomBar;

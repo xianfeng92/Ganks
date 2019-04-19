@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import com.example.ganks.mvp.base.BasePresenter;
 import com.trello.rxlifecycle2.components.support.RxFragment;
-import com.xforg.gank_core.activitys.ProxyActivity;
+import com.xforg.gank_core.Proxy.ProxyActivity;
 import javax.inject.Inject;
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;

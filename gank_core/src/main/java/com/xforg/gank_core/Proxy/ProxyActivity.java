@@ -1,4 +1,4 @@
-package com.xforg.gank_core.activitys;
+package com.xforg.gank_core.Proxy;
 
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;

@@ -1,1 +1,1 @@
-include ':app', ':gank_core', ':domain', ':data'
+include ':app', ':gank_core', ':domain', ':repository'
