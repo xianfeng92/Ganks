@@ -1,4 +1,4 @@
-package com.example.ganks.dataConvert;
+package com.example.ganks.common;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.xforg.gank_core.recycler.DataConverter;
 import com.xforg.gank_core.recycler.MultipleFields;
 import com.xforg.gank_core.recycler.MultipleItemEntity;
-
 import java.util.ArrayList;
 
 /**

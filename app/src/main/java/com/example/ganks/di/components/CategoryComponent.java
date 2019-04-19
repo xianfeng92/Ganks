@@ -2,7 +2,7 @@ package com.example.ganks.di.components;
 
 import com.example.ganks.di.Scope.PerFragment;
 import com.example.ganks.di.modules.CategoryModule;
-import com.example.ganks.mvp.ui.fragment.article.CategoryArticleFragment;
+import com.example.ganks.mvp.ui.fragment.CategoryArticleFragment;
 import com.example.ganks.mvp.view.CategoryView;
 
 import dagger.BindsInstance;

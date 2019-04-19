@@ -8,7 +8,6 @@ import com.example.ganks.R;
 import com.xforg.easyimage.ImageLoader;
 import com.xforg.easyimage.config.ConfigBuilder;
 import com.xforg.easyimage.config.ImageConfig;
-
 import java.util.List;
 
 public class LineAdapter extends BaseItemDraggableAdapter<MeiziList.Meizi,BaseViewHolder> {

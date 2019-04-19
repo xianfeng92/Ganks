@@ -1,10 +1,10 @@
 package com.example.ganks.di.modules;
 
 import android.content.Context;
-import com.example.data.HelperImpl.DbHelperImp;
+import com.example.data.HelperImpl.DbHelperImpl;
 import com.example.data.HelperImpl.GreenDaoHelperImpl;
 import com.example.data.HelperImpl.HttpHelperImpl;
-import com.example.data.HelperImpl.PreferenceHelperImp;
+import com.example.data.HelperImpl.PreferenceHelperImpl;
 import com.example.domain.helper.DbHelper;
 import com.example.domain.helper.GreenDaoHelper;
 import com.example.domain.helper.HttpHelper;
@@ -42,13 +42,13 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    DbHelper provideDbHelper(DbHelperImp helper){
+    DbHelper provideDbHelper(DbHelperImpl helper){
         return helper;
     }
 
     @Provides
     @Singleton
-    PreferenceHelper providePreferenceHelper(PreferenceHelperImp helper){
+    PreferenceHelper providePreferenceHelper(PreferenceHelperImpl helper){
         return helper;
     }
 

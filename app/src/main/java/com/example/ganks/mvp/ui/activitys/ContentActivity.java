@@ -2,7 +2,6 @@ package com.example.ganks.mvp.ui.activitys;
 
 import android.os.Bundle;
 import com.example.ganks.R;
-import com.example.ganks.base.GanksApplication;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.mvp.ui.TabSelectedEvent;
 import com.example.ganks.mvp.ui.fragment.HomeFragment;
@@ -17,7 +16,6 @@ import com.xforg.gank_core.utils.ToastUtils;
 import com.xforg.gank_core.widge.BottomBar;
 import com.xforg.gank_core.widge.BottomBarTab;
 import com.example.ganks.common.EventBusActivityScope;
-
 
 public class ContentActivity extends ProxyActivity implements GankDelegate.OnBackToFirstListener{
 
@@ -133,10 +131,5 @@ public class ContentActivity extends ProxyActivity implements GankDelegate.OnBac
     @Override
     public void onBackToFirstFragment() {
         mBottomBar.setCurrentItem(0);
-    }
-
-
-    private void initializeInjector(){
-        GanksApplication.getApplicationComponent().contentActivityComponent().build().inject(this);
     }
 }

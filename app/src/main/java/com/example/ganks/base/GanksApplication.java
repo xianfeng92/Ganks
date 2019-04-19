@@ -20,7 +20,7 @@ import me.yokeyword.fragmentation.Fragmentation;
  */
 public class GanksApplication extends Application {
 
-    private  static ApplicationComponent applicationComponent;
+    private static ApplicationComponent applicationComponent;
     private static  GanksApplication instance;
 
     @Override
@@ -76,7 +76,7 @@ public class GanksApplication extends Application {
                 .build();
     }
 
-    public  static ApplicationComponent getApplicationComponent(){
+    public static ApplicationComponent getApplicationComponent(){
         return applicationComponent;
     }
 
