@@ -11,10 +11,17 @@ import javax.inject.Inject;
 public class HomePresenter extends BasePresenter<HomeView> {
 
     @Inject
-    HomePresenter(){};
+    HomePresenter(){}
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
+
+
 }

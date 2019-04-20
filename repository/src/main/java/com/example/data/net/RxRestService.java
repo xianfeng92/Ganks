@@ -21,6 +21,6 @@ public interface RxRestService {
     @GET("api/data/福利/10/{page}")
     Observable<MeiziList.Meizi> getMeizi(@Path("page") int page);
 
-    @GET("random/data/福利/{number}")
+    @GET("api/random/data/福利/{number}")
     Observable<MeiziList> getRandomBeauties(@Path("number") int number);
 }

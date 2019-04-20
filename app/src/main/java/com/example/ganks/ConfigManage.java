@@ -2,6 +2,7 @@ package com.example.ganks;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import com.example.ganks.base.GanksApplication;
 
 /**
@@ -9,26 +10,19 @@ import com.example.ganks.base.GanksApplication;
  */
 public enum ConfigManage {
     INSTANCE;
+    private static final String TAG = "ConfigManage";
 
-    private final String spName = "app_config";
-    private final String key_isListShowImg = "isListShowImg";
-    private final String key_thumbnailQuality = "thumbnailQuality";
+    private final String spName = "ganks_config";
     private final String key_banner_url = "keyBannerUrl";
     private final String key_launcher_img_show = "keyLauncherImgShow";
     private final String key_launcher_img_probability_show = "keyLauncherImgProbabilityShow";
 
-    private boolean isListShowImg;
-    private int thumbnailQuality;
     private String bannerURL;
     private boolean isShowLauncherImg;
     private boolean isProbabilityShowLauncherImg;
 
     public void initConfig(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(spName, Context.MODE_PRIVATE);
-        // 列表是否显示图片
-        isListShowImg = sharedPreferences.getBoolean(key_isListShowImg, true);
-        // 缩略图质量 0：原图 1：默认 2：省流
-        thumbnailQuality = sharedPreferences.getInt(key_thumbnailQuality, 1);
         // Banner URL 用于加载页显示
         bannerURL = sharedPreferences.getString(key_banner_url, "");
         // 启动页是否显示妹子图
@@ -37,41 +31,18 @@ public enum ConfigManage {
         isProbabilityShowLauncherImg = sharedPreferences.getBoolean(key_launcher_img_probability_show, false);
     }
 
-    public boolean isListShowImg() {
-        return isListShowImg;
-    }
-
-    public void setListShowImg(boolean listShowImg) {
-        SharedPreferences sharedPreferences = GanksApplication.getInstance().getSharedPreferences(spName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(key_isListShowImg, listShowImg);
-        if (editor.commit()) {
-            isListShowImg = listShowImg;
-        }
-    }
-
-    public int getThumbnailQuality() {
-        return thumbnailQuality;
-    }
-
-    public void setThumbnailQuality(int thumbnailQuality) {
-        SharedPreferences sharedPreferences = GanksApplication.getInstance().getSharedPreferences(spName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(key_thumbnailQuality, thumbnailQuality);
-        if (editor.commit()) {
-            this.thumbnailQuality = thumbnailQuality;
-        }
-    }
 
     public String getBannerURL() {
         return bannerURL;
     }
 
     public void setBannerURL(String bannerURL) {
+        Log.d(TAG, "setBannerURL: "+bannerURL);
         SharedPreferences sharedPreferences = GanksApplication.getInstance().getSharedPreferences(spName, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key_banner_url, bannerURL);
         if (editor.commit()) {
+            Log.d(TAG, "setBannerURL: commit");
             this.bannerURL = bannerURL;
         }
     }
@@ -80,25 +51,7 @@ public enum ConfigManage {
         return isShowLauncherImg;
     }
 
-    public void setShowLauncherImg(boolean showLauncherImg) {
-        SharedPreferences sharedPreferences = GanksApplication.getInstance().getSharedPreferences(spName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(key_launcher_img_show, showLauncherImg);
-        if (editor.commit()) {
-            isShowLauncherImg = showLauncherImg;
-        }
-    }
-
     public boolean isProbabilityShowLauncherImg() {
         return isProbabilityShowLauncherImg;
-    }
-
-    public void setProbabilityShowLauncherImg(boolean probabilityShowLauncherImg) {
-        SharedPreferences sharedPreferences = GanksApplication.getInstance().getSharedPreferences(spName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(key_launcher_img_probability_show, probabilityShowLauncherImg);
-        if (editor.commit()) {
-            isProbabilityShowLauncherImg = probabilityShowLauncherImg;
-        }
     }
 }

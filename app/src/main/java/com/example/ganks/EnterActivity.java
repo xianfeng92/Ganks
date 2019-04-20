@@ -3,67 +3,34 @@ package com.example.ganks;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.AppCompatImageView;
+import android.util.Log;
 import android.view.View;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.ganks.mvp.ui.activitys.ContentActivity;
-import com.orhanobut.logger.Logger;
+import com.example.ganks.mvp.view.EnterView;
+import com.xforg.easyimage.ImageLoader;
+import com.xforg.easyimage.config.ConfigBuilder;
+import com.xforg.easyimage.config.ImageConfig;
 import com.xforg.gank_core.StatusBar.StatusBarUtil;
 import com.example.ganks.delegates.GankDelegate;
-import com.xforg.gank_core.utils.timer.BaseTimerTask;
-import com.xforg.gank_core.utils.timer.ITimerListener;
-import java.text.MessageFormat;
-import java.util.Timer;
-import butterknife.BindView;
-import butterknife.OnClick;
 
-public class EnterActivity extends AppCompatActivity implements GankDelegate.OnBackToFirstListener, ITimerListener {
+public class EnterActivity extends AppCompatActivity implements EnterView, GankDelegate.OnBackToFirstListener, View.OnClickListener {
 
-    private Timer mTimer = null;
-    private int mCount = 5;
-    private AppCompatTextView mTvTimer = null;
+    private static final String TAG = "EnterActivity";
 
-    @BindView(R.id.tv_launcher_timer)
-    public AppCompatTextView textView;
+    AppCompatImageView mImageView;
 
-    @OnClick(R.id.tv_launcher_timer)
-    void onClickTimerView(){
-        if (mTimer != null){
-            mTimer.cancel();
-            mTimer = null;
-            enterContentActivity();
-        }
-    }
+    private String mUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter);
+        mImageView = findViewById(R.id.img_launcher_welcome);
+        mImageView.setOnClickListener(this);
         StatusBarUtil.setStatusBarAndNavigationBarTranslucent(this);
-        initTimer();
-        mTvTimer = findViewById(R.id.tv_launcher_timer);
-        mTvTimer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickTimerView();
-            }
-        });
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    private void enterContentActivity(){
-        startActivity(new Intent(EnterActivity.this, ContentActivity.class));
-        finish();
-    }
-
-    private void initTimer(){
-        mTimer = new Timer();
-        final BaseTimerTask baseTimerTask = new BaseTimerTask(this);
-        mTimer.schedule(baseTimerTask,0,1000);
+        loadImg();
     }
 
     @Override
@@ -72,23 +39,24 @@ public class EnterActivity extends AppCompatActivity implements GankDelegate.OnB
     }
 
     @Override
-    public void onTimer() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Logger.d("onTimer");
-                if (mTvTimer != null){
-                    mTvTimer.setText(MessageFormat.format("跳过\n{0}s", mCount));
-                    mCount--;
-                    if (mCount < 0){
-                        enterContentActivity();
-                        if (mTimer != null){
-                            mTimer.cancel();
-                            mTimer = null;
-                        }
-                    }
-                }
-            }
-        });
+    public void goContentActivity() {
+        startActivity(new Intent(EnterActivity.this, ContentActivity.class));
+        finish();
+    }
+
+    private void loadImg() {
+        mUrl = ConfigManage.INSTANCE.getBannerURL();
+        Log.d(TAG, "loadImg: "+mUrl);
+        ImageConfig config = new ConfigBuilder(this)
+                .url(mUrl)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .error(R.mipmap.banner)
+                .build();
+        ImageLoader.getActualLoader().apply(config).into(mImageView);
+    }
+
+    @Override
+    public void onClick(View v) {
+        goContentActivity();
     }
 }

@@ -2,6 +2,8 @@ package com.example.ganks.base;
 
 import android.app.Application;
 import android.content.Context;
+
+import com.example.ganks.ConfigManage;
 import com.example.ganks.di.components.ApplicationComponent;
 import com.example.ganks.di.components.DaggerApplicationComponent;
 import com.example.ganks.di.modules.ApplicationModule;
@@ -33,6 +35,7 @@ public class GanksApplication extends Application {
         super.onCreate();
         instance = this;
         initializeInjector();
+        ConfigManage.INSTANCE.initConfig(this);
         Fragmentation.builder()
                 // 设置 栈视图 模式为 （默认）悬浮球模式   SHAKE: 摇一摇唤出  NONE：隐藏， 仅在Debug环境生效
                 .stackViewMode(Fragmentation.BUBBLE)

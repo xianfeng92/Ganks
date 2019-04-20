@@ -34,6 +34,11 @@ public class RepositoryManager implements HttpHelper, DbHelper, PreferenceHelper
     }
 
     @Override
+    public Observable<MeiziList> getRandomMeizi(int num) {
+        return httpHelper.getRandomMeizi(num);
+    }
+
+    @Override
     public void addToFavorite(MeiziList.Meizi meizi) {
         greenDaoHelper.addToFavorite(meizi);
     }

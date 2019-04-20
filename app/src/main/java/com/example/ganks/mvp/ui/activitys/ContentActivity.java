@@ -1,7 +1,13 @@
 package com.example.ganks.mvp.ui.activitys;
 
 import android.os.Bundle;
+import android.util.Log;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.domain.MeiziList;
+import com.example.domain.repository.RepositoryManager;
+import com.example.ganks.ConfigManage;
 import com.example.ganks.R;
+import com.example.ganks.base.GanksApplication;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.mvp.ui.TabSelectedEvent;
 import com.example.ganks.mvp.ui.fragment.HomeFragment;
@@ -9,21 +15,29 @@ import com.example.ganks.mvp.ui.fragment.LoveMeiziFragment;
 import com.example.ganks.mvp.ui.fragment.MeiziFragment;
 import com.example.ganks.mvp.ui.fragment.TanTanFragment;
 import com.orhanobut.logger.Logger;
+import com.xforg.easyimage.ImageLoader;
+import com.xforg.easyimage.config.ConfigBuilder;
+import com.xforg.easyimage.config.ImageConfig;
 import com.xforg.gank_core.StatusBar.StatusBarUtil;
 import com.xforg.gank_core.Proxy.ProxyActivity;
 import com.example.ganks.delegates.GankDelegate;
+import com.xforg.gank_core.utils.RxUtils;
 import com.xforg.gank_core.utils.ToastUtils;
 import com.xforg.gank_core.widge.BottomBar;
 import com.xforg.gank_core.widge.BottomBarTab;
 import com.example.ganks.common.EventBusActivityScope;
+import javax.inject.Inject;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class ContentActivity extends ProxyActivity implements GankDelegate.OnBackToFirstListener{
+    private static final String TAG = "ContentActivity";
 
     public static final int FIRST = 0;
     public static final int SECOND = 1;
     public static final int THIRD = 2;
     public static final int FOURTH = 3;
-
     private BaseDelegate[] mFragments = new BaseDelegate[4];
     private BottomBar mBottomBar;
 
@@ -31,6 +45,9 @@ public class ContentActivity extends ProxyActivity implements GankDelegate.OnBac
     // 再点一次退出程序时间设置
     private static final long WAIT_TIME = 2000L;
     private long TOUCH_TIME = 0;
+
+    @Inject
+    RepositoryManager repositoryManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,12 +75,8 @@ public class ContentActivity extends ProxyActivity implements GankDelegate.OnBac
             mFragments[FOURTH] = findFragment(MeiziFragment.class);
         }
         initView();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Logger.d("onResume");
+        initializeInjector();
+        cacheRandomImg();
     }
 
     private void initView(){
@@ -131,5 +144,57 @@ public class ContentActivity extends ProxyActivity implements GankDelegate.OnBac
     @Override
     public void onBackToFirstFragment() {
         mBottomBar.setCurrentItem(0);
+    }
+
+    public void saveCacheImgUrl(String url){
+        Log.d(TAG, "saveCacheImgUrl: "+url);
+        ImageConfig config = new ConfigBuilder(this)
+                .url(url)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .build();
+        ImageLoader.getActualLoader().apply(config).preload();
+        ConfigManage.INSTANCE.setBannerURL(url);
+    }
+
+    private void cacheRandomImg() {
+        if (!ConfigManage.INSTANCE.isShowLauncherImg()) { // 不显示欢迎妹子，也就不需要预加载了
+            return;
+        }
+        if (ConfigManage.INSTANCE.isProbabilityShowLauncherImg()) { // 概率出现欢迎妹子
+            if (Math.random() < 0.75) {
+                ConfigManage.INSTANCE.setBannerURL("");
+                return;
+            }
+        }
+        Observable<MeiziList> observable = repositoryManager.getRandomMeizi(1);
+        observable.compose(RxUtils.rxSchedulerHelper())
+                .subscribe(new Observer<MeiziList>() {
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, "onError: "+e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete: ");
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(MeiziList meiziResult) {
+                        if (meiziResult != null && meiziResult.results != null && meiziResult.results.size() > 0 && meiziResult.results.get(0).url != null) {
+                            Log.d(TAG, "onNext: ");
+                            saveCacheImgUrl(meiziResult.results.get(0).url);
+                        }
+                    }
+                });
+    }
+
+    private void initializeInjector() {
+        GanksApplication.getApplicationComponent().contentActivityComponent().build().inject(this);
     }
 }

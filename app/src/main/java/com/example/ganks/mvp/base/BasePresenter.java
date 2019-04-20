@@ -18,7 +18,6 @@ public class BasePresenter<V extends IView> implements IPresenter{
         this.onStart();
     }
 
-
     @Override
     public void onStart() {
 
