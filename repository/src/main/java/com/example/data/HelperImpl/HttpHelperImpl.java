@@ -3,7 +3,6 @@ package com.example.data.HelperImpl;
 import com.example.data.net.RxRestService;
 import com.example.domain.MeiziList;
 import com.example.domain.helper.HttpHelper;
-import java.util.List;
 import javax.inject.Inject;
 import io.reactivex.Observable;
 
@@ -26,7 +25,7 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<List<MeiziList.Meizi>> meiziList(int page) {
+    public Observable<MeiziList> meiziList(int page) {
         return rxRestService.getMeiziList(page);
     }
 

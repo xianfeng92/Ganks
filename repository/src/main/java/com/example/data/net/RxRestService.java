@@ -1,7 +1,6 @@
 package com.example.data.net;
 
 import com.example.domain.MeiziList;
-import java.util.List;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -16,7 +15,7 @@ public interface RxRestService {
     Observable<MeiziList> gank(@Path("type") String type, @Path("pageSize") int pageSize, @Path("page") int page);
 
     @GET("api/data/福利/10/{page}")
-    Observable<List<MeiziList.Meizi>> getMeiziList(@Path("page") int page);
+    Observable<MeiziList> getMeiziList(@Path("page") int page);
 
     @GET("api/data/福利/10/{page}")
     Observable<MeiziList.Meizi> getMeizi(@Path("page") int page);

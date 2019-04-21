@@ -11,32 +11,40 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.SkeletonScreen;
+import com.example.domain.MeiziList;
+import com.example.domain.repository.RepositoryManager;
 import com.example.ganks.R;
 import com.example.ganks.base.GanksApplication;
 import com.example.ganks.delegates.BaseDelegate;
 import com.example.ganks.mvp.presenter.CategoryPresenter;
-import com.example.ganks.mvp.ui.adapter.MultipleRecyclerAdapter;
+import com.example.ganks.mvp.ui.adapter.LineAdapter;
 import com.example.ganks.mvp.view.CategoryView;
 import com.orhanobut.logger.Logger;
-import com.xforg.gank_core.recycler.MultipleItemEntity;
+import com.xforg.gank_core.utils.RxUtils;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created By zhongxianfeng on 19-2-1
  * github: https://github.com/xianfeng92
  */
 public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> implements SwipeRefreshLayout.OnRefreshListener, CategoryView {
 
-    private MultipleRecyclerAdapter mAdapter;
+    private LineAdapter mAdapter;
     private LinearLayoutManager layoutManager;
-    private List<MultipleItemEntity> datas = new ArrayList<>();
+    private List<MeiziList.Meizi> datas = new ArrayList<>();
     private int page = 1;
-    int pageSize = 10;
     private int lastVisibleItem;
 
     RecyclerView mRecyclerView;
     SwipeRefreshLayout mSwipeRefreshLayout;
     public String type;
+
+    @Inject
+    RepositoryManager repositoryManager;
 
     public static CategoryArticleFragment newInstance(String type, FragmentManager fragmentManager){
         CategoryArticleFragment categoryArticleFragment = new CategoryArticleFragment();
@@ -72,7 +80,7 @@ public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> imp
         layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new MultipleRecyclerAdapter(datas);
+        mAdapter = new LineAdapter(R.layout.line_meizi_item,datas);
         mAdapter.openLoadAnimation();
         mAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         mRecyclerView.setAdapter(mAdapter);
@@ -112,35 +120,31 @@ public class CategoryArticleFragment extends BaseDelegate<CategoryPresenter> imp
                 .count(10)
                 .load(R.layout.item_skeleton_news)
                 .show(); //default count is 10
-//        RestClient.builder()
-//                .url("https://gank.io/api/data")
-//                .addParams(type)
-//                .addParams(pageSize)
-//                .addParams(page)
-//                .error(new IError() {
-//                    @Override
-//                    public void onError(int code, String msg) {
-//                        Logger.e("onError %s",msg);
-//                    }
-//                })
-//                .success(new ISuccess() {
-//                    @Override
-//                    public void onSuccess(String response) {
-//                        // 数据解析
-//                        final HomeDataConvert homeDataConvert = new HomeDataConvert();
-//                        homeDataConvert.serJsonData(response);
-//                        final ArrayList<MultipleItemEntity> list = homeDataConvert.convert();
-//                        if (list != null) {
-//                            datas.addAll(list);
-//                            mAdapter.notifyDataSetChanged();
-//                            skeletonScreen.hide();
-//                        } else {
-//                            throw new RuntimeException("Can not get Data from Service");
-//                        }
-//                    }
-//                })
-//                .build()
-//                .get();
+        repositoryManager.meiziList(page)
+                .compose(RxUtils.rxSchedulerHelper())
+                .subscribe(new Observer<MeiziList>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(MeiziList meiziList) {
+                            datas.addAll(meiziList.results);
+                            mAdapter.notifyDataSetChanged();
+                            skeletonScreen.hide();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
         mSwipeRefreshLayout.setRefreshing(false);
     }
 

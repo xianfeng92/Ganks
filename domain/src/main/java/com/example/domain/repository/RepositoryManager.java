@@ -29,7 +29,7 @@ public class RepositoryManager implements HttpHelper, DbHelper, PreferenceHelper
     }
 
     @Override
-    public Observable<List<MeiziList.Meizi>> meiziList(int page) {
+    public Observable<MeiziList> meiziList(int page) {
         return httpHelper.meiziList(page);
     }
 

@@ -7,7 +7,6 @@ import com.example.ganks.di.Scope.PerFragment;
 import com.example.ganks.mvp.base.BasePresenter;
 import com.example.ganks.mvp.view.MeiziView;
 import com.xforg.gank_core.utils.RxUtils;
-import java.util.List;
 import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -29,18 +28,18 @@ public class MeiziPresenter extends BasePresenter<MeiziView> {
     }
 
     public void requestData(int page){
-        Observable<List<MeiziList.Meizi>> meiziListObservable = repositoryManager.meiziList(page);
+        Observable<MeiziList> meiziListObservable = repositoryManager.meiziList(page);
         meiziListObservable
                 .compose(RxUtils.rxSchedulerHelper())
-                .subscribe(new Observer<List<MeiziList.Meizi>>() {
+                .subscribe(new Observer<MeiziList>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(List<MeiziList.Meizi> meizis) {
-                        mRootView.setNewData(meizis);
+                    public void onNext(MeiziList meizis) {
+                        mRootView.setNewData(meizis.results);
                     }
 
                     @Override

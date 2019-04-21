@@ -2,7 +2,6 @@ package com.example.ganks.base;
 
 import android.app.Application;
 import android.content.Context;
-
 import com.example.ganks.ConfigManage;
 import com.example.ganks.di.components.ApplicationComponent;
 import com.example.ganks.di.components.DaggerApplicationComponent;
